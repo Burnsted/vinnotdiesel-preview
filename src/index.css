@@ -735,6 +735,15 @@ img { max-width: 100%; display: block; }
 }
 .footer-brand { color: var(--text-muted); }
 .footer-brand strong { color: var(--text); font-weight: 600; }
+.footer-meta {
+  display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center;
+}
+.footer-credits {
+  color: var(--text-muted); text-decoration: underline; text-underline-offset: 2px;
+}
+.footer-credits:hover { color: var(--text); }
+.app-shell.chrome-dark .footer-credits { color: #aaa; }
+.app-shell.chrome-dark .footer-credits:hover { color: #fff; }
 
 .empty-state {
   text-align: center; padding: 48px 16px; color: var(--text-muted);
@@ -834,14 +843,30 @@ img { max-width: 100%; display: block; }
   opacity: 0; transition: opacity 1.1s ease;
 }
 .home-hero-slide.is-active { opacity: 1; z-index: 1; }
-.home-hero-img {
-  position: absolute; inset: -8%;
+
+/* Shared full-bleed media (photo / video) */
+.media-frame {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  background: #111;
+}
+.media-frame-video,
+.media-frame-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.media-frame-img {
   background-size: cover; background-position: center;
   transform: scale(1.05);
 }
-.home-hero-img.ken-burns {
+.media-frame-img.ken-burns {
   animation: kenBurns 14s ease-in-out infinite alternate;
 }
+.home-hero-media { inset: -2%; }
+.home-stack-media { inset: 0; }
+.home-carousel-frame { inset: 0; }
+.model-hero-media { inset: -2%; }
 @keyframes kenBurns {
   from { transform: scale(1.05) translate(0, 0); }
   to { transform: scale(1.14) translate(-2%, -1.5%); }
@@ -906,15 +931,12 @@ img { max-width: 100%; display: block; }
   text-decoration: none; color: #fff;
 }
 .home-stack-card:hover { text-decoration: none; color: #fff; }
-.home-stack-img {
-  position: absolute; inset: 0;
-  background-size: cover; background-position: center;
-  transform: scale(1.02);
+.home-stack-card.zoom-on-view:hover .media-frame-video,
+.home-stack-card.zoom-on-view:focus-within .media-frame-video,
+.home-stack-card.zoom-on-view:hover .media-frame-img,
+.home-stack-card.zoom-on-view:focus-within .media-frame-img {
+  transform: scale(1.06);
   transition: transform 8s ease;
-}
-.home-stack-card.zoom-on-view:hover .home-stack-img,
-.home-stack-card.zoom-on-view:focus-within .home-stack-img {
-  transform: scale(1.08);
 }
 .home-stack-grad {
   position: absolute; inset: 0;
@@ -976,13 +998,6 @@ img { max-width: 100%; display: block; }
   aspect-ratio: 3 / 4.2;
   background: #1a1a22;
 }
-.home-carousel-img {
-  position: absolute; inset: -6%;
-  background-size: cover; background-position: center;
-}
-.home-carousel-img.ken-burns-slow {
-  animation: kenBurns 18s ease-in-out infinite alternate;
-}
 .home-carousel-overlay {
   position: absolute; left: 0; right: 0; bottom: 0;
   padding: 20px 16px 16px;
@@ -1039,8 +1054,10 @@ img { max-width: 100%; display: block; }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .ken-burns, .ken-burns-slow, .home-stack-img { animation: none !important; transition: none !important; }
+  .ken-burns, .ken-burns-slow { animation: none !important; transition: none !important; }
   .home-hero-slide { transition: none; }
+  .home-stack-card.zoom-on-view:hover .media-frame-video,
+  .home-stack-card.zoom-on-view:hover .media-frame-img { transform: none; }
 }
 .home-page.motion-paused .ken-burns,
 .home-page.motion-paused .ken-burns-slow {
@@ -1058,19 +1075,12 @@ img { max-width: 100%; display: block; }
   background: var(--dark);
   overflow: hidden;
 }
-.model-hero-img {
-  position: absolute; inset: -5%;
-  background-size: cover; background-position: center;
-}
-.model-hero-img.ken-burns-slow {
-  animation: kenBurns 20s ease-in-out infinite alternate;
-}
 .model-hero-grad {
-  position: absolute; inset: 0;
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
   background: linear-gradient(to top, rgba(0,0,0,0.55), transparent 50%);
 }
 .model-hero-script {
-  position: absolute; left: 50%; top: 42%;
+  position: absolute; left: 50%; top: 42%; z-index: 3;
   transform: translate(-50%, -50%);
   margin: 0;
   font-size: clamp(2.8rem, 12vw, 4.5rem);
@@ -1080,6 +1090,9 @@ img { max-width: 100%; display: block; }
   text-align: center;
   pointer-events: none;
   text-shadow: 0 4px 40px rgba(0,0,0,0.35);
+}
+.model-hero-pause {
+  position: absolute; right: 16px; bottom: 16px; z-index: 4;
 }
 .model-body {
   max-width: 560px;

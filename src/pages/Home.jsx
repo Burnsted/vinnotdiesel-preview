@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { getModels, HERO_SLIDES } from '../data/models'
+import MediaFrame from '../components/MediaFrame'
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false)
@@ -19,6 +20,22 @@ function formatFrom(price) {
   return `From $${price.toLocaleString()}*`
 }
 
+function PausePlayIcon({ paused }) {
+  if (paused) {
+    return (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+        <path d="M3 2l9 5-9 5V2z" />
+      </svg>
+    )
+  }
+  return (
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true">
+      <rect x="1" y="1" width="3.5" height="10" rx="0.5" />
+      <rect x="7.5" y="1" width="3.5" height="10" rx="0.5" />
+    </svg>
+  )
+}
+
 export default function Home() {
   const navigate = useNavigate()
   const models = getModels()
@@ -29,7 +46,7 @@ export default function Home() {
   const [carouselIdx, setCarouselIdx] = useState(0)
   const trackRef = useRef(null)
 
-  // Hero auto-advance
+  // Hero auto-advance (also stops when paused — videos pause via MediaFrame)
   useEffect(() => {
     if (paused || reduced) return
     const t = setInterval(() => {
@@ -66,7 +83,10 @@ export default function Home() {
       cards.forEach((c, i) => {
         const center = c.offsetLeft + c.offsetWidth / 2
         const d = Math.abs(center - mid)
-        if (d < bestDist) { bestDist = d; best = i }
+        if (d < bestDist) {
+          bestDist = d
+          best = i
+        }
       })
       setCarouselIdx(best)
     }
@@ -87,9 +107,14 @@ export default function Home() {
               className={`home-hero-slide ${i === slide ? 'is-active' : ''}`}
               aria-hidden={i !== slide}
             >
-              <div
-                className={`home-hero-img ${motionOff ? '' : 'ken-burns'}`}
-                style={{ backgroundImage: `url(${s.image})` }}
+              <MediaFrame
+                image={s.image}
+                video={s.video}
+                active={i === slide}
+                paused={paused}
+                reduced={reduced}
+                kenBurns
+                className="home-hero-media"
               />
             </div>
           ))}
@@ -123,17 +148,13 @@ export default function Home() {
               aria-label={paused ? 'Play slideshow' : 'Pause slideshow'}
               onClick={() => setPaused((p) => !p)}
             >
-              {paused ? (
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M3 2l9 5-9 5V2z" /></svg>
-              ) : (
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="1" y="1" width="3.5" height="10" rx="0.5" /><rect x="7.5" y="1" width="3.5" height="10" rx="0.5" /></svg>
-              )}
+              <PausePlayIcon paused={paused} />
             </button>
           </div>
         </div>
       </section>
 
-      {/* ── Stacked model photo cards ── */}
+      {/* ── Stacked model photo/video cards ── */}
       <section className="home-model-stack" aria-label="Models">
         {models.map((m) => (
           <Link
@@ -141,7 +162,14 @@ export default function Home() {
             to={`/model/${m.slug}`}
             className={`home-stack-card ${motionOff ? '' : 'zoom-on-view'}`}
           >
-            <div className="home-stack-img" style={{ backgroundImage: `url(${m.image})` }} />
+            <MediaFrame
+              image={m.image}
+              video={m.video}
+              active
+              paused={false}
+              reduced={reduced}
+              className="home-stack-media"
+            />
             <div className="home-stack-grad" aria-hidden="true" />
             <span className="home-stack-label">{m.label}</span>
             <span className="home-stack-arrow" aria-hidden="true">
@@ -159,13 +187,18 @@ export default function Home() {
 
         <div className="home-carousel-wrap">
           <div className="home-carousel" ref={trackRef}>
-            {models.map((m) => (
+            {models.map((m, i) => (
               <article key={m.slug} className="home-carousel-card">
                 <div className="home-carousel-name" aria-hidden="true">{m.model}</div>
                 <div className="home-carousel-media">
-                  <div
-                    className={`home-carousel-img ${motionOff ? '' : 'ken-burns-slow'}`}
-                    style={{ backgroundImage: `url(${m.heroImage})` }}
+                  <MediaFrame
+                    image={m.heroImage}
+                    video={m.carouselVideo || m.video}
+                    active={i === carouselIdx}
+                    paused={carouselPaused}
+                    reduced={reduced}
+                    kenBurns
+                    className="home-carousel-frame"
                   />
                   <div className="home-carousel-overlay">
                     <span className="pill-dark">{m.tag}</span>
@@ -205,11 +238,7 @@ export default function Home() {
               aria-label={carouselPaused ? 'Play carousel' : 'Pause carousel'}
               onClick={() => setCarouselPaused((p) => !p)}
             >
-              {carouselPaused ? (
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M3 2l9 5-9 5V2z" /></svg>
-              ) : (
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="1" y="1" width="3.5" height="10" rx="0.5" /><rect x="7.5" y="1" width="3.5" height="10" rx="0.5" /></svg>
-              )}
+              <PausePlayIcon paused={carouselPaused} />
             </button>
           </div>
         </div>

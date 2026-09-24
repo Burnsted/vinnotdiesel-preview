@@ -1,12 +1,85 @@
 import { LISTINGS } from './listings'
-import heroCoastal from '../assets/trucks/hero-coastal.webp'
-import depotCharge from '../assets/trucks/depot-charge.webp'
-import jobsitePalms from '../assets/trucks/jobsite-palms.webp'
-import nightCoast from '../assets/trucks/night-coast.webp'
-import angularLot from '../assets/trucks/angular-lot.webp'
-import scrubTrail from '../assets/trucks/scrub-trail.webp'
 
-const IMAGE_POOL = [heroCoastal, depotCharge, jobsitePalms, nightCoast, angularLot, scrubTrail]
+import lightningHero from '../assets/trucks/lightning-hero.webp'
+import lightningStack from '../assets/trucks/lightning-stack.webp'
+import lightningLifestyle from '../assets/trucks/lightning-lifestyle.webp'
+import silveradoHero from '../assets/trucks/silverado-hero.webp'
+import silveradoStack from '../assets/trucks/silverado-stack.webp'
+import silveradoLifestyle from '../assets/trucks/silverado-lifestyle.webp'
+import sierraHero from '../assets/trucks/sierra-hero.webp'
+import sierraStack from '../assets/trucks/sierra-stack.webp'
+import sierraLifestyle from '../assets/trucks/sierra-lifestyle.webp'
+import rivianHero from '../assets/trucks/rivian-hero.webp'
+import rivianStack from '../assets/trucks/rivian-stack.webp'
+import rivianLifestyle from '../assets/trucks/rivian-lifestyle.webp'
+import cybertruckHero from '../assets/trucks/cybertruck-hero.webp'
+import cybertruckStack from '../assets/trucks/cybertruck-stack.webp'
+import cybertruckLifestyle from '../assets/trucks/cybertruck-lifestyle.webp'
+import hummerHero from '../assets/trucks/hummer-hero.webp'
+import hummerStack from '../assets/trucks/hummer-stack.webp'
+import hummerLifestyle from '../assets/trucks/hummer-lifestyle.webp'
+
+import videoLightning from '../assets/trucks/video/lightning.mp4'
+import videoSilverado from '../assets/trucks/video/silverado.mp4'
+import videoSierra from '../assets/trucks/video/sierra.mp4'
+import videoRivian from '../assets/trucks/video/rivian.mp4'
+import videoCybertruckShow from '../assets/trucks/video/cybertruck-show.mp4'
+import videoCybertruckKb from '../assets/trucks/video/cybertruck-kb.mp4'
+import videoHummer from '../assets/trucks/video/hummer.mp4'
+import videoEvCharge from '../assets/trucks/video/ev-truck-charge.mp4'
+import videoEvShow from '../assets/trucks/video/ev-truck-show.mp4'
+
+/** Per make|model media — real licensed photography + short looping video. */
+const MODEL_MEDIA = {
+  'Ford|F-150 Lightning': {
+    image: lightningStack,
+    heroImage: lightningHero,
+    lifestyleImage: lightningLifestyle,
+    video: videoLightning,
+    heroVideo: videoEvCharge,
+    carouselVideo: videoLightning,
+  },
+  'Chevrolet|Silverado EV': {
+    image: silveradoStack,
+    heroImage: silveradoHero,
+    lifestyleImage: silveradoLifestyle,
+    video: videoSilverado,
+    heroVideo: videoSilverado,
+    carouselVideo: videoEvShow,
+  },
+  'GMC|Sierra EV': {
+    image: sierraStack,
+    heroImage: sierraHero,
+    lifestyleImage: sierraLifestyle,
+    video: videoSierra,
+    heroVideo: videoSierra,
+    carouselVideo: videoSierra,
+  },
+  'Rivian|R1T': {
+    image: rivianStack,
+    heroImage: rivianHero,
+    lifestyleImage: rivianLifestyle,
+    video: videoRivian,
+    heroVideo: videoRivian,
+    carouselVideo: videoRivian,
+  },
+  'Tesla|Cybertruck': {
+    image: cybertruckStack,
+    heroImage: cybertruckHero,
+    lifestyleImage: cybertruckLifestyle,
+    video: videoCybertruckShow,
+    heroVideo: videoCybertruckShow,
+    carouselVideo: videoCybertruckKb,
+  },
+  'GMC|Hummer EV': {
+    image: hummerStack,
+    heroImage: hummerHero,
+    lifestyleImage: hummerLifestyle,
+    video: videoHummer,
+    heroVideo: videoHummer,
+    carouselVideo: videoHummer,
+  },
+}
 
 function slugify(make, model) {
   return `${make}-${model}`
@@ -53,6 +126,19 @@ function workBlurb(make, model) {
   )
 }
 
+function mediaFor(make, model) {
+  return (
+    MODEL_MEDIA[`${make}|${model}`] || {
+      image: lightningStack,
+      heroImage: lightningHero,
+      lifestyleImage: lightningLifestyle,
+      video: null,
+      heroVideo: null,
+      carouselVideo: null,
+    }
+  )
+}
+
 /** Aggregate listings into model families (make + model). */
 export function getModels() {
   const map = new Map()
@@ -69,7 +155,7 @@ export function getModels() {
     map.get(key).listings.push(l)
   }
 
-  const models = [...map.values()].map((m, idx) => {
+  const models = [...map.values()].map((m) => {
     const priced = m.listings.filter((l) => l.allInPrice != null && l.feesKnown)
     const fromPrice = priced.length ? Math.min(...priced.map((l) => l.allInPrice)) : null
     const sohs = m.listings.map((l) => l.soh).filter((v) => v != null)
@@ -79,6 +165,7 @@ export function getModels() {
     const chargers = m.listings.map((l) => l.dcFastMaxKw).filter((v) => v != null)
     const onboard = m.listings.map((l) => l.onboardChargerKw).filter((v) => v != null)
     const sample = m.listings[0]
+    const media = mediaFor(m.make, m.model)
 
     const typical = (arr) => {
       if (!arr.length) return null
@@ -97,9 +184,12 @@ export function getModels() {
       description: oneLiner(sample),
       fromPrice,
       count: m.listings.length,
-      image: IMAGE_POOL[idx % IMAGE_POOL.length],
-      heroImage: IMAGE_POOL[(idx + 1) % IMAGE_POOL.length],
-      lifestyleImage: IMAGE_POOL[(idx + 2) % IMAGE_POOL.length],
+      image: media.image,
+      heroImage: media.heroImage,
+      lifestyleImage: media.lifestyleImage,
+      video: media.video,
+      heroVideo: media.heroVideo,
+      carouselVideo: media.carouselVideo,
       blurb: workBlurb(m.make, m.model),
       cab: sample.cab,
       bed: sample.bed,
@@ -153,11 +243,10 @@ export function getModelBySlug(slug) {
 
 export const HERO_SLIDES = getModels()
   .slice(0, 5)
-  .map((m, i) => ({
+  .map((m) => ({
     id: m.slug,
     title: `${m.model}.`,
-    image: IMAGE_POOL[i % IMAGE_POOL.length],
+    image: m.heroImage,
+    video: m.heroVideo || m.video,
     href: `/model/${m.slug}`,
   }))
-
-export { IMAGE_POOL }

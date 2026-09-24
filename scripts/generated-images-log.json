@@ -1,37 +1,36 @@
 {
-  "generatedAt": "2026-09-24T18:25:18.910Z",
-  "note": "ORIGINAL canvas scenes — generic EV work pickups, no logos, FL settings. GenerateImage unavailable.",
-  "method": "HTML canvas + Playwright + cwebp",
+  "generatedAt": "2026-09-24T18:35:00.000Z",
+  "note": "Replaced canvas illustrations with Wikimedia Commons photography + Pexels / Ken Burns video loops. See CREDITS.md.",
+  "method": "Wikimedia download + cwebp; ffmpeg Ken Burns / re-encode",
   "images": [
-    {
-      "name": "hero-coastal.webp",
-      "kb": 83,
-      "quality": 85
-    },
-    {
-      "name": "depot-charge.webp",
-      "kb": 62,
-      "quality": 85
-    },
-    {
-      "name": "jobsite-palms.webp",
-      "kb": 82,
-      "quality": 85
-    },
-    {
-      "name": "night-coast.webp",
-      "kb": 49,
-      "quality": 85
-    },
-    {
-      "name": "angular-lot.webp",
-      "kb": 42,
-      "quality": 85
-    },
-    {
-      "name": "scrub-trail.webp",
-      "kb": 62,
-      "quality": 85
-    }
+    { "name": "lightning-hero.webp", "kb": 95 },
+    { "name": "lightning-stack.webp", "kb": 270 },
+    { "name": "lightning-lifestyle.webp", "kb": 146 },
+    { "name": "silverado-hero.webp", "kb": 121 },
+    { "name": "silverado-stack.webp", "kb": 259 },
+    { "name": "silverado-lifestyle.webp", "kb": 132 },
+    { "name": "sierra-hero.webp", "kb": 162 },
+    { "name": "sierra-stack.webp", "kb": 186 },
+    { "name": "sierra-lifestyle.webp", "kb": 162 },
+    { "name": "rivian-hero.webp", "kb": 242 },
+    { "name": "rivian-stack.webp", "kb": 283 },
+    { "name": "rivian-lifestyle.webp", "kb": 134 },
+    { "name": "cybertruck-hero.webp", "kb": 175 },
+    { "name": "cybertruck-stack.webp", "kb": 154 },
+    { "name": "cybertruck-lifestyle.webp", "kb": 86 },
+    { "name": "hummer-hero.webp", "kb": 183 },
+    { "name": "hummer-stack.webp", "kb": 132 },
+    { "name": "hummer-lifestyle.webp", "kb": 177 }
+  ],
+  "videos": [
+    { "name": "video/lightning.mp4", "kb": 230 },
+    { "name": "video/silverado.mp4", "kb": 209 },
+    { "name": "video/sierra.mp4", "kb": 336 },
+    { "name": "video/rivian.mp4", "kb": 515 },
+    { "name": "video/cybertruck-show.mp4", "kb": 627 },
+    { "name": "video/cybertruck-kb.mp4", "kb": 295 },
+    { "name": "video/hummer.mp4", "kb": 361 },
+    { "name": "video/ev-truck-charge.mp4", "kb": 1056 },
+    { "name": "video/ev-truck-show.mp4", "kb": 918 }
   ]
 }
