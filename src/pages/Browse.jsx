@@ -150,13 +150,13 @@ export default function Browse() {
       />
 
       <section>
-        <div className="results-header">
+        <div className="results-toolbar">
           <div className="results-count">
             <strong>{results.length}</strong> of {LISTINGS.length} trucks
             {q ? <> matching “{q}”</> : null}
           </div>
           <div className="sort-wrap">
-            <label htmlFor="sort" className="card-sub">Sort</label>
+            <label htmlFor="sort">Sort</label>
             <select id="sort" value={sort} onChange={(e) => setSort(e.target.value)}>
               {SORTS.map((s) => (
                 <option key={s.id} value={s.id}>{s.label}</option>
@@ -168,7 +168,7 @@ export default function Browse() {
         {results.length === 0 ? (
           <div className="empty-state">
             <p>No trucks match these filters.</p>
-            <p style={{ fontSize: '0.85rem' }}>Try lowering SOH min, payload, or clearing transparent-pricing.</p>
+            <p style={{ fontSize: '0.85rem' }}>Try lowering SOH min, payload, or clearing transparent pricing.</p>
           </div>
         ) : (
           <div className="listing-grid">

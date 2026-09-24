@@ -29,6 +29,7 @@ export default function Header() {
             <span className="vin">Vin</span>
             <span className="not">Not</span>
             <span className="diesel">Diesel</span>
+            <span className="accent-bar" aria-hidden="true" />
           </span>
           <span className="logo-tag">Used EV work trucks · Battery first</span>
         </Link>
@@ -36,7 +37,7 @@ export default function Header() {
         {onBrowse && (
           <form className="header-search" onSubmit={onSubmit} role="search">
             <div className="search-input-wrap">
-              <span aria-hidden="true">⌕</span>
+              <span aria-hidden="true" style={{ color: 'var(--text-dim)', fontSize: '0.85rem' }}>⌕</span>
               <input
                 type="search"
                 placeholder="Search make, model, upfit, location…"

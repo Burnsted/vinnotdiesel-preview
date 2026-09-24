@@ -6,7 +6,7 @@ export default function Footer() {
           <strong>VinNotDiesel</strong> — Used EV work trucks. Battery first.
         </div>
         <div>
-          Preview v0 · Demo inventory only · Not real listings · No payments · Independent marketplace preview
+          Preview · Demo inventory · Not real listings · No payments
         </div>
       </div>
     </footer>

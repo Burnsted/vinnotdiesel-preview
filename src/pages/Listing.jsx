@@ -76,7 +76,7 @@ export default function Listing() {
           <div className="hero-stats">
             <div className="stat-tile">
               <div className="stat-label">All-in price</div>
-              <div className={`stat-value ${priceKnown ? '' : 'amber'}`}>{priceText}</div>
+              <div className={`stat-value ${priceKnown ? 'price' : 'amber'}`}>{priceText}</div>
               <div className="stat-hint">{priceKnown ? 'Fees included' : 'Ask seller for fee sheet'}</div>
             </div>
             <div className="stat-tile">
@@ -100,7 +100,7 @@ export default function Listing() {
         </section>
 
         {/* 2. Media gallery */}
-        <section className="module">
+        <section className="module module-gallery">
           <h2 className="module-title"><span className="num">2</span> Media gallery</h2>
           <div className="gallery">
             {gallery.map((g, i) => (
@@ -114,7 +114,7 @@ export default function Listing() {
         </section>
 
         {/* 3. Work & EV facts */}
-        <section className="module">
+        <section className="module module-facts">
           <h2 className="module-title"><span className="num">3</span> Work &amp; EV facts</h2>
           <dl className="facts-strip">
             <div className="fact"><dt>Usable pack</dt><dd>{listing.usableKwh ? `${listing.usableKwh} kWh` : '—'}</dd></div>
@@ -202,7 +202,7 @@ export default function Listing() {
               <input
                 type="text"
                 placeholder="Ask the seller…"
-                style={{ flex: 1, minWidth: 180, background: 'var(--bg-elev)', border: '1px solid var(--border)', borderRadius: 6, padding: '8px 10px' }}
+                style={{ flex: 1, minWidth: 180, background: 'var(--bg-elev)', border: '1px solid var(--border)', borderRadius: 4, padding: '8px 10px' }}
                 value={msgNote}
                 onChange={(e) => setMsgNote(e.target.value)}
                 aria-label="Question stub"
@@ -249,7 +249,7 @@ export default function Listing() {
 
       <div className="cta-sticky">
         <div className="cta-inner">
-          <div className={`cta-price ${priceKnown ? '' : ''}`} style={priceKnown ? undefined : { color: 'var(--amber)' }}>
+          <div className="cta-price" style={priceKnown ? undefined : { color: 'var(--amber)', fontFamily: 'var(--font)' }}>
             {priceText}
           </div>
           <div className="cta-actions">
