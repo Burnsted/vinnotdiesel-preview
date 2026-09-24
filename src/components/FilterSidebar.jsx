@@ -41,9 +41,13 @@ export default function FilterSidebar({ filters, setFilters, open, onClose }) {
   }
 
   return (
-    <aside className={`filters-panel ${open ? '' : 'collapsed'}`} aria-label="Filters">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-        <h2 className="filters-title" style={{ margin: 0 }}>Filters</h2>
+    <aside
+      className={`filters-panel ${open ? 'open' : ''}`}
+      aria-label="Filters"
+      aria-hidden={!open}
+    >
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+        <h2 className="filters-title">Filter</h2>
         {onClose && (
           <button type="button" className="btn btn-sm btn-ghost" onClick={onClose} aria-label="Close filters">
             ✕
@@ -142,7 +146,7 @@ export default function FilterSidebar({ filters, setFilters, open, onClose }) {
         </label>
       </div>
 
-      {/* Identity (make/model/year) — dense, under Trust-adjacent */}
+      {/* Vehicle */}
       <div className="filter-section">
         <h3 className="filter-section-title">Vehicle</h3>
         <div className="filter-group">
@@ -170,6 +174,11 @@ export default function FilterSidebar({ filters, setFilters, open, onClose }) {
 
       <div className="filter-actions">
         <button type="button" className="btn btn-sm btn-block" onClick={reset}>Reset filters</button>
+        {onClose && (
+          <button type="button" className="btn btn-sm btn-block btn-primary" onClick={onClose}>
+            Show results
+          </button>
+        )}
       </div>
     </aside>
   )

@@ -5,7 +5,7 @@ import FilterSidebar, { DEFAULTS } from '../components/FilterSidebar'
 import ListingCard from '../components/ListingCard'
 
 const SORTS = [
-  { id: 'newest', label: 'Newest listed' },
+  { id: 'newest', label: 'Recommended' },
   { id: 'price-asc', label: 'Price: low → high' },
   { id: 'price-desc', label: 'Price: high → low' },
   { id: 'mileage', label: 'Mileage: low → high' },
@@ -117,31 +117,83 @@ export default function Browse() {
   const q = params.get('q') || ''
   const [filters, setFilters] = useState({ ...DEFAULTS })
   const [sort, setSort] = useState('newest')
-  const [filtersOpen, setFiltersOpen] = useState(true)
+  const [filtersOpen, setFiltersOpen] = useState(false)
+  const [sortOpen, setSortOpen] = useState(false)
 
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 900px)')
-    const apply = () => setFiltersOpen(!mq.matches)
-    apply()
-    mq.addEventListener('change', apply)
-    return () => mq.removeEventListener('change', apply)
-  }, [])
+    if (!filtersOpen) return
+    const onKey = (e) => { if (e.key === 'Escape') setFiltersOpen(false) }
+    window.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [filtersOpen])
 
   const results = useMemo(() => {
     const filtered = applyFilters(LISTINGS, filters, q)
     return sortListings(filtered, sort)
   }, [filters, q, sort])
 
+  const sortLabel = SORTS.find((s) => s.id === sort)?.label || 'Recommended'
+
   return (
     <div className="browse-layout">
-      <button
-        type="button"
-        className="btn filters-drawer-toggle"
-        onClick={() => setFiltersOpen((o) => !o)}
-      >
-        {filtersOpen ? 'Hide filters' : 'Show filters'}
-      </button>
+      <div className="browse-hero">
+        <h1>VinNotDiesel</h1>
+        <p className="browse-sub">Used EV work trucks for sale.</p>
+      </div>
 
+      <div className="browse-chrome">
+        <button
+          type="button"
+          className="btn btn-pill"
+          onClick={() => { setFiltersOpen(true); setSortOpen(false) }}
+          aria-expanded={filtersOpen}
+        >
+          <span className="pill-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+              <path d="M4 6h16M7 12h10M10 18h4" />
+            </svg>
+          </span>
+          Filter
+        </button>
+        <button
+          type="button"
+          className="btn btn-pill"
+          onClick={() => setSortOpen((o) => !o)}
+          aria-expanded={sortOpen}
+        >
+          <span className="pill-icon" aria-hidden="true">
+            <svg width="14" height="16" viewBox="0 0 14 18" fill="none" stroke="currentColor" strokeWidth="1.75">
+              <path d="M7 1v16M3 5l4-4 4 4M3 13l4 4 4-4" />
+            </svg>
+          </span>
+          {sortLabel}
+        </button>
+      </div>
+
+      {sortOpen && (
+        <div className="sort-panel" role="listbox" aria-label="Sort options">
+          {SORTS.map((s) => (
+            <button
+              key={s.id}
+              type="button"
+              className={sort === s.id ? 'active' : ''}
+              onClick={() => { setSort(s.id); setSortOpen(false) }}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div
+        className={`filters-backdrop ${filtersOpen ? 'open' : ''}`}
+        onClick={() => setFiltersOpen(false)}
+        aria-hidden="true"
+      />
       <FilterSidebar
         filters={filters}
         setFilters={setFilters}
@@ -154,14 +206,6 @@ export default function Browse() {
           <div className="results-count">
             <strong>{results.length}</strong> of {LISTINGS.length} trucks
             {q ? <> matching “{q}”</> : null}
-          </div>
-          <div className="sort-wrap">
-            <label htmlFor="sort">Sort</label>
-            <select id="sort" value={sort} onChange={(e) => setSort(e.target.value)}>
-              {SORTS.map((s) => (
-                <option key={s.id} value={s.id}>{s.label}</option>
-              ))}
-            </select>
           </div>
         </div>
 

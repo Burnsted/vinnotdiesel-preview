@@ -202,7 +202,7 @@ export default function Listing() {
               <input
                 type="text"
                 placeholder="Ask the seller…"
-                style={{ flex: 1, minWidth: 180, background: 'var(--bg-elev)', border: '1px solid var(--border)', borderRadius: 4, padding: '8px 10px' }}
+                style={{ flex: 1, minWidth: 180, background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 8, padding: '8px 10px' }}
                 value={msgNote}
                 onChange={(e) => setMsgNote(e.target.value)}
                 aria-label="Question stub"
@@ -260,7 +260,7 @@ export default function Listing() {
             >
               Message
             </button>
-            <button type="button" className="btn btn-amber" onClick={() => setOfferOpen(true)}>
+            <button type="button" className="btn" onClick={() => setOfferOpen(true)}>
               Make Offer
             </button>
             <button type="button" className="btn btn-primary" onClick={() => setBuyOpen(true)}>

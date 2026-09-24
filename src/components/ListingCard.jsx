@@ -19,16 +19,16 @@ function valuePillClass(band) {
 function TruckSilhouette({ make }) {
   const label = make?.slice(0, 3).toUpperCase() || 'EV'
   return (
-    <svg width="180" height="70" viewBox="0 0 180 70" fill="none" aria-hidden="true">
+    <svg width="220" height="90" viewBox="0 0 220 90" fill="none" aria-hidden="true">
       <path
-        d="M8 48 H28 L38 28 H78 L92 18 H145 L168 28 V48 H158 Q152 58 140 58 Q128 58 122 48 H58 Q52 58 40 58 Q28 58 22 48 H8 Z"
-        fill="rgba(0,229,255,0.12)"
-        stroke="#00e5ff"
-        strokeWidth="1.25"
+        d="M12 62 H36 L48 36 H98 L114 24 H178 L206 36 V62 H194 Q186 74 172 74 Q158 74 150 62 H70 Q62 74 48 74 Q34 74 26 62 H12 Z"
+        fill="rgba(17,17,17,0.06)"
+        stroke="#333"
+        strokeWidth="1.4"
       />
-      <circle cx="40" cy="52" r="8" stroke="#ffb020" strokeWidth="1.5" fill="#0f1419" />
-      <circle cx="140" cy="52" r="8" stroke="#ffb020" strokeWidth="1.5" fill="#0f1419" />
-      <text x="90" y="38" textAnchor="middle" fill="#9aa7b5" fontSize="11" fontFamily="Inter,sans-serif">{label}</text>
+      <circle cx="48" cy="66" r="10" stroke="#555" strokeWidth="1.5" fill="#f2f2f2" />
+      <circle cx="172" cy="66" r="10" stroke="#555" strokeWidth="1.5" fill="#f2f2f2" />
+      <text x="110" y="50" textAnchor="middle" fill="#666" fontSize="13" fontFamily="Inter,sans-serif" fontWeight="600">{label}</text>
     </svg>
   )
 }
@@ -40,31 +40,47 @@ export default function ListingCard({ listing }) {
   const sellerLabel = listing.sellerType.charAt(0).toUpperCase() + listing.sellerType.slice(1)
 
   return (
-    <Link to={`/listing/${listing.id}`} className="listing-card">
-      <div className="card-media">
+    <article className="listing-card">
+      <Link to={`/listing/${listing.id}`} className="card-media" aria-label={`View ${listing.year} ${listing.make} ${listing.model}`}>
         <div className="card-badges">
           <span className={valuePillClass(listing.workValue)}>{listing.workValue}</span>
+          {listing.titleStatus && (
+            <span className="pill" style={{ background: '#fff', border: '1px solid var(--border)', color: 'var(--text-muted)' }}>
+              {listing.titleStatus} title
+            </span>
+          )}
         </div>
         <div className="card-media-truck">
           <TruckSilhouette make={listing.make} />
         </div>
-        <span className="card-media-label" style={{ position: 'absolute', bottom: 6, right: 8 }}>
+        <span className="card-media-label" style={{ position: 'absolute', bottom: 8, right: 10 }}>
           placeholder
         </span>
-      </div>
+      </Link>
+
       <div className="card-body">
-        {/* 1. All-in price (display weight) */}
-        <div className={`card-price ${price.unknown ? 'unknown' : ''}`}>{price.text}</div>
-        {/* 2. Year / Make / Model */}
         <h3 className="card-ymm">
           {listing.year} {listing.make} {listing.model}
+          {listing.trim ? ` ${listing.trim}` : ''}
         </h3>
-        {/* 3. Chip row: SOH · range · payload · seller */}
+        <p className="card-condition">
+          Used · {sellerLabel} seller
+        </p>
+        <p className="card-specs">
+          SOH {sohMissing ? '—' : `${listing.soh}%`}
+          <span className="dot">·</span>
+          {listing.ratedRange} mi range
+          <span className="dot">·</span>
+          {listing.payload.toLocaleString()} lb payload
+          <span className="dot">·</span>
+          {listing.mileage.toLocaleString()} mi
+        </p>
+
         <div className="card-chip-row">
-          <span className="meta-chip">
+          <span className="meta-chip ev-chip">
             SOH<strong>{sohMissing ? '—' : `${listing.soh}%`}</strong>
           </span>
-          <span className="meta-chip">
+          <span className="meta-chip ev-chip">
             Range<strong>{listing.ratedRange} mi</strong>
           </span>
           <span className="meta-chip">
@@ -74,11 +90,22 @@ export default function ListingCard({ listing }) {
             Seller<strong>{sellerLabel}</strong>
           </span>
         </div>
-        {/* 4. Miles / location */}
-        <p className="card-footer-meta">
-          {listing.mileage.toLocaleString()} mi · {listing.location.city}, {listing.location.state} · {miles} mi away
-          {listing.trim ? ` · ${listing.trim}` : ''}
-        </p>
+
+        <div className="card-price-block">
+          <div className={`card-price ${price.unknown ? 'unknown' : ''}`}>{price.text}</div>
+          {!price.unknown && (
+            <>
+              <span className="card-price-note">All-in · fees included</span>
+              <button type="button" className="card-price-link" onClick={(e) => { e.preventDefault(); e.stopPropagation() }}>
+                Price details
+              </button>
+            </>
+          )}
+          {price.unknown && (
+            <span className="card-price-note">Ask seller for fee sheet</span>
+          )}
+        </div>
+
         {listing.upfitTags.length > 0 && (
           <div className="card-upfits">
             {listing.upfitTags.slice(0, 4).map((t) => (
@@ -86,7 +113,33 @@ export default function ListingCard({ listing }) {
             ))}
           </div>
         )}
+
+        <div className="card-actions">
+          <Link to={`/listing/${listing.id}`} className="btn btn-primary">
+            Show details
+          </Link>
+          <button
+            type="button"
+            className="btn btn-save"
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); alert('Demo: Save is stubbed.') }}
+            aria-label="Save listing"
+          >
+            <svg width="12" height="14" viewBox="0 0 16 20" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true">
+              <path d="M3 1.5h10a1 1 0 011 1v15.2l-6-3.4-6 3.4V2.5a1 1 0 011-1z" />
+            </svg>
+            Save
+          </button>
+        </div>
+
+        <p className="card-footer-meta">
+          {listing.sellerName}
+          <span className="sep">·</span>
+          <span className="muted">
+            {listing.location.city}, {listing.location.state}
+            {' · '}{miles} mi away
+          </span>
+        </p>
       </div>
-    </Link>
+    </article>
   )
 }
