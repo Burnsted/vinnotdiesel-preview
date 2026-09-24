@@ -1,7 +1,20 @@
-import { useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getModelBySlug } from '../data/models'
 import ListingCard from '../components/ListingCard'
+import MediaFrame from '../components/MediaFrame'
+
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const update = () => setReduced(mq.matches)
+    update()
+    mq.addEventListener?.('change', update)
+    return () => mq.removeEventListener?.('change', update)
+  }, [])
+  return reduced
+}
 
 function formatFrom(price) {
   if (price == null) return null
@@ -33,6 +46,8 @@ export default function Model() {
   const { slug } = useParams()
   const model = useMemo(() => getModelBySlug(slug), [slug])
   const inventoryRef = useRef(null)
+  const reduced = usePrefersReducedMotion()
+  const [heroPaused, setHeroPaused] = useState(false)
 
   if (!model) {
     return (
@@ -70,9 +85,29 @@ export default function Model() {
       </header>
 
       <section className="model-hero">
-        <div className="model-hero-img ken-burns-slow" style={{ backgroundImage: `url(${model.heroImage})` }} />
+        <MediaFrame
+          image={model.heroImage}
+          video={model.heroVideo || model.video}
+          active
+          paused={heroPaused}
+          reduced={reduced}
+          kenBurns
+          className="model-hero-media"
+        />
         <div className="model-hero-grad" aria-hidden="true" />
         <h1 className="model-hero-script">{model.model}</h1>
+        <button
+          type="button"
+          className="btn-round-control model-hero-pause"
+          aria-label={heroPaused ? 'Play media' : 'Pause media'}
+          onClick={() => setHeroPaused((p) => !p)}
+        >
+          {heroPaused ? (
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M3 2l9 5-9 5V2z" /></svg>
+          ) : (
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="1" y="1" width="3.5" height="10" rx="0.5" /><rect x="7.5" y="1" width="3.5" height="10" rx="0.5" /></svg>
+          )}
+        </button>
       </section>
 
       <div className="model-body">
@@ -81,7 +116,7 @@ export default function Model() {
           <span className="crumb-pill is-active">{model.model}</span>
         </div>
 
-        <h2 className="model-title">{model.fullName}</h2>
+        <h2 className="model-title">{model.fullName}.</h2>
         <span className="pill-gray">{model.tag}</span>
 
         {from && (
@@ -90,7 +125,6 @@ export default function Model() {
             <span className="model-from-star">*</span>
           </p>
         )}
-        {/* Monthly estimate omitted — no transparent lease computation in seed data. */}
 
         <div className="model-cta-stack">
           <button type="button" className="btn-model-primary" onClick={scrollToInventory}>
