@@ -1,0 +1,345 @@
+# VinNotDiesel income model v1
+# SOURCED = fetched fact with source_url | ASSUMPTION = estimate with reasoning | CALC = derived
+# Scenarios: conservative | base | upside | Years: 1 | 2 | 3
+# Currency: USD. Roundings may differ slightly from narrative summaries.
+
+row_type,scenario,year,metric,unit,value,source_url,reasoning
+SOURCED,all,all,cars_and_bids_buyer_fee_pct,percent,5,https://carsandbids.com/what-is/,Cars & Bids published buyer commission
+SOURCED,all,all,cars_and_bids_buyer_fee_min,USD,250,https://carsandbids.com/what-is/,Published minimum buyer fee
+SOURCED,all,all,cars_and_bids_buyer_fee_max,USD,7500,https://carsandbids.com/what-is/,Published maximum buyer fee
+SOURCED,all,all,cars_and_bids_seller_listing_fee,USD,0,https://carsandbids.com/what-is/,Sellers list free; receive 100% of sale price
+SOURCED,all,all,cars_and_bids_sell_through_claim,percent,80,https://carsandbids.com/what-is/,Site claims 80%+ sell-through; not used as VinNotDiesel forecast
+SOURCED,all,all,bat_seller_listing_classic,USD,99,https://bringatrailer.com/submit-a-vehicle/,BaT Classic listing fee
+SOURCED,all,all,bat_seller_listing_plus,USD,429,https://bringatrailer.com/submit-a-vehicle/,BaT Plus (listing + pro photo/video package)
+SOURCED,all,all,bat_plus_photo_addon,USD,330,https://bringatrailer.com/how-bat-works/,Plus photo add-on vs Classic per BaT how-fees page
+SOURCED,all,all,bat_white_glove_listing,USD,2500,https://bringatrailer.com/whiteglove/,White Glove flat fee per vehicle (no seller commission)
+SOURCED,all,all,bat_buyer_fee_standard_pct,percent,5,https://bringatrailer.com/how-bat-works/,Standard vehicle category buyer fee
+SOURCED,all,all,bat_buyer_fee_select_pct,percent,10,https://bringatrailer.com/how-bat-works/,Select categories (e.g. motorcycles/parts) buyer fee
+SOURCED,all,all,bat_buyer_fee_min,USD,250,https://bringatrailer.com/how-bat-works/,Published minimum
+SOURCED,all,all,bat_buyer_fee_cap_5pct,USD,7500,https://bringatrailer.com/how-bat-works/,Cap for 5% category (US)
+SOURCED,all,all,bat_buyer_fee_cap_10pct,USD,4000,https://bringatrailer.com/how-bat-works/,Cap for 10% category (US)
+SOURCED,all,all,autotrader_psx_listing_under_10k,USD,9,https://intercom.help/autotraderprivatesellerexchange/en/articles/12820777-how-much-does-it-cost-to-sell-a-car-through-psx,PSX ad creation fee band
+SOURCED,all,all,autotrader_psx_listing_10k_20k,USD,29,https://intercom.help/autotraderprivatesellerexchange/en/articles/12820777-how-much-does-it-cost-to-sell-a-car-through-psx,PSX ad creation fee band
+SOURCED,all,all,autotrader_psx_listing_over_20k,USD,49,https://intercom.help/autotraderprivatesellerexchange/en/articles/12820777-how-much-does-it-cost-to-sell-a-car-through-psx,PSX ad creation fee band
+SOURCED,all,all,autotrader_psx_closing_fee_pct,percent,1,https://intercom.help/autotraderprivatesellerexchange/en/articles/12820777-how-much-does-it-cost-to-sell-a-car-through-psx,Closing fee when sold via PSX (waived on Direct Offer)
+SOURCED,all,all,autotrader_psx_closing_fee_min,USD,99,https://intercom.help/autotraderprivatesellerexchange/en/articles/12820777-how-much-does-it-cost-to-sell-a-car-through-psx,Min closing fee if sold for $10000 or less
+SOURCED,all,all,safepay_total_fee,USD,198,https://carsandbids.com/safepay/,Cars & Bids SafePay powered by KeySavvy flat total
+SOURCED,all,all,safepay_loan_payoff_surcharge,USD,99,https://carsandbids.com/safepay/,Additional if loan payoff needed
+SOURCED,all,all,ford_f150_lightning_us_sales_2024,units,33510,https://www.sec.gov/Archives/edgar/data/37996/000003799625000002/exhibit99q42024salesrele.htm,Ford FY2024 U.S. Lightning sales
+SOURCED,all,all,ford_etransit_us_sales_2024,units,12610,https://www.sec.gov/Archives/edgar/data/37996/000003799625000002/exhibit99q42024salesrele.htm,Ford FY2024 U.S. E-Transit sales
+SOURCED,all,all,chevy_silverado_ev_us_sales_2024,units,7428,https://insideevs.com/news/746177/general-motors-record-2024-ev-sales/,InsideEVs table summarizing GM 2024 EV sales
+SOURCED,all,all,gmc_sierra_ev_us_sales_2024,units,1788,https://insideevs.com/news/746177/general-motors-record-2024-ev-sales/,InsideEVs table summarizing GM 2024 EV sales
+SOURCED,all,all,gmc_hummer_ev_us_sales_2024,units,13993,https://insideevs.com/news/746177/general-motors-record-2024-ev-sales/,Pickup+SUV combined in source table
+SOURCED,all,all,brightdrop_vans_us_sales_2024,units,1529,https://insideevs.com/news/746177/general-motors-record-2024-ev-sales/,BrightDrop vans 2024
+SOURCED,all,all,manheim_used_ev_sold_2024,units,106000,https://press.manheim.com/2025-02-06-Cox-Automotive-Launches-Manheim-Location-EV-Certification-Program,-Establishing-New-Standard-in-Managing-and-Servicing-Used-EVs-at-Scale,Manheim approx used EVs sold 2024
+SOURCED,all,all,manheim_used_ev_sold_2023,units,51000,https://press.manheim.com/2025-02-06-Cox-Automotive-Launches-Manheim-Location-EV-Certification-Program,-Establishing-New-Standard-in-Managing-and-Servicing-Used-EVs-at-Scale,Manheim approx used EVs sold 2023
+SOURCED,all,all,kbb_2025_lightning_xlt_fair_purchase,USD,47240,https://www.kbb.com/ford/f150-lightning/2025/xlt-pickup-4d-5-1-2-ft/,Fair Purchase Price example ZIP 10001 at fetch time
+SOURCED,all,all,iseecars_used_2025_lightning_avg,USD,66261,https://www.iseecars.com/compare/ford-f__150_lightning-vs-rivian-r1t,iSeeCars average used 2025 Lightning price
+SOURCED,all,all,iseecars_used_2025_r1t_avg,USD,76402,https://www.iseecars.com/compare/ford-f__150_lightning-vs-rivian-r1t,iSeeCars average used 2025 R1T price
+SOURCED,all,all,cargurus_us_dealer_list_price_public,text,not_published,https://dealers.cargurus.com/listings,Dealer packages require contacting sales; no public U.S. fee sheet fetched
+
+ASSUMPTION,all,all,vnd_buyer_fee_pct,percent,4,,Undercut Cars & Bids 5% while remaining a real take-rate on work-truck ASPs
+ASSUMPTION,all,all,vnd_buyer_fee_min,USD,200,,Slightly under Cars & Bids $250 min
+ASSUMPTION,all,all,vnd_buyer_fee_max,USD,5000,,Below Cars & Bids / BaT $7500 cap; still binds only on very high Cybertruck/Hummer outcomes
+ASSUMPTION,all,all,vnd_seller_listing_fee,USD,79,,Below BaT Classic $99; often waived in Y1 seeding
+ASSUMPTION,all,all,vnd_featured_fee,USD,149,,Placement boost without BaT-Plus photo package economics
+ASSUMPTION,all,all,vnd_vin_battery_report_price,USD,89,,Consumer add-on band; vendor COGS TBD
+ASSUMPTION,all,all,vnd_financing_referral_fee,USD,250,,No public partner bounty fetched; flat proxy until contracts exist
+ASSUMPTION,all,all,vnd_insurance_referral_fee,USD,125,,No public schedule fetched
+ASSUMPTION,all,all,vnd_warranty_referral_fee,USD,200,,No public schedule fetched
+ASSUMPTION,all,all,vnd_dealer_sub_monthly_y1,USD,299,,Guess; CarGurus U.S. dealer pricing not public
+ASSUMPTION,all,all,vnd_dealer_sub_monthly_y3,USD,349,,Slight price lift with proven audience
+ASSUMPTION,all,all,vnd_fit_my_truck_referral_y1,USD,100,,Internal sister-brand handoff; no market rate
+ASSUMPTION,all,all,vnd_fit_my_truck_referral_y3,USD,150,,Higher as Fit My Truck matures
+
+ASSUMPTION,conservative,1,listings_per_month,count,4,,Solo founder Florida seed; thin inventory
+ASSUMPTION,base,1,listings_per_month,count,8,,Steady FL outreach + free-listing promo
+ASSUMPTION,upside,1,listings_per_month,count,15,,Strong dealer/fleet supply response
+ASSUMPTION,conservative,2,listings_per_month,count,12,,Slow SE crawl
+ASSUMPTION,base,2,listings_per_month,count,25,,FL + early SE working
+ASSUMPTION,upside,2,listings_per_month,count,40,,SE density + dealer feeds
+ASSUMPTION,conservative,3,listings_per_month,count,25,,Still regional niche
+ASSUMPTION,base,3,listings_per_month,count,50,,Category brand in SE with national bleed
+ASSUMPTION,upside,3,listings_per_month,count,80,,National niche pull without becoming CarGurus
+
+ASSUMPTION,conservative,1,sell_through_rate,percent,40,,New brand; below Cars & Bids 80%+ claim
+ASSUMPTION,base,1,sell_through_rate,percent,55,,Curated inventory; still learning reserves
+ASSUMPTION,upside,1,sell_through_rate,percent,65,,Tight curation + demand match
+ASSUMPTION,conservative,2,sell_through_rate,percent,50,,
+ASSUMPTION,base,2,sell_through_rate,percent,60,,
+ASSUMPTION,upside,2,sell_through_rate,percent,65,,
+ASSUMPTION,conservative,3,sell_through_rate,percent,55,,
+ASSUMPTION,base,3,sell_through_rate,percent,65,,
+ASSUMPTION,upside,3,sell_through_rate,percent,70,,Still below Cars & Bids claimed 80%+
+
+ASSUMPTION,conservative,1,avg_sale_price,USD,45000,,Near KBB Lightning XLT Fair Purchase ~47240; work-trim blend
+ASSUMPTION,base,1,avg_sale_price,USD,48000,,Blend of work Lightnings/vans with some premium units; below iSeeCars Lightning avg 66261
+ASSUMPTION,upside,1,avg_sale_price,USD,52000,,Richer mix of R1T/Silverado EV/Cybertruck
+ASSUMPTION,conservative,2,avg_sale_price,USD,47000,,
+ASSUMPTION,base,2,avg_sale_price,USD,50000,,
+ASSUMPTION,upside,2,avg_sale_price,USD,54000,,
+ASSUMPTION,conservative,3,avg_sale_price,USD,48000,,
+ASSUMPTION,base,3,avg_sale_price,USD,52000,,
+ASSUMPTION,upside,3,avg_sale_price,USD,55000,,
+
+ASSUMPTION,conservative,1,pct_listings_paid_listing_fee,percent,25,,Mostly free seeding
+ASSUMPTION,base,1,pct_listings_paid_listing_fee,percent,50,,Half free promo
+ASSUMPTION,upside,1,pct_listings_paid_listing_fee,percent,75,,Fees stick earlier
+ASSUMPTION,conservative,2,pct_listings_paid_listing_fee,percent,70,,
+ASSUMPTION,base,2,pct_listings_paid_listing_fee,percent,80,,
+ASSUMPTION,upside,2,pct_listings_paid_listing_fee,percent,90,,
+ASSUMPTION,conservative,3,pct_listings_paid_listing_fee,percent,85,,
+ASSUMPTION,base,3,pct_listings_paid_listing_fee,percent,90,,
+ASSUMPTION,upside,3,pct_listings_paid_listing_fee,percent,95,,
+
+ASSUMPTION,conservative,1,pct_listings_featured,percent,10,,
+ASSUMPTION,base,1,pct_listings_featured,percent,15,,
+ASSUMPTION,upside,1,pct_listings_featured,percent,20,,
+ASSUMPTION,conservative,2,pct_listings_featured,percent,15,,
+ASSUMPTION,base,2,pct_listings_featured,percent,18,,
+ASSUMPTION,upside,2,pct_listings_featured,percent,22,,
+ASSUMPTION,conservative,3,pct_listings_featured,percent,18,,
+ASSUMPTION,base,3,pct_listings_featured,percent,20,,
+ASSUMPTION,upside,3,pct_listings_featured,percent,25,,
+
+ASSUMPTION,conservative,1,pct_listings_report,percent,30,,
+ASSUMPTION,base,1,pct_listings_report,percent,40,,
+ASSUMPTION,upside,1,pct_listings_report,percent,50,,
+ASSUMPTION,conservative,2,pct_listings_report,percent,40,,
+ASSUMPTION,base,2,pct_listings_report,percent,45,,
+ASSUMPTION,upside,2,pct_listings_report,percent,55,,
+ASSUMPTION,conservative,3,pct_listings_report,percent,45,,
+ASSUMPTION,base,3,pct_listings_report,percent,50,,
+ASSUMPTION,upside,3,pct_listings_report,percent,60,,
+
+ASSUMPTION,conservative,1,pct_sales_financing_referral,percent,20,,
+ASSUMPTION,base,1,pct_sales_financing_referral,percent,20,,
+ASSUMPTION,upside,1,pct_sales_financing_referral,percent,25,,
+ASSUMPTION,conservative,2,pct_sales_financing_referral,percent,20,,
+ASSUMPTION,base,2,pct_sales_financing_referral,percent,22,,
+ASSUMPTION,upside,2,pct_sales_financing_referral,percent,28,,
+ASSUMPTION,conservative,3,pct_sales_financing_referral,percent,22,,
+ASSUMPTION,base,3,pct_sales_financing_referral,percent,25,,
+ASSUMPTION,upside,3,pct_sales_financing_referral,percent,30,,
+
+ASSUMPTION,conservative,1,pct_sales_insurance_referral,percent,10,,
+ASSUMPTION,base,1,pct_sales_insurance_referral,percent,15,,
+ASSUMPTION,upside,1,pct_sales_insurance_referral,percent,20,,
+ASSUMPTION,conservative,2,pct_sales_insurance_referral,percent,12,,
+ASSUMPTION,base,2,pct_sales_insurance_referral,percent,18,,
+ASSUMPTION,upside,2,pct_sales_insurance_referral,percent,22,,
+ASSUMPTION,conservative,3,pct_sales_insurance_referral,percent,15,,
+ASSUMPTION,base,3,pct_sales_insurance_referral,percent,20,,
+ASSUMPTION,upside,3,pct_sales_insurance_referral,percent,25,,
+
+ASSUMPTION,conservative,1,pct_sales_warranty_referral,percent,10,,
+ASSUMPTION,base,1,pct_sales_warranty_referral,percent,15,,
+ASSUMPTION,upside,1,pct_sales_warranty_referral,percent,20,,
+ASSUMPTION,conservative,2,pct_sales_warranty_referral,percent,12,,
+ASSUMPTION,base,2,pct_sales_warranty_referral,percent,18,,
+ASSUMPTION,upside,2,pct_sales_warranty_referral,percent,22,,
+ASSUMPTION,conservative,3,pct_sales_warranty_referral,percent,15,,
+ASSUMPTION,base,3,pct_sales_warranty_referral,percent,20,,
+ASSUMPTION,upside,3,pct_sales_warranty_referral,percent,25,,
+
+ASSUMPTION,conservative,1,dealer_fleet_subs_avg_count,count,1,,One pilot dealer mid-year
+ASSUMPTION,base,1,dealer_fleet_subs_avg_count,count,2,,
+ASSUMPTION,upside,1,dealer_fleet_subs_avg_count,count,4,,
+ASSUMPTION,conservative,2,dealer_fleet_subs_avg_count,count,3,,
+ASSUMPTION,base,2,dealer_fleet_subs_avg_count,count,6,,
+ASSUMPTION,upside,2,dealer_fleet_subs_avg_count,count,12,,
+ASSUMPTION,conservative,3,dealer_fleet_subs_avg_count,count,8,,
+ASSUMPTION,base,3,dealer_fleet_subs_avg_count,count,15,,
+ASSUMPTION,upside,3,dealer_fleet_subs_avg_count,count,30,,
+
+ASSUMPTION,conservative,1,dealer_sub_billable_months,count,6,,Ramp mid-year
+ASSUMPTION,base,1,dealer_sub_billable_months,count,6,,
+ASSUMPTION,upside,1,dealer_sub_billable_months,count,6,,
+ASSUMPTION,conservative,2,dealer_sub_billable_months,count,12,,
+ASSUMPTION,base,2,dealer_sub_billable_months,count,12,,
+ASSUMPTION,upside,2,dealer_sub_billable_months,count,12,,
+ASSUMPTION,conservative,3,dealer_sub_billable_months,count,12,,
+ASSUMPTION,base,3,dealer_sub_billable_months,count,12,,
+ASSUMPTION,upside,3,dealer_sub_billable_months,count,12,,
+
+ASSUMPTION,conservative,1,fit_my_truck_referrals,count,5,,
+ASSUMPTION,base,1,fit_my_truck_referrals,count,10,,
+ASSUMPTION,upside,1,fit_my_truck_referrals,count,25,,
+ASSUMPTION,conservative,2,fit_my_truck_referrals,count,20,,
+ASSUMPTION,base,2,fit_my_truck_referrals,count,40,,
+ASSUMPTION,upside,2,fit_my_truck_referrals,count,80,,
+ASSUMPTION,conservative,3,fit_my_truck_referrals,count,40,,
+ASSUMPTION,base,3,fit_my_truck_referrals,count,80,,
+ASSUMPTION,upside,3,fit_my_truck_referrals,count,160,,
+
+ASSUMPTION,conservative,1,sponsored_content_revenue,USD,1500,,Small local tests
+ASSUMPTION,base,1,sponsored_content_revenue,USD,3000,,
+ASSUMPTION,upside,1,sponsored_content_revenue,USD,6000,,
+ASSUMPTION,conservative,2,sponsored_content_revenue,USD,6000,,
+ASSUMPTION,base,2,sponsored_content_revenue,USD,12000,,
+ASSUMPTION,upside,2,sponsored_content_revenue,USD,24000,,
+ASSUMPTION,conservative,3,sponsored_content_revenue,USD,12000,,
+ASSUMPTION,base,3,sponsored_content_revenue,USD,24000,,
+ASSUMPTION,upside,3,sponsored_content_revenue,USD,48000,,
+
+ASSUMPTION,conservative,1,opex_total,USD,35000,,Lean legal+tools+light marketing; no salaries
+ASSUMPTION,base,1,opex_total,USD,37500,,See income-model.md cost table
+ASSUMPTION,upside,1,opex_total,USD,45000,,More marketing when inventory exists
+ASSUMPTION,conservative,2,opex_total,USD,50000,,
+ASSUMPTION,base,2,opex_total,USD,59500,,
+ASSUMPTION,upside,2,opex_total,USD,80000,,
+ASSUMPTION,conservative,3,opex_total,USD,80000,,
+ASSUMPTION,base,3,opex_total,USD,105000,,
+ASSUMPTION,upside,3,opex_total,USD,150000,,Still no full-time hires in this model
+
+CALC,conservative,1,listings_per_year,count,48,,12 * listings_per_month
+CALC,base,1,listings_per_year,count,96,,12 * listings_per_month
+CALC,upside,1,listings_per_year,count,180,,12 * listings_per_month
+CALC,conservative,1,units_sold,count,19,,round(listings_per_year * sell_through)
+CALC,base,1,units_sold,count,53,,round(96 * 0.55)
+CALC,upside,1,units_sold,count,117,,round(180 * 0.65)
+CALC,conservative,1,avg_buyer_fee_per_sale,USD,1800,,min(max(0.04*ASP,200),5000) at ASP 45000
+CALC,base,1,avg_buyer_fee_per_sale,USD,1920,,at ASP 48000
+CALC,upside,1,avg_buyer_fee_per_sale,USD,2080,,at ASP 52000
+CALC,conservative,1,gmv,USD,855000,,units_sold * ASP
+CALC,base,1,gmv,USD,2544000,,53 * 48000
+CALC,upside,1,gmv,USD,6084000,,117 * 52000
+CALC,conservative,1,rev_buyer_success_fee,USD,34200,,19 * 1800
+CALC,base,1,rev_buyer_success_fee,USD,101760,,53 * 1920
+CALC,upside,1,rev_buyer_success_fee,USD,243360,,117 * 2080
+CALC,conservative,1,rev_seller_listing_fees,USD,948,,48 * 0.25 * 79
+CALC,base,1,rev_seller_listing_fees,USD,3792,,96 * 0.50 * 79
+CALC,upside,1,rev_seller_listing_fees,USD,10665,,180 * 0.75 * 79
+CALC,conservative,1,rev_featured_placement,USD,745,,round(48 * 0.10) * 149
+CALC,base,1,rev_featured_placement,USD,2086,,round(96 * 0.15) * 149
+CALC,upside,1,rev_featured_placement,USD,5364,,round(180 * 0.20) * 149
+CALC,conservative,1,rev_vin_battery_reports,USD,1246,,round(48 * 0.30) * 89
+CALC,base,1,rev_vin_battery_reports,USD,3382,,round(96 * 0.40) * 89
+CALC,upside,1,rev_vin_battery_reports,USD,8010,,round(180 * 0.50) * 89
+CALC,conservative,1,rev_financing_referral,USD,1000,,round(19 * 0.20) * 250
+CALC,base,1,rev_financing_referral,USD,2750,,round(53 * 0.20) * 250
+CALC,upside,1,rev_financing_referral,USD,7250,,round(117 * 0.25) * 250
+CALC,conservative,1,rev_insurance_referral,USD,250,,round(19 * 0.10) * 125
+CALC,base,1,rev_insurance_referral,USD,1000,,round(53 * 0.15) * 125
+CALC,upside,1,rev_insurance_referral,USD,2875,,round(117 * 0.20) * 125
+CALC,conservative,1,rev_warranty_referral,USD,400,,round(19 * 0.10) * 200
+CALC,base,1,rev_warranty_referral,USD,1600,,round(53 * 0.15) * 200
+CALC,upside,1,rev_warranty_referral,USD,4600,,round(117 * 0.20) * 200
+CALC,conservative,1,rev_dealer_fleet_subscriptions,USD,1794,,1 * 299 * 6
+CALC,base,1,rev_dealer_fleet_subscriptions,USD,3588,,2 * 299 * 6
+CALC,upside,1,rev_dealer_fleet_subscriptions,USD,7176,,4 * 299 * 6
+CALC,conservative,1,rev_fit_my_truck_referral,USD,500,,5 * 100
+CALC,base,1,rev_fit_my_truck_referral,USD,1000,,10 * 100
+CALC,upside,1,rev_fit_my_truck_referral,USD,2500,,25 * 100
+CALC,conservative,1,rev_sponsored_content,USD,1500,,from ASSUMPTION
+CALC,base,1,rev_sponsored_content,USD,3000,,from ASSUMPTION
+CALC,upside,1,rev_sponsored_content,USD,6000,,from ASSUMPTION
+CALC,conservative,1,rev_total,USD,42583,,sum of Y1 conservative streams
+CALC,base,1,rev_total,USD,123958,,sum of Y1 base streams
+CALC,upside,1,rev_total,USD,297800,,sum of Y1 upside streams
+CALC,conservative,1,contribution_after_opex,USD,7583,,rev_total - opex_total
+CALC,base,1,contribution_after_opex,USD,86458,,123958 - 37500
+CALC,upside,1,contribution_after_opex,USD,252800,,297800 - 45000
+
+CALC,conservative,2,listings_per_year,count,144,,12 * 12
+CALC,base,2,listings_per_year,count,300,,12 * 25
+CALC,upside,2,listings_per_year,count,480,,12 * 40
+CALC,conservative,2,units_sold,count,72,,144 * 0.50
+CALC,base,2,units_sold,count,180,,300 * 0.60
+CALC,upside,2,units_sold,count,312,,480 * 0.65
+CALC,conservative,2,avg_buyer_fee_per_sale,USD,1880,,0.04 * 47000
+CALC,base,2,avg_buyer_fee_per_sale,USD,2000,,0.04 * 50000
+CALC,upside,2,avg_buyer_fee_per_sale,USD,2160,,0.04 * 54000
+CALC,conservative,2,gmv,USD,3384000,,72 * 47000
+CALC,base,2,gmv,USD,9000000,,180 * 50000
+CALC,upside,2,gmv,USD,16848000,,312 * 54000
+CALC,conservative,2,rev_buyer_success_fee,USD,135360,,72 * 1880
+CALC,base,2,rev_buyer_success_fee,USD,360000,,180 * 2000
+CALC,upside,2,rev_buyer_success_fee,USD,673920,,312 * 2160
+CALC,conservative,2,rev_seller_listing_fees,USD,7963,,144 * 0.70 * 79
+CALC,base,2,rev_seller_listing_fees,USD,18960,,300 * 0.80 * 79
+CALC,upside,2,rev_seller_listing_fees,USD,34128,,480 * 0.90 * 79
+CALC,conservative,2,rev_featured_placement,USD,3278,,round(144*0.15)*149
+CALC,base,2,rev_featured_placement,USD,8046,,round(300*0.18)*149
+CALC,upside,2,rev_featured_placement,USD,15794,,round(480*0.22)*149
+CALC,conservative,2,rev_vin_battery_reports,USD,5162,,round(144*0.40)*89
+CALC,base,2,rev_vin_battery_reports,USD,12015,,round(300*0.45)*89
+CALC,upside,2,rev_vin_battery_reports,USD,23496,,round(480*0.55)*89
+CALC,conservative,2,rev_financing_referral,USD,3500,,round(72*0.20)*250
+CALC,base,2,rev_financing_referral,USD,9900,,round(180*0.22)*250
+CALC,upside,2,rev_financing_referral,USD,21840,,round(312*0.28)*250
+CALC,conservative,2,rev_insurance_referral,USD,1125,,round(72*0.12)*125
+CALC,base,2,rev_insurance_referral,USD,4000,,round(180*0.18)*125
+CALC,upside,2,rev_insurance_referral,USD,8625,,round(312*0.22)*125
+CALC,conservative,2,rev_warranty_referral,USD,1800,,round(72*0.12)*200
+CALC,base,2,rev_warranty_referral,USD,6400,,round(180*0.18)*200
+CALC,upside,2,rev_warranty_referral,USD,13600,,round(312*0.22)*200
+CALC,conservative,2,rev_dealer_fleet_subscriptions,USD,10764,,3 * 299 * 12
+CALC,base,2,rev_dealer_fleet_subscriptions,USD,23328,,6 * 324 * 12 (midpoint Y1-Y3 sub price)
+CALC,upside,2,rev_dealer_fleet_subscriptions,USD,46656,,12 * 324 * 12
+CALC,conservative,2,rev_fit_my_truck_referral,USD,2500,,20 * 125 midpoint
+CALC,base,2,rev_fit_my_truck_referral,USD,5000,,40 * 125
+CALC,upside,2,rev_fit_my_truck_referral,USD,10000,,80 * 125
+CALC,conservative,2,rev_sponsored_content,USD,6000,,
+CALC,base,2,rev_sponsored_content,USD,12000,,
+CALC,upside,2,rev_sponsored_content,USD,24000,,
+CALC,conservative,2,rev_total,USD,177452,,sum Y2 conservative
+CALC,base,2,rev_total,USD,459649,,sum Y2 base
+CALC,upside,2,rev_total,USD,872059,,sum Y2 upside
+CALC,conservative,2,contribution_after_opex,USD,127452,,177452 - 50000
+CALC,base,2,contribution_after_opex,USD,400149,,459649 - 59500
+CALC,upside,2,contribution_after_opex,USD,792059,,872059 - 80000
+
+CALC,conservative,3,listings_per_year,count,300,,12 * 25
+CALC,base,3,listings_per_year,count,600,,12 * 50
+CALC,upside,3,listings_per_year,count,960,,12 * 80
+CALC,conservative,3,units_sold,count,165,,300 * 0.55
+CALC,base,3,units_sold,count,390,,600 * 0.65
+CALC,upside,3,units_sold,count,672,,960 * 0.70
+CALC,conservative,3,avg_buyer_fee_per_sale,USD,1920,,0.04 * 48000
+CALC,base,3,avg_buyer_fee_per_sale,USD,2080,,0.04 * 52000
+CALC,upside,3,avg_buyer_fee_per_sale,USD,2200,,0.04 * 55000
+CALC,conservative,3,gmv,USD,7920000,,165 * 48000
+CALC,base,3,gmv,USD,20280000,,390 * 52000
+CALC,upside,3,gmv,USD,36960000,,672 * 55000
+CALC,conservative,3,rev_buyer_success_fee,USD,316800,,165 * 1920
+CALC,base,3,rev_buyer_success_fee,USD,811200,,390 * 2080
+CALC,upside,3,rev_buyer_success_fee,USD,1478400,,672 * 2200
+CALC,conservative,3,rev_seller_listing_fees,USD,20145,,300 * 0.85 * 79
+CALC,base,3,rev_seller_listing_fees,USD,42660,,600 * 0.90 * 79
+CALC,upside,3,rev_seller_listing_fees,USD,72048,,960 * 0.95 * 79
+CALC,conservative,3,rev_featured_placement,USD,8046,,round(300*0.18)*149
+CALC,base,3,rev_featured_placement,USD,17880,,round(600*0.20)*149
+CALC,upside,3,rev_featured_placement,USD,35760,,round(960*0.25)*149
+CALC,conservative,3,rev_vin_battery_reports,USD,12015,,round(300*0.45)*89
+CALC,base,3,rev_vin_battery_reports,USD,26700,,round(600*0.50)*89
+CALC,upside,3,rev_vin_battery_reports,USD,51264,,round(960*0.60)*89
+CALC,conservative,3,rev_financing_referral,USD,9000,,round(165*0.22)*250
+CALC,base,3,rev_financing_referral,USD,24500,,round(390*0.25)*250
+CALC,upside,3,rev_financing_referral,USD,50400,,round(672*0.30)*250
+CALC,conservative,3,rev_insurance_referral,USD,3125,,round(165*0.15)*125
+CALC,base,3,rev_insurance_referral,USD,9750,,round(390*0.20)*125
+CALC,upside,3,rev_insurance_referral,USD,21000,,round(672*0.25)*125
+CALC,conservative,3,rev_warranty_referral,USD,5000,,round(165*0.15)*200
+CALC,base,3,rev_warranty_referral,USD,15600,,round(390*0.20)*200
+CALC,upside,3,rev_warranty_referral,USD,33600,,round(672*0.25)*200
+CALC,conservative,3,rev_dealer_fleet_subscriptions,USD,33504,,8 * 349 * 12
+CALC,base,3,rev_dealer_fleet_subscriptions,USD,62820,,15 * 349 * 12
+CALC,upside,3,rev_dealer_fleet_subscriptions,USD,125640,,30 * 349 * 12
+CALC,conservative,3,rev_fit_my_truck_referral,USD,6000,,40 * 150
+CALC,base,3,rev_fit_my_truck_referral,USD,12000,,80 * 150
+CALC,upside,3,rev_fit_my_truck_referral,USD,24000,,160 * 150
+CALC,conservative,3,rev_sponsored_content,USD,12000,,
+CALC,base,3,rev_sponsored_content,USD,24000,,
+CALC,upside,3,rev_sponsored_content,USD,48000,,
+CALC,conservative,3,rev_total,USD,425635,,sum Y3 conservative
+CALC,base,3,rev_total,USD,1047110,,sum Y3 base
+CALC,upside,3,rev_total,USD,1941112,,sum Y3 upside
+CALC,conservative,3,contribution_after_opex,USD,345635,,425635 - 80000
+CALC,base,3,contribution_after_opex,USD,942110,,1047110 - 105000
+CALC,upside,3,contribution_after_opex,USD,1791112,,1941112 - 150000
+
+ASSUMPTION,base,1,one_pager_y1_revenue_range_low,USD,90000,,Narrative band around modeled ~124k if volume/ASP flex down
+ASSUMPTION,base,1,one_pager_y1_revenue_range_high,USD,160000,,Narrative band around modeled ~124k if volume/ASP flex up
+ASSUMPTION,base,3,one_pager_y3_revenue_range_low,USD,850000,,Narrative band around modeled ~1.05M
+ASSUMPTION,base,3,one_pager_y3_revenue_range_high,USD,1300000,,Narrative band around modeled ~1.05M
