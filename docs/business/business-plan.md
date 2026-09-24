@@ -1,48 +1,55 @@
-# VinNotDiesel — Business Plan v1
+# VinNotDiesel — Business Plan v1.1
 
 **Brand:** VinNotDiesel (one *t*)  
 **Founder:** Ted Burns · Vero Beach, FL (Treasure Coast)  
-**What it is:** An independent marketplace for EV work trucks and vans — CarGurus-style discovery crossed with Bring a Trailer / Cars & Bids–style auctions and buy-now, focused only on electric work vehicles.  
-**Related brand:** Fit My Truck (fleet TCO / upfit planner). Separate public brand; referral sharing later.  
+**What it is:** An independent **used EV work-truck marketplace** (web + app). CarGurus-style browse/comps clarity + BaT/Cars & Bids–style diligence culture — focused only on electric work vehicles.  
+**Live preview (app owned elsewhere):** https://burnsted.github.io/vinnotdiesel-preview/  
+**Related brand:** Fit My Truck (fleet TCO / upfit planner). **Separate public brand** — no FitMyTruck look, IA, or public affiliation ([team brief](https://burnsted.github.io/vinnotdiesel-preview/) product constraint). Referral sharing later is OK privately.  
 **Domains / email:** On hold — do **not** assume vinnotdiesel.com is owned.
 
-**How to read this doc:** Sourced market facts include a URL we fetched. Anything else is labeled **ASSUMPTION** with reasoning so you can separate facts from guesses. Legal items are flagged **verify with a lawyer**.
+**How to read this doc:** **SOURCED** facts include a primary URL (fetched or from team research that cites one). **ASSUMPTION** rows include reasoning. Legal notes = **verify with a lawyer**. Product rules below match locked marketplace synthesis v0 (2026-09-24).
 
 ---
 
 ## One-page summary
 
-**Problem.** Trades and small fleets shopping used EV trucks/vans have to hunt across general classifieds and enthusiast auctions that do not speak “payload, range under load, charger at the shop, upfit.” Battery health and trade-fit are hard to compare.
+**Problem.** Trades and small fleets shopping used EV trucks/vans hunt across general classifieds and enthusiast auctions that ignore payload, upfit, charger needs, and battery state-of-health (SOH).
 
-**Who buys.** Landscapers, electricians, HVAC, plumbing, GCs, small fleets, and prosumers who need a work truck that plugs in — not a weekend toy.
+**Who buys.** Landscapers, electricians, HVAC, plumbing, GCs, small fleets, municipalities, and prosumers — plus dealers/upfitters selling surplus.
 
-**What we sell (product).** Listings with auction and/or buy-now; VIN + battery-health reports; trade-fit tags (payload, towing, bed/van config, charger needs). Later: financing / insurance / warranty referrals and Fit My Truck upfit handoffs.
+**Locked product rules (v0).**  
+- Commerce: **Buy Now + Make Offer** first; **auctions later**.  
+- Every listing must show **battery health + how it was measured**, or it is marked **Incomplete Data**.  
+- **Work specs up top** (payload/GVWR, range, charger kW, cab/bed, upfit).  
+- Prices shown **all-in** / fee-transparent.  
+- Not a fitment configurator. Not an enthusiast auction house that happens to have trucks.
 
-**Where we start.** Florida first (founder on the Treasure Coast), then Southeast corridor markets with trades density and growing used EV supply.
+**Where we start.** Florida first (Treasure Coast → statewide commercial desks), then Southeast, using a researched rolodex of **137** dealers nationwide that market EV work trucks (**21** in Florida). Top Florida names: **Maher Chevy / Maher Truck Center**, **Nimnicht Chevy**, **Duval Ford** (plus Essential Ford of Stuart as home-market first call).
 
-**Three most realistic Year 1 income streams**
+**Supply signal (team verified sample, 2026-09-24):** **101** used EV truck/van listings with fetched prices — pickups 85 / vans 16. Sample median ask **$59,994** overall; **work-relevant mix** (Lightning, Silverado EV, Sierra EV, R1T, e-Transit, BrightDrop) median **~$51,635**. Broader market aggregates on CarGurus/Cars.com show hundreds–thousands of used listings per model (see §7) — this is not a census.
 
-1. **Buyer premium / success fee** on completed sales (auction or buy-now) — the primary cash engine once sell-through exists. Peers: Cars & Bids charges buyers **5%** (min **$250**, max **$7,500**); BaT charges buyers **5%** or **10%** by category (min **$250**, caps **$7,500** / **$4,000**). Sources: [carsandbids.com/what-is](https://carsandbids.com/what-is/), [bringatrailer.com/how-bat-works](https://bringatrailer.com/how-bat-works/).
-2. **Seller listing fees + featured placement** — smaller dollars early, useful for quality control and cash before volume. Peer anchors: BaT Classic **$99** list / Plus **$429**; Autotrader Private Seller Exchange listing **$9–$49** by price band. Sources: [bringatrailer.com/submit-a-vehicle](https://bringatrailer.com/submit-a-vehicle/), [bringatrailer.com/how-bat-works](https://bringatrailer.com/how-bat-works/), [Autotrader PSX fees](https://intercom.help/autotraderprivatesellerexchange/en/articles/12820777-how-much-does-it-cost-to-sell-a-car-through-psx).
-3. **VIN + battery-health report upsell** — high trust value for EV work buyers; pairs with trade-fit tags. Recurrent/Black Book published that battery-informed reports improve used-EV transparency (early results: vehicles with Recurrent Reports “can sell for thousands more”). Source: [Black Book / Recurrent](https://www.blackbook.com/black-book-and-recurrent-collaborate-for-first-ev-specific-valuation-powered-by-battery-data/).
+**Three most realistic Year 1 income streams** (seller-side first — avoid leading with BaT/C&B-scale **buyer** premiums on work trucks):
 
-**Base-case Year 1 revenue range (modeled):** about **$90k–$160k** total marketplace revenue.  
-See `income-model.md` / `income-model.csv` for conservative / base / upside and Year 2–3. Numbers that are not competitor fee schedules or published sales stats are **ASSUMPTIONS**.
+1. **Seller success fee** on completed Buy Now / Make Offer sales (dealers may use **subscription** instead). Peers still matter as ceiling: Cars & Bids buyer **5%** ($250–$7,500); BaT seller list **$99** / buyer **5%**. Sources: [carsandbids.com/what-is](https://carsandbids.com/what-is/), [bringatrailer.com/how-bat-works](https://bringatrailer.com/how-bat-works/).
+2. **Battery SOH documentation package** — required path to a Complete listing (else Incomplete Data). Monetize facilitation / partner report, not fake SOH. Category trust anchor (Manheim already puts VIN-specific battery health into EV inspections — [Manheim EV certification](https://site.manheim.com/solutions/evcertification)).
+3. **Listing + featured / promoted placement** — quality gate + cash before volume. Peer: BaT Classic **$99** / Plus **$429**; Autotrader PSX **$9–$49**. Sources: [BaT submit](https://bringatrailer.com/submit-a-vehicle/), [Autotrader PSX](https://intercom.help/autotraderprivatesellerexchange/en/articles/12820777-how-much-does-it-cost-to-sell-a-car-through-psx).
 
-**Team.** Ted + AI agents. No hires assumed in this plan.
+**Base-case Year 1 revenue range (modeled):** about **$70k–$150k**.  
+**Base-case Year 3 range:** about **$0.7M–$1.15M**.  
+Detail: `income-model.md` / `income-model.csv`.
 
-**Immediate risk to manage.** Florida dealer / auction / advertising rules if VinNotDiesel holds inventory, takes title, or advertises vehicles it does not own — **verify with a lawyer** before go-live (see Legal).
+**Team.** Ted + AI agents. No hires assumed.
+
+**Immediate risk.** Florida dealer / advertising rules if VinNotDiesel advertises vehicles it does not own or runs retail auctions — **verify with a lawyer**. Preview is live; domains are not assumed owned.
 
 ---
 
 ## 1. Problem
 
-Buying a used EV *work* vehicle is not the same as buying a used EV car or a diesel F-250.
-
-- **Signal mismatch.** General sites (CarGurus, Autotrader) optimize for consumer search. Enthusiast auctions (BaT, Cars & Bids) optimize for rare / cool cars. Neither is built around “will this Lightning or E-Transit run my landscaping route with a 6-kW inverter and a ladder rack?”
-- **Battery risk.** For EVs, range and battery condition drive value. Manheim has been building VIN-specific battery health into EV inspections and reported ~**106,000** used EVs sold through Manheim in **2024** vs ~**51,000** in **2023**. Source: [Manheim press release (Feb 6, 2025)](https://press.manheim.com/2025-02-06-Cox-Automotive-Launches-Manheim-Location-EV-Certification-Program,-Establishing-New-Standard-in-Managing-and-Servicing-Used-EVs-at-Scale). That wholesale surge does not give a trades buyer a retail marketplace that explains battery health in work terms.
-- **Trade-fit opacity.** Payload, towing under EV conditions, cargo volume, upfit compatibility, Level 2 / DC fast needs at the shop, and fleet TCO are rarely first-class filters.
-- **Trust friction.** High ASP vehicles (tens of thousands of dollars) need clean title path, escrow-like payment, and history — not Facebook Marketplace vibes.
+- **Wrong marketplaces.** CarGurus/Autotrader optimize generic retail. BaT/Cars & Bids optimize enthusiast auctions. Neither answers: “Can I work with this truck tomorrow — battery, payload, warranty, all-in price?”
+- **Battery opacity.** Used EV value tracks SOH and range. Manheim sold ~**106,000** used EVs in **2024** vs ~**51,000** in **2023** ([Manheim press](https://press.manheim.com/2025-02-06-Cox-Automotive-Launches-Manheim-Location-EV-Certification-Program,-Establishing-New-Standard-in-Managing-and-Servicing-Used-EVs-at-Scale)). Wholesale transparency is not a trades-facing retail marketplace.
+- **Work-spec burial.** Payload after upfit, GVWR, charger kW, bed/cab, and known electrical/upfit issues are rarely first-class.
+- **Fee / price opacity.** Pros need all-in asks (CarGurus fee-transparency lesson), not sticker games.
 
 ---
 
@@ -50,252 +57,248 @@ Buying a used EV *work* vehicle is not the same as buying a used EV car or a die
 
 | Segment | Need | Why VinNotDiesel |
 | --- | --- | --- |
-| **Trades owner-operators** (landscaping, electrical, HVAC, plumbing) | One reliable EV truck/van that fits tools and job sites | Trade-fit tags + battery report + local FL / SE inventory |
-| **Small fleets (2–25 units)** | Replace diesels carefully; standardize on a few SKUs | Comparable listings, fleet seller channel later |
-| **GCs / specialty contractors** | Payload + range honesty | Filter by work specs, not “sport” trims |
-| **Prosumers** | Want EV truck that still works weekends | Same inventory, lighter upfit needs |
-| **Sellers** (individuals, dealers, fleet managers exiting EV units) | Reach buyers who *want* EV work trucks | Niche audience + listing/report packaging |
+| Trades owner-operators | One EV truck/van that fits the job | Work-spec hero + SOH + all-in price |
+| Small fleets / municipalities | Comparable SKUs, diligence | Saved search/alerts; Incomplete Data filter |
+| GCs / specialty contractors | Payload + range honesty | Filters for work, not “sport” |
+| Prosumers | EV truck that still works | Same inventory, lighter upfit |
+| Dealers / fleet / upfitters selling surplus | Reach buyers who want EV work trucks | Seller badges + dealer sub path |
 
-**ASSUMPTION — segment mix Year 1:** ~60% trades / small fleet buyers, ~25% prosumers, ~15% dealers shopping retail-adjacent inventory. Reasoning: founder GTM is trades-first in FL; dealer channel usually follows once listing quality is proven.
+**ASSUMPTION — Y1 buyer mix:** ~60% trades/fleet, ~25% prosumer, ~15% dealer/cross-shop. Reasoning: FL commercial GTM.
 
 ---
 
 ## 3. Value proposition
 
-**For buyers:** “Find electric work trucks and vans that fit the job — with VIN history, battery-health context, and trade-fit tags — then buy via auction or buy-now with a clear close path.”
+**Principle (locked):** A marketplace for used EV work trucks where every listing answers: *Can I work with this truck tomorrow — what’s the battery, the payload, the warranty, and the all-in price?*
 
-**For sellers:** “Reach trades and fleets who already want EV work vehicles, not tire-kickers shopping sports cars.”
+| Unlike | Difference |
+| --- | --- |
+| CarGurus | Work/EV fields and SOH first-class — not generic lead-gen |
+| BaT / Cars & Bids | Not enthusiast auction-first; commercial disclosures; **seller-side** economics in v0 |
+| Fit My Truck | You **buy the truck** here — you don’t configure accessories as the core loop |
 
-**Positioning line (working):** Independent marketplace for EV work trucks and vans — not diesel classifieds, not enthusiast auctions.
-
-**Brand note:** Separate public brand from Fit My Truck. Later: “need an upfit / TCO plan?” → Fit My Truck; “need the truck?” → VinNotDiesel.
+**Preview:** https://burnsted.github.io/vinnotdiesel-preview/
 
 ---
 
-## 4. Product
+## 4. Product (locked v0 rules)
 
-### Core
+### Commerce
+- **Must:** **Buy Now** (fixed) + **Make Offer** (expiry workflow).  
+- **Later:** Auction (soft-close) for rare trims — do not lead with auction tax on tools.
 
-- **Listings** for in-scope EV work trucks and vans (examples: Ford F-150 Lightning, E-Transit; Rivian R1T / EDV; Chevy Silverado EV / BrightDrop; GMC Sierra EV / Hummer EV; Tesla Cybertruck). Scope can expand later; keep work-use filter strict early.
-- **Auction and/or buy-now.** Auction for price discovery on scarce / desirable units; buy-now for fleet refresh and time-sensitive sellers.
-- **VIN report** (history / title / odometer style third-party).
-- **Battery-health report** (partner or packaged data — Recurrent-class insight is the category, not a signed deal).
-- **Trade-fit tags** — payload, towing, bed/van layout, charger dependency, common upfit notes, “shop L2 ready?” style flags.
+### Listing standards (Complete vs Incomplete)
+**Must for Complete listing:**
+- Year/make/model/trim, VIN, mileage, location, title status, seller type (private / dealer / fleet / upfitter)
+- **Battery SOH % + measurement method** (plus usable kWh if known, onboard charger kW, DC fast max)
+- **Work specs up top:** payload / GVWR / curb, bed/cab, drivetrain, upfit description + photos
+- Warranty remaining (battery + bumper) + transfer notes
+- Known-issues checklist (modules, wreck, water, charger faults, upfit electrical)
+- Photo minimum (exterior, bed/upfit, dash range, charge port, underbody/frame)
+- **All-in price** (fee-transparent badge)
 
-### Trust / close
+**If SOH missing or method unknown → status = Incomplete Data** (searchable but ranked down; “SOH-documented only” alert filter).
 
-- Clear post-sale checklist.
-- Optional escrow / payment + title partner (peer pattern: Cars & Bids SafePay powered by KeySavvy at **$198** total, plus **$99** loan-payoff surcharge if applicable). Source: [carsandbids.com/safepay](https://carsandbids.com/safepay/).
+### Detail anatomy (priority order)
+1. Hero: **all-in price · range · SOH · payload**  
+2. Media + walk-around  
+3. Work & EV facts strip  
+4. Upfit package  
+5. Warranty & battery docs  
+6. History report  
+7. Known issues  
+8. Seller card  
+9. Q&A  
+10. Comps / Work Value band  
+11. CTA: Message · Make Offer · Buy Now · Book PPI  
 
-### Later (not required for launch)
+### Explicit non-goals
+Fitment/parts configurator · horizontal ICE marketplace · personality auction livestream brand · requiring “cool” · opaque fees.
 
-- Financing, insurance, warranty referral widgets.
-- Dealer / fleet subscription inventory feeds.
-- Sponsored content (charger OEMs, upfitters, insurers).
-- Deep Fit My Truck referral for TCO + upfit planning.
+### Trust rails
+In-platform messaging; optional escrow/title partner (peer pattern: Cars & Bids SafePay **$198** + **$99** loan payoff — [safepay](https://carsandbids.com/safepay/)); PPI hooks; sold archive from day one.
 
 ---
 
 ## 5. Go-to-market
 
-### Phase A — Florida (days 0–90)
+### Phase A — Florida (0–90 days)
 
-- Founder-led outreach on Treasure Coast / I-95 / I-4 corridors: trades associations, Ford Pro / Chevy / Rivian commercial peer groups, independent dealers with EV trucks, fleet managers cycling E-Transit / BrightDrop / Lightning.
-- Seed **first 10 listings** with white-glove help (photos, trade-fit tags, reports) — see §12.
-- Content: “what to check on a used Lightning for landscaping” style guides — SEO + Facebook/Nextdoor trades groups. No domain assumed; use temporary hosting / email until domains clear.
+**Treasure Coast first call:** Essential Ford of Stuart — Lightning page  
+https://www.essentialford.com/f-150-lightning.html
 
-### Phase B — Southeast (roughly months 4–12)
+**Priority-5 commercial desks (statewide):**
 
-- Expand listing acquisition to GA, AL, SC, NC, TN — same trades verticals.
-- Partner with 1–2 Southeast upfitters and 1 payment/title partner.
+| Dealer | Why | Evidence URLs |
+| --- | --- | --- |
+| **Maher Truck Center / Maher Chevrolet** (St. Petersburg) | Silverado EV **Work Truck** showroom / work-truck center | https://mahertruckcenter.com/showrooms/68c29ed0650b5ec880068e9f/ · https://maherchevrolet.worktrucksolutions.com/ |
+| **Nimnicht Chevrolet** (Jacksonville) | Silverado EV WT on work-truck subdomain | https://worktrucks.nimnichtchevy.com/work-truck/2024-chevrolet-silverado-ev-crew-cab-awd-pickup-12921819 |
+| **Duval Ford** (Jacksonville) | **Lightning PRO** + commercial sales | https://www.duvalford.com/ev-lightning/ · https://www.duvalford.com/2025-ford-f-150-lightning-pro-jacksonville-fl/ · https://www.duvalford.com/commercial-vehicles-sales-jacksonville/ |
+
+**Next FL calls (priority 4):** Al Packer Ford WPB (https://www.alpackerford.net/ev-lightning), Mullinax Ford WPB, Bill Currie Ford (Lightning + E-Transit commercial), Tropical Ford Orlando (E-Transit), AutoNation Chevy Doral commercial, CDJR of Tampa Bay (ProMaster EV), AutoNation Chevy Airport (WT called out).
+
+Florida shortlist researched: **21** dealers in rolodex / **23** in FL evidence table with public EV work-truck signals. Do **not** invent on-lot counts — marketing ≠ inventory; verify by phone/browser before quoting units.
+
+### Phase B — Southeast (months 4–12)
+Use nationwide index Phases 1B–3 (South Atlantic, East/West South Central). National top names outside FL include Capital Ford Raleigh, Chastang Ford (TX), etc. (**137** dealers in rolodex total across 10 Census divisions).
 
 ### Phase C — Selective national (Year 2+)
+Only after FL/SE Complete-listing sell-through works. Recruit EV-only used specialists already in the inventory sample (e.g. EV Auto Brentwood TN, Green Wave Salem MA) for SOH-friendly stock.
 
-- Only after FL/SE sell-through and ops playbook work. Do not dilute niche with passenger EVs.
-
-**ASSUMPTION — CAC:** Founder time + ~$1k/mo paid social/classifieds Year 1. Reasoning: solo founder, AI-assisted content; no sales hire.
+**ASSUMPTION — CAC:** Founder time + ~$1k/mo paid reach Y1. No sales hire.
 
 ---
 
-## 6. Competitors and honest positioning
+## 6. Competitors (honest)
 
-| Player | What they are | Fee / model (sourced where public) | VinNotDiesel angle |
+| Player | Role | Public fees / notes | Our angle |
 | --- | --- | --- | --- |
-| **Cars & Bids** | Modern enthusiast auctions | Buyer **5%** (min **$250**, max **$7,500**); sellers list free, keep 100% of hammer; site cites **80%+** sell-through | They win cool cars. We win *work* EVs. Do not pretend to out-Doug Doug. |
-| **Bring a Trailer** | Collector / enthusiast auctions | Seller Classic **$99**, Plus **$429**, White Glove **$2,500**/vehicle; buyer **5%** or **10%** (min **$250**; caps **$7,500** / **$4,000**) | Same: enthusiast DNA. We filter for trades utility. |
-| **CarGurus** | Mass retail marketplace | Dealer packages; public U.S. price sheet not posted — “contact sales” ([dealers.cargurus.com/listings](https://dealers.cargurus.com/listings)) | Breadth without trade-fit / battery-first EV work UX. |
-| **Autotrader** | Mass retail + private seller tools | PSX private listing **$9 / $29 / $49** by ask; closing fee **1%** (min **$99**), waived on Direct Offer | Same breadth problem; fee schedule is consumer-classified, not niche auction. |
-| **Recurrent** | Battery data / Range Score / reports | Consumer Range Score / Sell-with-Recurrent model; Black Book partnership for battery-adjusted values | Partner / complement, not clone. We are the *marketplace*; they are battery intelligence. |
-| **ACV Auctions** | Dealer-to-dealer wholesale, digital | Licensed dealers only; condition reports, transport, flooring ([acvauctions.com](https://www.acvauctions.com/)) | Wholesale B2B. We are retail / trades-facing (unless we later add a dealer lane — legal review first). |
-| **Manheim** | Large wholesale auction + EV ops | ~**106k** used EVs sold via Manheim in 2024; VIN-specific battery health in inspections; EV location certification program | Wholesale / fleet remarketing giant. We serve the trades buyer Manheim does not market to directly. |
+| Cars & Bids | Modern enthusiast auction | Buyer **5%** ($250–$7,500); free list; SafePay **$198** | Auction-first + cool-car ICP — we are Buy Now/Offer + work SOH |
+| Bring a Trailer | Collector auction | Seller **$99** / Plus **$429** / White Glove **$2,500**; buyer **5%/10%** | Same — steal dossier culture, not “cool” gate |
+| CarGurus | Mass retail | Dealer packages; U.S. $ not public ([dealers.cargurus.com/listings](https://dealers.cargurus.com/listings)); fee-transparency program | Steal all-in UX; don’t steal horizontal IA |
+| Autotrader | Mass + PSX | PSX list **$9–$49**; close **1%** (min **$99**) | Breadth without work/SOH core |
+| Recurrent | Battery intelligence | Range Score / reports; Black Book partnership | **Partner class**, not competitor marketplace |
+| ACV / Manheim | Dealer wholesale | Manheim ~106k used EVs in 2024; VIN battery health in inspections | Wholesale — we serve trades retail |
 
-**Honest takeaway:** Do not compete with BaT/Cars & Bids on enthusiast volume or with CarGurus on national SKU count. Win on **category clarity** (EV work vehicles only) + **trade-fit + battery trust**.
+Monetization preference vs peers: **seller success fee / dealer sub**, not a 5% buyer tax on fleet POs (marketplace synthesis v0).
 
 ---
 
-## 7. Market context (sourced supply signals)
+## 7. Market & price signals
 
-These are **new-vehicle U.S. sales** (not used-market registrations). They show that a used pool of EV work trucks/vans is forming — not that VinNotDiesel can capture X%.
+### New-vehicle U.S. sales (supply pipeline — not used counts)
 
-| Model / line | 2024 U.S. figure | Source |
+| Model | 2024 U.S. | Source |
 | --- | --- | --- |
-| Ford F-150 Lightning | **33,510** (+39% YoY) | [Ford SEC exhibit / Q4 2024 sales release](https://www.sec.gov/Archives/edgar/data/37996/000003799625000002/exhibit99q42024salesrele.htm) |
-| Ford E-Transit | **12,610** (+64% YoY) | Same Ford release |
-| Chevy Silverado EV | **7,428** | [InsideEVs summary of GM 2024 EV sales](https://insideevs.com/news/746177/general-motors-record-2024-ev-sales/) |
-| GMC Sierra EV | **1,788** | Same |
-| GMC Hummer EV (pickup + SUV combined in table) | **13,993** | Same |
+| F-150 Lightning | **33,510** | [Ford SEC FY2024 sales](https://www.sec.gov/Archives/edgar/data/37996/000003799625000002/exhibit99q42024salesrele.htm) |
+| E-Transit | **12,610** | Same |
+| Silverado EV | **7,428** | [InsideEVs / GM table](https://insideevs.com/news/746177/general-motors-record-2024-ev-sales/) |
+| Sierra EV | **1,788** | Same |
+| Hummer EV (pickup+SUV in table) | **13,993** | Same |
 | BrightDrop vans | **1,529** | Same |
 
-**Used price anchors (examples, not ASP targets):**
+### Used listing aggregates (team research 2026-09-24 — not de-duplicated national census)
 
-- KBB Fair Purchase Price for a **2025 F-150 Lightning XLT** (example ZIP 10001 at fetch): **$47,240**; private-party excellent estimate **~$46,430**. Source: [KBB](https://www.kbb.com/ford/f150-lightning/2025/xlt-pickup-4d-5-1-2-ft/).
-- iSeeCars: used **2025** Lightning range **$49,042–$79,279** (avg **$66,261**); used **2025** R1T **$64,990–$89,965** (avg **$76,402**). Source: [iSeeCars compare page](https://www.iseecars.com/compare/ford-f__150_lightning-vs-rivian-r1t).
+| Model | Source | Count | URL |
+| --- | --- | --- | --- |
+| F-150 Lightning | CarGurus year Total Listings (sum≈1,790 if additive) | ~1,790 | https://www.cargurus.com/Cars/l-Used-Ford-F-150-Lightning-d3147 |
+| F-150 Lightning | Cars.com used nationwide | **433** | https://www.cars.com/shopping/results/?stock_type=used&makes%5B%5D=ford&models%5B%5D=ford-f_150_lightning&maximum_distance=all&zip=10001 |
+| Rivian R1T | Cars.com used nationwide | **354** | https://www.cars.com/shopping/results/?stock_type=used&makes%5B%5D=rivian&models%5B%5D=rivian-r1t&maximum_distance=all&zip=10001 |
+| Cybertruck | Cars.com | **212** | https://www.cars.com/shopping/results/?stock_type=used&makes%5B%5D=tesla&models%5B%5D=tesla-cybertruck&maximum_distance=all&zip=10001 |
+| Silverado EV | Cars.com | **161** | https://www.cars.com/shopping/results/?stock_type=used&makes%5B%5D=chevrolet&models%5B%5D=chevrolet-silverado_ev&maximum_distance=all&zip=10001 |
+| e-Transit | Cars.com | **62** | https://www.cars.com/shopping/results/?stock_type=used&makes%5B%5D=ford&models%5B%5D=ford-e_transit&maximum_distance=all&zip=10001 |
+| BrightDrop | Cars.com keyword+electric | **51** | https://www.cars.com/shopping/results/?stock_type=used&keyword=BrightDrop&maximum_distance=all&zip=10001&fuel_slugs[]=electric |
 
-**ASSUMPTION — marketplace ASP Year 1:** **$48,000**. Reasoning: blends KBB XLT-like work trims with higher R1T/Cybertruck outliers and lower-mileage van units; deliberately below iSeeCars category averages that skew premium.
+### Verified sample prices (101 CSV rows, fetch date 2026-09-24)
+
+| Slice | n | Median ask | Mean ask | Min–Max |
+| --- | --- | --- | --- | --- |
+| All sample rows | 101 | **$59,994** | ~$57,776 | $23,999–$93,497 |
+| Work-relevant mix* | 76 | **~$51,635** | ~$51,590 | $23,999–$77,685 |
+| F-150 Lightning | 20 | **$44,595** | ~$43,986 | $33,080–$51,999 |
+| e-Transit | 8 | **$30,071** | ~$30,548 | $23,999–$41,398 |
+| BrightDrop | 8 | **$38,997** | ~$39,141 | $35,111–$45,640 |
+| Silverado EV | 13 | **$67,990** | ~$64,873 | $51,387–$77,685 |
+
+\*Lightning + Silverado EV + Sierra EV + R1T + e-Transit + BrightDrop.
+
+**Example Complete-listing candidates already documented (EV-only dealers):**
+- 2023 Lightning LARIAT · $50,900 · 45,627 mi · EV Auto — https://www.evauto.com/vehicle/used-2023-ford-f-150-lightning-lariat-1ftvw1ev9pwg10081/
+- 2023 Lightning XLT · $48,400 · 26,542 mi · Green Wave — https://www.greenwaveev.com/vehicle/used-2023-ford-rayo-f-150-xlt-1ftvw1ev1pwg42328/
+- 2024 Silverado EV Work Truck · $51,387 (Cars.com VDP in sample) — https://www.cars.com/vehicledetail/6217c752-4d4e-404e-9212-f7c81d381a78/
+
+**ASSUMPTION — marketplace ASP Y1 base:** **$50,000**. Reasoning: near work-relevant sample median (~$51.6k); pulls Lightning/van weight without Cybertruck/Hummer skew ($77k/$70k medians in sample).
 
 ---
 
 ## 8. Operations
 
-**Launch posture (lean):**
-
-1. Curated listings (human + AI draft QA) — reject junk photos and incomplete VINs.
-2. Standard listing checklist: VIN, mileage, battery report status, charger history if known, upfit list, payload/tow claims with caveats.
-3. Auction calendar or rolling buy-now — start with whatever inventorizes faster.
-4. Buyer/seller messaging templates; post-sale checklist.
-5. Optional payment/title partner (KeySavvy-class) rather than building escrow Day 1.
-6. Support: Ted + AI triage; escalate title/payment issues to partner.
-
-**What we will not do early:** Hold large inventory on balance sheet, run physical auction lanes, or hire ops staff.
+1. Curate to **Complete** standard (reject Incomplete for homepage merchandising).  
+2. Buy Now / Make Offer tools; no auction ops in v0.  
+3. SOH capture path: seller upload (OEM app / shop printout) **or** paid partner package.  
+4. Optional escrow/title partner for remote fleet deals.  
+5. Ted + AI support; escalate title/payment to partner.  
+6. **Do not** hold inventory or run physical lanes early.
 
 ---
 
-## 9. Legal and regulatory notes — **verify with a lawyer**
+## 9. Legal — **verify with a lawyer**
 
-*Not legal advice. Florida-specific notes from fetched public sources; counsel must map VinNotDiesel’s exact operating model (classifieds vs. consignment vs. auction vs. taking title).*
-
-### Dealer licensing trigger (FL)
-
-- FLHSMV: any entity that buys, sells, offers, displays, or deals in **three or more** motor vehicles in any **12-month** period requires a dealer license. Source: [FLHSMV dealer licenses](https://www.flhsmv.gov/motor-vehicles-tags-titles/dealers-installers-manufacturers-distributors-importers/mv-rv-mh-dealer-broker-licenses/).
-- Fla. Stat. **320.27**: person who buys/sells/deals in **three or more** motor vehicles in 12 months is *prima facie* presumed a dealer; advertising a vehicle **belonging to another** generally requires a licensed dealer (owners may advertise vehicles titled in their own names). Source: [Fla. Stat. 320.27](https://www.flsenate.gov/Laws/Statutes/2025/320.27).
-
-### Auction vs. retail license types (FL)
-
-- **Vehicle Auction (VA):** bid sales where **buyers are licensed dealers**.
-- Auctions that sell **at retail** need an **Independent (VI)** license. Source: [FLHSMV license types](https://www.flhsmv.gov/motor-vehicles-tags-titles/dealers-installers-manufacturers-distributors-importers/mv-rv-mh-dealer-broker-licenses/types-of-licenses-available/).
-
-### Insurance / bond / application (FL)
-
-- Garage liability (or GL + business auto) minimums cited by FLHSMV: **$25,000** combined single-limit liability + **$10,000** PIP (with stated exceptions). Surety bond via form **86020** (or letter of credit alternative). Source: [FLHSMV dealer licenses](https://www.flhsmv.gov/motor-vehicles-tags-titles/dealers-installers-manufacturers-distributors-importers/mv-rv-mh-dealer-broker-licenses/).
-- **ASSUMPTION / secondary:** Bonding agencies commonly describe the motor vehicle dealer bond face amount as **$25,000** (e.g. [Ashton Agency summary](https://bonds.ashtonagency.com/florida-motor-vehicle-dealer-bond-requirements-2026/)). Confirm current face amount and whether VinNotDiesel’s model requires dealer licensure at all — **verify with a lawyer / FLHSMV**.
-
-### Escrow and payments
-
-- Peer approach: optional third-party payment + title (e.g. SafePay / KeySavvy **$198** + **$99** loan payoff). Source: [Cars & Bids SafePay](https://carsandbids.com/safepay/).
-- If VinNotDiesel ever holds funds or titles itself, money-transmission / dealer / escrow rules may apply — **verify with a lawyer**.
-
-### Practical launch paths to discuss with counsel
-
-1. **True peer marketplace** — owners list their own titled vehicles; platform fees for software/marketing; no advertising “for” others in the statutory sense.
-2. **Licensed dealer / broker / auction** — if consigning, taking possession, or running retail auctions.
-3. **Hybrid** — software marketplace + licensed partner for titled transactions.
+- FL: dealing in **3+** vehicles / 12 months → presumed dealer; advertising **another’s** vehicle generally needs a license; owners may advertise own titled vehicles ([Fla. Stat. 320.27](https://www.flsenate.gov/Laws/Statutes/2025/320.27); [FLHSMV](https://www.flhsmv.gov/motor-vehicles-tags-titles/dealers-installers-manufacturers-distributors-importers/mv-rv-mh-dealer-broker-licenses/)).  
+- FL **VA** auction license = dealer buyers only; retail auctions need **VI** ([license types](https://www.flhsmv.gov/motor-vehicles-tags-titles/dealers-installers-manufacturers-distributors-importers/mv-rv-mh-dealer-broker-licenses/types-of-licenses-available/)). v0 Buy Now/Offer still needs counsel on consignment/advertising.  
+- Garage liability mins + bond form **86020** per FLHSMV if licensed.  
+- Escrow/holding funds → separate review.
 
 ---
 
 ## 10. Team
 
-| Role | Who | Notes |
-| --- | --- | --- |
-| Founder / GTM / seller ops | Ted Burns | Vero Beach, FL |
-| Product / content / research / drafting | AI agents | No headcount assumed |
-| Legal / accounting / title partner | Outside vendors | As needed |
-
-No hires in the 365-day plan. Revisit only after sustained sell-through and cash-flow cover.
+Ted Burns (founder/GTM) + AI agents. No hires in 365-day plan. Outside counsel/CPA/title partner as needed.
 
 ---
 
 ## 11. Milestones
 
-### Next 30 days
+### 30 days
+- Counsel on FL operating model (**verify with a lawyer**).  
+- Align preview (https://burnsted.github.io/vinnotdiesel-preview/) with Complete/Incomplete + Buy Now/Offer rules (app agent).  
+- Outreach list: Essential Ford Stuart → Maher → Nimnicht → Duval → Bill Currie / Tropical.  
+- Soft fee card: free seed listings; seller success fee drafted (see income model).
 
-- Lock operating model recommendation with a Florida motor-vehicle attorney (**verify with a lawyer**).
-- Temporary brand presence (hosting + email) without assuming vinnotdiesel.com.
-- Listing template: VIN, photos, trade-fit tags, report fields.
-- Target list of 30 FL sellers (dealers, fleets, owners).
-- Draft fee card (see income model ASSUMPTIONS) — soft-launch free listings OK.
+### 90 days
+- **First 10 Complete listings** (§12).  
+- First closed Buy Now or Make Offer (fee waived OK for learning).  
+- SOH partner shortlist + escrow pilot decision.  
+- Metrics: Complete rate, offer→close, time-to-sale.
 
-### Next 90 days
-
-- First **10 live listings** (see §12).
-- First completed sale (even if fee waived for learning).
-- Payment/title partner pilot decision.
-- Battery-report vendor shortlist (Recurrent-class or inspection shops).
-- Measure: listing → inquiry → sale conversion; time-to-sale.
-
-### Next 365 days
-
-- Steady FL inventory + SE expansion of seller acquisition.
-- Paid fee card live (listing + buyer premium + reports).
-- 2–5 dealer or fleet supply relationships.
-- Fit My Truck referral path live (manual is fine).
-- Revisit: license status, whether to add auction-only vs. buy-now mix, first sponsored content test.
+### 365 days
+- Steady FL Complete inventory; SE dealer expansion from 137-dealer rolodex.  
+- Paid seller success + dealer subs live.  
+- Manual Fit My Truck referral path.  
+- Revisit auction only if rare-trim demand proves it.
 
 ---
 
 ## 12. First-10-listings plan
 
-Goal: prove category clarity and learn ops — not maximize fees.
+Goal: prove **Complete** standard with FL commercial sellers + 1–2 SOH-friendly used EV specialists. Prefer work trims over Cybertruck/Hummer traffic bait.
 
-| # | Target unit type | Why | How to source |
+| # | Target | Source path | Notes |
 | --- | --- | --- | --- |
-| 1–3 | F-150 Lightning (work trims / Pro / XLT-like) | Largest EV truck volume signal (33,510 U.S. sales in 2024 — Ford) | FL dealers, lease returns, owner Facebook/Forum outreach |
-| 4–5 | E-Transit or BrightDrop / Chevy EV van | Clear trades / delivery story | Fleet managers, Ford Pro commercial dealers |
-| 6–7 | Rivian R1T or EDV | Brand gravity + work/adventure crossover | Owner groups; keep trade-fit honest |
-| 8 | Silverado EV or Sierra EV | GM work-truck path | Dealer used inventory |
-| 9 | Cybertruck or Hummer EV (only if work-use story is real) | Traffic magnet — do not let it redefine the brand | Only with work upfit or commercial buyer angle |
-| 10 | Wildcard FL trades EV already upfitted | Best demo of trade-fit tags | Direct outreach to landscapers / HVAC shops |
+| 1–2 | F-150 Lightning (Pro/XLT/work) | Essential Ford Stuart + Al Packer / Mullinax | Home market; Lightning pages linked above |
+| 3–4 | Lightning PRO / commercial | **Duval Ford** | https://www.duvalford.com/2025-ford-f-150-lightning-pro-jacksonville-fl/ |
+| 5–6 | Silverado EV **Work Truck** | **Maher Truck Center** + **Nimnicht Chevy** | WT showroom / work-truck VDP URLs above |
+| 7 | E-Transit | Bill Currie Ford or Tropical Ford | Commercial van path; sample used e-Transits in CSV from ~$24k–$41k |
+| 8 | BrightDrop / Chevy EV van | FL commercial Chevy or sample Cars.com stock | Sample BrightDrop asks ~$35k–$46k |
+| 9 | Silverado EV WT (used) | National sample if FL dry — e.g. $51,387 WT VDP | https://www.cars.com/vehicledetail/6217c752-4d4e-404e-9212-f7c81d381a78/ |
+| 10 | Lightning with SOH docs | EV Auto / Green Wave style seller | Force SOH+method before marking Complete |
 
-**Execution checklist per listing:** 40+ photos, cold-start video, VIN report, battery-health status (even if “pending shop test”), trade-fit tags, reserve/buy-now guidance, shipping note.
+**Per listing:** all-in price, SOH % + method, work-spec hero, upfit photos, known issues, Buy Now + Make Offer enabled.
 
-**ASSUMPTION — first 10 fee policy:** Waive seller listing fees; optional buyer premium at half rate or waived on first 3 sales for testimonials. Reasoning: inventory seeding > revenue in month 1–2.
+**ASSUMPTION — seed fees:** Waive listing + success fee on first 3 closes; still require SOH for Complete.
 
 ---
 
 ## 13. Key risks
 
-| Risk | Why it matters | Mitigation |
-| --- | --- | --- |
-| **Licensing / advertising rules** | Can shut down GTM overnight | Lawyer before scale; choose model deliberately |
-| **Thin inventory** | Empty marketplace = no buyers | Founder-led seeding; free listings early; FL focus |
-| **Thin demand** | EV work adoption still niche vs diesel | Stay niche; educate on TCO via Fit My Truck later |
-| **Battery distrust** | Kills high-ASP deals | Report upsell + clear caveats; shop PPI path |
-| **Fee resistance** | Sellers compare to free Craigslist | Earn it with buyer quality; stay under enthusiast auction buyer fees where possible |
-| **Domain / brand ops lag** | Domains on hold | Temporary stack; do not over-promise URLs |
-| **Founder bandwidth** | Solo + AI | Ruthless scope; no early hires |
-| **OEM / policy swings** | EV truck sales can drop (e.g. Lightning discontinuation chatter in trade press) | Used market still cycles units already sold; diversify models |
+| Risk | Mitigation |
+| --- | --- |
+| Licensing / advertising | Counsel before consignment scale |
+| Incomplete SOH compliance | Incomplete Data badge + no homepage boost |
+| Thin FL used EV stock | Pull from 137-dealer rolodex + EV-only used dealers |
+| Fee resistance | Seller-side story; undercut 5% buyer premiums |
+| Domain lag | Preview URL live; don’t promise vinnotdiesel.com |
+| FitMyTruck brand bleed | Hard IA/visual separation |
+| Auction creep | Keep auction “later” until Buy Now/Offer works |
 
 ---
 
-## 14. Sources fetched for this plan
+## 14. Sources
 
-- [Cars & Bids — What’s Cars & Bids / fees](https://carsandbids.com/what-is/)
-- [Cars & Bids — SafePay](https://carsandbids.com/safepay/)
-- [Bring a Trailer — How it works / fees](https://bringatrailer.com/how-bat-works/)
-- [Bring a Trailer — Submit a vehicle](https://bringatrailer.com/submit-a-vehicle/)
-- [Autotrader PSX — seller fees](https://intercom.help/autotraderprivatesellerexchange/en/articles/12820777-how-much-does-it-cost-to-sell-a-car-through-psx)
-- [CarGurus dealer listings (no public U.S. price sheet)](https://dealers.cargurus.com/listings)
-- [Ford U.S. Q4/FY 2024 sales — SEC exhibit](https://www.sec.gov/Archives/edgar/data/37996/000003799625000002/exhibit99q42024salesrele.htm)
-- [InsideEVs — GM 2024 EV sales table](https://insideevs.com/news/746177/general-motors-record-2024-ev-sales/)
-- [KBB — 2025 F-150 Lightning XLT values](https://www.kbb.com/ford/f150-lightning/2025/xlt-pickup-4d-5-1-2-ft/)
-- [iSeeCars — Lightning vs R1T used pricing](https://www.iseecars.com/compare/ford-f__150_lightning-vs-rivian-r1t)
-- [Black Book / Recurrent battery valuation](https://www.blackbook.com/black-book-and-recurrent-collaborate-for-first-ev-specific-valuation-powered-by-battery-data/)
-- [Manheim EV certification / used EV volume](https://press.manheim.com/2025-02-06-Cox-Automotive-Launches-Manheim-Location-EV-Certification-Program,-Establishing-New-Standard-in-Managing-and-Servicing-Used-EVs-at-Scale)
-- [Manheim EV certification page](https://site.manheim.com/solutions/evcertification)
-- [ACV Auctions](https://www.acvauctions.com/)
-- [FLHSMV — dealer license overview](https://www.flhsmv.gov/motor-vehicles-tags-titles/dealers-installers-manufacturers-distributors-importers/mv-rv-mh-dealer-broker-licenses/)
-- [FLHSMV — license types](https://www.flhsmv.gov/motor-vehicles-tags-titles/dealers-installers-manufacturers-distributors-importers/mv-rv-mh-dealer-broker-licenses/types-of-licenses-available/)
-- [Fla. Stat. 320.27](https://www.flsenate.gov/Laws/Statutes/2025/320.27)
+**Team research inputs (2026-09-24):** marketplace synthesis v0 · product brief · used EV truck inventory (101 rows) · nationwide dealer index (137) · Florida dealer shortlist. Primary URLs from those files are cited inline above.
+
+**Also fetched for this plan:** Cars & Bids fees/SafePay · BaT fees/White Glove · Autotrader PSX · CarGurus dealer listings page · Ford SEC 2024 sales · InsideEVs GM EV table · KBB/iSeeCars price anchors · Manheim EV press · FLHSMV / Fla. Stat. 320.27 · Black Book/Recurrent.
 
 ---
 
-*VinNotDiesel business plan v1 — docs only. App / styles / concept page owned elsewhere.*
+*VinNotDiesel business plan v1.1 — docs only. App / styles / concept page owned elsewhere.*

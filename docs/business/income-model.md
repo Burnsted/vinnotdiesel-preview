@@ -1,8 +1,10 @@
-# VinNotDiesel — Income Model v1
+# VinNotDiesel — Income Model v1.1
 
-Companion to `business-plan.md`. Spreadsheet detail: `income-model.csv`.
+Companion to `business-plan.md`. Spreadsheet: `income-model.csv`.
 
-**Rule:** Competitor fees and published sales/price stats are **sourced** (URLs fetched). VinNotDiesel’s own prices, volumes, attach rates, costs, and projections are **ASSUMPTIONS** unless labeled otherwise.
+**Product lock (v0):** Buy Now + Make Offer (auctions later); mandatory battery SOH + method or Incomplete Data; work specs up top; all-in prices; **prefer seller-side monetization** over BaT/C&B-scale buyer premiums.
+
+**Rule:** Competitor fees and published/team-verified listing stats are **SOURCED**. VinNotDiesel prices, volumes, and costs are **ASSUMPTIONS**.
 
 ---
 
@@ -12,57 +14,78 @@ Companion to `business-plan.md`. Spreadsheet detail: `income-model.csv`.
 | --- | --- | --- | --- | --- |
 | Avg listings / month | 4 | 8 | 15 | 50 |
 | Sell-through | 40% | 55% | 65% | 65% |
-| ASP | $45,000 | $48,000 | $52,000 | $52,000 |
-| **Total revenue** | **~$45k** | **~$124k** | **~$297k** | **~$1.05M** |
+| ASP | $45,000 | $50,000 | $55,000 | $52,000 |
+| **Total revenue** | **~$37k** | **~$111k** | **~$265k** | **~$0.90M** |
 
-**Base-case Year 1 range to use in the one-pager:** **~$90k–$160k** (band around modeled ~$124k if ASP/sell-through flex ±20%).
-
-**Base-case Year 3 range:** **~$0.85M–$1.3M** (band around modeled ~$1.05M / $1.047M calc).
+**Base-case Year 1 range (one-pager):** **~$70k–$150k** (band around modeled ~$111k).  
+**Base-case Year 3 range:** **~$0.7M–$1.15M** (band around modeled ~$904k).
 
 ---
 
-## Revenue streams
+## Revenue streams (v0 priority)
 
-| Stream | How it works | Peer / market anchor (sourced) | VinNotDiesel plan |
+| Priority | Stream | Notes | Peer anchor (sourced) |
 | --- | --- | --- | --- |
-| **Seller listing fee** | Pay to publish | BaT Classic **$99**; Plus **$429**; Autotrader PSX **$9–$49** | **ASSUMPTION:** $79 standard; heavy free-listing promo in Y1 |
-| **Buyer premium / success fee** | % of closed sale | Cars & Bids **5%** (min **$250**, max **$7,500**); BaT **5%/10%** (min **$250**, caps **$7,500/$4,000**) | **ASSUMPTION:** **4%**, min **$200**, max **$5,000** |
-| **Featured placement** | Extra visibility | BaT photo upgrade economics; mass sites sell boosts | **ASSUMPTION:** **$149** / listing |
-| **VIN + battery report upsell** | Packaged confidence | Recurrent/Black Book: reports can move used EV outcomes (“thousands more” in early results) | **ASSUMPTION:** **$89** attach |
-| **Financing referral** | Lead / funded deal bounty | Peers promote lenders (e.g. Cars & Bids × LightStream); bounty not public | **ASSUMPTION:** **$250** per funded referral |
-| **Insurance referral** | Quote handoff | No public schedule fetched | **ASSUMPTION:** **$125** per bound policy |
-| **Warranty referral** | VSC / battery warranty | No public schedule fetched | **ASSUMPTION:** **$200** per sale |
-| **Dealer / fleet subscription** | Monthly inventory seat | CarGurus dealer packages exist; **U.S. list prices not public** | **ASSUMPTION:** **$299/mo** (Y1), **$349/mo** (Y3) |
-| **Fit My Truck upfit referral** | Internal sister brand | No market rate (same founder) | **ASSUMPTION:** **$100–$150** per qualified handoff |
-| **Sponsored content** | OEM / charger / upfitter | No public niche CPM fetched | **ASSUMPTION:** small flat placements |
+| 1 | **Seller success fee** on closed Buy Now / Make Offer | Primary take for private/fleet sellers | C&B buyer **5%** is a *ceiling to undercut*, not our v0 lead ([C&B](https://carsandbids.com/what-is/)) |
+| 1b | **Dealer / fleet subscription** | Dealers may pay monthly instead of per-sale success | CarGurus dealer $ **not public** ([listings](https://dealers.cargurus.com/listings)) |
+| 2 | **SOH documentation package** | Path to Complete listing; Incomplete Data if missing | Manheim VIN battery health in EV inspections ([Manheim](https://site.manheim.com/solutions/evcertification)); Recurrent/Black Book battery-adjusted values ([Black Book](https://www.blackbook.com/black-book-and-recurrent-collaborate-for-first-ev-specific-valuation-powered-by-battery-data/)) |
+| 3 | **Listing + featured / promoted** | Quality gate + early cash | BaT **$99** / **$429** ([submit](https://bringatrailer.com/submit-a-vehicle/)); PSX **$9–$49** ([PSX](https://intercom.help/autotraderprivatesellerexchange/en/articles/12820777-how-much-does-it-cost-to-sell-a-car-through-psx)) |
+| 4 | Financing / insurance / warranty referrals | After close path exists | No public bounty schedules fetched |
+| 5 | Fit My Truck upfit referral | Sister brand; separate public face | Internal ASSUMPTION |
+| 6 | Sponsored content | Charger / upfitter / insurer | Flat tests |
+| Later | Buyer premium | Optional convenience only — **not** v0 lead | BaT/C&B 5% |
 
-Sources for peer fees: [Cars & Bids](https://carsandbids.com/what-is/), [BaT how fees work](https://bringatrailer.com/how-bat-works/), [BaT submit](https://bringatrailer.com/submit-a-vehicle/), [Autotrader PSX](https://intercom.help/autotraderprivatesellerexchange/en/articles/12820777-how-much-does-it-cost-to-sell-a-car-through-psx), [CarGurus listings](https://dealers.cargurus.com/listings), [Black Book/Recurrent](https://www.blackbook.com/black-book-and-recurrent-collaborate-for-first-ev-specific-valuation-powered-by-battery-data/).
+**Avoid v0:** Leading with 5% buyer premiums on fleet purchases (marketplace synthesis).
 
 ---
 
-## Fee card ASSUMPTIONS (proposed, not live)
+## Fee card ASSUMPTIONS (proposed)
 
 | Item | Amount | Reasoning |
 | --- | --- | --- |
-| Buyer success fee | 4% of sale price, min $200, max $5,000 | Undercuts Cars & Bids’ published 5% / $7,500 cap while staying meaningful on ~$48k ASP (fee ≈ $1,920 before cap) |
-| Seller listing | $79 (often $0 in Y1 seed) | Below BaT $99 Classic; free early to fill the lot |
-| Featured | $149 | Below BaT Plus ($429 with pro photos); pure placement, not photo service |
-| VIN + battery package | $89 | Consumer add-on band; actual third-party COGS TBD |
-| Dealer/fleet sub | $299–$349/mo | Guess until first dealer negotiation; CarGurus pricing is quote-only |
+| Seller success fee | **3%** of closed price, min **$500**, max **$3,000** | Material but below C&B/BaT buyer 5%; fleets hate buyer tax on POs |
+| Dealer/fleet sub | **$299/mo** Y1 → **$349/mo** Y3 | Quote-only category (CarGurus); trial until first deals |
+| Listing fee | **$79** (often $0 in Y1 seed) | Below BaT Classic $99 |
+| Featured / promoted | **$149** | Placement only (BaT Plus $429 includes photos) |
+| SOH documentation package | **$129** | Facilitated partner read / packaged report so listing can be Complete |
+| Financing referral | **$250** flat | Until partner contract |
+| Insurance / warranty | **$125** / **$200** | Until partner contract |
+| Fit My Truck referral | **$100–$150** | Internal |
 
-At **ASSUMPTION ASP $48,000**, uncapped 4% = **$1,920** buyer fee per sale (under $5,000 max).
+At **ASSUMPTION ASP $50,000**, seller success fee = **$1,500** (under $3,000 max).
 
 ---
 
-## Volume and conversion ASSUMPTIONS
+## ASP anchor (sourced sample + assumption)
+
+Team verified **101** used EV truck/van asks (2026-09-24 CSV):
+
+| Slice | Median ask | Source |
+| --- | --- | --- |
+| All 101 rows | **$59,994** | Team inventory sample (fetched listing pages/JSON) |
+| Work-relevant mix (Lightning, Silverado EV, Sierra EV, R1T, e-Transit, BrightDrop) | **~$51,635** | Same sample |
+| F-150 Lightning (n=20) | **$44,595** | Same |
+| e-Transit (n=8) | **$30,071** | Same |
+
+Example primary listing URLs in sample:  
+https://www.evauto.com/vehicle/used-2023-ford-f-150-lightning-lariat-1ftvw1ev9pwg10081/ ($50,900) ·  
+https://www.greenwaveev.com/vehicle/used-2023-ford-rayo-f-150-xlt-1ftvw1ev1pwg42328/ ($48,400) ·  
+https://www.cars.com/vehicledetail/6217c752-4d4e-404e-9212-f7c81d381a78/ (Silverado EV WT $51,387).
+
+**ASSUMPTION — model ASP:** base Y1 **$50,000** (rounded toward work-relevant median; not Cybertruck/Hummer-skewed overall median).
+
+Broader market size (aggregates, not de-duplicated census): Cars.com used Lightning **433**, R1T **354**, Silverado EV **161**, e-Transit **62** (URLs in business plan §7). CarGurus year-table sums are larger but additive caveats apply.
+
+---
+
+## Volume ASSUMPTIONS
 
 | Driver | Conservative | Base | Upside | Reasoning |
 | --- | --- | --- | --- | --- |
-| Y1 avg listings/mo | 4 | 8 | 15 | Solo founder FL seeding; Cars & Bids scale is not a peer for Year 1 |
-| Y2 avg listings/mo | 12 | 25 | 40 | SE expansion |
-| Y3 avg listings/mo | 25 | 50 | 80 | Still niche vs national classifieds |
-| Sell-through | 40% / 50% / 55% by year on conservative; base 55%→60%→65% | | | Cars & Bids cites **80%+** sell-through ([what-is page](https://carsandbids.com/what-is/)) — we do **not** assume that until brand density exists |
-| ASP | $45k / $48k / $52k | | | Anchored near KBB Lightning XLT Fair Purchase ~**$47,240** ([KBB](https://www.kbb.com/ford/f150-lightning/2025/xlt-pickup-4d-5-1-2-ft/)); below iSeeCars Lightning avg **$66,261** ([iSeeCars](https://www.iseecars.com/compare/ford-f__150_lightning-vs-rivian-r1t)) |
+| Y1 listings/mo | 4 | 8 | 15 | Founder + FL dealer desk outreach (Maher, Nimnicht, Duval, Essential Stuart) |
+| Y2 / Y3 listings/mo | 12 / 25 | 25 / 50 | 40 / 80 | SE then selective national from 137-dealer rolodex |
+| Sell-through | 40→55% | 55→65% | 65→70% | Below C&B claimed **80%+** ([C&B](https://carsandbids.com/what-is/)) until density exists |
+| SOH package attach | 70–95% of listings | | | Required for Complete; Incomplete listings don’t buy package |
 
 ---
 
@@ -74,83 +97,64 @@ At **ASSUMPTION ASP $48,000**, uncapped 4% = **$1,920** buyer fee per sale (unde
 | --- | --- | --- | --- |
 | Listings / year | 48 | 96 | 180 |
 | Units sold | 19 | 53 | 117 |
-| GMV | $0.86M | $2.54M | $6.08M |
-| Buyer success fees | $34.2k | $101.8k | $243.4k |
-| Listing fees (net of free promo) | $0.9k | $3.8k | $10.7k |
-| Featured | $0.7k | $2.1k | $5.4k |
-| Reports | $1.3k | $3.4k | $8.0k |
-| Financing referrals | $1.0k | $2.8k | $7.3k |
-| Insurance + warranty | $0.8k | $2.7k | $7.0k |
-| Dealer/fleet subs | $1.8k | $3.6k | $7.2k |
-| Fit My Truck referrals | $0.5k | $1.0k | $2.5k |
-| Sponsored | $1.5k | $3.0k | $6.0k |
-| **Total revenue** | **~$45k** | **~$124k** | **~$297k** |
+| GMV | $0.86M | $2.65M | $6.44M |
+| Seller success fees | $25.7k | $79.5k | $193.1k |
+| SOH packages | $4.4k | $10.6k | $22.1k |
+| Listing + featured | $1.7k | $5.9k | $16.0k |
+| Referrals + FMT + sponsored | $3.4k | $9.4k | $23.2k |
+| Dealer/fleet subs | $1.8k | $5.4k | $10.8k |
+| **Total revenue** | **~$37k** | **~$111k** | **~$265k** |
 
-Detail and attach-rate ASSUMPTIONS are in `income-model.csv`.
-
-### Year 2–3 (base only in narrative; all three scenarios in CSV)
+### Year 2–3 (base)
 
 | | Base Y2 | Base Y3 |
 | --- | --- | --- |
 | Listings / year | 300 | 600 |
 | Units sold | 180 | 390 |
-| GMV | $9.0M | $20.3M |
-| **Total revenue** | **~$460k** | **~$1.05M** |
+| GMV | $9.4M | $20.3M |
+| **Total revenue** | **~$411k** | **~$904k** |
 
-Primary engine remains **buyer success fees** (~70–80% of revenue in these models).
+Seller success fee remains the majority (~65–70%) of revenue.
 
 ---
 
 ## Costs (ASSUMPTIONS) and break-even
 
-| Cost bucket | Y1 base | Y2 base | Y3 base | Notes |
-| --- | --- | --- | --- | --- |
-| Hosting / tools / AI | $6,000 | $10,000 | $18,000 | No app-build cost in this doc |
-| Legal / formation / compliance consult | $10,000 | $5,000 | $8,000 | **verify with a lawyer** — may rise if licensing required |
-| Insurance / bond / entity | $2,500 | $3,500 | $5,000 | If licensed; FLHSMV cites garage liability mins + bond form ([FLHSMV](https://www.flhsmv.gov/motor-vehicles-tags-titles/dealers-installers-manufacturers-distributors-importers/mv-rv-mh-dealer-broker-licenses/)) |
-| Payment / title partner tooling | $2,000 | $4,000 | $8,000 | Peer consumer fee example SafePay **$198** is charged to parties, not our COGS ([SafePay](https://carsandbids.com/safepay/)) |
-| Marketing / travel (FL→SE) | $12,000 | $24,000 | $40,000 | Founder-led |
-| Report COGS (pass-through shortfall) | $2,000 | $8,000 | $18,000 | If $89 retail < vendor cost on some units |
-| Misc / contingency | $3,000 | $5,000 | $8,000 | |
-| **Total opex (no salaries)** | **~$37.5k** | **~$59.5k** | **~$105k** | Ted’s labor not booked as payroll |
+| Cost bucket | Y1 base | Y2 base | Y3 base |
+| --- | --- | --- | --- |
+| Hosting / tools / AI | $6,000 | $10,000 | $18,000 |
+| Legal / compliance consult | $10,000 | $5,000 | $8,000 |
+| Insurance / bond if licensed | $2,500 | $3,500 | $5,000 |
+| SOH partner COGS (gap vs $129 retail) | $4,000 | $12,000 | $28,000 |
+| Payment/title tooling | $2,000 | $4,000 | $8,000 |
+| Marketing / FL→SE travel | $12,000 | $24,000 | $40,000 |
+| Contingency | $3,000 | $5,000 | $8,000 |
+| **Total opex (no salaries)** | **~$39.5k** | **~$63.5k** | **~$115k** |
 
-**Break-even (base, cash opex only):**
-
-- Y1 modeled revenue ~$124k vs ~$38k opex → **cash-positive on paper in Year 1** if volume hits base (before founder living costs).
-- Conservative Y1 ~$45k vs ~$35k lean opex → **roughly break-even / slight profit**; misses hurt.
-- Treat founder time as the real scarce cost; do not hire until base run-rate covers a contractor.
-
-**ASSUMPTION — founder draw:** $0 in model. Reasoning: plan says no hires; living costs are personal, not company opex here.
+**Break-even (base, cash opex only):** Y1 modeled ~$111k vs ~$40k opex → cash-positive *if* base volume hits — before founder living costs (**ASSUMPTION** founder draw $0 in model). Conservative Y1 (~$37k) ≈ break-even / slight loss vs lean opex.
 
 ---
 
-## What would move the needle most
+## What moves the needle
 
-1. **Sell-through** — every +10 pts on base Y1 ≈ +~$18k success fees.
-2. **Listings/month** — inventory is the constraint, not fee cleverness.
-3. **Report attach** — trust closes work-EV deals; also trains the brand.
-4. **Dealer/fleet subs** — only after 20+ quality listings prove audience.
+1. **Complete listings/month** from Maher / Nimnicht / Duval / Essential desks.  
+2. **Sell-through** on Buy Now / Make Offer (not auction).  
+3. **SOH attach** — Incomplete Data cannot be the majority of the homepage.  
+4. **Dealer subs** once audience exists.
 
 ---
 
 ## Sensitivity (base Y1)
 
-| Change | Approx. revenue impact |
+| Change | Approx. impact |
 | --- | --- |
-| ASP $48k → $40k | Success fees −~$17k |
-| ASP $48k → $60k | Success fees +~$25k (still under $5k cap) |
-| Sell-through 55% → 40% | Success fees −~$28k |
-| Sell-through 55% → 70% | Success fees +~$28k |
-| Buyer fee 4% → 5% (C&B-like) | Success fees +~$25k |
+| ASP $50k → $45k | Success fees −~$8k |
+| Success fee 3% → 2% | Success fees −~$26k |
+| Sell-through 55% → 40% | Success fees −~$22k |
+| Add C&B-like 5% **buyer** fee instead | Higher take but fights v0 positioning / fleet PO friction |
 
 ---
 
-## CSV column guide
+## CSV guide
 
-`income-model.csv` rows are either:
-
-- `SOURCED` — fact with `source_url`, or  
-- `ASSUMPTION` — model input with `reasoning`, or  
-- `CALC` — arithmetic from ASSUMPTION/SOURCED inputs.
-
-Scenarios: `conservative`, `base`, `upside` × years `1`, `2`, `3`.
+`income-model.csv`: `SOURCED` · `ASSUMPTION` · `CALC` rows; scenarios `conservative` / `base` / `upside`; years `1`–`3`.
