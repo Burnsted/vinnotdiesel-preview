@@ -1,6 +1,6 @@
 # VinNotDiesel — Business Plan v1.2
 
-**Brand:** VinNotDiesel (one *t*)  
+**Brand:** VinNotDiesel (one *t*) · **Plan version:** v1.3  
 **What it is:** An independent **used EV work-truck and work-van marketplace** (web + app). CarGurus-style browse/comps clarity + BaT/Cars & Bids–style diligence — electric work vehicles only.  
 **Live preview (app owned elsewhere):** https://burnsted.github.io/vinnotdiesel-preview/  
 **Domains / email:** On hold — do **not** assume vinnotdiesel.com is owned.  
@@ -19,24 +19,29 @@
 **Locked product rules (v0).**  
 - Commerce: **Buy Now + Make Offer** first; **auctions later**.  
 - Every listing must show **battery health + how it was measured**, or it is **Incomplete Data**.  
-- **Complete** also requires an **open-recall check by VIN** (e.g. F-150 Lightning NHTSA **25V-131** / Ford **25S18** — HV battery; Ford recommends limiting charge to **80%** until remedied). Source: [NHTSA Part 573 report 25V-131](https://static.nhtsa.gov/odi/rcl/2025/RCLRPT-25V131-1389.PDF); [owner notice PDF](https://static.nhtsa.gov/odi/rcl/2025/RIONL-25V131-1511.pdf).  
+- **Complete** also requires an **open-recall check by VIN**. Examples:  
+  - F-150 Lightning NHTSA **25V-131** / Ford **25S18** — HV battery; limit charge to **80%** until remedied ([Part 573](https://static.nhtsa.gov/odi/rcl/2025/RCLRPT-25V131-1389.PDF), [owner notice](https://static.nhtsa.gov/odi/rcl/2025/RIONL-25V131-1511.pdf)).  
+  - E-Transit NHTSA **25V-860** / Ford **25SD9** — left rear axle half-shaft may disengage from the drive unit; loss of drive / rollaway risk ([Part 573](https://static.nhtsa.gov/odi/rcl/2025/RCLRPT-25V860-8209.pdf), [NHTSA ack](https://static.nhtsa.gov/odi/rcl/2025/RCAK-25V860-1053.pdf)).  
 - **Work specs up top**; prices shown **all-in**.
 
-**Where we start.** Florida first, then Southeast. Use the researched rolodex of dealers that *market* EV work vehicles (**137** nationwide / **21** Florida) for outreach — but **seed listings only from verified used stock**, not new-truck showroom pages.
+**Where we start.** Florida first, then Southeast. **First listings** come from Florida sellers that already have **verified used** EV work stock — not from franchise desks that only market new EV trucks. Those franchise names stay as **dealer subscription targets** only (see §5 / §12).
+
+**Florida field check (team-verified 2026-09-24):** Not one checked FL listing shows battery health **% plus how it was measured** (one seller shows only a 1–5 grade). **Every FL unit would be Incomplete Data today.** Battery documentation is therefore the core seller pitch and onboarding step; **SOH package attach rate is the key early metric**.
 
 **Supply signals (team-verified 2026-09-24):**  
-- **101** used EV truck/van sample rows (pickups 85 / vans 16 in that CSV) with fetched asks — work-relevant median ~**$51,635**.  
-- **Separate van inventory:** **249** verified used EV vans — **113** E-Transits, **68** BrightDrops; used Rivian vans listed from **$34,995** to **$46,299** (team-verified 2026-09-24).
+- **101** used EV truck/van sample rows nationally (pickups 85 / vans 16) — work-relevant median ~**$51,635**.  
+- **249** verified used EV vans nationally — **113** E-Transits, **68** BrightDrops; Rivian vans **$34,995–$46,299**.  
+- FL used examples: Jacksonville EV-only used dealer with ~**11** used E-Transits at **$27k–$31k**; Miami truck center with the **only used Rivian van in FL** (seller names kept generic in this public doc).
 
 **Three most realistic Year 1 income streams**
 
-1. **Dealer / fleet subscriptions** — dealers rarely pay per-sale success fees and often close off-platform; sub is how dealer inventory pays.  
-2. **Seller success fee on private + fleet closes** — Buy Now / Make Offer completed *on* VinNotDiesel. Peer fee *ceilings* (not our lead model): Cars & Bids buyer **5%** ([source](https://carsandbids.com/what-is/)); BaT seller **$99** + buyer **5%** ([source](https://bringatrailer.com/how-bat-works/)).  
-3. **SOH documentation package + listing/featured** — required path to Complete; Incomplete if SOH/method or recall check missing.
+1. **Dealer / fleet subscriptions** — including franchise desks with no used stock yet (subscription targets).  
+2. **Seller success fee on private + fleet closes** — on-platform Buy Now / Make Offer.  
+3. **SOH documentation package** (+ listing/featured) — the path from Incomplete → Complete; early attach is the unlock metric.
 
-**Base-case Year 1 revenue range (modeled):** about **$70k–$140k**.  
+**Base-case Year 1 revenue range (modeled):** about **$65k–$130k**.  
 **Base-case Year 3 range:** about **$0.55M–$0.95M**.  
-See `income-model.md` / `income-model.csv`.
+See `income-model.md` / `income-model.csv` (Y1 SOH attach lowered after FL field check).
 
 **Immediate risk.** Florida dealer/advertising rules if the marketplace advertises vehicles it does not own — **verify with a lawyer**. **Dealer off-platform close** is an explicit revenue risk (see §13).
 
@@ -45,8 +50,9 @@ See `income-model.md` / `income-model.csv`.
 ## 1. Problem
 
 - Wrong marketplaces for work EVs (generic retail or enthusiast auction).  
-- Battery opacity + **open recalls** that change usable range (e.g. Lightning **25V-131** 80% charge limit until repair).  
+- Battery opacity + **open recalls** that change usable range or drivability (e.g. Lightning **25V-131** 80% charge limit; E-Transit **25V-860** half-shaft).  
 - Work specs buried; fees opaque.
+- **Florida listing gap:** field check found **no** SOH % + method on checked FL ads — marketplace trust has to be built, not scraped.
 
 ---
 
@@ -80,12 +86,16 @@ Unlike horizontal ICE classifieds: EV work category only.
 **Complete requires all of:**
 - Identity hygiene (VIN, miles, title, seller type, location)  
 - **Battery SOH % + measurement method** (+ usable kWh / charger kW when known)  
-- **Open-recall check by VIN** — result recorded on listing (open / none found / check failed). Example: certain 2022–2024 F-150 Lightnings under NHTSA **25V-131** (Ford **25S18**); Ford recommends limiting HV charge to **80%** until arrays inspected/replaced ([NHTSA 25V-131 Part 573](https://static.nhtsa.gov/odi/rcl/2025/RCLRPT-25V131-1389.PDF), [owner notice](https://static.nhtsa.gov/odi/rcl/2025/RIONL-25V131-1511.pdf)).  
+- **Open-recall check by VIN** — result recorded on listing (open / none found / check failed). Examples:  
+  - Certain 2022–2024 F-150 Lightnings — NHTSA **25V-131** (Ford **25S18**); limit HV charge to **80%** until arrays inspected/replaced ([Part 573](https://static.nhtsa.gov/odi/rcl/2025/RCLRPT-25V131-1389.PDF), [owner notice](https://static.nhtsa.gov/odi/rcl/2025/RIONL-25V131-1511.pdf)).  
+  - Certain 2022–2025 E-Transits — NHTSA **25V-860** (Ford **25SD9**); left rear half-shaft may not be fully seated in the PDU → loss of drive / rollaway risk ([Part 573](https://static.nhtsa.gov/odi/rcl/2025/RCLRPT-25V860-8209.pdf), [NHTSA ack](https://static.nhtsa.gov/odi/rcl/2025/RCAK-25V860-1053.pdf)).  
 - Work specs **up top** (payload/GVWR, range, cab/bed or van cargo, upfit)  
 - Warranty remaining + known-issues checklist  
 - Photo minimum + **all-in** price  
 
 Missing SOH/method **or** missing recall check → **Incomplete Data**.
+
+**Florida reality check (team field check 2026-09-24):** zero checked FL listings meet SOH % + method. A 1–5 battery “grade” alone is **not** Complete. Treat battery documentation as onboarding step #1 for every FL seller.
 
 ### Monetization preference
 Dealer **subscription** for dealer inventory. **Success fee** mainly on private/fleet on-platform closes. Avoid leading with 5% buyer premiums.
@@ -94,12 +104,19 @@ Dealer **subscription** for dealer inventory. **Success fee** mainly on private/
 
 ## 5. Go-to-market
 
-### 5A. Pickups / work trucks (Florida → Southeast)
-- Outreach to dealers that publicly market EV work trucks (**21** FL / **137** nationwide in team rolodex) — ask for **used** consignments or subscription seats, not new DEMO/PRO pages as listings.  
-- Recruit **EV-only used** retailers already in the verified sample (e.g. EV Auto, Green Wave, Ever) who have live used VDPs.  
-- Private/fleet sellers via trades networks and used classifieds.
+### 5A. Core seller pitch (Florida first): battery documentation
+**Pitch:** “Listings without battery health **% + measurement method** stay Incomplete and get buried. We help you document SOH so trades buyers can trust the van or truck.”  
+**Onboarding step 1:** capture SOH % + method (shop printout, OEM app export, or paid SOH package).  
+**Key early metric:** **SOH package / Complete attach rate** on FL listings (field baseline = **0%** Complete on checked units, 2026-09-24).
 
-### 5B. Vans (own line)
+### 5B. Pickups / work trucks — two tracks
+**Track 1 — First listings (verified used stock):** Florida sellers that already hold used EV work inventory (see §12). Do **not** treat new-truck marketing pages as listing sources.
+
+**Track 2 — Dealer subscription targets (no verified used EV work stock in FL field check):** Maher Chevy / Maher Truck Center, Nimnicht Chevy, Duval Ford, and Essential Ford Stuart — demoted to **subscription / future used-feed** outreach only. They market EV work trucks but had **no verifiable used EV work stock** in the 2026-09-24 Florida field check. Sell them audience + Incomplete→Complete tooling, not “we’ll list your new PRO/WT page.”
+
+Broader rolodex (**21** FL / **137** nationwide) remains useful for the same subscription conversation once used stock appears.
+
+### 5C. Vans (own line)
 Team-verified used EV van inventory (**2026-09-24**):
 
 | Metric | Value |
@@ -109,10 +126,12 @@ Team-verified used EV van inventory (**2026-09-24**):
 | BrightDrop | **68** |
 | Used Rivian vans (listed ask range) | **$34,995 – $46,299** |
 
-**GTM implication:** Treat vans as a parallel category with van-specific filters (roof height, cargo length, GVWR, charger), separate saved searches, and seller outreach to commercial Ford/Chevy van desks **for used/surplus**, plus fleet off-lease. Do not bury vans under pickup merchandising. The smaller 16-van slice inside the 101-row truck CSV is a sample only; the **249** count is the van program signal.
+**FL van seed:** Jacksonville EV-only used dealer (~**11** used E-Transits, asks ~**$27k–$31k**); Miami truck center (only used Rivian van found in FL). Screen E-Transits for **25V-860** on VIN recall check.
 
-### 5C. Sequencing
-Florida → Southeast → selective national after Complete sell-through works.
+**GTM:** Van filters, saved searches, and surplus/off-lease outreach — do not bury vans under pickup merchandising.
+
+### 5D. Sequencing
+Florida used-stock sellers + battery onboarding → Southeast → selective national.
 
 ---
 
@@ -165,32 +184,31 @@ Founder + AI agents. No hires in the 365-day plan. Outside counsel / title partn
 
 ## 11. Milestones
 
-**30 days:** Counsel on FL model; Complete checklist includes recall-by-VIN; outreach for **used** stock (EV-only used retailers + private/fleet); draft sub + success-fee card.  
-**90 days:** First **10 Complete used listings** (§12); first on-platform private/fleet close; first paying dealer sub.  
-**365 days:** FL + SE Complete inventory (trucks + vans); paid mix live; revisit auction only if needed.
+**30 days:** Counsel on FL model; battery-doc onboarding live; VIN recall check includes **25V-131** + **25V-860**; approach Jacksonville / Miami used-stock sellers; franchise desks as **subscription targets** only.  
+**90 days:** First **10 FL used listings** (§12) with SOH path in progress; measure **Complete attach rate** vs 0% field baseline; first paying sub.  
+**365 days:** FL + SE Complete inventory (trucks + vans); paid mix live.
 
 ---
 
-## 12. First-10-listings plan (**used stock only**)
+## 12. First-10-listings plan (**Florida used stock only**)
 
-Built from the verified used inventory CSV (fetch date **2026-09-24**). **No new-truck dealer showroom / PRO / WT marketing pages** as listing sources. Dealer names appear only where the sample shows a **used** VDP.
+**Source rule:** First 10 come from **Florida sellers that have verified used EV work stock** (team field check **2026-09-24**). Seller names kept **generic** in this public doc.
 
-| # | Unit (used) | Ask | Miles | Seller | Listing URL |
-| --- | --- | --- | --- | --- | --- |
-| 1 | 2023 F-150 Lightning Pro | $35,500 | 37,675 | Unknown (Cars.com) | https://www.cars.com/vehicledetail/525c7e0f-fc2e-453d-bd73-a61fa7b0f3ac/ |
-| 2 | 2023 F-150 Lightning XLT | $36,994 | 33,479 | Unknown (Cars.com) | https://www.cars.com/vehicledetail/33a6498f-3cd4-4d7f-88b2-ab41e40a43ba/ |
-| 3 | 2023 F-150 Lightning XLT | $48,400 | 26,542 | **Green Wave Electric Vehicles** (EV-only dealer, used) | https://www.greenwaveev.com/vehicle/used-2023-ford-rayo-f-150-xlt-1ftvw1ev1pwg42328/ |
-| 4 | 2023 F-150 Lightning LARIAT | $50,900 | 45,627 | **EV Auto** (EV-only dealer, used) | https://www.evauto.com/vehicle/used-2023-ford-f-150-lightning-lariat-1ftvw1ev9pwg10081/ |
-| 5 | 2023 Ford e-Transit Base | $23,999 | 56,127 | Unknown (Cars.com) | https://www.cars.com/vehicledetail/4fcfeb75-16a6-496e-a599-309d9e451129/ |
-| 6 | 2022 Ford e-Transit T-350 Low Roof | $25,999 | 13,566 | Unknown (Cars.com) | https://www.cars.com/vehicledetail/24ce3204-9e61-4998-9cf5-7e4de61b78ea/ |
-| 7 | 2025 BrightDrop 600 | $35,111 | 15,833 | Unknown (Cars.com) | https://www.cars.com/vehicledetail/dcfbefed-91d5-4d4e-a32c-a59ccab14d86/ |
-| 8 | 2024 Silverado EV Work Truck | $51,387 | 4,170 | Unknown (Cars.com) | https://www.cars.com/vehicledetail/6217c752-4d4e-404e-9212-f7c81d381a78/ |
-| 9 | 2022 Rivian R1T Adventure Package | $56,600 | 33,987 | **EV Auto** (used) | https://www.evauto.com/vehicle/used-2022-rivian-r1t-adventure-package-7fctgaaa2nn006912/ |
-| 10 | 2024 Rivian R1T Adventure Dual Motor (FL) | $60,550 | 22,003 | Unknown (CarGurus; Ocoee, FL) | https://www.cargurus.com/Cars/l-Used-Rivian-R1T-Newark-d2837_L4760 |
+**Not listing sources:** Maher Chevy / Maher Truck Center, Nimnicht Chevy, Duval Ford, Essential Ford Stuart — **dealer subscription targets only** (no verifiable used EV work stock in that field check).
 
-**Before marking Complete:** SOH % + method, VIN open-recall check (Lightning rows: screen for **25V-131**), work-spec hero, all-in price, Buy Now + Make Offer.
+| # | Unit type (used) | Ask guidance | FL seller (generic) | Notes |
+| --- | --- | --- | --- | --- |
+| 1–8 | Ford E-Transit | ~**$27,000–$31,000** | Jacksonville EV-only used dealer (~**11** used E-Transits on lot) | Team field check 2026-09-24. Screen each VIN for **25V-860**. |
+| 9 | Rivian van | Team FL find | Miami truck center | **Only used Rivian van in FL** in that field check. |
+| 10 | Additional E-Transit (or other FL used work EV from same Jacksonville lot) | Within dealer’s ~$27k–$31k E-Transit band | Jacksonville EV-only used dealer | Prefer staying on verified FL used stock vs out-of-state seeds. |
 
-**ASSUMPTION — seed fees:** Waive success fee on first 3 private/fleet closes; still require Complete fields. Dealer used partners start on subscription trial.
+**Status today:** All of these would publish as **Incomplete Data** until SOH **% + method** is captured (field check: no FL listing met that bar; a 1–5 grade is insufficient).
+
+**Onboarding before Complete:** (1) battery SOH % + method, (2) VIN open-recall check, (3) work-spec hero + all-in price, (4) Buy Now + Make Offer.
+
+**ASSUMPTION — seed fees:** Waive success fee on first 3 private/fleet closes; heavily subsidize or include SOH package on first-10 to create Complete exemplars. Franchise subscription targets start on trial seats with no fake used inventory.
+
+**Key early metric:** share of FL listings that reach **Complete** (SOH attach). Model ASSUMPTION after field baseline: Y1 base SOH attach **40%** (was 85%) — labeled in `income-model.csv`.
 
 ---
 
@@ -198,11 +216,12 @@ Built from the verified used inventory CSV (fetch date **2026-09-24**). **No new
 
 | Risk | Why it matters | Mitigation |
 | --- | --- | --- |
-| **Dealers close off-platform** | Buyer finds unit on VinNotDiesel, deals at the store; **no success fee** | Price dealer value as **subscription + featured**; track assisted leads; success fee aimed at private/fleet |
+| **Dealers close off-platform** | Buyer finds unit on VinNotDiesel, deals at the store; **no success fee** | Price dealer value as **subscription + featured**; success fee aimed at private/fleet |
+| **FL battery-doc gap** | Field check: **0%** of checked FL listings have SOH % + method → all Incomplete | Battery onboarding as core pitch; track Complete attach as #1 early metric |
 | Licensing / advertising | FL dealer rules | Counsel before consignment scale |
-| Incomplete SOH / recall gaps | Trust failure | Incomplete Data badge; no homepage boost |
-| Thin Complete inventory | Empty marketplace | Seed from verified used URLs; EV-only used dealers |
-| Van category neglect | 249-van supply ignored | Separate van GTM + filters |
+| Franchise desks without used stock | Wasted listing ops if treated as inventory sources | Keep Maher / Nimnicht / Duval / Essential as **subscription targets** only |
+| Thin Complete inventory | Empty trustworthy marketplace | Seed Jacksonville / Miami used stock; subsidize first SOH packages |
+| Van category neglect | 249-van supply ignored | Separate van GTM + **25V-860** checks |
 | Fee resistance | Sellers compare to free ads | Seller-side story; undercut 5% buyer premiums |
 | Domain lag | Domains on hold | Use preview URL; don’t promise production domain |
 
@@ -210,8 +229,8 @@ Built from the verified used inventory CSV (fetch date **2026-09-24**). **No new
 
 ## 14. Sources
 
-Fetched: [NHTSA 25V-131 Part 573](https://static.nhtsa.gov/odi/rcl/2025/RCLRPT-25V131-1389.PDF), [NHTSA/Ford owner notice 25V131](https://static.nhtsa.gov/odi/rcl/2025/RIONL-25V131-1511.pdf), Cars & Bids / BaT / PSX / CarGurus / Ford SEC / InsideEVs / Manheim / FLHSMV as linked above.  
-Team-verified (2026-09-24): 101-row used truck CSV; **249** used van program counts; 137/21 dealer rolodex (outreach only — not first-10 new-stock sources).
+Fetched: [NHTSA 25V-131 Part 573](https://static.nhtsa.gov/odi/rcl/2025/RCLRPT-25V131-1389.PDF), [25V-131 owner notice](https://static.nhtsa.gov/odi/rcl/2025/RIONL-25V131-1511.pdf), [NHTSA 25V-860 Part 573](https://static.nhtsa.gov/odi/rcl/2025/RCLRPT-25V860-8209.pdf), [25V-860 NHTSA ack](https://static.nhtsa.gov/odi/rcl/2025/RCAK-25V860-1053.pdf), Cars & Bids / BaT / PSX / CarGurus / Ford SEC / InsideEVs / FLHSMV as linked above.  
+Team-verified (2026-09-24): 101-row used truck CSV; **249** used van counts; FL field check (battery-doc gap; Jacksonville ~11 E-Transits; Miami Rivian van; Maher/Nimnicht/Duval/Essential = subscription targets only).
 
 ---
 

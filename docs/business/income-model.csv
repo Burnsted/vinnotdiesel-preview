@@ -1,408 +1,402 @@
-# VinNotDiesel income model v1.2 — dealer subs primary for dealers; success fee mostly private/fleet
+# VinNotDiesel income model v1.3 — FL field check: lower early SOH attach; 25V-860 sourced
 # SOURCED | ASSUMPTION | CALC
 row_type,scenario,year,metric,unit,value,source_url,reasoning
-SOURCED,all,all,cars_and_bids_buyer_fee_pct,percent,5,https://carsandbids.com/what-is/,Published buyer fee — ceiling not v0 lead
-SOURCED,all,all,cars_and_bids_buyer_fee_min,USD,250,https://carsandbids.com/what-is/,
-SOURCED,all,all,cars_and_bids_buyer_fee_max,USD,7500,https://carsandbids.com/what-is/,
-SOURCED,all,all,cars_and_bids_safepay_fee,USD,198,https://carsandbids.com/safepay/,
+SOURCED,all,all,cars_and_bids_buyer_fee_pct,percent,5,https://carsandbids.com/what-is/,Ceiling not v0 lead
 SOURCED,all,all,bat_seller_listing_classic,USD,99,https://bringatrailer.com/submit-a-vehicle/,
-SOURCED,all,all,bat_seller_listing_plus,USD,429,https://bringatrailer.com/submit-a-vehicle/,
-SOURCED,all,all,bat_white_glove_listing,USD,2500,https://bringatrailer.com/whiteglove/,
-SOURCED,all,all,bat_buyer_fee_standard_pct,percent,5,https://bringatrailer.com/how-bat-works/,
-SOURCED,all,all,autotrader_psx_listing_over_20k,USD,49,https://intercom.help/autotraderprivatesellerexchange/en/articles/12820777-how-much-does-it-cost-to-sell-a-car-through-psx,
-SOURCED,all,all,ford_f150_lightning_us_sales_2024,units,33510,https://www.sec.gov/Archives/edgar/data/37996/000003799625000002/exhibit99q42024salesrele.htm,
-SOURCED,all,all,ford_etransit_us_sales_2024,units,12610,https://www.sec.gov/Archives/edgar/data/37996/000003799625000002/exhibit99q42024salesrele.htm,
-SOURCED,all,all,nhtsa_recall_25v131_part573,text,25V-131,https://static.nhtsa.gov/odi/rcl/2025/RCLRPT-25V131-1389.PDF,Ford F-150 Lightning HV battery recall; charge to 80% recommended until remedy
-SOURCED,all,all,nhtsa_recall_25v131_owner_notice,text,25V131,https://static.nhtsa.gov/odi/rcl/2025/RIONL-25V131-1511.pdf,Owner notice cites NHTSA 25V131 / Ford 25S18 and 80% charge limit
-SOURCED,all,all,team_inventory_sample_rows_trucks_csv,count,101,,Team-verified used EV truck/van sample CSV 2026-09-24
-SOURCED,all,all,team_inventory_median_ask_workish,USD,51635,,Median work-relevant mix in 101-row sample
-SOURCED,all,all,team_used_ev_vans_verified_total,count,249,,Team-verified used EV van inventory count 2026-09-24
+SOURCED,all,all,nhtsa_recall_25v131_part573,text,25V-131,https://static.nhtsa.gov/odi/rcl/2025/RCLRPT-25V131-1389.PDF,Lightning HV battery; 80% charge limit until remedy
+SOURCED,all,all,nhtsa_recall_25v860_part573,text,25V-860,https://static.nhtsa.gov/odi/rcl/2025/RCLRPT-25V860-8209.pdf,E-Transit left rear half-shaft / PDU insertion
+SOURCED,all,all,nhtsa_recall_25v860_ack,text,25V860,https://static.nhtsa.gov/odi/rcl/2025/RCAK-25V860-1053.pdf,NHTSA acknowledgment letter; Ford 25SD9
+SOURCED,all,all,team_fl_field_soh_complete_rate,percent,0,,Team FL field check 2026-09-24: no checked listing had SOH % + method
+SOURCED,all,all,team_fl_jacksonville_used_etransits,count,11,,Team field check ~11 used E-Transits at one Jacksonville EV-only used dealer
+SOURCED,all,all,team_fl_jacksonville_etransit_ask_low,USD,27000,,Team field check ask band low
+SOURCED,all,all,team_fl_jacksonville_etransit_ask_high,USD,31000,,Team field check ask band high
+SOURCED,all,all,team_fl_miami_used_rivian_van,text,only_fl_find,,Team field check: Miami truck center had only used Rivian van in FL
+SOURCED,all,all,team_fl_maher_nimnicht_duval_essential_used_stock,text,none_verified,,Demoted to dealer subscription targets only
+SOURCED,all,all,team_used_ev_vans_verified_total,count,249,,Team-verified 2026-09-24
 SOURCED,all,all,team_used_etransit_count,count,113,,Team-verified 2026-09-24
 SOURCED,all,all,team_used_brightdrop_count,count,68,,Team-verified 2026-09-24
-SOURCED,all,all,team_used_rivian_van_ask_low,USD,34995,,Team-verified listed ask range low 2026-09-24
-SOURCED,all,all,team_used_rivian_van_ask_high,USD,46299,,Team-verified listed ask range high 2026-09-24
-SOURCED,all,all,team_florida_dealers_rolodex,count,21,,Outreach rolodex — not first-10 new-stock sources
-SOURCED,all,all,team_nationwide_dealers_rolodex,count,137,,Outreach rolodex
-SOURCED,all,all,example_used_lightning_pro_carscom,USD,35500,https://www.cars.com/vehicledetail/525c7e0f-fc2e-453d-bd73-a61fa7b0f3ac/,First-10 used seed candidate
-SOURCED,all,all,example_used_lightning_greenwave,USD,48400,https://www.greenwaveev.com/vehicle/used-2023-ford-rayo-f-150-xlt-1ftvw1ev1pwg42328/,EV-only dealer used unit
-SOURCED,all,all,example_used_lightning_evauto,USD,50900,https://www.evauto.com/vehicle/used-2023-ford-f-150-lightning-lariat-1ftvw1ev9pwg10081/,EV-only dealer used unit
-SOURCED,all,all,example_used_etransit_carscom,USD,23999,https://www.cars.com/vehicledetail/4fcfeb75-16a6-496e-a599-309d9e451129/,
-SOURCED,all,all,example_used_brightdrop_carscom,USD,35111,https://www.cars.com/vehicledetail/dcfbefed-91d5-4d4e-a32c-a59ccab14d86/,
-SOURCED,all,all,example_used_silverado_wt_carscom,USD,51387,https://www.cars.com/vehicledetail/6217c752-4d4e-404e-9212-f7c81d381a78/,
-SOURCED,all,all,cargurus_us_dealer_list_price_public,text,not_published,https://dealers.cargurus.com/listings,
-ASSUMPTION,all,all,vnd_seller_success_fee_pct,percent,3,,On-platform private/fleet closes
+SOURCED,all,all,team_inventory_median_ask_workish,USD,51635,,101-row sample work-relevant median
+ASSUMPTION,all,all,vnd_seller_success_fee_pct,percent,3,,Private/fleet on-platform
 ASSUMPTION,all,all,vnd_seller_success_fee_min,USD,500,,
 ASSUMPTION,all,all,vnd_seller_success_fee_max,USD,3000,,
 ASSUMPTION,all,all,vnd_seller_listing_fee,USD,79,,
 ASSUMPTION,all,all,vnd_featured_fee,USD,149,,
-ASSUMPTION,all,all,vnd_soh_package_price,USD,129,,Complete-listing path
+ASSUMPTION,all,all,vnd_soh_package_price,USD,129,,Path Incomplete→Complete; core early GTM
 ASSUMPTION,all,all,vnd_financing_referral_fee,USD,250,,
 ASSUMPTION,all,all,vnd_insurance_referral_fee,USD,125,,
 ASSUMPTION,all,all,vnd_warranty_referral_fee,USD,200,,
-ASSUMPTION,all,all,vnd_upfit_partner_referral_fee_y1,USD,125,,Generic upfit partner — not a named sister brand
-ASSUMPTION,all,all,vnd_buyer_premium_v0,text,deferred,,Not v0 lead
-ASSUMPTION,all,all,complete_listing_requires_vin_recall_check,text,required,,e.g. screen Lightnings for NHTSA 25V-131
+ASSUMPTION,all,all,vnd_upfit_partner_referral_fee_y1,USD,125,,Generic upfit partner
+ASSUMPTION,all,all,fl_soh_attach_y1_lowered_reason,text,field_baseline_0pct,,ASSUMPTION lowered after FL field check 0% Complete
 ASSUMPTION,conservative,1,listings_per_month,count,5,,
-ASSUMPTION,conservative,1,sell_through_rate,percent,40,,Below C&B 80%+ claim
-ASSUMPTION,conservative,1,avg_sale_price,USD,48000,,Near work-relevant sample median for base
-ASSUMPTION,conservative,1,dealer_listing_share,percent,55,,Dealer inventory via subscription
-ASSUMPTION,conservative,1,success_attach_private,percent,90,,Private/fleet on-platform closes
-ASSUMPTION,conservative,1,success_attach_dealer,percent,10,,Low — dealers often close off-platform
+ASSUMPTION,conservative,1,sell_through_rate,percent,40,,
+ASSUMPTION,conservative,1,avg_sale_price,USD,48000,,
+ASSUMPTION,conservative,1,dealer_listing_share,percent,55,,
+ASSUMPTION,conservative,1,success_attach_private,percent,90,,
+ASSUMPTION,conservative,1,success_attach_dealer,percent,10,,Off-platform close risk
 ASSUMPTION,conservative,1,pct_listings_paid_listing_fee,percent,30,,
 ASSUMPTION,conservative,1,pct_listings_featured,percent,10,,
-ASSUMPTION,conservative,1,pct_listings_soh_package,percent,75,,
+ASSUMPTION,conservative,1,pct_listings_soh_package,percent,25,,Lowered vs prior model after FL field baseline 0% Complete; ramp with battery onboarding GTM
 ASSUMPTION,conservative,1,pct_sales_financing_referral,percent,12,,
 ASSUMPTION,conservative,1,pct_sales_insurance_referral,percent,8,,
 ASSUMPTION,conservative,1,pct_sales_warranty_referral,percent,8,,
-ASSUMPTION,conservative,1,dealer_fleet_subs_avg_count,count,4,,Primary dealer monetization
+ASSUMPTION,conservative,1,dealer_fleet_subs_avg_count,count,4,,Includes franchise subscription targets
 ASSUMPTION,conservative,1,dealer_sub_billable_months,count,6,,
 ASSUMPTION,conservative,1,dealer_sub_monthly_price,USD,349,,
-ASSUMPTION,conservative,1,upfit_partner_referrals,count,4,,Generic upfit partner
+ASSUMPTION,conservative,1,upfit_partner_referrals,count,4,,
 ASSUMPTION,conservative,1,upfit_partner_fee,USD,100,,
 ASSUMPTION,conservative,1,sponsored_content_revenue,USD,1500,,
-ASSUMPTION,conservative,1,opex_total,USD,36000,,No salaries; founder draw $0
+ASSUMPTION,conservative,1,opex_total,USD,36000,,
 CALC,conservative,1,listings_per_year,count,60,,
 CALC,conservative,1,units_sold,count,24,,
-CALC,conservative,1,private_fleet_units_sold,count,11,,Approx from listing mix
+CALC,conservative,1,private_fleet_units_sold,count,11,,
 CALC,conservative,1,dealer_units_sold,count,13,,
-CALC,conservative,1,success_fee_units,count,11,,private*attach_p + dealer*attach_d
+CALC,conservative,1,success_fee_units,count,11,,
 CALC,conservative,1,avg_seller_success_fee_per_sale,USD,1440.0,,
 CALC,conservative,1,gmv,USD,1152000,,
-CALC,conservative,1,rev_seller_success_fee,USD,15840.0,,Mostly private/fleet
-CALC,conservative,1,rev_dealer_fleet_subscriptions,USD,8376,,Primary dealer stream
+CALC,conservative,1,rev_seller_success_fee,USD,15840.0,,
+CALC,conservative,1,rev_dealer_fleet_subscriptions,USD,8376,,
 CALC,conservative,1,rev_seller_listing_fees,USD,1422,,
 CALC,conservative,1,rev_featured_placement,USD,894,,
-CALC,conservative,1,rev_soh_documentation_package,USD,5805,,
+CALC,conservative,1,rev_soh_documentation_package,USD,1935,,
 CALC,conservative,1,rev_financing_referral,USD,750,,
 CALC,conservative,1,rev_insurance_referral,USD,250,,
 CALC,conservative,1,rev_warranty_referral,USD,400,,
-CALC,conservative,1,rev_upfit_partner_referral,USD,400,,Replaces named-sister-brand referral
+CALC,conservative,1,rev_upfit_partner_referral,USD,400,,
 CALC,conservative,1,rev_sponsored_content,USD,1500,,
-CALC,conservative,1,rev_total,USD,35637.0,,
-CALC,conservative,1,pct_rev_success_fee,percent,44.4,,
-CALC,conservative,1,pct_rev_dealer_subs,percent,23.5,,
-CALC,conservative,1,contribution_after_opex,USD,-363.0,,
+CALC,conservative,1,rev_total,USD,31767.0,,
+CALC,conservative,1,pct_rev_success_fee,percent,49.9,,
+CALC,conservative,1,pct_rev_dealer_subs,percent,26.4,,
+CALC,conservative,1,pct_rev_soh_package,percent,6.1,,
+CALC,conservative,1,contribution_after_opex,USD,-4233.0,,
 ASSUMPTION,base,1,listings_per_month,count,10,,
-ASSUMPTION,base,1,sell_through_rate,percent,50,,Below C&B 80%+ claim
-ASSUMPTION,base,1,avg_sale_price,USD,50000,,Near work-relevant sample median for base
-ASSUMPTION,base,1,dealer_listing_share,percent,60,,Dealer inventory via subscription
-ASSUMPTION,base,1,success_attach_private,percent,90,,Private/fleet on-platform closes
-ASSUMPTION,base,1,success_attach_dealer,percent,15,,Low — dealers often close off-platform
+ASSUMPTION,base,1,sell_through_rate,percent,50,,
+ASSUMPTION,base,1,avg_sale_price,USD,50000,,
+ASSUMPTION,base,1,dealer_listing_share,percent,60,,
+ASSUMPTION,base,1,success_attach_private,percent,90,,
+ASSUMPTION,base,1,success_attach_dealer,percent,15,,Off-platform close risk
 ASSUMPTION,base,1,pct_listings_paid_listing_fee,percent,40,,
 ASSUMPTION,base,1,pct_listings_featured,percent,15,,
-ASSUMPTION,base,1,pct_listings_soh_package,percent,85,,
+ASSUMPTION,base,1,pct_listings_soh_package,percent,40,,Lowered vs prior model after FL field baseline 0% Complete; ramp with battery onboarding GTM
 ASSUMPTION,base,1,pct_sales_financing_referral,percent,15,,
 ASSUMPTION,base,1,pct_sales_insurance_referral,percent,12,,
 ASSUMPTION,base,1,pct_sales_warranty_referral,percent,12,,
-ASSUMPTION,base,1,dealer_fleet_subs_avg_count,count,10,,Primary dealer monetization
+ASSUMPTION,base,1,dealer_fleet_subs_avg_count,count,10,,Includes franchise subscription targets
 ASSUMPTION,base,1,dealer_sub_billable_months,count,9,,
 ASSUMPTION,base,1,dealer_sub_monthly_price,USD,399,,
-ASSUMPTION,base,1,upfit_partner_referrals,count,8,,Generic upfit partner
+ASSUMPTION,base,1,upfit_partner_referrals,count,8,,
 ASSUMPTION,base,1,upfit_partner_fee,USD,125,,
 ASSUMPTION,base,1,sponsored_content_revenue,USD,4000,,
-ASSUMPTION,base,1,opex_total,USD,42000,,No salaries; founder draw $0
+ASSUMPTION,base,1,opex_total,USD,42000,,
 CALC,base,1,listings_per_year,count,120,,
 CALC,base,1,units_sold,count,60,,
-CALC,base,1,private_fleet_units_sold,count,24,,Approx from listing mix
+CALC,base,1,private_fleet_units_sold,count,24,,
 CALC,base,1,dealer_units_sold,count,36,,
-CALC,base,1,success_fee_units,count,27,,private*attach_p + dealer*attach_d
+CALC,base,1,success_fee_units,count,27,,
 CALC,base,1,avg_seller_success_fee_per_sale,USD,1500.0,,
 CALC,base,1,gmv,USD,3000000,,
-CALC,base,1,rev_seller_success_fee,USD,40500.0,,Mostly private/fleet
-CALC,base,1,rev_dealer_fleet_subscriptions,USD,35910,,Primary dealer stream
+CALC,base,1,rev_seller_success_fee,USD,40500.0,,
+CALC,base,1,rev_dealer_fleet_subscriptions,USD,35910,,
 CALC,base,1,rev_seller_listing_fees,USD,3792,,
 CALC,base,1,rev_featured_placement,USD,2682,,
-CALC,base,1,rev_soh_documentation_package,USD,13158,,
+CALC,base,1,rev_soh_documentation_package,USD,6192,,
 CALC,base,1,rev_financing_referral,USD,2250,,
 CALC,base,1,rev_insurance_referral,USD,875,,
 CALC,base,1,rev_warranty_referral,USD,1400,,
-CALC,base,1,rev_upfit_partner_referral,USD,1000,,Replaces named-sister-brand referral
+CALC,base,1,rev_upfit_partner_referral,USD,1000,,
 CALC,base,1,rev_sponsored_content,USD,4000,,
-CALC,base,1,rev_total,USD,105567.0,,
-CALC,base,1,pct_rev_success_fee,percent,38.4,,
-CALC,base,1,pct_rev_dealer_subs,percent,34.0,,
-CALC,base,1,contribution_after_opex,USD,63567.0,,
+CALC,base,1,rev_total,USD,98601.0,,
+CALC,base,1,pct_rev_success_fee,percent,41.1,,
+CALC,base,1,pct_rev_dealer_subs,percent,36.4,,
+CALC,base,1,pct_rev_soh_package,percent,6.3,,
+CALC,base,1,contribution_after_opex,USD,56601.0,,
 ASSUMPTION,upside,1,listings_per_month,count,18,,
-ASSUMPTION,upside,1,sell_through_rate,percent,55,,Below C&B 80%+ claim
-ASSUMPTION,upside,1,avg_sale_price,USD,52000,,Near work-relevant sample median for base
-ASSUMPTION,upside,1,dealer_listing_share,percent,65,,Dealer inventory via subscription
-ASSUMPTION,upside,1,success_attach_private,percent,95,,Private/fleet on-platform closes
-ASSUMPTION,upside,1,success_attach_dealer,percent,20,,Low — dealers often close off-platform
+ASSUMPTION,upside,1,sell_through_rate,percent,55,,
+ASSUMPTION,upside,1,avg_sale_price,USD,52000,,
+ASSUMPTION,upside,1,dealer_listing_share,percent,65,,
+ASSUMPTION,upside,1,success_attach_private,percent,95,,
+ASSUMPTION,upside,1,success_attach_dealer,percent,20,,Off-platform close risk
 ASSUMPTION,upside,1,pct_listings_paid_listing_fee,percent,50,,
 ASSUMPTION,upside,1,pct_listings_featured,percent,18,,
-ASSUMPTION,upside,1,pct_listings_soh_package,percent,90,,
+ASSUMPTION,upside,1,pct_listings_soh_package,percent,55,,Lowered vs prior model after FL field baseline 0% Complete; ramp with battery onboarding GTM
 ASSUMPTION,upside,1,pct_sales_financing_referral,percent,18,,
 ASSUMPTION,upside,1,pct_sales_insurance_referral,percent,15,,
 ASSUMPTION,upside,1,pct_sales_warranty_referral,percent,15,,
-ASSUMPTION,upside,1,dealer_fleet_subs_avg_count,count,18,,Primary dealer monetization
+ASSUMPTION,upside,1,dealer_fleet_subs_avg_count,count,18,,Includes franchise subscription targets
 ASSUMPTION,upside,1,dealer_sub_billable_months,count,10,,
 ASSUMPTION,upside,1,dealer_sub_monthly_price,USD,449,,
-ASSUMPTION,upside,1,upfit_partner_referrals,count,20,,Generic upfit partner
+ASSUMPTION,upside,1,upfit_partner_referrals,count,20,,
 ASSUMPTION,upside,1,upfit_partner_fee,USD,150,,
 ASSUMPTION,upside,1,sponsored_content_revenue,USD,8000,,
-ASSUMPTION,upside,1,opex_total,USD,55000,,No salaries; founder draw $0
+ASSUMPTION,upside,1,opex_total,USD,55000,,
 CALC,upside,1,listings_per_year,count,216,,
 CALC,upside,1,units_sold,count,119,,
-CALC,upside,1,private_fleet_units_sold,count,42,,Approx from listing mix
+CALC,upside,1,private_fleet_units_sold,count,42,,
 CALC,upside,1,dealer_units_sold,count,77,,
-CALC,upside,1,success_fee_units,count,55,,private*attach_p + dealer*attach_d
+CALC,upside,1,success_fee_units,count,55,,
 CALC,upside,1,avg_seller_success_fee_per_sale,USD,1560.0,,
 CALC,upside,1,gmv,USD,6188000,,
-CALC,upside,1,rev_seller_success_fee,USD,85800.0,,Mostly private/fleet
-CALC,upside,1,rev_dealer_fleet_subscriptions,USD,80820,,Primary dealer stream
+CALC,upside,1,rev_seller_success_fee,USD,85800.0,,
+CALC,upside,1,rev_dealer_fleet_subscriptions,USD,80820,,
 CALC,upside,1,rev_seller_listing_fees,USD,8532,,
 CALC,upside,1,rev_featured_placement,USD,5811,,
-CALC,upside,1,rev_soh_documentation_package,USD,25026,,
+CALC,upside,1,rev_soh_documentation_package,USD,15351,,
 CALC,upside,1,rev_financing_referral,USD,5250,,
 CALC,upside,1,rev_insurance_referral,USD,2250,,
 CALC,upside,1,rev_warranty_referral,USD,3600,,
-CALC,upside,1,rev_upfit_partner_referral,USD,3000,,Replaces named-sister-brand referral
+CALC,upside,1,rev_upfit_partner_referral,USD,3000,,
 CALC,upside,1,rev_sponsored_content,USD,8000,,
-CALC,upside,1,rev_total,USD,228089.0,,
-CALC,upside,1,pct_rev_success_fee,percent,37.6,,
-CALC,upside,1,pct_rev_dealer_subs,percent,35.4,,
-CALC,upside,1,contribution_after_opex,USD,173089.0,,
+CALC,upside,1,rev_total,USD,218414.0,,
+CALC,upside,1,pct_rev_success_fee,percent,39.3,,
+CALC,upside,1,pct_rev_dealer_subs,percent,37.0,,
+CALC,upside,1,pct_rev_soh_package,percent,7.0,,
+CALC,upside,1,contribution_after_opex,USD,163414.0,,
 ASSUMPTION,conservative,2,listings_per_month,count,14,,
-ASSUMPTION,conservative,2,sell_through_rate,percent,48,,Below C&B 80%+ claim
-ASSUMPTION,conservative,2,avg_sale_price,USD,49000,,Near work-relevant sample median for base
-ASSUMPTION,conservative,2,dealer_listing_share,percent,60,,Dealer inventory via subscription
-ASSUMPTION,conservative,2,success_attach_private,percent,90,,Private/fleet on-platform closes
-ASSUMPTION,conservative,2,success_attach_dealer,percent,12,,Low — dealers often close off-platform
+ASSUMPTION,conservative,2,sell_through_rate,percent,48,,
+ASSUMPTION,conservative,2,avg_sale_price,USD,49000,,
+ASSUMPTION,conservative,2,dealer_listing_share,percent,60,,
+ASSUMPTION,conservative,2,success_attach_private,percent,90,,
+ASSUMPTION,conservative,2,success_attach_dealer,percent,12,,Off-platform close risk
 ASSUMPTION,conservative,2,pct_listings_paid_listing_fee,percent,45,,
 ASSUMPTION,conservative,2,pct_listings_featured,percent,15,,
-ASSUMPTION,conservative,2,pct_listings_soh_package,percent,85,,
+ASSUMPTION,conservative,2,pct_listings_soh_package,percent,55,,Lowered vs prior model after FL field baseline 0% Complete; ramp with battery onboarding GTM
 ASSUMPTION,conservative,2,pct_sales_financing_referral,percent,15,,
 ASSUMPTION,conservative,2,pct_sales_insurance_referral,percent,12,,
 ASSUMPTION,conservative,2,pct_sales_warranty_referral,percent,12,,
-ASSUMPTION,conservative,2,dealer_fleet_subs_avg_count,count,12,,Primary dealer monetization
+ASSUMPTION,conservative,2,dealer_fleet_subs_avg_count,count,12,,Includes franchise subscription targets
 ASSUMPTION,conservative,2,dealer_sub_billable_months,count,12,,
 ASSUMPTION,conservative,2,dealer_sub_monthly_price,USD,399,,
-ASSUMPTION,conservative,2,upfit_partner_referrals,count,15,,Generic upfit partner
+ASSUMPTION,conservative,2,upfit_partner_referrals,count,15,,
 ASSUMPTION,conservative,2,upfit_partner_fee,USD,125,,
 ASSUMPTION,conservative,2,sponsored_content_revenue,USD,8000,,
-ASSUMPTION,conservative,2,opex_total,USD,58000,,No salaries; founder draw $0
+ASSUMPTION,conservative,2,opex_total,USD,58000,,
 CALC,conservative,2,listings_per_year,count,168,,
 CALC,conservative,2,units_sold,count,81,,
-CALC,conservative,2,private_fleet_units_sold,count,32,,Approx from listing mix
+CALC,conservative,2,private_fleet_units_sold,count,32,,
 CALC,conservative,2,dealer_units_sold,count,49,,
-CALC,conservative,2,success_fee_units,count,35,,private*attach_p + dealer*attach_d
+CALC,conservative,2,success_fee_units,count,35,,
 CALC,conservative,2,avg_seller_success_fee_per_sale,USD,1470.0,,
 CALC,conservative,2,gmv,USD,3969000,,
-CALC,conservative,2,rev_seller_success_fee,USD,51450.0,,Mostly private/fleet
-CALC,conservative,2,rev_dealer_fleet_subscriptions,USD,57456,,Primary dealer stream
+CALC,conservative,2,rev_seller_success_fee,USD,51450.0,,
+CALC,conservative,2,rev_dealer_fleet_subscriptions,USD,57456,,
 CALC,conservative,2,rev_seller_listing_fees,USD,6004,,
 CALC,conservative,2,rev_featured_placement,USD,3725,,
-CALC,conservative,2,rev_soh_documentation_package,USD,18447,,
+CALC,conservative,2,rev_soh_documentation_package,USD,11868,,
 CALC,conservative,2,rev_financing_referral,USD,3000,,
 CALC,conservative,2,rev_insurance_referral,USD,1250,,
 CALC,conservative,2,rev_warranty_referral,USD,2000,,
-CALC,conservative,2,rev_upfit_partner_referral,USD,1875,,Replaces named-sister-brand referral
+CALC,conservative,2,rev_upfit_partner_referral,USD,1875,,
 CALC,conservative,2,rev_sponsored_content,USD,8000,,
-CALC,conservative,2,rev_total,USD,153207.0,,
-CALC,conservative,2,pct_rev_success_fee,percent,33.6,,
-CALC,conservative,2,pct_rev_dealer_subs,percent,37.5,,
-CALC,conservative,2,contribution_after_opex,USD,95207.0,,
+CALC,conservative,2,rev_total,USD,146628.0,,
+CALC,conservative,2,pct_rev_success_fee,percent,35.1,,
+CALC,conservative,2,pct_rev_dealer_subs,percent,39.2,,
+CALC,conservative,2,pct_rev_soh_package,percent,8.1,,
+CALC,conservative,2,contribution_after_opex,USD,88628.0,,
 ASSUMPTION,base,2,listings_per_month,count,28,,
-ASSUMPTION,base,2,sell_through_rate,percent,55,,Below C&B 80%+ claim
-ASSUMPTION,base,2,avg_sale_price,USD,51000,,Near work-relevant sample median for base
-ASSUMPTION,base,2,dealer_listing_share,percent,65,,Dealer inventory via subscription
-ASSUMPTION,base,2,success_attach_private,percent,90,,Private/fleet on-platform closes
-ASSUMPTION,base,2,success_attach_dealer,percent,15,,Low — dealers often close off-platform
+ASSUMPTION,base,2,sell_through_rate,percent,55,,
+ASSUMPTION,base,2,avg_sale_price,USD,51000,,
+ASSUMPTION,base,2,dealer_listing_share,percent,65,,
+ASSUMPTION,base,2,success_attach_private,percent,90,,
+ASSUMPTION,base,2,success_attach_dealer,percent,15,,Off-platform close risk
 ASSUMPTION,base,2,pct_listings_paid_listing_fee,percent,55,,
 ASSUMPTION,base,2,pct_listings_featured,percent,18,,
-ASSUMPTION,base,2,pct_listings_soh_package,percent,90,,
+ASSUMPTION,base,2,pct_listings_soh_package,percent,70,,Lowered vs prior model after FL field baseline 0% Complete; ramp with battery onboarding GTM
 ASSUMPTION,base,2,pct_sales_financing_referral,percent,18,,
 ASSUMPTION,base,2,pct_sales_insurance_referral,percent,15,,
 ASSUMPTION,base,2,pct_sales_warranty_referral,percent,15,,
-ASSUMPTION,base,2,dealer_fleet_subs_avg_count,count,25,,Primary dealer monetization
+ASSUMPTION,base,2,dealer_fleet_subs_avg_count,count,25,,Includes franchise subscription targets
 ASSUMPTION,base,2,dealer_sub_billable_months,count,12,,
 ASSUMPTION,base,2,dealer_sub_monthly_price,USD,449,,
-ASSUMPTION,base,2,upfit_partner_referrals,count,30,,Generic upfit partner
+ASSUMPTION,base,2,upfit_partner_referrals,count,30,,
 ASSUMPTION,base,2,upfit_partner_fee,USD,150,,
 ASSUMPTION,base,2,sponsored_content_revenue,USD,15000,,
-ASSUMPTION,base,2,opex_total,USD,70000,,No salaries; founder draw $0
+ASSUMPTION,base,2,opex_total,USD,70000,,
 CALC,base,2,listings_per_year,count,336,,
 CALC,base,2,units_sold,count,185,,
-CALC,base,2,private_fleet_units_sold,count,65,,Approx from listing mix
+CALC,base,2,private_fleet_units_sold,count,65,,
 CALC,base,2,dealer_units_sold,count,120,,
-CALC,base,2,success_fee_units,count,76,,private*attach_p + dealer*attach_d
+CALC,base,2,success_fee_units,count,76,,
 CALC,base,2,avg_seller_success_fee_per_sale,USD,1530.0,,
 CALC,base,2,gmv,USD,9435000,,
-CALC,base,2,rev_seller_success_fee,USD,116280.0,,Mostly private/fleet
-CALC,base,2,rev_dealer_fleet_subscriptions,USD,134700,,Primary dealer stream
+CALC,base,2,rev_seller_success_fee,USD,116280.0,,
+CALC,base,2,rev_dealer_fleet_subscriptions,USD,134700,,
 CALC,base,2,rev_seller_listing_fees,USD,14615,,
 CALC,base,2,rev_featured_placement,USD,8940,,
-CALC,base,2,rev_soh_documentation_package,USD,38958,,
+CALC,base,2,rev_soh_documentation_package,USD,30315,,
 CALC,base,2,rev_financing_referral,USD,8250,,
 CALC,base,2,rev_insurance_referral,USD,3500,,
 CALC,base,2,rev_warranty_referral,USD,5600,,
-CALC,base,2,rev_upfit_partner_referral,USD,4500,,Replaces named-sister-brand referral
+CALC,base,2,rev_upfit_partner_referral,USD,4500,,
 CALC,base,2,rev_sponsored_content,USD,15000,,
-CALC,base,2,rev_total,USD,350343.0,,
-CALC,base,2,pct_rev_success_fee,percent,33.2,,
-CALC,base,2,pct_rev_dealer_subs,percent,38.4,,
-CALC,base,2,contribution_after_opex,USD,280343.0,,
+CALC,base,2,rev_total,USD,341700.0,,
+CALC,base,2,pct_rev_success_fee,percent,34.0,,
+CALC,base,2,pct_rev_dealer_subs,percent,39.4,,
+CALC,base,2,pct_rev_soh_package,percent,8.9,,
+CALC,base,2,contribution_after_opex,USD,271700.0,,
 ASSUMPTION,upside,2,listings_per_month,count,45,,
-ASSUMPTION,upside,2,sell_through_rate,percent,58,,Below C&B 80%+ claim
-ASSUMPTION,upside,2,avg_sale_price,USD,53000,,Near work-relevant sample median for base
-ASSUMPTION,upside,2,dealer_listing_share,percent,68,,Dealer inventory via subscription
-ASSUMPTION,upside,2,success_attach_private,percent,92,,Private/fleet on-platform closes
-ASSUMPTION,upside,2,success_attach_dealer,percent,18,,Low — dealers often close off-platform
+ASSUMPTION,upside,2,sell_through_rate,percent,58,,
+ASSUMPTION,upside,2,avg_sale_price,USD,53000,,
+ASSUMPTION,upside,2,dealer_listing_share,percent,68,,
+ASSUMPTION,upside,2,success_attach_private,percent,92,,
+ASSUMPTION,upside,2,success_attach_dealer,percent,18,,Off-platform close risk
 ASSUMPTION,upside,2,pct_listings_paid_listing_fee,percent,60,,
 ASSUMPTION,upside,2,pct_listings_featured,percent,20,,
-ASSUMPTION,upside,2,pct_listings_soh_package,percent,92,,
+ASSUMPTION,upside,2,pct_listings_soh_package,percent,80,,Lowered vs prior model after FL field baseline 0% Complete; ramp with battery onboarding GTM
 ASSUMPTION,upside,2,pct_sales_financing_referral,percent,20,,
 ASSUMPTION,upside,2,pct_sales_insurance_referral,percent,18,,
 ASSUMPTION,upside,2,pct_sales_warranty_referral,percent,18,,
-ASSUMPTION,upside,2,dealer_fleet_subs_avg_count,count,35,,Primary dealer monetization
+ASSUMPTION,upside,2,dealer_fleet_subs_avg_count,count,35,,Includes franchise subscription targets
 ASSUMPTION,upside,2,dealer_sub_billable_months,count,12,,
 ASSUMPTION,upside,2,dealer_sub_monthly_price,USD,449,,
-ASSUMPTION,upside,2,upfit_partner_referrals,count,50,,Generic upfit partner
+ASSUMPTION,upside,2,upfit_partner_referrals,count,50,,
 ASSUMPTION,upside,2,upfit_partner_fee,USD,150,,
 ASSUMPTION,upside,2,sponsored_content_revenue,USD,25000,,
-ASSUMPTION,upside,2,opex_total,USD,95000,,No salaries; founder draw $0
+ASSUMPTION,upside,2,opex_total,USD,95000,,
 CALC,upside,2,listings_per_year,count,540,,
 CALC,upside,2,units_sold,count,313,,
-CALC,upside,2,private_fleet_units_sold,count,100,,Approx from listing mix
+CALC,upside,2,private_fleet_units_sold,count,100,,
 CALC,upside,2,dealer_units_sold,count,213,,
-CALC,upside,2,success_fee_units,count,130,,private*attach_p + dealer*attach_d
+CALC,upside,2,success_fee_units,count,130,,
 CALC,upside,2,avg_seller_success_fee_per_sale,USD,1590.0,,
 CALC,upside,2,gmv,USD,16589000,,
-CALC,upside,2,rev_seller_success_fee,USD,206700.0,,Mostly private/fleet
-CALC,upside,2,rev_dealer_fleet_subscriptions,USD,188580,,Primary dealer stream
+CALC,upside,2,rev_seller_success_fee,USD,206700.0,,
+CALC,upside,2,rev_dealer_fleet_subscriptions,USD,188580,,
 CALC,upside,2,rev_seller_listing_fees,USD,25596,,
 CALC,upside,2,rev_featured_placement,USD,16092,,
-CALC,upside,2,rev_soh_documentation_package,USD,64113,,
+CALC,upside,2,rev_soh_documentation_package,USD,55728,,
 CALC,upside,2,rev_financing_referral,USD,15750,,
 CALC,upside,2,rev_insurance_referral,USD,7000,,
 CALC,upside,2,rev_warranty_referral,USD,11200,,
-CALC,upside,2,rev_upfit_partner_referral,USD,7500,,Replaces named-sister-brand referral
+CALC,upside,2,rev_upfit_partner_referral,USD,7500,,
 CALC,upside,2,rev_sponsored_content,USD,25000,,
-CALC,upside,2,rev_total,USD,567531.0,,
-CALC,upside,2,pct_rev_success_fee,percent,36.4,,
-CALC,upside,2,pct_rev_dealer_subs,percent,33.2,,
-CALC,upside,2,contribution_after_opex,USD,472531.0,,
+CALC,upside,2,rev_total,USD,559146.0,,
+CALC,upside,2,pct_rev_success_fee,percent,37.0,,
+CALC,upside,2,pct_rev_dealer_subs,percent,33.7,,
+CALC,upside,2,pct_rev_soh_package,percent,10.0,,
+CALC,upside,2,contribution_after_opex,USD,464146.0,,
 ASSUMPTION,conservative,3,listings_per_month,count,28,,
-ASSUMPTION,conservative,3,sell_through_rate,percent,52,,Below C&B 80%+ claim
-ASSUMPTION,conservative,3,avg_sale_price,USD,50000,,Near work-relevant sample median for base
-ASSUMPTION,conservative,3,dealer_listing_share,percent,65,,Dealer inventory via subscription
-ASSUMPTION,conservative,3,success_attach_private,percent,90,,Private/fleet on-platform closes
-ASSUMPTION,conservative,3,success_attach_dealer,percent,12,,Low — dealers often close off-platform
+ASSUMPTION,conservative,3,sell_through_rate,percent,52,,
+ASSUMPTION,conservative,3,avg_sale_price,USD,50000,,
+ASSUMPTION,conservative,3,dealer_listing_share,percent,65,,
+ASSUMPTION,conservative,3,success_attach_private,percent,90,,
+ASSUMPTION,conservative,3,success_attach_dealer,percent,12,,Off-platform close risk
 ASSUMPTION,conservative,3,pct_listings_paid_listing_fee,percent,55,,
 ASSUMPTION,conservative,3,pct_listings_featured,percent,18,,
-ASSUMPTION,conservative,3,pct_listings_soh_package,percent,88,,
+ASSUMPTION,conservative,3,pct_listings_soh_package,percent,70,,Lowered vs prior model after FL field baseline 0% Complete; ramp with battery onboarding GTM
 ASSUMPTION,conservative,3,pct_sales_financing_referral,percent,18,,
 ASSUMPTION,conservative,3,pct_sales_insurance_referral,percent,15,,
 ASSUMPTION,conservative,3,pct_sales_warranty_referral,percent,15,,
-ASSUMPTION,conservative,3,dealer_fleet_subs_avg_count,count,22,,Primary dealer monetization
+ASSUMPTION,conservative,3,dealer_fleet_subs_avg_count,count,22,,Includes franchise subscription targets
 ASSUMPTION,conservative,3,dealer_sub_billable_months,count,12,,
 ASSUMPTION,conservative,3,dealer_sub_monthly_price,USD,449,,
-ASSUMPTION,conservative,3,upfit_partner_referrals,count,35,,Generic upfit partner
+ASSUMPTION,conservative,3,upfit_partner_referrals,count,35,,
 ASSUMPTION,conservative,3,upfit_partner_fee,USD,150,,
 ASSUMPTION,conservative,3,sponsored_content_revenue,USD,15000,,
-ASSUMPTION,conservative,3,opex_total,USD,90000,,No salaries; founder draw $0
+ASSUMPTION,conservative,3,opex_total,USD,90000,,
 CALC,conservative,3,listings_per_year,count,336,,
 CALC,conservative,3,units_sold,count,175,,
-CALC,conservative,3,private_fleet_units_sold,count,61,,Approx from listing mix
+CALC,conservative,3,private_fleet_units_sold,count,61,,
 CALC,conservative,3,dealer_units_sold,count,114,,
-CALC,conservative,3,success_fee_units,count,69,,private*attach_p + dealer*attach_d
+CALC,conservative,3,success_fee_units,count,69,,
 CALC,conservative,3,avg_seller_success_fee_per_sale,USD,1500.0,,
 CALC,conservative,3,gmv,USD,8750000,,
-CALC,conservative,3,rev_seller_success_fee,USD,103500.0,,Mostly private/fleet
-CALC,conservative,3,rev_dealer_fleet_subscriptions,USD,118536,,Primary dealer stream
+CALC,conservative,3,rev_seller_success_fee,USD,103500.0,,
+CALC,conservative,3,rev_dealer_fleet_subscriptions,USD,118536,,
 CALC,conservative,3,rev_seller_listing_fees,USD,14615,,
 CALC,conservative,3,rev_featured_placement,USD,8940,,
-CALC,conservative,3,rev_soh_documentation_package,USD,38184,,
+CALC,conservative,3,rev_soh_documentation_package,USD,30315,,
 CALC,conservative,3,rev_financing_referral,USD,8000,,
 CALC,conservative,3,rev_insurance_referral,USD,3250,,
 CALC,conservative,3,rev_warranty_referral,USD,5200,,
-CALC,conservative,3,rev_upfit_partner_referral,USD,5250,,Replaces named-sister-brand referral
+CALC,conservative,3,rev_upfit_partner_referral,USD,5250,,
 CALC,conservative,3,rev_sponsored_content,USD,15000,,
-CALC,conservative,3,rev_total,USD,320475.0,,
-CALC,conservative,3,pct_rev_success_fee,percent,32.3,,
-CALC,conservative,3,pct_rev_dealer_subs,percent,37.0,,
-CALC,conservative,3,contribution_after_opex,USD,230475.0,,
+CALC,conservative,3,rev_total,USD,312606.0,,
+CALC,conservative,3,pct_rev_success_fee,percent,33.1,,
+CALC,conservative,3,pct_rev_dealer_subs,percent,37.9,,
+CALC,conservative,3,pct_rev_soh_package,percent,9.7,,
+CALC,conservative,3,contribution_after_opex,USD,222606.0,,
 ASSUMPTION,base,3,listings_per_month,count,55,,
-ASSUMPTION,base,3,sell_through_rate,percent,60,,Below C&B 80%+ claim
-ASSUMPTION,base,3,avg_sale_price,USD,52000,,Near work-relevant sample median for base
-ASSUMPTION,base,3,dealer_listing_share,percent,70,,Dealer inventory via subscription
-ASSUMPTION,base,3,success_attach_private,percent,90,,Private/fleet on-platform closes
-ASSUMPTION,base,3,success_attach_dealer,percent,18,,Low — dealers often close off-platform
+ASSUMPTION,base,3,sell_through_rate,percent,60,,
+ASSUMPTION,base,3,avg_sale_price,USD,52000,,
+ASSUMPTION,base,3,dealer_listing_share,percent,70,,
+ASSUMPTION,base,3,success_attach_private,percent,90,,
+ASSUMPTION,base,3,success_attach_dealer,percent,18,,Off-platform close risk
 ASSUMPTION,base,3,pct_listings_paid_listing_fee,percent,60,,
 ASSUMPTION,base,3,pct_listings_featured,percent,20,,
-ASSUMPTION,base,3,pct_listings_soh_package,percent,92,,
+ASSUMPTION,base,3,pct_listings_soh_package,percent,85,,Lowered vs prior model after FL field baseline 0% Complete; ramp with battery onboarding GTM
 ASSUMPTION,base,3,pct_sales_financing_referral,percent,20,,
 ASSUMPTION,base,3,pct_sales_insurance_referral,percent,18,,
 ASSUMPTION,base,3,pct_sales_warranty_referral,percent,18,,
-ASSUMPTION,base,3,dealer_fleet_subs_avg_count,count,45,,Primary dealer monetization
+ASSUMPTION,base,3,dealer_fleet_subs_avg_count,count,45,,Includes franchise subscription targets
 ASSUMPTION,base,3,dealer_sub_billable_months,count,12,,
 ASSUMPTION,base,3,dealer_sub_monthly_price,USD,499,,
-ASSUMPTION,base,3,upfit_partner_referrals,count,60,,Generic upfit partner
+ASSUMPTION,base,3,upfit_partner_referrals,count,60,,
 ASSUMPTION,base,3,upfit_partner_fee,USD,175,,
 ASSUMPTION,base,3,sponsored_content_revenue,USD,30000,,
-ASSUMPTION,base,3,opex_total,USD,130000,,No salaries; founder draw $0
+ASSUMPTION,base,3,opex_total,USD,130000,,
 CALC,base,3,listings_per_year,count,660,,
 CALC,base,3,units_sold,count,396,,
-CALC,base,3,private_fleet_units_sold,count,119,,Approx from listing mix
+CALC,base,3,private_fleet_units_sold,count,119,,
 CALC,base,3,dealer_units_sold,count,277,,
-CALC,base,3,success_fee_units,count,157,,private*attach_p + dealer*attach_d
+CALC,base,3,success_fee_units,count,157,,
 CALC,base,3,avg_seller_success_fee_per_sale,USD,1560.0,,
 CALC,base,3,gmv,USD,20592000,,
-CALC,base,3,rev_seller_success_fee,USD,244920.0,,Mostly private/fleet
-CALC,base,3,rev_dealer_fleet_subscriptions,USD,269460,,Primary dealer stream
+CALC,base,3,rev_seller_success_fee,USD,244920.0,,
+CALC,base,3,rev_dealer_fleet_subscriptions,USD,269460,,
 CALC,base,3,rev_seller_listing_fees,USD,31284,,
 CALC,base,3,rev_featured_placement,USD,19668,,
-CALC,base,3,rev_soh_documentation_package,USD,78303,,
+CALC,base,3,rev_soh_documentation_package,USD,72369,,
 CALC,base,3,rev_financing_referral,USD,19750,,
 CALC,base,3,rev_insurance_referral,USD,8875,,
 CALC,base,3,rev_warranty_referral,USD,14200,,
-CALC,base,3,rev_upfit_partner_referral,USD,10500,,Replaces named-sister-brand referral
+CALC,base,3,rev_upfit_partner_referral,USD,10500,,
 CALC,base,3,rev_sponsored_content,USD,30000,,
-CALC,base,3,rev_total,USD,726960.0,,
-CALC,base,3,pct_rev_success_fee,percent,33.7,,
-CALC,base,3,pct_rev_dealer_subs,percent,37.1,,
-CALC,base,3,contribution_after_opex,USD,596960.0,,
+CALC,base,3,rev_total,USD,721026.0,,
+CALC,base,3,pct_rev_success_fee,percent,34.0,,
+CALC,base,3,pct_rev_dealer_subs,percent,37.4,,
+CALC,base,3,pct_rev_soh_package,percent,10.0,,
+CALC,base,3,contribution_after_opex,USD,591026.0,,
 ASSUMPTION,upside,3,listings_per_month,count,90,,
-ASSUMPTION,upside,3,sell_through_rate,percent,65,,Below C&B 80%+ claim
-ASSUMPTION,upside,3,avg_sale_price,USD,54000,,Near work-relevant sample median for base
-ASSUMPTION,upside,3,dealer_listing_share,percent,72,,Dealer inventory via subscription
-ASSUMPTION,upside,3,success_attach_private,percent,92,,Private/fleet on-platform closes
-ASSUMPTION,upside,3,success_attach_dealer,percent,20,,Low — dealers often close off-platform
+ASSUMPTION,upside,3,sell_through_rate,percent,65,,
+ASSUMPTION,upside,3,avg_sale_price,USD,54000,,
+ASSUMPTION,upside,3,dealer_listing_share,percent,72,,
+ASSUMPTION,upside,3,success_attach_private,percent,92,,
+ASSUMPTION,upside,3,success_attach_dealer,percent,20,,Off-platform close risk
 ASSUMPTION,upside,3,pct_listings_paid_listing_fee,percent,65,,
 ASSUMPTION,upside,3,pct_listings_featured,percent,22,,
-ASSUMPTION,upside,3,pct_listings_soh_package,percent,95,,
+ASSUMPTION,upside,3,pct_listings_soh_package,percent,92,,Lowered vs prior model after FL field baseline 0% Complete; ramp with battery onboarding GTM
 ASSUMPTION,upside,3,pct_sales_financing_referral,percent,22,,
 ASSUMPTION,upside,3,pct_sales_insurance_referral,percent,20,,
 ASSUMPTION,upside,3,pct_sales_warranty_referral,percent,20,,
-ASSUMPTION,upside,3,dealer_fleet_subs_avg_count,count,70,,Primary dealer monetization
+ASSUMPTION,upside,3,dealer_fleet_subs_avg_count,count,70,,Includes franchise subscription targets
 ASSUMPTION,upside,3,dealer_sub_billable_months,count,12,,
 ASSUMPTION,upside,3,dealer_sub_monthly_price,USD,499,,
-ASSUMPTION,upside,3,upfit_partner_referrals,count,100,,Generic upfit partner
+ASSUMPTION,upside,3,upfit_partner_referrals,count,100,,
 ASSUMPTION,upside,3,upfit_partner_fee,USD,175,,
 ASSUMPTION,upside,3,sponsored_content_revenue,USD,50000,,
-ASSUMPTION,upside,3,opex_total,USD,180000,,No salaries; founder draw $0
+ASSUMPTION,upside,3,opex_total,USD,180000,,
 CALC,upside,3,listings_per_year,count,1080,,
 CALC,upside,3,units_sold,count,702,,
-CALC,upside,3,private_fleet_units_sold,count,197,,Approx from listing mix
+CALC,upside,3,private_fleet_units_sold,count,197,,
 CALC,upside,3,dealer_units_sold,count,505,,
-CALC,upside,3,success_fee_units,count,282,,private*attach_p + dealer*attach_d
+CALC,upside,3,success_fee_units,count,282,,
 CALC,upside,3,avg_seller_success_fee_per_sale,USD,1620.0,,
 CALC,upside,3,gmv,USD,37908000,,
-CALC,upside,3,rev_seller_success_fee,USD,456840.0,,Mostly private/fleet
-CALC,upside,3,rev_dealer_fleet_subscriptions,USD,419160,,Primary dealer stream
+CALC,upside,3,rev_seller_success_fee,USD,456840.0,,
+CALC,upside,3,rev_dealer_fleet_subscriptions,USD,419160,,
 CALC,upside,3,rev_seller_listing_fees,USD,55458,,
 CALC,upside,3,rev_featured_placement,USD,35462,,
-CALC,upside,3,rev_soh_documentation_package,USD,132354,,
+CALC,upside,3,rev_soh_documentation_package,USD,128226,,
 CALC,upside,3,rev_financing_referral,USD,38500,,
 CALC,upside,3,rev_insurance_referral,USD,17500,,
 CALC,upside,3,rev_warranty_referral,USD,28000,,
-CALC,upside,3,rev_upfit_partner_referral,USD,17500,,Replaces named-sister-brand referral
+CALC,upside,3,rev_upfit_partner_referral,USD,17500,,
 CALC,upside,3,rev_sponsored_content,USD,50000,,
-CALC,upside,3,rev_total,USD,1250774.0,,
-CALC,upside,3,pct_rev_success_fee,percent,36.5,,
-CALC,upside,3,pct_rev_dealer_subs,percent,33.5,,
-CALC,upside,3,contribution_after_opex,USD,1070774.0,,
-ASSUMPTION,base,1,one_pager_y1_revenue_range_low,USD,70000,,
-ASSUMPTION,base,1,one_pager_y1_revenue_range_high,USD,140000,,
+CALC,upside,3,rev_total,USD,1246646.0,,
+CALC,upside,3,pct_rev_success_fee,percent,36.6,,
+CALC,upside,3,pct_rev_dealer_subs,percent,33.6,,
+CALC,upside,3,pct_rev_soh_package,percent,10.3,,
+CALC,upside,3,contribution_after_opex,USD,1066646.0,,
+ASSUMPTION,base,1,one_pager_y1_revenue_range_low,USD,65000,,Updated after lower Y1 SOH attach
+ASSUMPTION,base,1,one_pager_y1_revenue_range_high,USD,130000,,
 ASSUMPTION,base,3,one_pager_y3_revenue_range_low,USD,550000,,
 ASSUMPTION,base,3,one_pager_y3_revenue_range_high,USD,950000,,

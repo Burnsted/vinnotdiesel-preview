@@ -1,10 +1,12 @@
-# VinNotDiesel — Income Model v1.2
+# VinNotDiesel — Income Model v1.3
 
 Companion to `business-plan.md`. Spreadsheet: `income-model.csv`.
 
-**Product lock:** Buy Now + Make Offer; Complete = SOH + method + **VIN open-recall check** + work specs + all-in price.
+**Product lock:** Buy Now + Make Offer; Complete = SOH % + method + **VIN open-recall check** (incl. Lightning **25V-131**, E-Transit **25V-860**) + work specs + all-in price.
 
-**Monetization lock:** Dealers pay mainly via **subscription** (they often close off-platform). **Success fees** come mainly from **private and fleet** on-platform closes. Upfit handoffs are a generic **upfit partner referral** line (no named sister brand in public docs).
+**Monetization lock:** Dealer **subscriptions** (incl. franchise desks with no used stock yet). **Success fees** mainly private/fleet. **SOH package** is the Incomplete→Complete unlock — and the key early metric after the FL field check.
+
+**Florida field check (team-verified 2026-09-24):** **0%** of checked FL listings had battery health % + measurement method → every FL unit would be Incomplete today. **ASSUMPTION change:** Y1 base SOH attach lowered from **85% → 40%** (conservative 25%, upside 55%); Y2/Y3 ramp toward 70%/85%.
 
 ---
 
@@ -14,24 +16,24 @@ Companion to `business-plan.md`. Spreadsheet: `income-model.csv`.
 | --- | --- | --- | --- | --- |
 | Avg listings / month | 5 | 10 | 18 | 55 |
 | Sell-through | 40% | 50% | 55% | 60% |
-| Dealer share of listings | 55% | 60% | 65% | 70% |
+| SOH package attach | **25%** | **40%** | **55%** | **85%** |
 | ASP | $48,000 | $50,000 | $52,000 | $52,000 |
-| **Total revenue** | **~$36k** | **~$106k** | **~$228k** | **~$727k** |
+| **Total revenue** | **~$32k** | **~$99k** | **~$218k** | **~$721k** |
 
-**Base-case Year 1 range:** **~$70k–$140k** (around modeled ~$106k).  
-**Base-case Year 3 range:** **~$0.55M–$0.95M** (around modeled ~$727k).
+**Base-case Year 1 range:** **~$65k–$130k** (around modeled ~$99k; updated after lower SOH attach).  
+**Base-case Year 3 range:** **~$0.55M–$0.95M** (around modeled ~$721k).
 
 ### Base Y1 revenue mix (modeled)
 
 | Stream | ~$ | Share |
 | --- | --- | --- |
-| Seller success fee (mostly private/fleet) | $40.5k | ~38% |
-| Dealer / fleet subscriptions | $35.9k | ~34% |
-| SOH documentation packages | $13.2k | ~12% |
-| Listing + featured | $6.5k | ~6% |
-| Financing / insurance / warranty referrals | $4.5k | ~4% |
+| Seller success fee (mostly private/fleet) | $40.5k | ~41% |
+| Dealer / fleet subscriptions | $35.9k | ~36% |
+| SOH documentation packages | $6.2k | ~6% |
+| Listing + featured | $6.5k | ~7% |
+| Financing / insurance / warranty | $4.5k | ~5% |
 | Sponsored + upfit partner referral | $5.0k | ~5% |
-| **Total** | **~$106k** | 100% |
+| **Total** | **~$99k** | 100% |
 
 ### Base Y3 revenue mix (modeled)
 
@@ -39,10 +41,29 @@ Companion to `business-plan.md`. Spreadsheet: `income-model.csv`.
 | --- | --- | --- |
 | Dealer / fleet subscriptions | $269k | ~37% |
 | Seller success fee | $245k | ~34% |
-| SOH packages | $78k | ~11% |
+| SOH packages | $72k | ~10% |
 | Listing + featured | $51k | ~7% |
-| Other referrals / sponsored / upfit | $84k | ~12% |
-| **Total** | **~$727k** | 100% |
+| Other | $84k | ~12% |
+| **Total** | **~$721k** | 100% |
+
+---
+
+## Fee card ASSUMPTIONS
+
+Unchanged vs v1.2 except **SOH attach rates** (see above). Seller success **3%** (min $500 / max $3,000) on private/fleet; dealer success attach **10–20%**; dealer sub **$349–$499/mo**.
+
+---
+
+## Explicit risks (income-relevant)
+
+1. **Dealers close off-platform** → subscriptions, not success fees.  
+2. **FL battery-doc gap** → SOH attach may stay low without onboarding execution; Y1 SOH revenue is intentionally modest.
+
+---
+
+## CSV guide
+
+Includes SOURCED rows for **25V-860**, FL field SOH baseline **0%**, Jacksonville E-Transit band, Miami Rivian van note, and demotion of Maher/Nimnicht/Duval/Essential to subscription targets.
 
 ---
 
