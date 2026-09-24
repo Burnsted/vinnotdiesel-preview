@@ -28,10 +28,10 @@ export default function Listing() {
   if (!listing) {
     return (
       <div className="detail-page">
-        <Link to="/" className="back-link">← Back to browse</Link>
+        <Link to="/shop" className="back-link">← Back to browse</Link>
         <div className="empty-state">
           <p>Listing not found.</p>
-          <Link to="/">Return to inventory</Link>
+          <Link to="/shop">Return to inventory</Link>
         </div>
       </div>
     )
@@ -50,7 +50,7 @@ export default function Listing() {
   return (
     <>
       <div className="detail-page">
-        <Link to="/" className="back-link">← Back to browse</Link>
+        <Link to="/shop" className="back-link">← Back to browse</Link>
 
         {/* 1. Hero */}
         <section className="hero-block" aria-labelledby="listing-title">

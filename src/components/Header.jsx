@@ -16,10 +16,10 @@ export default function Header() {
     const next = new URLSearchParams(params)
     if (q.trim()) next.set('q', q.trim())
     else next.delete('q')
-    navigate({ pathname: '/', search: next.toString() ? `?${next}` : '' })
+    navigate({ pathname: '/shop', search: next.toString() ? `?${next}` : '' })
   }
 
-  const onBrowse = location.pathname === '/' || location.pathname === ''
+  const onBrowse = location.pathname === '/shop'
 
   return (
     <header className="site-header">
@@ -28,7 +28,7 @@ export default function Header() {
           type="button"
           className="header-menu-btn"
           aria-label="Menu"
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/shop')}
         >
           <span className="burger" aria-hidden="true">
             <span /><span /><span />
