@@ -1,3 +1,4 @@
+import AddToFleetButton from './AddToFleetButton'
 import { COMPARE_SPEC_ROWS } from '../lib/workSpec'
 
 /**
@@ -27,6 +28,7 @@ export default function WorkCompare({ current, candidates, title, lead }) {
             heading={col.heading}
             role={col.role}
             spec={col.spec}
+            pickId={col.pickId}
           />
         ))}
       </div>
@@ -38,7 +40,7 @@ export default function WorkCompare({ current, candidates, title, lead }) {
   )
 }
 
-function CompareCard({ kicker, heading, role, spec, current = false }) {
+function CompareCard({ kicker, heading, role, spec, current = false, pickId }) {
   return (
     <article
       className={`work-compare-card ${current ? 'is-current' : 'is-candidate'}`}
@@ -67,6 +69,11 @@ function CompareCard({ kicker, heading, role, spec, current = false }) {
           )
         })}
       </dl>
+      {current || !pickId ? null : (
+        <div className="work-compare-cta">
+          <AddToFleetButton pickId={pickId} size="btn-sm" />
+        </div>
+      )}
     </article>
   )
 }

@@ -6,10 +6,10 @@ Public static web preview of **FleetFit** — small-fleet used-EV swap packages 
 
 ## Locked product (v5 — this preview)
 
-- **Primary:** fleet intake → package match (typically **3–5**, up to ~10) → unit drill-in → per-unit Buy Now / Make Offer, plus reserve / offer on the package
+- **Primary:** fleet intake → package match (typically **3–5**, up to ~10) → unit drill-in → **Add to fleet** (selected: **In fleet**). FleetFit facilitates the package sale — no one-click checkout.
 - **Secondary:** Couples Match / single-vehicle shop — word of mouth. Not the home. No inventory carousel on `/`
 - **Money:** buyer’s fee on **closed units only** (BaT / Cars & Bids–style). Package browse shows listing asks only; checkout shows **Fee at checkout — amount TBD**. Never invent a fee $ or % on package cards. Buyer pays the seller / dealer. FleetFit never holds vehicle funds.
-- **Free EV layer** on each unit: battery (often “Not reported by dealer”), VIN recall placeholder, charging/trade fit, FIT SCORE (`worth it` / `worth it if…` / `pass` / `not enough data`)
+- **Free EV layer** on each unit: battery health (plain language, not SOH), VIN recall placeholder, charging notes, annual savings when a dollar figure is on file
 - Package screens mirror private-concept **structure and honesty** (FACT sticker sum, battery unknown, recalls unchecked, open items, trade-in pending) with **anonymized** public copy
 - Never claims FleetFit inspected the truck
 - Brand: **FleetFit** (Franz SVG lockup — Fleet white/charcoal · Fit teal). No Fit My Truck chrome. No VND L5 joke mark.
@@ -44,8 +44,7 @@ npm run build
 2. `/#/intake` — fleet intake (fleet size may be blank / “Not surveyed yet”)
 3. `/#/package/pkg-tc-electrical-4` — anonymized 4-unit electrical package
 4. `/#/package/pkg-tc-electrical-4/unit/unit-e2` — unit drill-in (Silverado EV WT)
-5. `/#/checkout?package=pkg-tc-electrical-4&unit=unit-e2&action=buy` — Buy Now DEMO
-6. Optional: landscaping intake or `/#/package/pkg-tc-landscape-2` — 2-unit hauler + lead
+5. Optional: landscaping intake or `/#/package/pkg-tc-landscape-2` — 2-unit hauler + lead
 
 ## Deploy
 

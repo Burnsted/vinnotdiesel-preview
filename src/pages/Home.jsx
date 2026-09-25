@@ -25,7 +25,7 @@ export default function Home() {
             Used EV fleet packages that fit the work day.
           </h1>
           <p className="locked-hero-lead">
-            Work vans and trucks that do the same job as non-EV work vehicles — and can save money, maintenance, and time. We help small trade shops see the fit, then package used EVs matched to your routes (typically 3–5 vehicles, up to ~10). Buy Now or Make Offer per unit.
+            Work vans and trucks that do the same job as non-EV work vehicles — and can save money, maintenance, and time. We help small trade shops see the fit, then package used EVs matched to your routes (typically 3–5 vehicles, up to ~10). Add units to the fleet as you build the package.
           </p>
           <div className="locked-hero-actions">
             <Link to="/intake" className="btn btn-primary">
@@ -57,7 +57,7 @@ export default function Home() {
           </li>
           <li>
             <strong>Per-unit decisions</strong>
-            <span>Buy Now or Make Offer on each unit. Free EV diligence on every truck. Reserve or offer on the whole package.</span>
+            <span>Add to fleet on each unit that belongs in the package. Keep shopping for the rest. FleetFit facilitates the sale when the mix is ready.</span>
           </li>
         </ol>
       </section>
@@ -85,7 +85,7 @@ export default function Home() {
       <section className="locked-section locked-section-alt" aria-labelledby="secondary-title">
         <h2 id="secondary-title">Secondary: Couples Match / single truck</h2>
         <p className="locked-section-lead">
-          One-offs still matter by word of mouth. Not the home lead — no inventory carousel here. Same EV layer and per-unit Buy Now / Make Offer when you only need one truck.
+          One-offs still matter by word of mouth. Not the home lead — no inventory carousel here. Same EV layer, and Add to fleet if a single truck belongs in the package.
         </p>
         <Link to="/shop" className="btn locked-btn-on-dark">Browse single trucks</Link>
       </section>

@@ -1,4 +1,5 @@
 import { Link, useLocation, useParams } from 'react-router-dom'
+import AddToFleetButton from '../components/AddToFleetButton'
 import SavingsLine from '../components/SavingsLine'
 import WorkCompare from '../components/WorkCompare'
 import WorkSpecRows from '../components/WorkSpecRows'
@@ -8,6 +9,7 @@ import {
   packageStickerSum,
 } from '../data/package'
 import { batteryConfidenceFromUnit } from '../lib/battery'
+import { fleetUnitKey, useFleetPick } from '../lib/fleetPick'
 import { formatMoney } from '../lib/fit'
 import { currentWorkVehicle, displayWorkSpec } from '../lib/workSpec'
 
@@ -24,6 +26,7 @@ export default function PackageResults() {
   const location = useLocation()
   const intake = location.state?.intake
   const pkg = getPackage(packageId)
+  const fleet = useFleetPick()
 
   if (!pkg) {
     return (
@@ -39,8 +42,10 @@ export default function PackageResults() {
   const askParts = pkg.units.map((u) => formatMoney(u.askPrice)).join(' + ')
   const current = currentWorkVehicle(intake, pkg)
   const unitNavState = location.state
+  const selectedInPackage = pkg.units.filter((unit) => fleet.has(fleetUnitKey(pkg.id, unit.id))).length
   const compareCandidates = pkg.units.map((unit) => ({
     id: unit.id,
+    pickId: fleetUnitKey(pkg.id, unit.id),
     kicker: 'Candidate EV',
     heading: `${unit.year} ${unit.make} ${unit.model} ${unit.trim}`,
     role: unit.role,
@@ -160,18 +165,7 @@ export default function PackageResults() {
                 >
                   Open unit
                 </Link>
-                <Link
-                  to={`/checkout?package=${pkg.id}&unit=${unit.id}&action=buy`}
-                  className="btn btn-sm btn-primary"
-                >
-                  Buy Now
-                </Link>
-                <Link
-                  to={`/checkout?package=${pkg.id}&unit=${unit.id}&action=offer`}
-                  className="btn btn-sm"
-                >
-                  Make Offer
-                </Link>
+                <AddToFleetButton pickId={fleetUnitKey(pkg.id, unit.id)} size="btn-sm" />
               </div>
             </li>
           ))}
@@ -235,20 +229,11 @@ export default function PackageResults() {
       </p>
 
       <div className="package-cta-bar">
-        <Link
-          to={`/checkout?package=${pkg.id}&action=reserve`}
-          className="btn btn-primary"
-        >
-          Reserve package
-        </Link>
+        <p className="package-fleet-count">
+          {selectedInPackage} of {pkg.unitCount} in fleet — keep adding units, or remove any that do not belong.
+        </p>
         <Link to="/intake?adjust=1" className="btn">
           Adjust mix
-        </Link>
-        <Link
-          to={`/checkout?package=${pkg.id}&action=offer`}
-          className="btn"
-        >
-          Make offer on package
         </Link>
       </div>
 

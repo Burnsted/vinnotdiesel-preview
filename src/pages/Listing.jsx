@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import AddToFleetButton from '../components/AddToFleetButton'
 import { LISTINGS, distanceFromHome } from '../data/listings'
 import { batteryConfidenceFromListing } from '../lib/battery'
-import MakeOfferModal from '../components/MakeOfferModal'
-import BuyNowModal from '../components/BuyNowModal'
+import { fleetListingKey } from '../lib/fleetPick'
 
 const GALLERY_LABELS = [
   { key: 'exterior', label: 'Exterior' },
@@ -21,9 +21,6 @@ function bandClass(band) {
 export default function Listing() {
   const { id } = useParams()
   const listing = useMemo(() => LISTINGS.find((l) => l.id === id), [id])
-  const [offerOpen, setOfferOpen] = useState(false)
-  const [buyOpen, setBuyOpen] = useState(false)
-  const [msgNote, setMsgNote] = useState('')
   const [ppiNote, setPpiNote] = useState('')
 
   if (!listing) {
@@ -243,7 +240,7 @@ export default function Listing() {
         <section className="module">
           <h2 className="module-title"><span className="num">11</span> Next steps</h2>
           <p style={{ margin: '0 0 8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-            Message · Make Offer · Buy Now · Book PPI — use the sticky bar below. PPI scheduling is stubbed.
+            Add this truck to the fleet if it belongs in the package, then keep looking. PPI scheduling is stubbed.
           </p>
           {ppiNote && <p className="ppi-note">{ppiNote}</p>}
         </section>
@@ -255,19 +252,7 @@ export default function Listing() {
             {priceText}
           </div>
           <div className="cta-actions">
-            <button
-              type="button"
-              className="btn btn-ghost"
-              onClick={() => alert('Demo: messaging not connected. Use Q&A stub above.')}
-            >
-              Message
-            </button>
-            <button type="button" className="btn" onClick={() => setOfferOpen(true)}>
-              Make Offer
-            </button>
-            <button type="button" className="btn btn-primary" onClick={() => setBuyOpen(true)}>
-              Buy Now
-            </button>
+            <AddToFleetButton pickId={fleetListingKey(listing.id)} />
             <button
               type="button"
               className="btn"
@@ -279,8 +264,6 @@ export default function Listing() {
         </div>
       </div>
 
-      {offerOpen && <MakeOfferModal listing={listing} onClose={() => setOfferOpen(false)} />}
-      {buyOpen && <BuyNowModal listing={listing} onClose={() => setBuyOpen(false)} />}
     </>
   )
 }

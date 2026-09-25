@@ -1640,7 +1640,25 @@ img { max-width: 100%; display: block; }
 }
 .package-cta-bar {
   display: flex; flex-wrap: wrap; gap: 10px;
+  align-items: center;
   margin-top: 22px;
+}
+.package-fleet-count {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  flex: 1 1 220px;
+}
+.btn-in-fleet {
+  background: #f3fbfa;
+  border: 1px solid var(--mark-teal);
+  color: var(--mark-ink);
+}
+.btn-in-fleet:hover {
+  background: #e7f7f5;
+}
+.work-compare-cta {
+  margin-top: 12px;
 }
 
 @media (min-width: 800px) {

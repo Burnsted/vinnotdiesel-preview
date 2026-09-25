@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
+import AddToFleetButton from './AddToFleetButton'
 import { distanceFromHome } from '../data/listings'
 import { batteryConfidenceFromListing } from '../lib/battery'
+import { fleetListingKey } from '../lib/fleetPick'
 
 function formatPrice(listing) {
   if (listing.allInPrice == null) {
@@ -98,7 +100,8 @@ export default function ListingCard({ listing }) {
         )}
 
         <div className="card-actions">
-          <Link to={`/listing/${listing.id}`} className="btn btn-primary">
+          <AddToFleetButton pickId={fleetListingKey(listing.id)} />
+          <Link to={`/listing/${listing.id}`} className="btn">
             Show details
           </Link>
           <button

@@ -1,9 +1,11 @@
 import { Link, useLocation, useParams } from 'react-router-dom'
+import AddToFleetButton from '../components/AddToFleetButton'
 import SavingsLine from '../components/SavingsLine'
 import WorkCompare from '../components/WorkCompare'
 import WorkSpecRows from '../components/WorkSpecRows'
 import { getPackage, getUnit } from '../data/package'
 import { batteryConfidenceFromUnit } from '../lib/battery'
+import { fleetUnitKey } from '../lib/fleetPick'
 import { formatMoney } from '../lib/fit'
 import { currentWorkVehicle, displayWorkSpec } from '../lib/workSpec'
 
@@ -27,6 +29,7 @@ export default function PackageUnit() {
   const current = currentWorkVehicle(intake, pkg)
   const candidate = {
     id: unit.id,
+    pickId: fleetUnitKey(pkg.id, unit.id),
     kicker: 'Candidate EV',
     heading: `${unit.year} ${unit.make} ${unit.model} ${unit.trim}`,
     role: unit.role,
@@ -68,18 +71,7 @@ export default function PackageUnit() {
           <p className="package-fee-note">Buyer’s fee appears only at checkout — amount TBD</p>
         </div>
         <div className="unit-ask-actions">
-          <Link
-            to={`/checkout?package=${pkg.id}&unit=${unit.id}&action=buy`}
-            className="btn btn-primary"
-          >
-            Buy Now
-          </Link>
-          <Link
-            to={`/checkout?package=${pkg.id}&unit=${unit.id}&action=offer`}
-            className="btn"
-          >
-            Make Offer
-          </Link>
+          <AddToFleetButton pickId={fleetUnitKey(pkg.id, unit.id)} />
         </div>
       </div>
 
