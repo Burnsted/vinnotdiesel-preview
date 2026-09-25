@@ -50,6 +50,7 @@ export default function PackageResults() {
     heading: `${unit.year} ${unit.make} ${unit.model} ${unit.trim}`,
     role: unit.role,
     spec: displayWorkSpec(unit),
+    bodyType: unit.bodyType,
   }))
 
   return (
@@ -112,7 +113,7 @@ export default function PackageResults() {
         current={current}
         candidates={compareCandidates}
         title="How they fit next to your current work vehicle"
-        lead="See how this EV matches the job your current truck does — payload, bed / cab, and tow side by side. A dash means we do not have that figure yet."
+        lead="See how this EV matches the job your current work vehicle does — payload, bed / cab, tow, and energy side by side. A dash means we do not have that figure yet."
       />
 
       <section aria-labelledby="units-title">

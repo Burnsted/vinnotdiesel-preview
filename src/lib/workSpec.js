@@ -48,26 +48,54 @@ function factField(raw, format) {
   return { text, known: true }
 }
 
+export function formatEnergy(rangeMi, kwh) {
+  const rangeKnown = rangeMi != null && rangeMi !== '' && Number.isFinite(Number(rangeMi))
+  const kwhKnown = kwh != null && kwh !== '' && Number.isFinite(Number(kwh))
+  if (rangeKnown && kwhKnown) {
+    return {
+      text: `${Number(rangeMi).toLocaleString()} mi (${Number(kwh)} kWh)`,
+      known: true,
+    }
+  }
+  if (rangeKnown) {
+    return { text: `${Number(rangeMi).toLocaleString()} mi`, known: true }
+  }
+  if (kwhKnown) {
+    return { text: `${DASH} (${Number(kwh)} kWh)`, known: true }
+  }
+  return { text: DASH, known: false }
+}
+
+export function formatMpg(value) {
+  const n = Number(value)
+  if (!Number.isFinite(n)) return DASH
+  return `${n} MPG`
+}
+
+export function formatAsk(value) {
+  const n = Number(value)
+  if (!Number.isFinite(n)) return { text: DASH, known: false }
+  return { text: `$${n.toLocaleString()}`, known: true }
+}
+
 /** Work specs from an exact listing match, or em dashes. */
 export function displayWorkSpec(unit) {
   const listing = findExactListingMatch(unit)
-  if (!listing) {
-    return {
-      payload: { text: DASH, known: false },
-      bed: { text: DASH, known: false },
-      cab: { text: DASH, known: false },
-      cabBed: { text: DASH, known: false },
-      tow: { text: DASH, known: false },
-      source: null,
-    }
-  }
+  const range = listing?.ratedRange ?? unit?.ratedRange
+  const kwh = listing?.usableKwh ?? unit?.battery?.usableKwh
+  const empty = { text: DASH, known: false }
+
   return {
-    payload: factField(listing.payload, formatLb),
-    bed: factField(listing.bed),
-    cab: factField(listing.cab),
-    cabBed: factField(formatCabBed(listing.cab, listing.bed)),
-    tow: factField(listing.tow, formatLb),
-    source: listing.id,
+    payload: listing ? factField(listing.payload, formatLb) : empty,
+    bed: listing ? factField(listing.bed) : empty,
+    cab: listing ? factField(listing.cab) : empty,
+    cabBed: listing ? factField(formatCabBed(listing.cab, listing.bed)) : empty,
+    tow: listing ? factField(listing.tow, formatLb) : empty,
+    energy: formatEnergy(range, kwh),
+    ask: formatAsk(unit?.askPrice),
+    mpg: empty,
+    kbbTradeIn: empty,
+    source: listing?.id || null,
   }
 }
 
@@ -87,16 +115,23 @@ export function currentWorkVehicle(intake, pkg) {
   }
 
   const empty = { text: DASH, known: false }
+  const mpg = factField(intake?.mpg ?? pkg?.currentMpg, formatMpg)
+  const kbb = factField(intake?.kbbTradeIn ?? pkg?.currentKbbTradeIn)
   return {
-    heading: 'Your truck',
+    heading: 'Your current work vehicle',
     role,
     kind: 'Non-EV work vehicle',
+    bodyType: /van/i.test(role) ? 'van' : 'truck',
     spec: {
       payload: empty,
       bed: empty,
       cab: empty,
       cabBed: empty,
       tow: empty,
+      energy: mpg.known ? mpg : empty,
+      ask: empty,
+      mpg,
+      kbbTradeIn: kbb,
       source: null,
     },
   }
@@ -109,10 +144,11 @@ export const WORK_SPEC_ROWS = [
   { key: 'tow', label: 'Tow' },
 ]
 
-/** Compare moment: Steve product-bar row order */
+/** Compare moment: capacity primary, then one Energy row */
 export const COMPARE_SPEC_ROWS = [
   { key: 'payload', label: 'Payload' },
   { key: 'bed', label: 'Bed / capacity' },
   { key: 'cab', label: 'Cab' },
   { key: 'tow', label: 'Tow / pull' },
+  { key: 'energy', label: 'Energy' },
 ]

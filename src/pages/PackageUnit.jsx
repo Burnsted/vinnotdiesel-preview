@@ -34,6 +34,7 @@ export default function PackageUnit() {
     heading: `${unit.year} ${unit.make} ${unit.model} ${unit.trim}`,
     role: unit.role,
     spec,
+    bodyType: unit.bodyType,
   }
 
   return (
@@ -89,7 +90,7 @@ export default function PackageUnit() {
         current={current}
         candidates={[candidate]}
         title="Next to your current work vehicle"
-        lead="See how this EV matches the job your current truck does. We do not invent payload or tow for the current vehicle."
+        lead="See how this EV matches the job your current work vehicle does. We do not invent payload, tow, MPG, or KBB."
       />
 
       <section className="module" aria-labelledby="ev-layer">

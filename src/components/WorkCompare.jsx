@@ -3,8 +3,7 @@ import { COMPARE_SPEC_ROWS } from '../lib/workSpec'
 
 /**
  * On-page side-by-side vs the shop's current non-EV work vehicle.
- * Product-bar rows: Role · Payload · Bed / capacity · Cab · Tow / pull.
- * Not a compare tray / edge drawer.
+ * Energy is one row. Ask lives on the EV thumb. No compare tray.
  */
 export default function WorkCompare({ current, candidates, title, lead }) {
   return (
@@ -19,6 +18,7 @@ export default function WorkCompare({ current, candidates, title, lead }) {
           heading={current.heading}
           role={current.role}
           spec={current.spec}
+          bodyType={current.bodyType}
           current
         />
         {candidates.map((col) => (
@@ -28,19 +28,29 @@ export default function WorkCompare({ current, candidates, title, lead }) {
             heading={col.heading}
             role={col.role}
             spec={col.spec}
+            bodyType={col.bodyType}
             pickId={col.pickId}
           />
         ))}
       </div>
       <p className="work-compare-note">
-        Figures come from listing specs already in this preview. A dash means that
-        figure is not on file — we do not invent payload or tow.
+        Energy is one row: range (pack size) on the EV, MPG on your current work
+        vehicle. A dash means that figure is not on file — we do not invent
+        range, MPG, or KBB.
       </p>
     </section>
   )
 }
 
-function CompareCard({ kicker, heading, role, spec, current = false, pickId }) {
+function CompareCard({ kicker, heading, role, spec, current = false, pickId, bodyType }) {
+  const thumbLabel = current
+    ? 'YOUR TRUCK'
+    : bodyType === 'van'
+      ? 'EV VAN'
+      : 'EV TRUCK'
+  const showAsk = !current && spec.ask?.known
+  const showKbb = current && spec.kbbTradeIn?.known
+
   return (
     <article
       className={`work-compare-card ${current ? 'is-current' : 'is-candidate'}`}
@@ -48,6 +58,15 @@ function CompareCard({ kicker, heading, role, spec, current = false, pickId }) {
     >
       <p className="work-compare-col-kicker">{kicker}</p>
       <h3 className="work-compare-col-name">{heading}</h3>
+      <div className="work-compare-photo">
+        <span className="work-compare-thumb-label" aria-hidden="true">{thumbLabel}</span>
+        {showAsk ? (
+          <span className="work-compare-ask">{spec.ask.text}</span>
+        ) : null}
+        {showKbb ? (
+          <span className="work-compare-kbb">KBB trade-in ~{spec.kbbTradeIn.text}</span>
+        ) : null}
+      </div>
       <dl className="work-spec-rows">
         <div className="work-spec-row">
           <dt>Role</dt>
