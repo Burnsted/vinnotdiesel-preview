@@ -34,9 +34,9 @@ export default function WorkCompare({ current, candidates, title, lead }) {
         ))}
       </div>
       <p className="work-compare-note">
-        Energy is one row: range (pack size) on the EV, MPG on your current work
-        vehicle. A dash means that figure is not on file — we do not invent
-        range, MPG, or KBB.
+        Energy is one row: range (pack size) on the EV, tank range (MPG) on
+        your current work vehicle. A dash means that figure is not on file —
+        we do not invent range, tank gallons, MPG, or KBB.
       </p>
     </section>
   )

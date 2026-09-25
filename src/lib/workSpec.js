@@ -66,10 +66,42 @@ export function formatEnergy(rangeMi, kwh) {
   return { text: DASH, known: false }
 }
 
-export function formatMpg(value) {
+function finiteNumber(value) {
+  if (value == null || value === '') return null
   const n = Number(value)
-  if (!Number.isFinite(n)) return DASH
-  return `${n} MPG`
+  return Number.isFinite(n) ? n : null
+}
+
+/**
+ * Current-column Energy: tank range mi (MPG), parallel to EV range mi (kWh).
+ * Tank miles = gallons × MPG only when both FACT. Never invent gallons, MPG, or tank range.
+ * Bare MPG is not allowed — missing tank miles stay a dash: `— (18 MPG)`.
+ */
+export function formatTankEnergy({ tankRangeMi, mpg, tankGallons } = {}) {
+  const mpgN = finiteNumber(mpg)
+  const gallonsN = finiteNumber(tankGallons)
+  const storedRange = finiteNumber(tankRangeMi)
+  const computedRange =
+    gallonsN != null && mpgN != null ? Math.round(gallonsN * mpgN) : null
+  const rangeN = computedRange ?? storedRange
+
+  if (rangeN != null && mpgN != null) {
+    return {
+      text: `${rangeN.toLocaleString()} mi (${mpgN} MPG)`,
+      known: true,
+    }
+  }
+  if (rangeN != null) {
+    return { text: `${rangeN.toLocaleString()} mi`, known: true }
+  }
+  if (mpgN != null) {
+    return { text: `${DASH} (${mpgN} MPG)`, known: true }
+  }
+  return { text: DASH, known: false }
+}
+
+export function formatMpg(value) {
+  return formatTankEnergy({ mpg: value }).text
 }
 
 export function formatAsk(value) {
@@ -102,7 +134,7 @@ export function displayWorkSpec(unit) {
 /**
  * Current non-EV work vehicle for the compare moment.
  * Intake does not capture current-vehicle specs — placeholder role only.
- * Never invent payload / cab / bed / tow for the current column.
+ * Never invent payload / cab / bed / tow / tank gallons / MPG for the current column.
  */
 export function currentWorkVehicle(intake, pkg) {
   const trade = intake?.trade || pkg?.trade || ''
@@ -115,7 +147,11 @@ export function currentWorkVehicle(intake, pkg) {
   }
 
   const empty = { text: DASH, known: false }
-  const mpg = factField(intake?.mpg ?? pkg?.currentMpg, formatMpg)
+  const energy = formatTankEnergy({
+    tankRangeMi: intake?.tankRangeMi ?? pkg?.currentTankRangeMi,
+    mpg: intake?.mpg ?? pkg?.currentMpg,
+    tankGallons: intake?.tankGallons ?? pkg?.currentTankGallons,
+  })
   const kbb = factField(intake?.kbbTradeIn ?? pkg?.currentKbbTradeIn)
   return {
     heading: 'Your current work vehicle',
@@ -128,9 +164,9 @@ export function currentWorkVehicle(intake, pkg) {
       cab: empty,
       cabBed: empty,
       tow: empty,
-      energy: mpg.known ? mpg : empty,
+      energy,
       ask: empty,
-      mpg,
+      mpg: energy,
       kbbTradeIn: kbb,
       source: null,
     },
