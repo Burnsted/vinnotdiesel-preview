@@ -15,7 +15,7 @@ const ELECTRICAL_UNITS = [
     year: 2023,
     make: 'Ford',
     model: 'E-Transit',
-    trim: 'Cargo 250 Medium roof',
+    trim: 'Cargo 250',
     mileage: 22100,
     location: { city: 'Stuart', state: 'FL' },
     askPrice: 38900,
