@@ -9,7 +9,11 @@ export default function AddToFleetButton({ pickId, size = '' }) {
       type="button"
       className={`btn ${size} ${inFleet ? 'btn-in-fleet' : 'btn-primary'}`.trim()}
       aria-pressed={inFleet}
-      onClick={() => fleet.toggle(pickId)}
+      onClick={(event) => {
+        event.preventDefault()
+        event.stopPropagation()
+        fleet.toggle(pickId)
+      }}
     >
       {inFleet ? (
         <>

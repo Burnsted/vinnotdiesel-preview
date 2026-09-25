@@ -1,6 +1,5 @@
 import { Link, useLocation, useParams } from 'react-router-dom'
-import AddToFleetButton from '../components/AddToFleetButton'
-import UnitPhoto from '../components/UnitPhoto'
+import StackCard from '../components/StackCard'
 import WorkCompare from '../components/WorkCompare'
 import { batteryUnknownCount, getPackage } from '../data/package'
 import { fleetUnitKey, useFleetPick } from '../lib/fleetPick'
@@ -22,14 +21,6 @@ function dayNeedLabel(pkg, intake) {
   if (fromNote) return fromNote[1].replace('-', '–')
   if (/trailer/i.test(pkg.workDayNote || '')) return 'Trailer day'
   return null
-}
-
-function SpecChip({ label, field }) {
-  return (
-    <span className={`spec-chip ${field?.known ? 'is-known' : 'is-dash'}`}>
-      {label} {field?.text || '—'}
-    </span>
-  )
 }
 
 function fleetSizeChip(intake, pkg) {
@@ -56,22 +47,22 @@ export default function PackageResults() {
   }
 
   const current = currentWorkVehicle(intake, pkg)
-  const unitNavState = location.state
   const selectedInPackage = pkg.units.filter((unit) => fleet.has(fleetUnitKey(pkg.id, unit.id))).length
   const unknownBatt = batteryUnknownCount(pkg)
   const dayNeed = dayNeedLabel(pkg, intake)
   const compareCandidates = pkg.units.map((unit) => ({
     id: unit.id,
+    unit,
     pickId: fleetUnitKey(pkg.id, unit.id),
     kicker: 'Candidate EV',
-    heading: `${unit.year} ${unit.make} ${unit.model} ${unit.trim}`,
+    heading: `${unit.year} ${unit.model}`,
     role: unit.role,
     spec: displayWorkSpec(unit),
-    bodyType: unit.bodyType,
+    mileage: unit.mileage,
   }))
 
   return (
-    <div className="locked-page package-page">
+    <div className="locked-page package-page is-stack">
       <nav className="locked-crumbs" aria-label="Breadcrumb">
         <Link to="/">Home</Link>
         <span aria-hidden="true"> / </span>
@@ -82,14 +73,13 @@ export default function PackageResults() {
 
       <header className="match-header">
         <p className="match-kicker">
-          {pkg.path} · {pkg.unitCount} units · DEMO
+          {pkg.trade} · {pkg.unitCount} units{dayNeed ? ` · Day ${dayNeed}` : ''} · DEMO
         </p>
         <h1 className="match-title">{pkg.headline}</h1>
         <div className="spec-chips match-header-chips">
           <span className="spec-chip is-known">Trade {pkg.trade}</span>
           <span className="spec-chip is-known">{pkg.unitCount} units</span>
           {dayNeed ? <span className="spec-chip is-known">Day {dayNeed}</span> : null}
-          <span className="spec-chip is-dash">Trade-in {pkg.tradeIn.status}</span>
         </div>
         <div className="spec-chips">
           <span className="spec-chip is-dash">
@@ -103,47 +93,26 @@ export default function PackageResults() {
       <WorkCompare
         current={current}
         candidates={compareCandidates}
-        title="Fit next to your current work vehicle"
+        packageId={pkg.id}
+        title="Fit next to your current work vehicle."
       />
 
       <section aria-labelledby="units-title">
         <h2 id="units-title" className="package-units-title">Units</h2>
-        <ul className="package-unit-grid">
-          {pkg.units.map((unit, index) => {
+        <ul className="package-unit-stack">
+          {pkg.units.map((unit) => {
             const spec = displayWorkSpec(unit)
             return (
-              <li key={unit.id} className="package-unit-card is-dense">
-                <UnitPhoto unit={unit} packageId={pkg.id} size="card" showAsk />
-                <p className="package-unit-role">Unit {index + 1} · {unit.role}</p>
-                <Link
-                  to={`/package/${pkg.id}/unit/${unit.id}`}
-                  state={unitNavState}
-                  className="package-unit-name"
-                >
-                  {unit.year} {unit.make} {unit.model}
-                </Link>
-                <p className="package-unit-meta">
-                  {unit.mileage.toLocaleString()} mi
-                  {' · '}
-                  {unit.bodyType === 'van' ? 'EV van' : 'EV truck'}
-                </p>
-                <div className="spec-chips">
-                  <SpecChip label="Payload" field={spec.payload} />
-                  <SpecChip label="Bed" field={spec.bed} />
-                  <span className={`spec-chip ${spec.energy.known ? 'is-known' : 'is-dash'}`}>
-                    {spec.energy.text}
-                  </span>
-                </div>
-                <div className="package-unit-actions">
-                  <AddToFleetButton pickId={fleetUnitKey(pkg.id, unit.id)} size="btn-block" />
-                  <Link
-                    to={`/package/${pkg.id}/unit/${unit.id}`}
-                    state={unitNavState}
-                    className="package-open-link"
-                  >
-                    Open
-                  </Link>
-                </div>
+              <li key={unit.id}>
+                <StackCard
+                  heading={`${unit.year} ${unit.model}`}
+                  role={unit.role}
+                  unit={unit}
+                  packageId={pkg.id}
+                  pickId={fleetUnitKey(pkg.id, unit.id)}
+                  spec={spec}
+                  mileage={unit.mileage}
+                />
               </li>
             )
           })}

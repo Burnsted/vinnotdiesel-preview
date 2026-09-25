@@ -2044,12 +2044,126 @@ img { max-width: 100%; display: block; }
   max-width: 42rem;
 }
 
-@media (min-width: 360px) {
-  .work-compare-grid { grid-template-columns: 1fr 1fr; }
+.work-compare.is-stack {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0 0 28px;
+}
+.work-compare-stack {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.package-unit-stack {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
 
+.stack-card {
+  background: #161b22;
+  color: #f2f4f5;
+  border: 1px solid #242b33;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.stack-card.is-open {
+  border-color: var(--mark-teal);
+}
+.stack-card.is-current {
+  box-shadow: inset 0 2px 0 var(--mark-teal);
+}
+.stack-card-body {
+  padding: 14px 16px 16px;
+}
+.stack-card-kicker {
+  margin: 0 0 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mark-teal);
+}
+.stack-card.is-candidate .stack-card-kicker {
+  color: rgba(255, 255, 255, 0.45);
+}
+.stack-card-heading {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #fff;
+}
+.stack-card-role {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
+}
+.stack-card-stats {
+  margin: 0 0 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.58);
+}
+.stack-card-chips {
+  margin: 0 0 12px;
+}
+.stack-card .spec-chip {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+.stack-card .btn-primary,
+.stack-card .btn-in-fleet,
+.stack-card .btn-block {
+  width: 100%;
+  border-radius: 999px;
+  padding: 14px 18px;
+}
+.stack-card .btn-primary {
+  background: var(--mark-teal);
+  border-color: var(--mark-teal);
+  color: #04110f;
+  font-weight: 700;
+}
+.stack-card .btn-primary:hover {
+  background: #17a396;
+  border-color: #17a396;
+  color: #04110f;
+}
+.stack-card .btn-in-fleet {
+  background: rgba(27, 182, 168, 0.12);
+  color: #fff;
+}
+.stack-card-details {
+  display: inline-flex;
+  align-items: center;
+  margin: 10px 0 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+.stack-card-details:hover { color: #fff; }
+.stack-card-expand {
+  margin: 0;
+  padding: 10px 16px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.stack-card .work-spec-row dt { color: rgba(255, 255, 255, 0.45); }
+.stack-card .work-spec-value.is-known { color: #fff; }
+.stack-card .work-spec-value.is-dash { color: rgba(255, 255, 255, 0.38); }
+
 @media (min-width: 800px) {
-  .work-compare-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .work-compare-stack,
+  .package-unit-stack { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2087,6 +2201,12 @@ img { max-width: 100%; display: block; }
 .unit-photo.is-card {
   height: 148px;
   margin: 0 0 10px;
+}
+.unit-photo.is-stack {
+  height: 168px;
+  margin: 0;
+  border-radius: 0;
+  background: linear-gradient(180deg, #1a2228 0%, #0f1419 100%);
 }
 .unit-photo-shape {
   display: block;
@@ -2131,16 +2251,28 @@ img { max-width: 100%; display: block; }
   font-weight: 600;
   color: rgba(255, 255, 255, 0.82);
 }
+.unit-photo-headline {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(15, 20, 25, 0.72);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
 .unit-photo-ask {
   position: absolute;
-  top: 8px;
-  left: 8px;
-  background: #fff;
-  color: #111;
-  padding: 3px 7px;
-  border-radius: 4px;
-  font-size: 0.72rem;
-  font-weight: 700;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(15, 20, 25, 0.72);
+  color: #fff;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(27, 182, 168, 0.45);
+  font-size: 0.82rem;
+  font-weight: 600;
 }
 .unit-photo-kbb {
   position: absolute;
@@ -2182,7 +2314,8 @@ img { max-width: 100%; display: block; }
   outline: 2px solid var(--mark-teal);
   outline-offset: 1px;
 }
-.unit-photo.is-card .compare-control {
+.unit-photo.is-card .compare-control,
+.unit-photo.is-stack .compare-control {
   width: 38px;
   height: 38px;
 }

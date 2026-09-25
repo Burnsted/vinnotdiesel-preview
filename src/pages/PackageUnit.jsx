@@ -30,12 +30,13 @@ export default function PackageUnit() {
   const current = currentWorkVehicle(intake, pkg)
   const candidate = {
     id: unit.id,
+    unit,
     pickId: fleetUnitKey(pkg.id, unit.id),
     kicker: 'Candidate EV',
-    heading: `${unit.year} ${unit.make} ${unit.model} ${unit.trim}`,
+    heading: `${unit.year} ${unit.model}`,
     role: unit.role,
     spec,
-    bodyType: unit.bodyType,
+    mileage: unit.mileage,
   }
 
   return (
@@ -92,8 +93,8 @@ export default function PackageUnit() {
       <WorkCompare
         current={current}
         candidates={[candidate]}
-        title="Next to your current work vehicle"
-        lead="See how this EV matches the job your current work vehicle does. We do not invent payload, tow, MPG, or KBB."
+        packageId={pkg.id}
+        title="Fit next to your current work vehicle."
       />
 
       <section className="module" aria-labelledby="ev-layer">

@@ -127,6 +127,8 @@ export function displayWorkSpec(unit) {
     ask: formatAsk(unit?.askPrice),
     mpg: empty,
     kbbTradeIn: empty,
+    drivetrain: listing ? factField(listing.drivetrain) : empty,
+    cargo: listing ? factField(listing.cargoVolume ?? listing.cargo) : empty,
     source: listing?.id || null,
   }
 }
@@ -168,6 +170,8 @@ export function currentWorkVehicle(intake, pkg) {
       ask: empty,
       mpg: energy,
       kbbTradeIn: kbb,
+      drivetrain: empty,
+      cargo: empty,
       source: null,
     },
   }
@@ -182,6 +186,17 @@ export const WORK_SPEC_ROWS = [
 
 /** Compare moment: capacity primary, then one Energy row */
 export const COMPARE_SPEC_ROWS = [
+  { key: 'payload', label: 'Payload' },
+  { key: 'bed', label: 'Bed' },
+  { key: 'cab', label: 'Cab' },
+  { key: 'tow', label: 'Tow' },
+  { key: 'energy', label: 'Energy' },
+]
+
+/** Expanded stack only — never the collapsed default */
+export const EXPAND_SPEC_ROWS = [
+  { key: 'cargo', label: 'Cargo' },
+  { key: 'drivetrain', label: 'Drivetrain' },
   { key: 'payload', label: 'Payload' },
   { key: 'bed', label: 'Bed' },
   { key: 'cab', label: 'Cab' },

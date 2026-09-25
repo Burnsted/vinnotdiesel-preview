@@ -11,6 +11,7 @@ export default function UnitPhoto({
   whisper = false,
   current = false,
   kbb,
+  headline,
 }) {
   const thumbLabel = current
     ? 'YOUR TRUCK'
@@ -29,6 +30,7 @@ export default function UnitPhoto({
       {whisper && unit ? (
         <span className="unit-photo-whisper">{unitWhisper(unit)}</span>
       ) : null}
+      {headline ? <span className="unit-photo-headline">{headline}</span> : null}
       {ask?.known ? <span className="unit-photo-ask">{ask.text}</span> : null}
       {showKbb ? (
         <span className="unit-photo-kbb">KBB trade-in ~{kbb.text}</span>
