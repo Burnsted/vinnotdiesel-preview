@@ -1,4 +1,4 @@
-/** Demo inventory for VinNotDiesel preview — not real listings. */
+/** Demo inventory for FleetFit preview — not real listings. */
 export const HOME_BASE = { city: 'West Palm Beach', state: 'FL', lat: 26.7153, lng: -80.0534 };
 
 export const LISTINGS = [
@@ -300,7 +300,7 @@ export const LISTINGS = [
     workValue: 'Stretched',
     compsNote: 'Heavy, thirsty, expensive — Stretched unless you specifically need Extreme Off-Road capability.',
     photos: ['exterior', 'bed-upfit', 'dash-range', 'charge-port'],
-    description: 'Capability theater with genuine off-road chops. Listed for completeness — not a typical VinNotDiesel work buy.',
+    description: 'Capability theater with genuine off-road chops. Listed for completeness — not a typical FleetFit fleet package.',
   },
   {
     id: 'vnd-008',
