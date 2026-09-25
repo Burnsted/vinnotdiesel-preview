@@ -238,7 +238,7 @@ const LANDSCAPE_UNITS = [
     openItems: [
       'Tow rating for dual-axle enclosed cargo must be verified',
       'Battery SOH not reported',
-      'Replaces a current gas hauler — year of the outgoing truck is unconfirmed',
+      'Replaces a current non-EV hauler — year of the outgoing truck is unconfirmed',
     ],
     replaceNote: 'Replaces hauler — current truck year unconfirmed (not title-checked).',
     upfitNote: 'Stock bed — hitch / brake controller not confirmed.',

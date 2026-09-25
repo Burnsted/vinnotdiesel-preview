@@ -25,7 +25,7 @@ export default function Home() {
             Used EV fleet packages that fit the work day.
           </h1>
           <p className="locked-hero-lead">
-            Work vans and trucks that do the same job as gas or diesel — and can save money, maintenance, and time. We help small trade shops see the fit, then package used EVs matched to your routes (typically 3–5 vehicles, up to ~10). Buy Now or Make Offer per unit.
+            Work vans and trucks that do the same job as non-EV work vehicles — and can save money, maintenance, and time. We help small trade shops see the fit, then package used EVs matched to your routes (typically 3–5 vehicles, up to ~10). Buy Now or Make Offer per unit.
           </p>
           <div className="locked-hero-actions">
             <Link to="/intake" className="btn btn-primary">
