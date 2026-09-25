@@ -21,5 +21,5 @@
     "oxlint": "^1.81.0",
     "vite": "^8.3.0"
   },
-  "description": "VinNotDiesel \u2014 used EV work-truck marketplace web preview"
+  "description": "FleetFit \u2014 used EV fleet packages web preview (repo: vinnotdiesel-preview)"
 }

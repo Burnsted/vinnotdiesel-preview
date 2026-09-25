@@ -1,8 +1,8 @@
-# VinNotDiesel Preview
+# FleetFit Preview
 
-Public static web preview of **VinNotDiesel** — a used EV work-truck marketplace.
+Public static web preview of **FleetFit** — small-fleet used EV packages (Acquire), not a one-off auction board.
 
-> Used EV work trucks. Battery first.
+> Used EV fleet packages that fit the work day.
 
 ## Stack
 

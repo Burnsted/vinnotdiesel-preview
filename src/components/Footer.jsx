@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="footer-inner">
         <div className="footer-brand">
-          <strong>VinNotDiesel</strong> — Used EV work trucks. Battery first.
+          <strong>FleetFit</strong> — Used EV fleet packages that fit the work day.
         </div>
         <div>
           Preview · Demo inventory · Not real listings · No payments

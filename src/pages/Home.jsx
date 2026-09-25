@@ -100,8 +100,8 @@ export default function Home() {
           <button type="button" className="overlay-icon-btn" aria-label="Menu" onClick={() => navigate('/shop')}>
             <span className="burger light" aria-hidden="true"><span /><span /><span /></span>
           </button>
-          <Link to="/" className="overlay-wordmark" aria-label="VinNotDiesel home">
-            VinNotDiesel
+          <Link to="/" className="overlay-wordmark" aria-label="FleetFit home">
+            FleetFit
           </Link>
           <button type="button" className="overlay-icon-btn" aria-label="Account (stub)">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
