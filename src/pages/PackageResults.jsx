@@ -229,7 +229,7 @@ export default function PackageResults() {
       </div>
 
       <p className="locked-foot-note">
-        VinNotDiesel has not seen these trucks in person. We do not hold vehicle funds.
+        FleetFit has not seen these trucks in person. We do not hold vehicle funds.
         Buyer pays the seller / dealer. Fees are not displayed on this package screen.
       </p>
     </div>

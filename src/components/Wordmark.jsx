@@ -1,20 +1,19 @@
 /**
- * Official Franz wordmark v2 (2026-09-25) — L5 system, no truck/bolt.
- * VIN ALL CAPS Space Grotesk Bold · sky #68B0F0
- * not lowercase Satisfy script · neon mint #3DDC84
- * DIESEL ALL CAPS Space Grotesk Bold · white on dark / charcoal #0D1520 on light
- * Never mashed VINNOTDIESEL. No amber. No FMT chrome.
+ * Official Franz FleetFit wordmark v1 (2026-09-25).
+ * Compound FleetFit — Fleet white (#FFFFFF on dark / charcoal #0B1220 on light)
+ * · Fit teal #1BB6A8. Space Grotesk Bold. No script, no gap, no truck/bolt.
+ * Vin Not Diesel L5 joke mark is parked. No FMT chrome in this lockup.
  */
 const FILES = {
   dark: {
-    nav: 'vnd-wordmark-nav-dark.svg',
-    hero: 'vnd-wordmark-horizontal-dark.svg',
-    eyebrow: 'vnd-wordmark-nav-dark.svg',
+    nav: 'fleetfit-wordmark-nav-dark.svg',
+    hero: 'fleetfit-wordmark-horizontal-dark.svg',
+    eyebrow: 'fleetfit-wordmark-nav-dark.svg',
   },
   light: {
-    nav: 'vnd-wordmark-horizontal-light.svg',
-    hero: 'vnd-wordmark-horizontal-light.svg',
-    eyebrow: 'vnd-wordmark-horizontal-light.svg',
+    nav: 'fleetfit-wordmark-horizontal-light.svg',
+    hero: 'fleetfit-wordmark-horizontal-light.svg',
+    eyebrow: 'fleetfit-wordmark-horizontal-light.svg',
   },
 }
 
@@ -35,8 +34,8 @@ export default function Wordmark({
   return (
     <img
       src={src}
-      alt={decorative ? '' : 'Vin Not Diesel'}
-      aria-label={decorative ? undefined : 'Vin Not Diesel'}
+      alt={decorative ? '' : 'FleetFit'}
+      aria-label={decorative ? undefined : 'FleetFit'}
       aria-hidden={decorative ? true : undefined}
       className={`wordmark wordmark-${size} wordmark-${tone} ${className}`.trim()}
       draggable={false}

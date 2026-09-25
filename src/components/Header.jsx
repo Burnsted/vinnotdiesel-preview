@@ -52,7 +52,7 @@ export default function Header() {
           </form>
         )}
 
-        <Link to="/" className="logo" aria-label="Vin Not Diesel">
+        <Link to="/" className="logo" aria-label="FleetFit">
           <Wordmark size="nav" tone="light" decorative />
         </Link>
 

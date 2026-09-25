@@ -11,15 +11,14 @@
   --text: #111111;
   --text-muted: #555555;
   --text-dim: #888888;
-  /* Scarce VND cyan — focus, links, key EV chips only */
+  /* Scarce cyan — focus, links, key EV chips only */
   --cyan: #00a8bd;
   --cyan-bright: #00e5ff;
   --cyan-bg: rgba(0, 168, 189, 0.08);
   --amber: #c47a00;
-  --mark-sky: #68b0f0;
-  --mark-mint: #3ddc84;
+  --mark-teal: #1bb6a8;
   --mark-paper: #ffffff;
-  --mark-ink: #0d1520;
+  --mark-ink: #0b1220;
   --amber-bg: rgba(196, 122, 0, 0.1);
   --green: #1a7f4b;
   --green-bg: rgba(26, 127, 75, 0.1);
@@ -97,23 +96,23 @@ img { max-width: 100%; display: block; }
 .logo:hover { text-decoration: none; }
 .logo:hover .wordmark { text-decoration: none; }
 
-/* Official Franz v2 SVG lockup — height-boxed; width follows viewBox (~3.72:1) */
+/* Official Franz FleetFit SVG lockup — height-boxed; width follows viewBox (~2.5:1) */
 .wordmark {
   display: block;
   width: auto;
-  max-width: min(100%, 320px);
-  height: 24px;
+  max-width: min(100%, 280px);
+  height: 26px;
   object-fit: contain;
   object-position: left center;
 }
-.wordmark-nav { height: 24px; }
-.wordmark-hero { height: 42px; max-width: min(100%, 460px); }
-.wordmark-eyebrow { height: 18px; max-width: min(100%, 220px); }
-.logo .wordmark { height: 24px; }
-.locked-topnav-brand .wordmark { height: 26px; }
-.locked-brand .wordmark { height: 42px; }
-.footer-brand .wordmark { height: 20px; }
-.overlay-wordmark .wordmark { height: 24px; }
+.wordmark-nav { height: 26px; }
+.wordmark-hero { height: 44px; max-width: min(100%, 360px); }
+.wordmark-eyebrow { height: 18px; max-width: min(100%, 180px); }
+.logo .wordmark { height: 26px; }
+.locked-topnav-brand .wordmark { height: 28px; }
+.locked-brand .wordmark { height: 44px; }
+.footer-brand .wordmark { height: 22px; }
+.overlay-wordmark .wordmark { height: 26px; }
 .logo-tag { display: none; }
 .header-search { flex: 1; max-width: 280px; margin-left: 8px; }
 .search-input-wrap {

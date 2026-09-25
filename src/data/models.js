@@ -49,7 +49,7 @@ function workBlurb(make, model) {
   }
   return (
     blurbs[key] ||
-    'Electric work truck listed on VinNotDiesel. Review battery SOH, payload, warranty, and all-in price on each unit before you travel.'
+    'Electric work truck in a FleetFit package. Review battery SOH, payload, warranty, and listing ask on each unit before you travel.'
   )
 }
 

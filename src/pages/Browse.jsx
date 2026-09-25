@@ -141,8 +141,8 @@ export default function Browse() {
   return (
     <div className="browse-layout">
       <div className="browse-hero">
-        <h1>Used EV work trucks for sale.</h1>
-        <p className="browse-sub">Battery first · Listing ask · fee at checkout TBD. <a href="#/" style={{color:'var(--cyan)'}}>Home</a></p>
+        <h1>Used EV fleet packages.</h1>
+        <p className="browse-sub">Used EV fleet packages that fit the work day · asking · fee at checkout TBD. <a href="#/" style={{color:'var(--cyan)'}}>Home</a></p>
       </div>
 
       <div className="browse-chrome">

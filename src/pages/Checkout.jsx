@@ -101,7 +101,7 @@ export default function Checkout() {
         </dl>
         <p className="locked-disclaimer">
           Preview stub. No payment, no escrow, no binding contract.
-          VinNotDiesel does not hold vehicle funds. Buyer pays the seller / dealer.
+          FleetFit does not hold vehicle funds. Buyer pays the seller / dealer.
           {unit
             ? ' We have not seen this truck in person.'
             : ' We have not seen these trucks in person.'}
@@ -116,7 +116,7 @@ export default function Checkout() {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={() => alert('Demo only — nothing was charged or submitted. VinNotDiesel does not hold vehicle funds.')}
+            onClick={() => alert('Demo only — nothing was charged or submitted. FleetFit does not hold vehicle funds.')}
           >
             {action === 'offer'
               ? 'Submit offer (demo)'

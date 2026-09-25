@@ -18,7 +18,7 @@ export default function BuyNowModal({ listing, onClose }) {
             </p>
             <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
               Buyer’s fee: fee at checkout — amount TBD. Escrow, title, and payment partners are not wired yet.
-              VinNotDiesel does not hold vehicle funds. Buyer pays the seller / dealer.
+              FleetFit does not hold vehicle funds. Buyer pays the seller / dealer.
             </p>
             <p className="fake-note">Demo only — no charge, no binding contract. We have not seen this truck in person.</p>
             <div className="modal-actions">

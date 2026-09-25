@@ -59,7 +59,7 @@ export default function Model() {
         <Link to="/" className="overlay-icon-btn" aria-label="Back home">
           <span className="burger light" aria-hidden="true"><span /><span /><span /></span>
         </Link>
-        <Link to="/" className="overlay-wordmark" aria-label="Vin Not Diesel">
+        <Link to="/" className="overlay-wordmark" aria-label="FleetFit">
           <Wordmark size="nav" tone="dark" decorative />
         </Link>
         <button type="button" className="overlay-icon-btn" aria-label="Account (stub)">

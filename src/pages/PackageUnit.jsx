@@ -133,7 +133,7 @@ export default function PackageUnit() {
       </section>
 
       <p className="locked-foot-note">
-        VinNotDiesel does not hold vehicle funds. Buyer pays the seller / dealer.
+        FleetFit does not hold vehicle funds. Buyer pays the seller / dealer.
         Package screens never show fee amounts.
       </p>
     </div>

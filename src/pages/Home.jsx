@@ -5,10 +5,10 @@ import Wordmark from '../components/Wordmark'
 export default function Home() {
   return (
     <div className="locked-home">
-      <header className="locked-hero" aria-label="Vin Not Diesel">
+      <header className="locked-hero" aria-label="FleetFit">
         <div className="locked-hero-bg" aria-hidden="true" />
         <nav className="locked-topnav" aria-label="Preview">
-          <Link to="/" className="locked-topnav-brand" aria-label="Vin Not Diesel">
+          <Link to="/" className="locked-topnav-brand" aria-label="FleetFit">
             <Wordmark size="nav" tone="dark" decorative />
           </Link>
           <div className="locked-topnav-links">
@@ -67,8 +67,8 @@ export default function Home() {
           checkout shows <strong>Fee at checkout — amount TBD</strong>. No fee $ or % is invented on package cards.
         </p>
         <ul className="locked-bullets">
-          <li>Buyer pays the seller / dealer. Vin Not Diesel never holds vehicle funds.</li>
-          <li>We never claim Vin Not Diesel inspected the truck.</li>
+          <li>Buyer pays the seller / dealer. FleetFit never holds vehicle funds.</li>
+          <li>We never claim FleetFit inspected the truck.</li>
           <li>Battery and recall data are often incomplete — we surface that as FACT gaps.</li>
         </ul>
       </section>

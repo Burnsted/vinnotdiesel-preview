@@ -98,7 +98,7 @@ const ELECTRICAL_UNITS = [
     ],
     upfitNote: 'Spray liner only — commercial body not installed.',
     description:
-      'Placeholder long-range work truck. Ask price only; VinNotDiesel has not inspected this unit.',
+      'Placeholder long-range work truck. Ask price only; FleetFit has not inspected this unit.',
   },
   {
     id: 'unit-e3',
@@ -243,7 +243,7 @@ const LANDSCAPE_UNITS = [
     replaceNote: 'Replaces hauler — current truck year unconfirmed (not title-checked).',
     upfitNote: 'Stock bed — hitch / brake controller not confirmed.',
     description:
-      'Placeholder hauler slot for a two-truck landscape day. VinNotDiesel has not seen this truck or the trailer.',
+      'Placeholder hauler slot for a two-truck landscape day. FleetFit has not seen this truck or the trailer.',
   },
   {
     id: 'unit-l2',
@@ -329,7 +329,7 @@ export const PACKAGES = [
     tradeIn: {
       status: 'Pending dealer appraisal',
       detail:
-        'Count stated (~4) — outgoing units not inventoried by VinNotDiesel. No ACV shown — not invented.',
+        'Count stated (~4) — outgoing units not inventoried by FleetFit. No ACV shown — not invented.',
     },
     sourcedNote:
       'Sourced from dealer listings and your fleet inputs. We have not seen these vehicles in person.',
