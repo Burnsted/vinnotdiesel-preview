@@ -35,9 +35,6 @@ export default function Home() {
               See example package
             </Link>
           </div>
-          <p className="locked-hero-cred">
-            In EVs since 2015 · 16 owned · 4 in the driveway now
-          </p>
         </div>
       </header>
 
