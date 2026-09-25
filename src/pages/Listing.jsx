@@ -38,10 +38,10 @@ export default function Listing() {
   }
 
   const miles = distanceFromHome(listing)
-  const priceKnown = listing.allInPrice != null && listing.feesKnown
+  const priceKnown = listing.allInPrice != null
   const priceText = priceKnown
     ? `$${listing.allInPrice.toLocaleString()}`
-    : 'Price + fees unknown'
+    : 'Ask unknown'
   const sohMissing = listing.soh == null
 
   const panels = GALLERY_LABELS.filter((g) => listing.photos.includes(g.key))
@@ -76,9 +76,9 @@ export default function Listing() {
           </p>
           <div className="hero-stats">
             <div className="stat-tile">
-              <div className="stat-label">All-in price</div>
+              <div className="stat-label">Listing ask</div>
               <div className={`stat-value ${priceKnown ? 'price' : 'amber'}`}>{priceText}</div>
-              <div className="stat-hint">{priceKnown ? 'Fees included' : 'Ask seller for fee sheet'}</div>
+              <div className="stat-hint">asking · fee at checkout TBD</div>
             </div>
             <div className="stat-tile">
               <div className="stat-label">Rated range</div>

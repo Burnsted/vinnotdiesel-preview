@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 import { distanceFromHome } from '../data/listings'
 
 function formatPrice(listing) {
-  if (listing.allInPrice == null || !listing.feesKnown) {
-    return { text: 'Price + fees unknown', unknown: true }
+  if (listing.allInPrice == null) {
+    return { text: 'Ask unknown', unknown: true }
   }
   return {
     text: `$${listing.allInPrice.toLocaleString()}`,
@@ -65,15 +65,7 @@ export default function ListingCard({ listing }) {
         </h3>
         <p className="card-condition">
           Used · {sellerLabel} seller
-        </p>
-        <p className="card-specs">
-          SOH {sohMissing ? '—' : `${listing.soh}%`}
-          <span className="dot">·</span>
-          {listing.ratedRange} mi range
-          <span className="dot">·</span>
-          {listing.payload.toLocaleString()} lb payload
-          <span className="dot">·</span>
-          {listing.mileage.toLocaleString()} mi
+          {' · '}{listing.mileage.toLocaleString()} mi
         </p>
 
         <div className="card-chip-row">
@@ -93,17 +85,7 @@ export default function ListingCard({ listing }) {
 
         <div className="card-price-block">
           <div className={`card-price ${price.unknown ? 'unknown' : ''}`}>{price.text}</div>
-          {!price.unknown && (
-            <>
-              <span className="card-price-note">All-in · fees included</span>
-              <button type="button" className="card-price-link" onClick={(e) => { e.preventDefault(); e.stopPropagation() }}>
-                Price details
-              </button>
-            </>
-          )}
-          {price.unknown && (
-            <span className="card-price-note">Ask seller for fee sheet</span>
-          )}
+          <span className="card-price-note">asking · fee at checkout TBD</span>
         </div>
 
         {listing.upfitTags.length > 0 && (

@@ -126,7 +126,7 @@ export default function FilterSidebar({ filters, setFilters, open, onClose }) {
       <div className="filter-section">
         <h3 className="filter-section-title">Trust</h3>
         <div className="filter-group">
-          <label htmlFor="priceMax">All-in price max ($)</label>
+          <label htmlFor="priceMax">Ask max ($)</label>
           <input id="priceMax" type="number" min="0" step="1000" placeholder="e.g. 60000"
             value={filters.priceMax} onChange={(e) => set('priceMax', e.target.value)} />
         </div>
