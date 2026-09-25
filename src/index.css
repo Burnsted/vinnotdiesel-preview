@@ -1429,7 +1429,23 @@ img { max-width: 100%; display: block; }
 }
 .spec-chip.is-dash { color: var(--text-dim); font-weight: 500; }
 .package-unit-card.is-dense { padding: 12px; gap: 4px; }
-.package-unit-card.is-dense .package-unit-actions { justify-content: flex-start; }
+.package-unit-card.is-dense .package-unit-actions {
+  justify-content: flex-start;
+  align-items: center;
+}
+.package-open-link {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-dim);
+}
+.package-open-link:hover { color: var(--text); }
+.package-fee-quiet,
+.package-tradein-quiet {
+  margin: 4px 0 0;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+.match-header-chips { margin: 10px 0 0; }
 .locked-eyebrow {
   font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
   text-transform: uppercase; color: var(--cyan); margin: 0 0 8px;

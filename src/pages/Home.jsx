@@ -13,7 +13,7 @@ export default function Home() {
           </Link>
           <div className="locked-topnav-links">
             <Link to="/intake">Fleet intake</Link>
-            <Link to="/shop" title="Secondary — Couples Match / single truck">Shop</Link>
+            <Link to="/shop">Shop</Link>
             <span className="badge-demo">Demo</span>
           </div>
         </nav>
@@ -25,7 +25,7 @@ export default function Home() {
             Used EV fleet packages that fit the work day.
           </h1>
           <p className="locked-hero-lead">
-            Same job as your current non-EV work vehicles.
+            Same job as your work truck — money, maintenance, and time.
           </p>
           <div className="locked-hero-actions">
             <Link to="/intake" className="btn btn-primary">
@@ -41,21 +41,21 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="locked-section home-dense" aria-label="How it works">
+      <section className="locked-section home-dense" aria-label="Path">
         <ul className="home-path">
           <li>Intake</li>
           <li>Package</li>
-          <li>Add units</li>
+          <li>Add to fleet</li>
         </ul>
         <p className="home-money-line">
-          Buyer’s fee on closed units · amount at checkout (TBD).
+          Buyer’s fee on closed units · amount at checkout (TBD)
         </p>
         <ul className="home-layer-chips">
           <li>Battery health</li>
           <li>Recalls</li>
           <li>Charging</li>
         </ul>
-        <p className="home-quiet">Composite preview · not a real shop.</p>
+        <p className="home-quiet">Demo · composite examples · not a real shop</p>
       </section>
     </div>
   )

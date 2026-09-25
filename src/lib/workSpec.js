@@ -156,7 +156,7 @@ export function currentWorkVehicle(intake, pkg) {
   return {
     heading: 'Your current work vehicle',
     role,
-    kind: 'Non-EV work vehicle',
+    kind: 'Your current',
     bodyType: /van/i.test(role) ? 'van' : 'truck',
     spec: {
       payload: empty,
@@ -183,8 +183,8 @@ export const WORK_SPEC_ROWS = [
 /** Compare moment: capacity primary, then one Energy row */
 export const COMPARE_SPEC_ROWS = [
   { key: 'payload', label: 'Payload' },
-  { key: 'bed', label: 'Bed / capacity' },
+  { key: 'bed', label: 'Bed' },
   { key: 'cab', label: 'Cab' },
-  { key: 'tow', label: 'Tow / pull' },
+  { key: 'tow', label: 'Tow' },
   { key: 'energy', label: 'Energy' },
 ]
