@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="FleetFit">
   <title>FleetFit mark</title>
-  <rect width="512" height="512" rx="96" fill="#0B1220"/>
   <g id="mark">
     <path fill="#FFFFFF" d="M142.1 248.36999999999998V178.36999999999998H186.1V190.36999999999998H155.3V207.26999999999998H183.7V219.26999999999998H155.3V248.36999999999998Z"/>
     <path fill="#FFFFFF" d="M195.9 248.36999999999998V178.36999999999998H208.5V248.36999999999998Z"/>
