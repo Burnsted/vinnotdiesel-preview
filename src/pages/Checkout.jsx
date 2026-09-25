@@ -1,4 +1,5 @@
 import { Link, useSearchParams } from 'react-router-dom'
+import Wordmark from '../components/Wordmark'
 import {
   DEFAULT_PACKAGE_ID,
   findUnitAnywhere,
@@ -59,7 +60,10 @@ export default function Checkout() {
       </nav>
 
       <header className="locked-page-header">
-        <p className="locked-eyebrow">VinNotDiesel · Demo only</p>
+        <p className="locked-eyebrow locked-eyebrow-mark">
+          <Wordmark size="eyebrow" tone="light" decorative />
+          <span>Demo only</span>
+        </p>
         <h1>{title}</h1>
         <p className="locked-page-lead">
           {unit

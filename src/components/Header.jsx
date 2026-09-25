@@ -1,5 +1,6 @@
 import { Link, useNavigate, useSearchParams, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import Wordmark from './Wordmark'
 
 export default function Header() {
   const [params] = useSearchParams()
@@ -51,12 +52,8 @@ export default function Header() {
           </form>
         )}
 
-        <Link to="/" className="logo" aria-label="VinNotDiesel home">
-          <span className="logo-mark">
-            <span className="vin">Vin</span>
-            <span className="not">Not</span>
-            <span className="diesel">Diesel</span>
-          </span>
+        <Link to="/" className="logo" aria-label="Vin Not Diesel">
+          <Wordmark size="nav" tone="light" decorative />
         </Link>
 
         <nav className="header-nav" aria-label="Primary">

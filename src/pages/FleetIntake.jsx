@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import Wordmark from '../components/Wordmark'
 import { matchPackageIdFromIntake } from '../data/package'
 
 const TRADES = [
@@ -60,7 +61,10 @@ export default function FleetIntake() {
       </nav>
 
       <header className="locked-page-header">
-        <p className="locked-eyebrow">VinNotDiesel · Fleet swap</p>
+        <p className="locked-eyebrow locked-eyebrow-mark">
+          <Wordmark size="eyebrow" tone="light" decorative />
+          <span>Fleet swap</span>
+        </p>
         <h1>{adjusting ? 'Adjust the mix' : 'Tell us about the work day'}</h1>
         <p className="locked-page-lead">
           Primary path: small-fleet used-EV packages for trade shops (typically 3–5, up to ~10).

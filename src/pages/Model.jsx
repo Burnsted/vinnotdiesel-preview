@@ -2,6 +2,7 @@ import { useMemo, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getModelBySlug } from '../data/models'
 import ListingCard from '../components/ListingCard'
+import Wordmark from '../components/Wordmark'
 
 function formatFrom(price) {
   if (price == null) return null
@@ -58,8 +59,8 @@ export default function Model() {
         <Link to="/" className="overlay-icon-btn" aria-label="Back home">
           <span className="burger light" aria-hidden="true"><span /><span /><span /></span>
         </Link>
-        <Link to="/" className="overlay-wordmark" aria-label="VinNotDiesel home">
-          VinNotDiesel
+        <Link to="/" className="overlay-wordmark" aria-label="Vin Not Diesel">
+          <Wordmark size="nav" tone="dark" decorative />
         </Link>
         <button type="button" className="overlay-icon-btn" aria-label="Account (stub)">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
