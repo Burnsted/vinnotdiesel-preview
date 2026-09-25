@@ -35,7 +35,7 @@ export default function App() {
           <Route path="/listing/:id" element={<Listing />} />
         </Routes>
       </main>
-      <Footer />
+      {!darkChrome && <Footer />}
     </div>
   )
 }

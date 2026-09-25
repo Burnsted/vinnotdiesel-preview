@@ -20,9 +20,12 @@ export default function UnitPhoto({
   const ask = showAsk && !current ? formatAsk(unit?.askPrice) : null
   const showKbb = current && kbb?.known
 
+  const body = current ? 'truck' : unit?.bodyType === 'van' ? 'van' : 'truck'
+
   return (
-    <div className={`unit-photo is-${size} ${current ? 'is-current' : ''}`}>
-      <span className="unit-photo-glyph" aria-hidden="true">{thumbLabel}</span>
+    <div className={`unit-photo is-${size} is-${body} ${current ? 'is-current' : ''}`}>
+      <span className="unit-photo-glyph sr-only">{thumbLabel}</span>
+      <span className="unit-photo-shape" aria-hidden="true" />
       {whisper && unit ? (
         <span className="unit-photo-whisper">{unitWhisper(unit)}</span>
       ) : null}

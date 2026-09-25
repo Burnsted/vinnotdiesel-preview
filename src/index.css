@@ -794,7 +794,7 @@ img { max-width: 100%; display: block; }
   --radius-card: 22px;
 }
 
-.app-shell.chrome-dark { background: var(--dark); color: #fff; }
+.app-shell.chrome-dark { background: #05080a; color: #fff; }
 .app-shell.chrome-dark .site-footer {
   background: var(--dark); border-top-color: #222; color: #888;
 }
@@ -1280,12 +1280,63 @@ img { max-width: 100%; display: block; }
   border: 1px solid rgba(255, 255, 255, 0.35);
 }
 .locked-btn-on-dark:hover { background: rgba(255, 255, 255, 0.08); text-decoration: none; }
-.locked-hero-cred {
-  margin: 16px 0 0;
-  font-size: 0.82rem;
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.5);
-  letter-spacing: 0.01em;
+
+/* Franz 01 sparse home — stacked pills, PATH, no cred row */
+.locked-home.is-sparse {
+  background: #05080a;
+  min-height: 100vh;
+}
+.locked-home.is-sparse .locked-hero {
+  min-height: auto;
+  align-items: flex-start;
+  padding: 88px 24px 32px;
+}
+.locked-home.is-sparse .locked-hero-bg {
+  background:
+    radial-gradient(ellipse 70% 48% at 82% 0%, rgba(27, 182, 168, 0.14), transparent 58%),
+    #05080a;
+  animation: none;
+}
+.locked-home.is-sparse .locked-hero-inner {
+  width: min(560px, 100%);
+}
+.locked-home.is-sparse .locked-hero-title {
+  font-size: clamp(2rem, 8vw, 2.75rem);
+  margin: 0 0 14px;
+}
+.locked-home.is-sparse .locked-hero-lead {
+  font-size: 1.02rem;
+  margin: 0 0 28px;
+  max-width: 22rem;
+}
+.locked-home.is-sparse .locked-hero-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  max-width: 420px;
+}
+.locked-home.is-sparse .locked-hero-actions .btn {
+  width: 100%;
+  border-radius: 999px;
+  padding: 16px 22px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.locked-home.is-sparse .home-dense {
+  padding: 8px 24px 56px;
+}
+.home-path-label {
+  margin: 0 0 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+}
+.locked-home.is-sparse .home-path li {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 @keyframes locked-fade-up {
@@ -1428,10 +1479,43 @@ img { max-width: 100%; display: block; }
   color: var(--text);
 }
 .spec-chip.is-dash { color: var(--text-dim); font-weight: 500; }
-.package-unit-card.is-dense { padding: 12px; gap: 4px; }
+.package-unit-card.is-dense { padding: 14px; gap: 6px; }
+.package-unit-card.is-dense .package-unit-role {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 2px 0 0;
+}
 .package-unit-card.is-dense .package-unit-actions {
+  display: flex;
+  flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: stretch;
+  gap: 8px;
+  margin-top: 8px;
+}
+.package-unit-card.is-dense .btn-primary,
+.package-unit-card.is-dense .btn-in-fleet,
+.package-unit-card.is-dense .btn-block {
+  width: 100%;
+  border-radius: 999px;
+  padding: 14px 18px;
+}
+.package-unit-card.is-dense .btn-primary {
+  background: var(--mark-teal);
+  border-color: var(--mark-teal);
+  color: #04110f;
+  font-weight: 700;
+}
+.package-unit-card.is-dense .btn-primary:hover {
+  background: #17a396;
+  border-color: #17a396;
+  color: #04110f;
+}
+.package-unit-card.is-dense .package-open-link {
+  text-align: center;
 }
 .package-open-link {
   font-size: 0.78rem;
@@ -2001,8 +2085,34 @@ img { max-width: 100%; display: block; }
   margin: 0 0 18px;
 }
 .unit-photo.is-card {
-  height: 120px;
+  height: 148px;
   margin: 0 0 10px;
+}
+.unit-photo-shape {
+  display: block;
+  width: 68%;
+  height: 40%;
+  background: #1c1c1c;
+  position: relative;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+.unit-photo.is-van .unit-photo-shape {
+  border-radius: 10px 22px 8px 8px;
+}
+.unit-photo.is-truck .unit-photo-shape {
+  width: 64%;
+  height: 34%;
+  border-radius: 8px 6px 4px 4px;
+}
+.unit-photo.is-truck .unit-photo-shape::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 28%;
+  width: 42%;
+  height: 72%;
+  background: #141414;
+  border-radius: 0 4px 4px 0;
 }
 .unit-photo.is-compare {
   height: 86px;

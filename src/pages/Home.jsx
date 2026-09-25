@@ -4,7 +4,7 @@ import Wordmark from '../components/Wordmark'
 
 export default function Home() {
   return (
-    <div className="locked-home">
+    <div className="locked-home is-sparse">
       <header className="locked-hero" aria-label="FleetFit">
         <div className="locked-hero-bg" aria-hidden="true" />
         <nav className="locked-topnav" aria-label="Preview">
@@ -12,7 +12,7 @@ export default function Home() {
             <Wordmark size="nav" tone="dark" decorative />
           </Link>
           <div className="locked-topnav-links">
-            <Link to="/intake">Fleet intake</Link>
+            <Link to="/intake">Intake</Link>
             <Link to="/shop">Shop</Link>
             <span className="badge-demo">Demo</span>
           </div>
@@ -31,7 +31,7 @@ export default function Home() {
             <Link to="/intake" className="btn btn-primary">
               See if they fit
             </Link>
-            <Link to={`/package/${DEFAULT_PACKAGE_ID}`} className="btn btn-ghost locked-btn-on-dark">
+            <Link to={`/package/${DEFAULT_PACKAGE_ID}`} className="btn locked-btn-on-dark">
               See example package
             </Link>
           </div>
@@ -39,18 +39,11 @@ export default function Home() {
       </header>
 
       <section className="locked-section home-dense" aria-label="Path">
+        <p className="home-path-label">Path</p>
         <ul className="home-path">
           <li>Intake</li>
           <li>Package</li>
           <li>Add to fleet</li>
-        </ul>
-        <p className="home-money-line">
-          Buyer’s fee on closed units · amount at checkout (TBD)
-        </p>
-        <ul className="home-layer-chips">
-          <li>Battery health</li>
-          <li>Recalls</li>
-          <li>Charging</li>
         </ul>
         <p className="home-quiet">Demo · composite examples · not a real shop</p>
       </section>
