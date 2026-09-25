@@ -1259,6 +1259,12 @@ img { max-width: 100%; display: block; }
   display: flex; flex-wrap: wrap; gap: 12px;
   animation: locked-fade-up 0.75s ease 0.24s both;
 }
+.locked-hero-actions .btn-primary {
+  background: #fff; color: #0c1214; border-color: #fff;
+}
+.locked-hero-actions .btn-primary:hover {
+  background: rgba(255, 255, 255, 0.9); color: #0c1214;
+}
 .locked-btn-on-dark {
   background: transparent; color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.35);
