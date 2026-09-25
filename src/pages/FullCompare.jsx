@@ -15,7 +15,6 @@ const ROWS = [
   { key: 'bed', label: 'Bed / capacity' },
   { key: 'cab', label: 'Cab' },
   { key: 'tow', label: 'Tow / pull' },
-  { key: 'body', label: 'Body / config' },
   { key: 'energy', label: 'Energy' },
   { key: 'diligence', label: 'EV diligence' },
   { key: 'select', label: 'Select' },
@@ -68,7 +67,6 @@ export default function FullCompare() {
     diligence: batteryConfidenceFromUnit(unit).label,
     ymm: `${unit.year} ${unit.make} ${unit.model}`,
     role: unit.role,
-    body: unit.bodyType === 'van' ? 'Van' : 'Truck',
   }))
   const columns = 1 + candidates.length
 
@@ -79,7 +77,6 @@ export default function FullCompare() {
     if (row.key === 'bed') return cellText(current.spec.bed)
     if (row.key === 'cab') return cellText(current.spec.cab)
     if (row.key === 'tow') return cellText(current.spec.tow)
-    if (row.key === 'body') return current.bodyType === 'van' ? 'Van' : 'Truck'
     if (row.key === 'energy') return cellText(current.spec.energy)
     if (row.key === 'diligence') return '—'
     if (row.key === 'select') return 'Your truck'
@@ -94,7 +91,6 @@ export default function FullCompare() {
     if (row.key === 'bed') return cellText(col.spec.bed)
     if (row.key === 'cab') return cellText(col.spec.cab)
     if (row.key === 'tow') return cellText(col.spec.tow)
-    if (row.key === 'body') return col.body
     if (row.key === 'energy') return cellText(col.spec.energy)
     if (row.key === 'diligence') {
       return (
