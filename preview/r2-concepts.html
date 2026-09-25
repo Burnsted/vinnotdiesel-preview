@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Vin not Diesel — Round 2 concepts (cheap preview)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=DM+Sans:ital,opsz,wght@0,9..40,500;0,9..40,700;1,9..40,500&family=Inter:wght@500;600;700;800&family=Outfit:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #102018;
+      --paper: #f4f7f2;
+      --muted: #5c6b62;
+      --card: #fff;
+      --line: #d5e0d8;
+      /* B1 — Volt teal + warm sand */
+      --b1-bg: #0c2e28;
+      --b1-accent: #1fd6a0;
+      --b1-warm: #f0c27a;
+      --b1-sand: #efe6d4;
+      --b1-ink: #0a1f1b;
+      /* B2 — Charge blue + ember */
+      --b2-bg: #0b1a2e;
+      --b2-accent: #3aa0ff;
+      --b2-ember: #ff6b2c;
+      --b2-mist: #e8f1ff;
+      --b2-ink: #0a1524;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.4;
+    }
+    .wrap {
+      max-width: 390px;
+      margin: 0 auto;
+      padding: 16px 14px 48px;
+    }
+    .banner {
+      background: #fff3cd;
+      border: 1px solid #e6d089;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.78rem;
+      color: #5c4b12;
+      margin-bottom: 18px;
+    }
+    h1.page {
+      font-size: 1.35rem;
+      margin: 0 0 4px;
+      letter-spacing: -0.02em;
+    }
+    .page-sub { margin: 0 0 20px; color: var(--muted); font-size: 0.85rem; }
+    section { margin-bottom: 28px; }
+    .sec-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #e8efe9;
+      color: #2a4036;
+      margin-bottom: 10px;
+    }
+    .meta { font-size: 0.75rem; color: var(--muted); margin-top: 8px; }
+
+    /* A — wordmarks */
+    .wm {
+      display: flex;
+      align-items: baseline;
+      gap: 0.28em;
+      justify-content: center;
+      padding: 18px 8px;
+      border-radius: 12px;
+      background: #0f1c18;
+      color: #f5faf7;
+    }
+    .wm .vin, .wm .diesel {
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .wm.a1 .vin, .wm.a1 .diesel { font-family: Inter, sans-serif; font-size: 1.35rem; color: #f5faf7; }
+    .wm.a1 .not { font-family: Caveat, cursive; font-size: 1.7rem; color: #1fd6a0; font-weight: 600; letter-spacing: 0; text-transform: none; }
+    .wm.a2 .vin, .wm.a2 .diesel { font-family: Outfit, sans-serif; font-size: 1.4rem; color: #e8f1ff; }
+    .wm.a2 .not { font-family: Pacifico, cursive; font-size: 1.15rem; color: #ff6b2c; text-transform: none; letter-spacing: 0; position: relative; top: -2px; }
+    .wm.a3 .vin, .wm.a3 .diesel { font-family: DM Sans, sans-serif; font-size: 1.3rem; color: #efe6d4; font-weight: 700; }
+    .wm.a3 .not { font-family: DM Sans, sans-serif; font-style: italic; font-weight: 500; font-size: 1.05rem; color: #f0c27a; letter-spacing: 0.02em; text-transform: lowercase; }
+
+    /* B — palettes */
+    .swatches { display: flex; gap: 8px; margin-bottom: 10px; }
+    .swatch {
+      flex: 1; height: 44px; border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.08);
+      display: flex; align-items: flex-end; justify-content: center;
+      padding-bottom: 4px; font-size: 0.58rem; font-weight: 600; color: #fff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+    }
+    .mini-hero {
+      border-radius: 12px; overflow: hidden; height: 120px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 12px; color: #fff; position: relative;
+    }
+    .mini-hero .mh-title { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; }
+    .mini-hero .mh-btn {
+      margin-top: 8px; align-self: flex-start;
+      padding: 7px 14px; border-radius: 8px; font-size: 0.78rem; font-weight: 600;
+      border: 0;
+    }
+    .b1-hero {
+      background: linear-gradient(135deg, #0c2e28 0%, #145a4c 55%, #1fd6a0 140%);
+    }
+    .b1-hero .mh-btn { background: var(--b1-accent); color: var(--b1-ink); }
+    .b2-hero {
+      background: linear-gradient(145deg, #0b1a2e 0%, #1a3a6b 50%, #3aa0ff 130%);
+    }
+    .b2-hero .mh-btn { background: var(--b2-ember); color: #fff; }
+
+    /* C — buttons */
+    .btn-row { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+    .btn-primary {
+      background: linear-gradient(180deg, #24e0aa, #14b887);
+      color: #06241c; border: 0; border-radius: 10px;
+      padding: 13px 16px; font-weight: 700; font-size: 0.95rem;
+      box-shadow: 0 6px 16px rgba(31, 214, 160, 0.35);
+    }
+    .btn-secondary {
+      background: transparent; color: #0c2e28;
+      border: 1.5px solid #0c2e28; border-radius: 10px;
+      padding: 12px 16px; font-weight: 600; font-size: 0.92rem;
+    }
+    .btn-tertiary {
+      background: none; border: 0; color: #0c7a5c;
+      font-weight: 600; font-size: 0.9rem; text-decoration: underline;
+      text-underline-offset: 3px; padding: 6px 0; text-align: left;
+    }
+    .btn-note { font-size: 0.72rem; color: var(--muted); margin-top: 4px; }
+
+    /* D — work/play */
+    .toggle {
+      display: inline-flex; background: #e4eee8; border-radius: 999px; padding: 3px; gap: 2px;
+      margin-bottom: 12px;
+    }
+    .toggle button {
+      border: 0; background: transparent; padding: 8px 16px; border-radius: 999px;
+      font-weight: 700; font-size: 0.85rem; color: var(--muted); cursor: pointer;
+    }
+    .toggle button.is-on {
+      background: #0c2e28; color: #1fd6a0;
+    }
+    .ph {
+      height: 150px; border-radius: 12px;
+      background: repeating-linear-gradient(-45deg, #cfd8d3, #cfd8d3 8px, #c8d0ca 8px, #c8d0ca 16px);
+      color: #33403a; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 16px; font-size: 0.8rem; font-weight: 600;
+      border: 1px dashed #8a9a90;
+    }
+    .hero-mock-title {
+      font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em;
+      margin: 12px 0 4px;
+    }
+    .hero-mock-sub { font-size: 0.85rem; color: var(--muted); margin: 0 0 10px; }
+
+    /* E — year chips */
+    .year-row {
+      display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px;
+      scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    }
+    .year-chip {
+      flex: 0 0 210px; scroll-snap-align: start;
+      background: #0c2e28; color: #e8fff6; border-radius: 14px; padding: 14px;
+    }
+    .year-chip .yn { font-size: 1.6rem; font-weight: 800; color: #1fd6a0; }
+    .year-chip .yc { font-size: 0.75rem; opacity: 0.85; margin-bottom: 8px; }
+    .year-chip .ych { font-size: 0.78rem; line-height: 1.35; color: #c9efe2; }
+    .ex { color: #f0c27a; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.04em; }
+
+    /* F — accordion */
+    .acc {
+      border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: #fff;
+    }
+    .acc-h {
+      width: 100%; display: flex; justify-content: space-between; align-items: center;
+      padding: 14px; border: 0; background: #e8f7f0; font-weight: 700; font-size: 0.95rem;
+      cursor: pointer; color: var(--ink);
+    }
+    .acc-b { padding: 6px 14px 14px; display: none; }
+    .acc.open .acc-b { display: block; }
+    .spec-row {
+      display: flex; justify-content: space-between; gap: 12px;
+      padding: 10px 0; border-bottom: 1px solid #e8efe9; font-size: 0.85rem;
+    }
+    .spec-row:last-child { border-bottom: 0; }
+    .spec-row dt { color: var(--muted); font-weight: 500; }
+    .spec-row dd { margin: 0; font-weight: 700; text-align: right; }
+    .spec-row .ex-val { color: #9a6b12; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="banner">
+      Cheap preview only — not wired to the app. No build, no deploy. Pick directions before Round 2 implementation.
+    </div>
+    <h1 class="page">Round 2 concepts</h1>
+    <p class="page-sub">Mobile 390 · VIN <em>not</em> DIESEL · original color, not Porsche B&amp;W</p>
+
+    <!-- A -->
+    <section id="A">
+      <div class="sec-label">A · Wordmark</div>
+
+      <div class="card" id="A1">
+        <span class="tag">A1</span>
+        <div class="wm a1" aria-label="VIN not DIESEL">
+          <span class="vin">VIN</span><span class="not">not</span><span class="diesel">DIESEL</span>
+        </div>
+        <p class="meta">Inter bold (VIN/DIESEL) · Caveat script “not” · volt green #1FD6A0</p>
+      </div>
+
+      <div class="card" id="A2">
+        <span class="tag">A2</span>
+        <div class="wm a2">
+          <span class="vin">VIN</span><span class="not">not</span><span class="diesel">DIESEL</span>
+        </div>
+        <p class="meta">Outfit bold · Pacifico “not” · ember #FF6B2C</p>
+      </div>
+
+      <div class="card" id="A3">
+        <span class="tag">A3</span>
+        <div class="wm a3">
+          <span class="vin">VIN</span><span class="not">not</span><span class="diesel">DIESEL</span>
+        </div>
+        <p class="meta">DM Sans · italic condensed “not” · warm gold #F0C27A</p>
+      </div>
+    </section>
+
+    <!-- B -->
+    <section id="B">
+      <div class="sec-label">B · Palette</div>
+
+      <div class="card" id="B1">
+        <span class="tag">B1 · Volt teal</span>
+        <div class="swatches">
+          <div class="swatch" style="background:#0c2e28">ink</div>
+          <div class="swatch" style="background:#1fd6a0;color:#06241c;text-shadow:none">volt</div>
+          <div class="swatch" style="background:#f0c27a;color:#3a2a08;text-shadow:none">sand</div>
+          <div class="swatch" style="background:#efe6d4;color:#3a2a08;text-shadow:none">cream</div>
+        </div>
+        <div class="mini-hero b1-hero">
+          <div class="mh-title">F-150 Lightning.</div>
+          <button type="button" class="mh-btn">Discover more</button>
+        </div>
+        <p class="meta">Deep teal ground + electric volt accent + warm sand secondary</p>
+      </div>
+
+      <div class="card" id="B2">
+        <span class="tag">B2 · Charge blue</span>
+        <div class="swatches">
+          <div class="swatch" style="background:#0b1a2e">navy</div>
+          <div class="swatch" style="background:#3aa0ff;color:#061018;text-shadow:none">charge</div>
+          <div class="swatch" style="background:#ff6b2c">ember</div>
+          <div class="swatch" style="background:#e8f1ff;color:#0b1a2e;text-shadow:none">mist</div>
+        </div>
+        <div class="mini-hero b2-hero">
+          <div class="mh-title">Silverado EV.</div>
+          <button type="button" class="mh-btn">Discover more</button>
+        </div>
+        <p class="meta">Night navy + charge blue + ember CTA pop</p>
+      </div>
+    </section>
+
+    <!-- C -->
+    <section id="C">
+      <div class="sec-label">C · Buttons (shown in B1)</div>
+      <div class="card">
+        <div class="btn-row">
+          <button type="button" class="btn-primary">Explore the Lightning · Buy Now</button>
+          <span class="btn-note">Primary — filled / shaded (Explore, Buy Now, Make Offer)</span>
+          <button type="button" class="btn-secondary">Message · Book PPI</button>
+          <span class="btn-note">Secondary — outline / ghost</span>
+          <button type="button" class="btn-tertiary">Ask a question</button>
+          <span class="btn-note">Tertiary — text link</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- D -->
+    <section id="D">
+      <div class="sec-label">D · Work | Play toggle</div>
+      <div class="card">
+        <div class="toggle" role="group" aria-label="Mode">
+          <button type="button" id="btn-work" class="is-on" onclick="setMode('work')">Work</button>
+          <button type="button" id="btn-play" onclick="setMode('play')">Play</button>
+        </div>
+        <div class="ph" id="mode-ph">Lightning towing landscape trailer, full vehicle</div>
+        <h2 class="hero-mock-title" id="mode-title">Battery-first trucks for the job.</h2>
+        <p class="hero-mock-sub" id="mode-sub">Contractor routes, payload, SOH docs — work mode.</p>
+      </div>
+    </section>
+
+    <!-- E -->
+    <section id="E">
+      <div class="sec-label">E · Year picker (after model tap)</div>
+      <div class="card">
+        <p class="meta" style="margin-top:0;margin-bottom:10px">Ford F-150 Lightning → pick year · <span class="ex">EXAMPLE</span> copy</p>
+        <div class="year-row">
+          <article class="year-chip">
+            <div class="yn">2022</div>
+            <div class="yc">1 for sale</div>
+            <div class="ych"><span class="ex">EXAMPLE</span> Launch year — Pro / XLT; Standard + Extended packs.</div>
+          </article>
+          <article class="year-chip">
+            <div class="yn">2023</div>
+            <div class="yc">1 for sale</div>
+            <div class="ych"><span class="ex">EXAMPLE</span> Flash trim; charging refinements.</div>
+          </article>
+          <article class="year-chip">
+            <div class="yn">2024</div>
+            <div class="yc">0 for sale</div>
+            <div class="ych"><span class="ex">EXAMPLE</span> Platinum + BlueCruise updates.</div>
+          </article>
+          <article class="year-chip">
+            <div class="yn">2025</div>
+            <div class="yc">0 for sale</div>
+            <div class="ych"><span class="ex">EXAMPLE</span> Carryover — confirm pack sticker.</div>
+          </article>
+          <article class="year-chip">
+            <div class="yn">2026</div>
+            <div class="yc">0 for sale</div>
+            <div class="ych"><span class="ex">EXAMPLE</span> Latest stickers — verify door jamb.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- F -->
+    <section id="F">
+      <div class="sec-label">F · Specifications accordion</div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <div class="acc open" id="acc">
+          <button type="button" class="acc-h" onclick="this.parentElement.classList.toggle('open')">
+            <span>Specifications · 2023 <span class="ex">EXAMPLE</span></span>
+            <span aria-hidden="true">+/−</span>
+          </button>
+          <div class="acc-b">
+            <dl>
+              <div class="spec-row"><dt>Battery pack</dt><dd class="ex-val">EXAMPLE · Extended ~131 kWh</dd></div>
+              <div class="spec-row"><dt>EPA range</dt><dd class="ex-val">EXAMPLE · ~320 mi</dd></div>
+              <div class="spec-row"><dt>Payload</dt><dd class="ex-val">EXAMPLE · 2,000 lb</dd></div>
+              <div class="spec-row"><dt>Towing</dt><dd class="ex-val">EXAMPLE · 10,000 lb</dd></div>
+              <div class="spec-row"><dt>GVWR</dt><dd class="ex-val">EXAMPLE · 8,250 lb</dd></div>
+              <div class="spec-row"><dt>DC fast max</dt><dd class="ex-val">EXAMPLE · 150 kW</dd></div>
+              <div class="spec-row"><dt>Onboard AC</dt><dd class="ex-val">EXAMPLE · 19.2 kW</dd></div>
+              <div class="spec-row"><dt>Bed length</dt><dd class="ex-val">EXAMPLE · 5.5 ft</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function setMode(m) {
+      var work = m === 'work';
+      document.getElementById('btn-work').classList.toggle('is-on', work);
+      document.getElementById('btn-play').classList.toggle('is-on', !work);
+      document.getElementById('mode-ph').textContent = work
+        ? 'Lightning towing landscape trailer, full vehicle'
+        : 'R1T camping on beach, full vehicle';
+      document.getElementById('mode-title').textContent = work
+        ? 'Battery-first trucks for the job.'
+        : 'Weekends without the fuel stop.';
+      document.getElementById('mode-sub').textContent = work
+        ? 'Contractor routes, payload, SOH docs — work mode.'
+        : 'Camping, boat tow, overlanding — play mode.';
+    }
+  </script>
+</body>
+</html>

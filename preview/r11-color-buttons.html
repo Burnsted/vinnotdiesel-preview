@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>R11 — Navy beads + select listings (preview only)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0b1a2e;
+      --charge: #3aa0ff;
+      --ember: #ff682c;
+      --volt: #1fd6a0;
+      --mist: #e8f1ff;
+      --ink: #0b1a2e;
+      --muted: #5a6a7a;
+      --paper: #dfe8f2;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      background: linear-gradient(180deg, #0b1a2e 0%, #152840 40%, #dfe8f2 40%);
+      color: var(--ink);
+      line-height: 1.4;
+    }
+    .wrap { max-width: 390px; margin: 0 auto; padding: 14px 12px 56px; }
+    .banner {
+      background: #fff3cd; border: 1px solid #e6d089; border-radius: 12px;
+      padding: 10px 12px; font-size: 0.76rem; color: #5c4b12; margin-bottom: 14px;
+    }
+    h1.page { font-size: 1.12rem; margin: 0 0 4px; letter-spacing: -0.02em; color: #e8f1ff; }
+    .page-sub { margin: 0 0 12px; color: #9ecfff; font-size: 0.8rem; }
+    .ex { color: #c48a1a; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.03em; }
+    .src { font-size: 0.7rem; color: #9aa8b8; margin: 0 0 12px; line-height: 1.35; }
+
+    /* L5 lockup */
+    .not-script {
+      font-family: Caveat, cursive; font-weight: 700; color: var(--volt);
+      line-height: 1; display: inline-block;
+    }
+    .l5 { display: flex; align-items: center; gap: 0.45em; }
+    .l5-mark {
+      width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+      background: linear-gradient(145deg, #123050, #0b1a2e);
+      display: grid; place-items: center;
+      border: 1px solid rgba(58,160,255,0.45);
+    }
+    .l5-mark svg { width: 20px; height: 20px; }
+    .l5-words {
+      display: flex; align-items: baseline; gap: 0.18em;
+      font-weight: 700; font-size: 0.92rem; letter-spacing: -0.02em;
+    }
+    .l5-words .vin { color: #5eb6ff; }
+    .l5-words .diesel { color: #cfe6ff; font-weight: 600; opacity: 0.95; }
+    .l5-words .not-script { font-size: 1.1rem; }
+    .l5.on-light .vin { color: #1570c5; }
+    .l5.on-light .diesel { color: #3a6f9e; }
+
+    .phone {
+      width: 100%; border-radius: 22px; overflow: hidden;
+      background: var(--navy); color: #fff;
+      border: 1px solid #1e3048;
+      box-shadow: 0 14px 36px rgba(11,26,46,0.45);
+    }
+
+    /* —— Work | Play bead toggle —— */
+    .toggle {
+      display: inline-flex; background: rgba(0,0,0,0.35);
+      border-radius: 999px; padding: 3px;
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(8px);
+    }
+    .toggle span {
+      padding: 6px 12px; border-radius: 999px; font-size: 0.7rem; font-weight: 700;
+      color: rgba(255,255,255,0.55);
+    }
+    .toggle span.on {
+      background: var(--charge); color: #061018;
+    }
+
+    /* Beads / buttons */
+    .bead {
+      display: block; width: 100%; border: 0; border-radius: 999px;
+      padding: 13px 16px; font-family: inherit; font-weight: 700; font-size: 0.9rem;
+      cursor: pointer; text-align: center;
+    }
+    .bead-grad {
+      color: #fff;
+      background: linear-gradient(90deg, var(--ember), var(--charge));
+      box-shadow: 0 6px 18px rgba(255,104,44,0.35);
+    }
+    .bead-ember {
+      color: #fff; background: var(--ember);
+      box-shadow: 0 6px 16px rgba(255,104,44,0.32);
+    }
+    .bead-ghost {
+      color: #fff; background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.85);
+    }
+    .bead-outline-dark {
+      color: var(--navy); background: #fff;
+      border: 1.5px solid var(--navy);
+    }
+    .bead-link {
+      display: inline-block; background: none; border: 0; padding: 6px 0;
+      color: var(--charge); font-weight: 700; font-size: 0.88rem;
+      text-decoration: underline; text-underline-offset: 3px;
+      font-family: inherit; cursor: pointer;
+    }
+
+    /* —— S1 Home hero —— */
+    .s1-hero {
+      position: relative; height: 390px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 14px; isolation: isolate;
+    }
+    .s1-hero .bg {
+      position: absolute; inset: 0; z-index: 0;
+      background-size: cover; background-position: center 48%;
+    }
+    .s1-hero .scrim {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(135deg, rgba(11,26,46,0.88) 0%, rgba(26,58,110,0.45) 48%, rgba(255,104,44,0.28) 100%);
+    }
+    .s1-top {
+      position: absolute; top: 12px; left: 12px; right: 12px; z-index: 3;
+      display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    }
+    .s1-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 8px; }
+    .s1-h {
+      font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em;
+      line-height: 1.15; max-width: 14ch; margin: 0 0 4px;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.35);
+    }
+    .carousel {
+      background: var(--navy); padding: 12px 0 14px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .carousel-label {
+      font-size: 0.68rem; color: rgba(255,255,255,0.5); padding: 0 14px 8px;
+      letter-spacing: 0.04em;
+    }
+    .carousel-row {
+      display: flex; gap: 10px; overflow-x: auto; padding: 0 14px;
+      scrollbar-width: none;
+    }
+    .carousel-row::-webkit-scrollbar { display: none; }
+    .c-card {
+      flex: 0 0 132px; border-radius: 14px; overflow: hidden;
+      background: #123050; border: 1px solid rgba(58,160,255,0.2);
+    }
+    .c-ph { height: 78px; background-size: cover; background-position: center; }
+    .c-body { padding: 8px 9px 10px; }
+    .c-name { margin: 0; font-size: 0.78rem; font-weight: 700; }
+    .c-meta { margin: 2px 0 0; font-size: 0.68rem; color: rgba(255,255,255,0.55); }
+
+    /* —— Select / inventory —— */
+    .inv {
+      background: #edf2f8; color: var(--ink); padding-bottom: 8px;
+    }
+    .inv-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 12px; background: #fff; border-bottom: 1px solid #dce5ef;
+    }
+    .inv-bar .toggle { background: #e8eef5; border-color: transparent; }
+    .inv-bar .toggle span { color: var(--muted); }
+    .inv-bar .toggle span.on { background: var(--charge); color: #061018; }
+
+    .inv-head { padding: 12px 12px 0; }
+    .inv-title { margin: 0; font-size: 1.15rem; font-weight: 700; }
+    .inv-sub { margin: 4px 0 10px; font-size: 0.76rem; color: var(--muted); }
+
+    .year-chips {
+      display: flex; gap: 6px; padding: 0 12px 10px; overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .year-chips::-webkit-scrollbar { display: none; }
+    .ychip {
+      flex: 0 0 auto; border: 1.5px solid #c8d4e2; background: #fff;
+      border-radius: 999px; padding: 6px 13px; font-size: 0.78rem; font-weight: 700;
+      font-family: inherit; color: var(--ink); cursor: pointer;
+    }
+    .ychip.is-on {
+      background: rgba(58,160,255,0.16);
+      border-color: var(--charge);
+      color: #0b4a8a;
+      box-shadow: 0 0 0 1px rgba(58,160,255,0.2);
+    }
+
+    .grid {
+      display: grid; grid-template-columns: 1fr; gap: 12px;
+      padding: 0 12px 16px;
+    }
+    /* S2-style listing card */
+    .listing {
+      border-radius: 16px; overflow: hidden; background: #fff;
+      border: 1px solid #d5dde8;
+      box-shadow: 0 8px 22px rgba(11,26,46,0.08);
+      text-align: left; padding: 0; cursor: pointer;
+      font-family: inherit; color: inherit; width: 100%;
+    }
+    .listing.is-on { outline: 2px solid var(--charge); outline-offset: 1px; }
+    .listing-ph {
+      height: 168px; background-size: cover; background-position: center 45%;
+      position: relative;
+    }
+    .status-row {
+      position: absolute; top: 10px; left: 10px; right: 10px;
+      display: flex; flex-wrap: wrap; gap: 5px;
+    }
+    .status {
+      font-size: 0.62rem; font-weight: 700; padding: 4px 9px; border-radius: 999px;
+    }
+    .status-strong { background: #1a7f4b; color: #fff; }
+    .status-soh { background: var(--volt); color: #06241c; }
+    .status-title { background: #fff; color: #222; }
+    .listing-ex {
+      position: absolute; bottom: 8px; right: 8px;
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.04em;
+      padding: 3px 7px; border-radius: 999px;
+      background: rgba(154,107,18,0.92); color: #fff;
+    }
+    .listing-body { padding: 12px 12px 14px; }
+    .listing-ymm { margin: 0; font-size: 0.98rem; font-weight: 700; }
+    .listing-specs { margin: 3px 0 0; font-size: 0.74rem; color: var(--muted); }
+    .listing-price { margin: 8px 0 0; font-size: 1.3rem; font-weight: 700; }
+    .listing-price-sub { margin: 1px 0 0; font-size: 0.68rem; color: var(--muted); }
+
+    .card-heroes {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 10px 0 12px;
+    }
+    .ch {
+      border-radius: 12px; padding: 8px 9px;
+      background: var(--mist); border: 1px solid rgba(58,160,255,0.22);
+    }
+    .ch.save {
+      background: rgba(31,214,160,0.12);
+      border-color: rgba(31,214,160,0.35);
+    }
+    .ch .lab {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .ch .val { font-size: 0.92rem; font-weight: 700; margin-top: 2px; line-height: 1.15; }
+    .ch.range .val { color: #0b4a8a; }
+    .ch.save .val { color: #0f7a58; font-size: 0.82rem; }
+
+    .listing-actions { display: flex; flex-direction: column; gap: 8px; }
+    .listing-actions .bead { padding: 12px 14px; font-size: 0.88rem; }
+
+    /* —— Detail —— */
+    .view-home, .view-inv { display: block; }
+    .view-home.is-hide, .view-inv.is-hide { display: none; }
+    .detail { display: none; background: #fff; color: var(--ink); }
+    .detail.is-on { display: block; }
+    .detail-ph {
+      height: 180px; background-size: cover; background-position: center 42%;
+      position: relative;
+    }
+    .detail-back {
+      position: absolute; top: 10px; left: 10px;
+      border: 0; border-radius: 999px; padding: 7px 12px;
+      background: rgba(255,255,255,0.94); font-weight: 700; font-size: 0.72rem;
+      font-family: inherit; cursor: pointer; color: var(--ink);
+    }
+    .detail-body { padding: 12px 14px 18px; }
+    .detail-title { margin: 0 0 2px; font-size: 1.08rem; font-weight: 700; }
+    .detail-loc { margin: 0 0 10px; font-size: 0.78rem; color: var(--muted); }
+
+    .price-grade {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px; margin: 0 0 4px;
+    }
+    .detail-price { margin: 0; font-size: 1.4rem; font-weight: 700; line-height: 1.1; }
+    .detail-price-sub { margin: 2px 0 0; font-size: 0.7rem; color: var(--muted); }
+    .grade-wrap { flex: 0 0 auto; text-align: center; }
+    .grade-caption {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--muted); max-width: 72px;
+    }
+    .grade-blurb {
+      margin: 0 0 10px; font-size: 0.72rem; color: var(--muted); line-height: 1.35;
+    }
+
+    .hero-figs {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 12px;
+    }
+    .hf {
+      border-radius: 14px; padding: 12px 10px; text-align: center;
+      border: 1px solid transparent;
+    }
+    .hf.range {
+      background: linear-gradient(160deg, #e8f1ff, #d6e8ff);
+      border-color: rgba(58,160,255,0.35);
+    }
+    .hf.save {
+      background: linear-gradient(160deg, #e6faf3, #d0f5e8);
+      border-color: rgba(31,214,160,0.4);
+    }
+    .hf .lab {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .hf .val {
+      margin-top: 4px; font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .hf.range .val { color: #0b4a8a; }
+    .hf.save .val { color: #0f7a58; font-size: 1.05rem; }
+    .hf .sub { margin-top: 3px; font-size: 0.65rem; color: var(--muted); }
+
+    .detail-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+
+    .sec {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #9ecfff; margin: 18px 0 8px;
+    }
+    .btn-book {
+      margin-top: 14px; background: #0b1a2e; border: 1px solid #1e3048;
+      border-radius: 16px; padding: 16px 14px; color: #fff;
+    }
+    .btn-book .tag {
+      display: inline-block; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.05em;
+      padding: 3px 8px; border-radius: 999px; background: rgba(58,160,255,0.2);
+      color: #9fd4ff; margin-bottom: 12px;
+    }
+    .btn-book .stack { display: flex; flex-direction: column; gap: 8px; }
+    .foot { margin-top: 14px; font-size: 0.7rem; color: #7a8a9a; line-height: 1.4; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="banner">
+      Preview only — r10 layout + Ted’s locked <strong>navy beads</strong> (S1/S2 · K3–K6):
+      ember→charge gradient primary, ember Buy Now, charge selected/links, volt accents.
+      L5 logo. No app deploy.
+    </div>
+    <h1 class="page">R11 · Color beads on select listings</h1>
+    <p class="page-sub">S1 hero beads · S2 listing beads · r10 Range + savings + Vehicle Grade</p>
+    <p class="src">
+      Match attached beads books. Teal K1–K2 ignored for color (shape energy only).
+      Listing numbers <span class="ex" style="color:#e6c35c">EXAMPLE</span>.
+    </p>
+
+    <div class="phone" id="PHONE">
+      <!-- S1 HOME -->
+      <div class="view-home" id="viewHome">
+        <div class="s1-hero">
+          <div class="bg" style="background-image:url(assets/rivian-stack.webp)"></div>
+          <div class="scrim"></div>
+          <div class="s1-top">
+            <div class="l5" aria-label="VIN not DIESEL">
+              <div class="l5-mark" aria-hidden="true">
+                <svg viewBox="0 0 26 26" fill="none">
+                  <path d="M3 15 H7 L9 10 H15 L17 7 H22 L24 10 V15 H22.5 Q21.2 18 19 18 Q16.8 18 15.5 15 H10.5 Q9.2 18 7 18 Q4.8 18 3.5 15 H3 Z" stroke="#3aa0ff" stroke-width="1.4" fill="rgba(58,160,255,0.15)"/>
+                  <circle cx="7" cy="16.5" r="1.6" fill="#1fd6a0"/>
+                  <circle cx="19" cy="16.5" r="1.6" fill="#1fd6a0"/>
+                  <path d="M14 4 L11 10 H14 L12.5 15 L18 8 H15 Z" fill="#1fd6a0"/>
+                </svg>
+              </div>
+              <div class="l5-words">
+                <span class="vin">VIN</span>
+                <span class="not-script">not</span>
+                <span class="diesel">DIESEL</span>
+              </div>
+            </div>
+            <div class="toggle"><span class="on">Work</span><span>Play</span></div>
+          </div>
+          <div class="s1-content">
+            <h2 class="s1-h">Work week charged. Play day ready.</h2>
+            <button type="button" class="bead bead-grad" id="shopBtn">Shop all trucks</button>
+            <button type="button" class="bead bead-ghost" id="exploreBtn">Explore models</button>
+          </div>
+        </div>
+        <div class="carousel">
+          <div class="carousel-label">Models · swipe</div>
+          <div class="carousel-row">
+            <article class="c-card">
+              <div class="c-ph" style="background-image:url(assets/lightning-lifestyle.webp)"></div>
+              <div class="c-body">
+                <p class="c-name">F-150 Lightning.</p>
+                <p class="c-meta">From $35,500*</p>
+              </div>
+            </article>
+            <article class="c-card">
+              <div class="c-ph" style="background-image:url(assets/silverado-lifestyle.webp)"></div>
+              <div class="c-body">
+                <p class="c-name">Silverado EV.</p>
+                <p class="c-meta">From $54,500*</p>
+              </div>
+            </article>
+            <article class="c-card">
+              <div class="c-ph" style="background-image:url(assets/cybertruck-lifestyle.webp)"></div>
+              <div class="c-body">
+                <p class="c-name">Cybertruck.</p>
+                <p class="c-meta">From $67,500*</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <!-- SELECT INVENTORY -->
+      <div class="view-inv is-hide" id="viewInv">
+        <div class="inv">
+          <div class="inv-bar">
+            <div class="l5 on-light" aria-label="VIN not DIESEL">
+              <div class="l5-mark" aria-hidden="true">
+                <svg viewBox="0 0 26 26" fill="none">
+                  <path d="M3 15 H7 L9 10 H15 L17 7 H22 L24 10 V15 H22.5 Q21.2 18 19 18 Q16.8 18 15.5 15 H10.5 Q9.2 18 7 18 Q4.8 18 3.5 15 H3 Z" stroke="#3aa0ff" stroke-width="1.4" fill="rgba(58,160,255,0.15)"/>
+                  <circle cx="7" cy="16.5" r="1.6" fill="#1fd6a0"/>
+                  <circle cx="19" cy="16.5" r="1.6" fill="#1fd6a0"/>
+                  <path d="M14 4 L11 10 H14 L12.5 15 L18 8 H15 Z" fill="#1fd6a0"/>
+                </svg>
+              </div>
+              <div class="l5-words">
+                <span class="vin">VIN</span>
+                <span class="not-script">not</span>
+                <span class="diesel">DIESEL</span>
+              </div>
+            </div>
+            <div class="toggle"><span class="on">Work</span><span>Play</span></div>
+          </div>
+
+          <div class="inv-head">
+            <h2 class="inv-title">Select vehicles</h2>
+            <p class="inv-sub">Used EV trucks for sale · <span class="ex">EXAMPLE</span></p>
+          </div>
+          <div class="year-chips" id="yearChips"></div>
+          <div class="grid" id="grid"></div>
+        </div>
+      </div>
+
+      <!-- DETAIL -->
+      <div class="detail" id="detail">
+        <div class="detail-ph" id="detailPh">
+          <button type="button" class="detail-back" id="detailBack">← Select</button>
+          <div class="status-row" id="detailStatus"></div>
+        </div>
+        <div class="detail-body">
+          <p class="ex" style="margin:0 0 6px">EXAMPLE listing</p>
+          <h3 class="detail-title" id="detailTitle">—</h3>
+          <p class="detail-loc" id="detailLoc">—</p>
+
+          <div class="price-grade">
+            <div>
+              <p class="detail-price" id="detailPrice">—</p>
+              <p class="detail-price-sub" id="detailMiles">—</p>
+            </div>
+            <div class="grade-wrap" id="gradeWrap"></div>
+          </div>
+          <p class="grade-blurb">
+            Vehicle Grade · peer score vs similar same make/model used trucks.
+            <span class="ex">EXAMPLE</span>
+          </p>
+
+          <div class="hero-figs">
+            <div class="hf range">
+              <div class="lab">Range</div>
+              <div class="val" id="hfRange">—</div>
+              <div class="sub">EPA / rated mi</div>
+            </div>
+            <div class="hf save">
+              <div class="lab">vs gas twin</div>
+              <div class="val" id="hfSave">—</div>
+              <div class="sub">est. annual fuel savings</div>
+            </div>
+          </div>
+
+          <div class="detail-actions">
+            <button type="button" class="bead bead-ember">Buy Now</button>
+            <button type="button" class="bead bead-outline-dark">Make Offer</button>
+            <button type="button" class="bead-link">Message</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">Button pair close-up</div>
+    <div class="btn-book" id="btnBook">
+      <span class="tag">Primary vs secondary beads · K6</span>
+      <div class="stack">
+        <button type="button" class="bead bead-grad">Shop all trucks</button>
+        <button type="button" class="bead bead-ember">Buy Now</button>
+        <button type="button" class="bead bead-ghost">Explore models</button>
+        <button type="button" class="bead-link" style="align-self:flex-start">Message</button>
+      </div>
+    </div>
+
+    <p class="foot">
+      r10 left intact. Navy beads restored from Ted’s S1/S2 + K3–K6 attachments.
+      Stopped — await Ted. No deploy.
+    </p>
+  </div>
+
+  <script>
+    function dialTone(score) {
+      if (score >= 80) return { arc: "#1fd6a0", num: "#0f7a58" };
+      if (score >= 60) return { arc: "#3aa0ff", num: "#1570c5" };
+      return { arc: "#ff682c", num: "#c44a14" };
+    }
+    function polar(cx, cy, r, deg) {
+      const rad = (deg * Math.PI) / 180;
+      return [cx + r * Math.cos(rad), cy + r * Math.sin(rad)];
+    }
+    function arcPath(cx, cy, r, a, b) {
+      const [x1, y1] = polar(cx, cy, r, a);
+      const [x2, y2] = polar(cx, cy, r, b);
+      return `M ${x1.toFixed(2)} ${y1.toFixed(2)} A ${r} ${r} 0 ${b - a > 180 ? 1 : 0} 1 ${x2.toFixed(2)} ${y2.toFixed(2)}`;
+    }
+    function vehicleGradeDial(score, size = 72) {
+      const s = Math.max(0, Math.min(100, Math.round(score || 0)));
+      const tone = dialTone(s);
+      const start = -210, sweep = 240;
+      const needle = start + (s / 100) * sweep;
+      const cx = 50, cy = 54, r = 34;
+      const [nx, ny] = polar(cx, cy, r - 5, needle);
+      let ticks = "";
+      for (let i = 0; i <= 4; i++) {
+        const d = start + (i / 4) * sweep;
+        const [a1, a2] = polar(cx, cy, r + 1, d);
+        const [b1, b2] = polar(cx, cy, r + 4.5, d);
+        ticks += `<line x1="${a1.toFixed(1)}" y1="${a2.toFixed(1)}" x2="${b1.toFixed(1)}" y2="${b2.toFixed(1)}" stroke="${i === 4 ? "#1fd6a0" : "#b8c4d0"}" stroke-width="1.2" stroke-linecap="round"/>`;
+      }
+      return `
+        <div data-score="${s}">
+          <svg viewBox="0 0 100 72" width="${size}" height="${(size * 0.72).toFixed(1)}" aria-hidden="true">
+            <path d="${arcPath(cx, cy, r, start, start + sweep)}" fill="none" stroke="#dfe6ee" stroke-width="6.5" stroke-linecap="round"/>
+            <path d="${arcPath(cx, cy, r, start, needle)}" fill="none" stroke="${tone.arc}" stroke-width="6.5" stroke-linecap="round"/>
+            ${ticks}
+            <line x1="${cx}" y1="${cy}" x2="${nx.toFixed(2)}" y2="${ny.toFixed(2)}" stroke="#ff682c" stroke-width="2.1" stroke-linecap="round"/>
+            <circle cx="${cx}" cy="${cy}" r="3.6" fill="#0b1a2e" stroke="#ff682c" stroke-width="1.2"/>
+            <text x="${cx}" y="${cy + 16}" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="15" fill="${tone.num}">${s}</text>
+          </svg>
+          <div class="grade-caption">Vehicle Grade <span class="ex">EX</span></div>
+        </div>`;
+    }
+
+    const LISTINGS = [
+      { id: "l1", year: 2024, make: "Rivian", model: "R1T", trim: "Adventure", price: 62900, miles: 9800, loc: "Orlando, FL", range: 328, saveYr: 4200, grade: 92, soh: 97, work: "Strong", title: "Clean title", img: "assets/rivian-hero.webp" },
+      { id: "l2", year: 2023, make: "Ford", model: "F-150 Lightning", trim: "Pro", price: 42900, miles: 18420, loc: "Fort Lauderdale, FL", range: 230, saveYr: 3800, grade: 86, soh: 94, work: "Strong", title: "Clean title", img: "assets/lightning-lifestyle.webp" },
+      { id: "l3", year: 2023, make: "Rivian", model: "R1T", trim: "Adventure", price: 52000, miles: 22100, loc: "Miami, FL", range: 328, saveYr: 4100, grade: 84, soh: 91, work: "Fair", title: "Clean title", img: "assets/rivian-stack.webp" },
+      { id: "l4", year: 2024, make: "Chevrolet", model: "Silverado EV", trim: "WT", price: 58900, miles: 11250, loc: "Tampa, FL", range: 440, saveYr: 5100, grade: 88, soh: 97, work: "Strong", title: "Clean title", img: "assets/silverado-lifestyle.webp" }
+    ];
+
+    const state = { view: "home", year: "all", detailId: null };
+
+    function money(n) { return "$" + Math.round(n).toLocaleString(); }
+    function saveLabel(n) { return "Save ~$" + Math.round(n).toLocaleString() + "/yr"; }
+    function filtered() {
+      if (state.year === "all") return LISTINGS;
+      return LISTINGS.filter((L) => L.year === state.year);
+    }
+
+    function showViews() {
+      document.getElementById("viewHome").classList.toggle("is-hide", state.view !== "home");
+      document.getElementById("viewInv").classList.toggle("is-hide", state.view !== "inv");
+      const detail = document.getElementById("detail");
+      const L = LISTINGS.find((x) => x.id === state.detailId);
+      if (state.view === "detail" && L) {
+        detail.classList.add("is-on");
+        document.getElementById("viewHome").classList.add("is-hide");
+        document.getElementById("viewInv").classList.add("is-hide");
+      } else {
+        detail.classList.remove("is-on");
+      }
+    }
+
+    function renderChips() {
+      const years = ["all", ...[...new Set(LISTINGS.map((L) => L.year))].sort()];
+      document.getElementById("yearChips").innerHTML = years.map((y) => {
+        const label = y === "all" ? "All" : String(y).slice(2);
+        const on = state.year === y ? "is-on" : "";
+        return `<button type="button" class="ychip ${on}" data-year="${y}">${label}</button>`;
+      }).join("");
+      document.querySelectorAll(".ychip").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          state.year = btn.dataset.year === "all" ? "all" : Number(btn.dataset.year);
+          render();
+        });
+      });
+    }
+
+    function renderGrid() {
+      const root = document.getElementById("grid");
+      root.innerHTML = filtered().map((L) => `
+        <article class="listing ${state.detailId === L.id ? "is-on" : ""}" data-id="${L.id}">
+          <div class="listing-ph" style="background-image:url(${L.img})">
+            <div class="status-row">
+              <span class="status status-strong">${L.work}</span>
+              <span class="status status-soh">SOH ${L.soh}%</span>
+              <span class="status status-title">${L.title}</span>
+            </div>
+            <span class="listing-ex">EXAMPLE</span>
+          </div>
+          <div class="listing-body">
+            <h3 class="listing-ymm">${L.year} ${L.make} ${L.model} ${L.trim}</h3>
+            <p class="listing-specs">${L.range} mi range · ${L.miles.toLocaleString()} mi · ${L.loc}</p>
+            <p class="listing-price">${money(L.price)}</p>
+            <p class="listing-price-sub">All-in · fees included</p>
+            <div class="card-heroes">
+              <div class="ch range"><div class="lab">Range</div><div class="val">~${L.range} mi</div></div>
+              <div class="ch save"><div class="lab">vs gas</div><div class="val">${saveLabel(L.saveYr)}</div></div>
+            </div>
+            <div class="listing-actions">
+              <button type="button" class="bead bead-ember open-detail" data-id="${L.id}">Buy Now</button>
+              <button type="button" class="bead bead-outline-dark open-detail" data-id="${L.id}">Make Offer</button>
+              <button type="button" class="bead-link open-detail" data-id="${L.id}">Message</button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+
+      root.querySelectorAll(".open-detail, .listing").forEach((el) => {
+        el.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const id = el.dataset.id || el.closest(".listing")?.dataset.id;
+          if (!id) return;
+          state.detailId = id;
+          state.view = "detail";
+          render();
+        });
+      });
+    }
+
+    function renderDetail() {
+      const L = LISTINGS.find((x) => x.id === state.detailId);
+      if (!L) return;
+      document.getElementById("detailPh").style.backgroundImage = `url(${L.img})`;
+      document.getElementById("detailStatus").innerHTML = `
+        <span class="status status-strong">${L.work}</span>
+        <span class="status status-soh">SOH ${L.soh}%</span>
+        <span class="status status-title">${L.title}</span>`;
+      document.getElementById("detailTitle").textContent =
+        `${L.year} ${L.make} ${L.model} ${L.trim}`;
+      document.getElementById("detailLoc").textContent = L.loc;
+      document.getElementById("detailPrice").textContent = money(L.price);
+      document.getElementById("detailMiles").innerHTML =
+        `${L.miles.toLocaleString()} mi · all-in · <span class="ex">EXAMPLE</span>`;
+      document.getElementById("gradeWrap").innerHTML = vehicleGradeDial(L.grade, 76);
+      document.getElementById("hfRange").textContent = `~${L.range} mi`;
+      document.getElementById("hfSave").textContent = saveLabel(L.saveYr);
+    }
+
+    function render() {
+      showViews();
+      if (state.view === "inv" || state.view === "detail") {
+        renderChips();
+        renderGrid();
+      }
+      if (state.view === "detail") renderDetail();
+    }
+
+    document.getElementById("shopBtn").addEventListener("click", () => {
+      state.view = "inv"; state.detailId = null; render();
+    });
+    document.getElementById("exploreBtn").addEventListener("click", () => {
+      state.view = "inv"; state.detailId = null; render();
+    });
+    document.getElementById("detailBack").addEventListener("click", () => {
+      state.view = "inv"; state.detailId = null; render();
+    });
+
+    render();
+  </script>
+</body>
+</html>

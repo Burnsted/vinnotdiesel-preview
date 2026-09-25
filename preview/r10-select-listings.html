@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>R10 — Select listings grid (preview only)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0b1a2e;
+      --charge: #3aa0ff;
+      --ember: #ff6b2c;
+      --volt: #1fd6a0;
+      --mist: #e8f1ff;
+      --ink: #0b1a2e;
+      --muted: #5a6a7a;
+      --paper: #eef2f7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.4;
+    }
+    .wrap { max-width: 390px; margin: 0 auto; padding: 14px 12px 56px; }
+    .banner {
+      background: #fff3cd; border: 1px solid #e6d089; border-radius: 10px;
+      padding: 10px 12px; font-size: 0.76rem; color: #5c4b12; margin-bottom: 14px;
+    }
+    h1.page { font-size: 1.12rem; margin: 0 0 4px; letter-spacing: -0.02em; }
+    .page-sub { margin: 0 0 12px; color: var(--muted); font-size: 0.8rem; }
+    .ex { color: #9a6b12; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.03em; }
+    .src { font-size: 0.7rem; color: var(--muted); margin: 0 0 12px; line-height: 1.35; }
+
+    /* L5 */
+    .not-script {
+      font-family: Caveat, cursive; font-weight: 700; color: var(--volt);
+      line-height: 1; display: inline-block;
+    }
+    .l5 { display: flex; align-items: center; gap: 0.45em; }
+    .l5-mark {
+      width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+      background: linear-gradient(145deg, #123050, #0b1a2e);
+      display: grid; place-items: center;
+      border: 1px solid rgba(58,160,255,0.45);
+    }
+    .l5-mark svg { width: 20px; height: 20px; }
+    .l5-words {
+      display: flex; align-items: baseline; gap: 0.18em;
+      font-family: Space Grotesk, sans-serif; font-weight: 700;
+      font-size: 0.92rem; letter-spacing: -0.02em;
+    }
+    .l5-words .vin { color: #5eb6ff; }
+    .l5-words .diesel { color: #9ecfff; font-weight: 600; opacity: 0.92; }
+    .l5-words .not-script { font-size: 1.1rem; }
+    .bar-light .l5-words .vin { color: #1570c5; }
+    .bar-light .l5-words .diesel { color: #3a6f9e; }
+    .bar-light .l5-mark {
+      background: linear-gradient(145deg, #1a3a60, #0f2438);
+    }
+
+    .phone {
+      width: 100%; border-radius: 18px; overflow: hidden;
+      background: #f3f6fa; color: var(--ink);
+      border: 1px solid #d5dde8;
+      box-shadow: 0 10px 28px rgba(11,26,46,0.16);
+    }
+    .app-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 12px; background: #fff; border-bottom: 1px solid #e3e9f0;
+    }
+    .app-bar .toggle {
+      display: inline-flex; background: #eef2f7; border-radius: 999px; padding: 3px;
+    }
+    .app-bar .toggle span {
+      padding: 5px 10px; border-radius: 999px; font-size: 0.68rem; font-weight: 700;
+      color: var(--muted);
+    }
+    .app-bar .toggle span.on { background: var(--charge); color: #061018; }
+
+    .inv-head { padding: 12px 12px 0; }
+    .inv-title { margin: 0; font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; }
+    .inv-sub { margin: 4px 0 10px; font-size: 0.76rem; color: var(--muted); }
+
+    /* Light year chips only — not price slabs */
+    .year-chips {
+      display: flex; gap: 6px; padding: 0 12px 10px; overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .year-chips::-webkit-scrollbar { display: none; }
+    .ychip {
+      flex: 0 0 auto; border: 1.5px solid #d5dde8; background: #fff;
+      border-radius: 999px; padding: 6px 12px; font-size: 0.78rem; font-weight: 700;
+      font-family: inherit; color: var(--ink); cursor: pointer;
+    }
+    .ychip.is-on {
+      background: rgba(58,160,255,0.12);
+      border-color: var(--charge);
+      color: #0b4a8a;
+    }
+
+    /* Listing card grid */
+    .grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      padding: 0 10px 14px;
+    }
+    .card {
+      border: 1.5px solid #d5dde8; border-radius: 12px; overflow: hidden;
+      background: #fff; padding: 0; text-align: left; cursor: pointer;
+      font-family: inherit; color: inherit;
+    }
+    .card:hover, .card.is-on { border-color: var(--charge); }
+    .card-ph {
+      height: 96px; background-size: cover; background-position: center 45%;
+      position: relative;
+    }
+    .card-ex {
+      position: absolute; top: 6px; left: 6px;
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.04em;
+      padding: 2px 6px; border-radius: 999px;
+      background: rgba(154,107,18,0.92); color: #fff;
+    }
+    .card-body { padding: 7px 8px 9px; }
+    .card-ymm {
+      margin: 0; font-size: 0.72rem; font-weight: 700; line-height: 1.2;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .card-price { margin: 3px 0 0; font-size: 0.95rem; font-weight: 700; }
+    .card-meta { margin: 1px 0 0; font-size: 0.62rem; color: var(--muted); }
+    .card-heroes {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 7px;
+    }
+    .ch {
+      background: #eef2f7; border-radius: 8px; padding: 5px 6px;
+    }
+    .ch .lab {
+      font-size: 0.5rem; font-weight: 700; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .ch .val { font-size: 0.78rem; font-weight: 700; margin-top: 1px; line-height: 1.15; }
+    .ch.range .val { color: #1570c5; }
+    .ch.save .val { color: #0f7a58; font-size: 0.7rem; }
+
+    /* Detail */
+    .view-inv { display: block; }
+    .view-inv.is-hide { display: none; }
+    .detail { display: none; background: #fff; }
+    .detail.is-on { display: block; }
+    .detail-ph {
+      height: 180px; background-size: cover; background-position: center 42%;
+      position: relative;
+    }
+    .detail-back {
+      position: absolute; top: 10px; left: 10px;
+      border: 0; border-radius: 999px; padding: 6px 10px;
+      background: rgba(255,255,255,0.92); font-weight: 700; font-size: 0.72rem;
+      font-family: inherit; cursor: pointer; color: var(--ink);
+    }
+    .detail-body { padding: 12px 14px 18px; background: #fff; }
+    .detail-title { margin: 0 0 2px; font-size: 1.08rem; font-weight: 700; }
+    .detail-loc { margin: 0 0 10px; font-size: 0.78rem; color: var(--muted); }
+
+    .price-grade {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px; margin: 0 0 4px;
+    }
+    .price-block { min-width: 0; flex: 1; }
+    .detail-price { margin: 0; font-size: 1.4rem; font-weight: 700; line-height: 1.1; }
+    .detail-price-sub { margin: 2px 0 0; font-size: 0.7rem; color: var(--muted); }
+    .grade-wrap { flex: 0 0 auto; text-align: center; }
+    .grade-caption {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--muted); margin-top: 0; max-width: 72px;
+    }
+
+    /* Hero figures — Range + Annual savings — very prominent */
+    .hero-figs {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      margin: 10px 0 12px;
+    }
+    .hf {
+      border-radius: 12px; padding: 12px 10px; text-align: center;
+      border: 1px solid transparent;
+    }
+    .hf.range {
+      background: linear-gradient(160deg, #e8f1ff, #d6e8ff);
+      border-color: rgba(58,160,255,0.35);
+    }
+    .hf.save {
+      background: linear-gradient(160deg, #e6faf3, #d0f5e8);
+      border-color: rgba(31,214,160,0.4);
+    }
+    .hf .lab {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .hf .val {
+      margin-top: 4px; font-size: 1.45rem; font-weight: 700; letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .hf.range .val { color: #0b4a8a; }
+    .hf.save .val { color: #0f7a58; font-size: 1.15rem; }
+    .hf .sub { margin-top: 3px; font-size: 0.65rem; color: var(--muted); }
+
+    .grade-blurb {
+      margin: 0 0 10px; font-size: 0.72rem; color: var(--muted); line-height: 1.35;
+    }
+
+    .factors {
+      border: 1px solid #e3e9f0; border-radius: 12px; overflow: hidden;
+      margin: 0 0 12px; background: #fafcfe;
+    }
+    .factors-h {
+      width: 100%; display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 12px; border: 0; background: #f0f5fa;
+      font-family: inherit; font-weight: 700; font-size: 0.82rem; cursor: pointer;
+      color: var(--ink); text-align: left;
+    }
+    .factors-b { padding: 4px 12px 10px; border-top: 1px solid #e3e9f0; }
+    .factor-row {
+      display: flex; justify-content: space-between; gap: 10px;
+      padding: 8px 0; border-bottom: 1px solid #e8eef5; font-size: 0.8rem;
+    }
+    .factor-row:last-child { border-bottom: 0; }
+    .factor-row dt { color: var(--muted); font-weight: 500; }
+    .factor-row dd { margin: 0; font-weight: 700; text-align: right; }
+    .factor-row .hint { display: block; font-size: 0.62rem; font-weight: 500; color: var(--muted); }
+
+    .btn-ember {
+      width: 100%; border: 0; border-radius: 10px; padding: 12px;
+      background: var(--ember); color: #fff; font-weight: 700; font-size: 0.9rem;
+      font-family: inherit; cursor: pointer;
+    }
+    .btn-outline {
+      width: 100%; margin-top: 8px; border-radius: 10px; padding: 11px;
+      border: 1.5px solid var(--navy); background: transparent; color: var(--navy);
+      font-weight: 600; font-size: 0.86rem; font-family: inherit; cursor: pointer;
+    }
+
+    .hero-close {
+      margin-top: 14px; background: #fff; border: 1px solid #d5dde8;
+      border-radius: 14px; padding: 14px 12px;
+    }
+    .hero-close .tag {
+      display: inline-block; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.05em;
+      padding: 3px 8px; border-radius: 999px; background: #e4edf8; color: #2a3a4a; margin-bottom: 10px;
+    }
+    .foot { margin-top: 14px; font-size: 0.7rem; color: var(--muted); line-height: 1.4; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="banner">
+      Preview only — <strong>select listings</strong> grid. No pack/motor choosers. No huge year price slabs.
+      Cards show Range + Annual gas savings. One Vehicle Grade dial on detail only. L5 + K6. No deploy.
+    </div>
+    <h1 class="page">R10 · Select listings</h1>
+    <p class="page-sub">Photo-led inventory cards → detail with Range + Save $/yr + Vehicle Grade</p>
+    <p class="src">
+      No Fit My Truck UI. Buyers pick real vehicles for sale.
+      Photos are best-available full-vehicle placeholders · all listing numbers
+      <span class="ex">EXAMPLE</span> until Hot Deals inventory wires in.
+    </p>
+
+    <div class="phone" id="S3">
+      <div class="view-inv" id="viewInv">
+        <div class="app-bar bar-light">
+          <div class="l5" aria-label="VIN not DIESEL">
+            <div class="l5-mark" aria-hidden="true">
+              <svg viewBox="0 0 26 26" fill="none">
+                <path d="M3 15 H7 L9 10 H15 L17 7 H22 L24 10 V15 H22.5 Q21.2 18 19 18 Q16.8 18 15.5 15 H10.5 Q9.2 18 7 18 Q4.8 18 3.5 15 H3 Z" stroke="#3aa0ff" stroke-width="1.4" fill="rgba(58,160,255,0.15)"/>
+                <circle cx="7" cy="16.5" r="1.6" fill="#1fd6a0"/>
+                <circle cx="19" cy="16.5" r="1.6" fill="#1fd6a0"/>
+                <path d="M14 4 L11 10 H14 L12.5 15 L18 8 H15 Z" fill="#1fd6a0"/>
+              </svg>
+            </div>
+            <div class="l5-words">
+              <span class="vin">VIN</span>
+              <span class="not-script">not</span>
+              <span class="diesel">DIESEL</span>
+            </div>
+          </div>
+          <div class="toggle"><span class="on">Work</span><span>Play</span></div>
+        </div>
+
+        <div class="inv-head">
+          <h2 class="inv-title">Select vehicles</h2>
+          <p class="inv-sub">Used EV trucks for sale · <span class="ex">EXAMPLE</span> inventory</p>
+        </div>
+
+        <div class="year-chips" id="yearChips" role="tablist" aria-label="Filter by year"></div>
+        <div class="grid" id="grid"></div>
+      </div>
+
+      <div class="detail" id="detail">
+        <div class="detail-ph" id="detailPh">
+          <button type="button" class="detail-back" id="detailBack">← Select</button>
+        </div>
+        <div class="detail-body">
+          <p class="ex" style="margin:0 0 6px">EXAMPLE listing</p>
+          <h3 class="detail-title" id="detailTitle">—</h3>
+          <p class="detail-loc" id="detailLoc">—</p>
+
+          <div class="price-grade">
+            <div class="price-block">
+              <p class="detail-price" id="detailPrice">—</p>
+              <p class="detail-price-sub" id="detailMiles">—</p>
+            </div>
+            <div class="grade-wrap" id="gradeWrap"></div>
+          </div>
+          <p class="grade-blurb">
+            Vehicle Grade · peer score vs similar same make/model used trucks (SOH, miles, warranty, etc.).
+            <span class="ex">EXAMPLE</span>
+          </p>
+
+          <div class="hero-figs" id="heroFigs">
+            <div class="hf range">
+              <div class="lab">Range</div>
+              <div class="val" id="hfRange">—</div>
+              <div class="sub">EPA / rated mi</div>
+            </div>
+            <div class="hf save">
+              <div class="lab">vs gas twin</div>
+              <div class="val" id="hfSave">—</div>
+              <div class="sub">est. annual fuel savings</div>
+            </div>
+          </div>
+
+          <div class="factors">
+            <div class="factors-h">What’s in this grade</div>
+            <div class="factors-b" id="factorsBody"></div>
+          </div>
+
+          <button type="button" class="btn-ember">Buy Now</button>
+          <button type="button" class="btn-outline">Message seller</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-close" id="heroClose">
+      <span class="tag">Hero figures close-up</span>
+      <div class="hero-figs" style="margin:0">
+        <div class="hf range">
+          <div class="lab">Range</div>
+          <div class="val">~328 mi</div>
+          <div class="sub"><span class="ex">EXAMPLE</span></div>
+        </div>
+        <div class="hf save">
+          <div class="lab">vs gas twin</div>
+          <div class="val">Save ~$4,200/yr</div>
+          <div class="sub"><span class="ex">EXAMPLE</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="foot">
+      Real build will pull listing photos, range, and savings from Hot Deals / inventory records.
+      Stopped at preview — no full build, no deploy.
+    </p>
+  </div>
+
+  <script>
+    function dialTone(score) {
+      if (score >= 80) return { arc: "#1fd6a0", num: "#0f7a58" };
+      if (score >= 60) return { arc: "#3aa0ff", num: "#1570c5" };
+      return { arc: "#ff6b2c", num: "#c44a14" };
+    }
+    function polar(cx, cy, r, deg) {
+      const rad = (deg * Math.PI) / 180;
+      return [cx + r * Math.cos(rad), cy + r * Math.sin(rad)];
+    }
+    function arcPath(cx, cy, r, a, b) {
+      const [x1, y1] = polar(cx, cy, r, a);
+      const [x2, y2] = polar(cx, cy, r, b);
+      return `M ${x1.toFixed(2)} ${y1.toFixed(2)} A ${r} ${r} 0 ${b - a > 180 ? 1 : 0} 1 ${x2.toFixed(2)} ${y2.toFixed(2)}`;
+    }
+    function vehicleGradeDial(score, size = 72) {
+      const s = Math.max(0, Math.min(100, Math.round(score || 0)));
+      const tone = dialTone(s);
+      const start = -210, sweep = 240;
+      const needle = start + (s / 100) * sweep;
+      const cx = 50, cy = 54, r = 34;
+      const [nx, ny] = polar(cx, cy, r - 5, needle);
+      let ticks = "";
+      for (let i = 0; i <= 4; i++) {
+        const d = start + (i / 4) * sweep;
+        const [a1, a2] = polar(cx, cy, r + 1, d);
+        const [b1, b2] = polar(cx, cy, r + 4.5, d);
+        ticks += `<line x1="${a1.toFixed(1)}" y1="${a2.toFixed(1)}" x2="${b1.toFixed(1)}" y2="${b2.toFixed(1)}" stroke="${i === 4 ? "#1fd6a0" : "#b8c4d0"}" stroke-width="1.2" stroke-linecap="round"/>`;
+      }
+      return `
+        <div data-score="${s}">
+          <svg viewBox="0 0 100 72" width="${size}" height="${(size * 0.72).toFixed(1)}" aria-hidden="true">
+            <path d="${arcPath(cx, cy, r, start, start + sweep)}" fill="none" stroke="#dfe6ee" stroke-width="6.5" stroke-linecap="round"/>
+            <path d="${arcPath(cx, cy, r, start, needle)}" fill="none" stroke="${tone.arc}" stroke-width="6.5" stroke-linecap="round"/>
+            ${ticks}
+            <line x1="${cx}" y1="${cy}" x2="${nx.toFixed(2)}" y2="${ny.toFixed(2)}" stroke="#ff6b2c" stroke-width="2.1" stroke-linecap="round"/>
+            <circle cx="${cx}" cy="${cy}" r="3.6" fill="#0b1a2e" stroke="#ff6b2c" stroke-width="1.2"/>
+            <text x="${cx}" y="${cy + 16}" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="15" fill="${tone.num}">${s}</text>
+          </svg>
+          <div class="grade-caption">Vehicle Grade <span class="ex">EX</span></div>
+        </div>`;
+    }
+
+    /** EXAMPLE select inventory — no config choosers */
+    const LISTINGS = [
+      { id: "l1", year: 2024, make: "Rivian", model: "R1T", trim: "Adventure", price: 62900, miles: 9800, loc: "Orlando, FL", range: 328, saveYr: 4200, grade: 92, soh: 97, warranty: "88 mo battery", img: "assets/rivian-hero.webp", factors: { soh: "97% · excellent", miles: "9.8k · low", warranty: "88 mo left", other: "Approved pre-owned" } },
+      { id: "l2", year: 2023, make: "Ford", model: "F-150 Lightning", trim: "Pro", price: 42900, miles: 18420, loc: "Fort Lauderdale, FL", range: 230, saveYr: 3800, grade: 86, soh: 94, warranty: "62 mo battery", img: "assets/lightning-lifestyle.webp", factors: { soh: "94% · strong", miles: "18.4k · average", warranty: "62 mo left", other: "Clean title · fleet" } },
+      { id: "l3", year: 2023, make: "Rivian", model: "R1T", trim: "Adventure", price: 52000, miles: 22100, loc: "Miami, FL", range: 328, saveYr: 4100, grade: 84, soh: 91, warranty: "70 mo battery", img: "assets/rivian-stack.webp", factors: { soh: "91% · solid", miles: "22.1k · below avg", warranty: "70 mo left", other: "Documented service" } },
+      { id: "l4", year: 2024, make: "Chevrolet", model: "Silverado EV", trim: "WT", price: 58900, miles: 11250, loc: "Tampa, FL", range: 440, saveYr: 5100, grade: 88, soh: 97, warranty: "84 mo battery", img: "assets/silverado-lifestyle.webp", factors: { soh: "97% · excellent", miles: "11.3k · low", warranty: "84 mo left", other: "Service body ready" } },
+      { id: "l5", year: 2022, make: "Ford", model: "F-150 Lightning", trim: "XLT", price: 35500, miles: 41200, loc: "Orlando, FL", range: 210, saveYr: 3400, grade: 72, soh: 88, warranty: "40 mo battery", img: "assets/lightning-stack.webp", factors: { soh: "88% · peer avg", miles: "41.2k · high", warranty: "40 mo left", other: "Clean title · private" } },
+      { id: "l6", year: 2025, make: "Rivian", model: "R1T", trim: "Adventure", price: 74200, miles: 2100, loc: "Miami, FL", range: 328, saveYr: 4300, grade: 93, soh: 99, warranty: "100 mo battery", img: "assets/rivian-hero.webp", factors: { soh: "99% · near new", miles: "2.1k · very low", warranty: "100 mo left", other: "Delivery center" } },
+      { id: "l7", year: 2024, make: "GMC", model: "Sierra EV", trim: "Elevation", price: 61500, miles: 8700, loc: "West Palm Beach, FL", range: 390, saveYr: 4800, grade: 85, soh: 96, warranty: "80 mo battery", img: "assets/sierra-hero.webp", factors: { soh: "96% · strong", miles: "8.7k · low", warranty: "80 mo left", other: "Dealer stock" } },
+      { id: "l8", year: 2023, make: "Tesla", model: "Cybertruck", trim: "AWD", price: 67500, miles: 15600, loc: "West Palm Beach, FL", range: 320, saveYr: 3900, grade: 78, soh: 96, warranty: "88 mo battery", img: "assets/cybertruck-lifestyle.webp", factors: { soh: "96% · strong", miles: "15.6k · average", warranty: "88 mo left", other: "Upfit demo" } }
+    ];
+
+    const state = { year: "all", detailId: null };
+
+    function money(n) { return "$" + Math.round(n).toLocaleString(); }
+    function saveLabel(n) { return "Save ~$" + Math.round(n).toLocaleString() + "/yr"; }
+
+    function filtered() {
+      if (state.year === "all") return LISTINGS;
+      return LISTINGS.filter((L) => L.year === state.year);
+    }
+
+    function renderChips() {
+      const years = ["all", ...[...new Set(LISTINGS.map((L) => L.year))].sort()];
+      document.getElementById("yearChips").innerHTML = years.map((y) => {
+        const label = y === "all" ? "All" : String(y).slice(2);
+        const on = state.year === y ? "is-on" : "";
+        return `<button type="button" class="ychip ${on}" data-year="${y}">${label}</button>`;
+      }).join("");
+      document.querySelectorAll(".ychip").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          state.year = btn.dataset.year === "all" ? "all" : Number(btn.dataset.year);
+          state.detailId = null;
+          render();
+        });
+      });
+    }
+
+    function renderGrid() {
+      const root = document.getElementById("grid");
+      root.innerHTML = filtered().map((L) => `
+        <button type="button" class="card ${state.detailId === L.id ? "is-on" : ""}" data-id="${L.id}">
+          <div class="card-ph" style="background-image:url(${L.img})">
+            <span class="card-ex">EXAMPLE</span>
+          </div>
+          <div class="card-body">
+            <p class="card-ymm">${L.year} ${L.make} ${L.model} ${L.trim}</p>
+            <p class="card-price">${money(L.price)}</p>
+            <p class="card-meta">${L.miles.toLocaleString()} mi · ${L.loc}</p>
+            <div class="card-heroes">
+              <div class="ch range"><div class="lab">Range</div><div class="val">~${L.range} mi</div></div>
+              <div class="ch save"><div class="lab">vs gas</div><div class="val">${saveLabel(L.saveYr)}</div></div>
+            </div>
+          </div>
+        </button>
+      `).join("");
+      root.querySelectorAll(".card").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          state.detailId = btn.dataset.id;
+          render();
+        });
+      });
+    }
+
+    function renderDetail() {
+      const detail = document.getElementById("detail");
+      const inv = document.getElementById("viewInv");
+      const L = LISTINGS.find((x) => x.id === state.detailId);
+      if (!L) {
+        detail.classList.remove("is-on");
+        inv.classList.remove("is-hide");
+        return;
+      }
+      inv.classList.add("is-hide");
+      detail.classList.add("is-on");
+      document.getElementById("detailPh").style.backgroundImage = `url(${L.img})`;
+      document.getElementById("detailTitle").textContent =
+        `${L.year} ${L.make} ${L.model} ${L.trim}`;
+      document.getElementById("detailLoc").textContent = L.loc;
+      document.getElementById("detailPrice").textContent = money(L.price);
+      document.getElementById("detailMiles").innerHTML =
+        `${L.miles.toLocaleString()} mi · all-in · <span class="ex">EXAMPLE</span>`;
+      document.getElementById("gradeWrap").innerHTML = vehicleGradeDial(L.grade, 76);
+      document.getElementById("hfRange").textContent = `~${L.range} mi`;
+      document.getElementById("hfSave").textContent = saveLabel(L.saveYr);
+      document.getElementById("factorsBody").innerHTML = `
+        <dl>
+          <div class="factor-row"><dt>Battery SOH<span class="hint">vs similar trucks</span></dt><dd>${L.factors.soh} <span class="ex">EX</span></dd></div>
+          <div class="factor-row"><dt>Mileage<span class="hint">peer year/model</span></dt><dd>${L.factors.miles} <span class="ex">EX</span></dd></div>
+          <div class="factor-row"><dt>Warranty remaining</dt><dd>${L.factors.warranty} <span class="ex">EX</span></dd></div>
+          <div class="factor-row"><dt>Other</dt><dd>${L.factors.other} <span class="ex">EX</span></dd></div>
+        </dl>`;
+    }
+
+    function render() {
+      renderChips();
+      renderGrid();
+      renderDetail();
+    }
+
+    document.getElementById("detailBack").addEventListener("click", () => {
+      state.detailId = null;
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>

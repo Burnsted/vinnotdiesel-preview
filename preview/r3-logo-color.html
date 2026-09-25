@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>R3 — Logo + color concepts (preview only)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=IBM+Plex+Mono:wght@500;600;700&family=Inter:wght@500;600;700&family=Oswald:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --volt: #1fd6a0;
+      --volt-deep: #12b884;
+      --paper: #f3f5f8;
+      --ink: #121820;
+      --muted: #5a6570;
+      --b1-ink: #0c2e28;
+      --b1-volt: #1fd6a0;
+      --b1-sand: #f0c27a;
+      --b1-cream: #efe6d4;
+      --b2-navy: #0b1a2e;
+      --b2-charge: #3aa0ff;
+      --b2-ember: #ff6b2c;
+      --b2-mist: #e8f1ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.4;
+    }
+    .wrap { max-width: 390px; margin: 0 auto; padding: 14px 12px 56px; }
+    .banner {
+      background: #fff3cd; border: 1px solid #e6d089; border-radius: 10px;
+      padding: 10px 12px; font-size: 0.76rem; color: #5c4b12; margin-bottom: 14px;
+    }
+    h1.page { font-size: 1.25rem; margin: 0 0 4px; letter-spacing: -0.02em; }
+    .page-sub { margin: 0 0 18px; color: var(--muted); font-size: 0.82rem; }
+    .sec {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); margin: 22px 0 10px;
+    }
+    .card {
+      background: #fff; border: 1px solid #dce3ea; border-radius: 14px;
+      padding: 12px; margin-bottom: 12px;
+    }
+    .tag {
+      display: inline-block; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.05em;
+      padding: 3px 8px; border-radius: 999px; background: #e8eef5; color: #2a3a4a; margin-bottom: 8px;
+    }
+    .rationale { font-size: 0.75rem; color: var(--muted); margin: 8px 0 0; }
+    .bg-pair { display: grid; gap: 8px; }
+    .logo-stage {
+      border-radius: 12px; padding: 22px 12px; display: flex;
+      align-items: center; justify-content: center; min-height: 88px;
+    }
+    .logo-stage.dark { background: #0d1520; }
+    .logo-stage.light { background: #f7f9fc; border: 1px solid #e3e9f0; }
+    .logo-stage.b1dark { background: var(--b1-ink); }
+    .icons-row { display: flex; gap: 10px; justify-content: center; margin-top: 8px; flex-wrap: wrap; }
+    .app-icon {
+      width: 72px; height: 72px; border-radius: 16px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    }
+    .app-label { font-size: 0.65rem; text-align: center; color: var(--muted); margin-top: 4px; }
+
+    /* Shared not */
+    .not-script {
+      font-family: Caveat, cursive; font-weight: 700; color: var(--volt);
+      line-height: 1; display: inline-block;
+    }
+
+    /* —— L1 Charge-cut custom —— */
+    .l1 {
+      display: flex; align-items: center; gap: 0.18em;
+      font-family: Space Grotesk, sans-serif; font-weight: 700;
+      letter-spacing: -0.03em; font-size: 1.55rem;
+    }
+    .l1 .vin, .l1 .diesel { color: #7ec8ff; }
+    .logo-stage.light .l1 .vin, .logo-stage.light .l1 .diesel { color: #1a5faf; }
+    .l1 .not-script { font-size: 1.85rem; transform: rotate(-6deg); margin: 0 0.05em; }
+    .l1 svg.bolt-v { width: 1.05em; height: 1.15em; vertical-align: -0.12em; margin-right: -0.08em; }
+    .l1 .diesel { position: relative; }
+    .l1 .i-plug {
+      display: inline-block; width: 0.28em; height: 0.85em; margin: 0 0.04em;
+      border: 2.5px solid currentColor; border-radius: 2px 2px 1px 1px;
+      position: relative; vertical-align: -0.05em;
+    }
+    .l1 .i-plug::before, .l1 .i-plug::after {
+      content: ""; position: absolute; top: -0.28em; width: 2px; height: 0.28em;
+      background: currentColor; border-radius: 1px;
+    }
+    .l1 .i-plug::before { left: 3px; }
+    .l1 .i-plug::after { right: 3px; }
+
+    /* —— L2 VIN plate / strike DIESEL —— */
+    .l2 {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .l2-plate {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-weight: 600; font-size: 1.05rem; letter-spacing: 0.18em;
+      padding: 8px 12px; border-radius: 4px;
+      background: linear-gradient(180deg, #c5ccd4, #9aa3ad);
+      color: #1a1f24; border: 2px solid #6d7680;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), 0 2px 0 #4a525a;
+      text-transform: uppercase;
+    }
+    .l2-row {
+      display: flex; align-items: center; gap: 0.35em;
+      font-family: "IBM Plex Mono", monospace; font-weight: 700; font-size: 1.15rem;
+      letter-spacing: 0.08em;
+    }
+    .l2-row .diesel {
+      position: relative; color: #8b95a3; text-decoration: none;
+    }
+    .logo-stage.light .l2-row .diesel { color: #7a8491; }
+    .logo-stage.dark .l2-row .diesel { color: #8b95a3; }
+    .l2-row .diesel::after {
+      content: ""; position: absolute; left: -4%; right: -4%; top: 48%;
+      height: 3px; background: var(--volt); transform: rotate(-8deg);
+      border-radius: 2px; box-shadow: 0 0 8px rgba(31,214,160,0.6);
+    }
+    .l2-row .not-script { font-size: 1.55rem; letter-spacing: 0; }
+
+    /* —— L3 Two-tone gradient fill —— */
+    .l3 {
+      display: flex; align-items: baseline; gap: 0.22em;
+      font-family: Oswald, sans-serif; font-weight: 600;
+      font-size: 1.7rem; letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .l3 .vin, .l3 .diesel {
+      background: linear-gradient(115deg, #3aa0ff 0%, #1fd6a0 55%, #7ef0c8 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      filter: drop-shadow(0 1px 0 rgba(0,0,0,0.15));
+    }
+    .logo-stage.light .l3 .vin, .logo-stage.light .l3 .diesel {
+      background: linear-gradient(115deg, #1a6fd0 0%, #0fa878 60%, #12b884 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .l3 .not-script { font-size: 1.75rem; text-transform: none; letter-spacing: 0; }
+
+    /* —— L4 Stencil industrial —— */
+    .l4 {
+      display: flex; align-items: center; gap: 0.2em;
+      font-family: Oswald, sans-serif; font-weight: 700;
+      font-size: 1.55rem; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .l4 .vin { color: #ff8a4c; }
+    .l4 .diesel {
+      color: transparent;
+      -webkit-text-stroke: 1.5px #ff8a4c;
+      letter-spacing: 0.14em;
+    }
+    .logo-stage.light .l4 .vin { color: #e85a1a; }
+    .logo-stage.light .l4 .diesel {
+      color: transparent; -webkit-text-stroke: 1.5px #e85a1a;
+    }
+    .l4 .not-script {
+      font-size: 1.7rem; letter-spacing: 0; text-transform: none;
+      background: rgba(31,214,160,0.15); padding: 0 0.15em; border-radius: 4px;
+    }
+
+    /* —— L5 Geometric + icon —— */
+    .l5 {
+      display: flex; align-items: center; gap: 0.45em;
+    }
+    .l5-mark {
+      width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+      background: linear-gradient(145deg, #123050, #0b1a2e);
+      display: grid; place-items: center;
+      border: 1px solid rgba(58,160,255,0.45);
+    }
+    .logo-stage.light .l5-mark {
+      background: linear-gradient(145deg, #1a3a60, #0f2438);
+    }
+    .l5-words {
+      display: flex; align-items: baseline; gap: 0.18em;
+      font-family: Space Grotesk, sans-serif; font-weight: 700;
+      font-size: 1.25rem; letter-spacing: -0.02em;
+    }
+    .l5-words .vin { color: #5eb6ff; }
+    .l5-words .diesel { color: #9ecfff; font-weight: 600; opacity: 0.92; }
+    .logo-stage.light .l5-words .vin { color: #1570c5; }
+    .logo-stage.light .l5-words .diesel { color: #3a6f9e; }
+    .l5-words .not-script { font-size: 1.45rem; }
+
+    /* App icons */
+    .ai-l1 { background: #0d1520; }
+    .ai-l2 { background: linear-gradient(180deg, #b8c0c8, #8a939c); }
+    .ai-l3 { background: linear-gradient(145deg, #0b1a2e, #123a5c); }
+    .ai-l4 { background: #1a120e; }
+    .ai-l5 { background: linear-gradient(145deg, #0b1a2e, #123050); }
+    .ai-inner { transform: scale(0.55); white-space: nowrap; }
+
+    /* —— K hero mocks —— */
+    .k-hero {
+      position: relative; height: 520px; border-radius: 16px; overflow: hidden;
+      color: #fff; display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 16px; isolation: isolate;
+    }
+    .k-hero .bg {
+      position: absolute; inset: 0; background-size: cover; background-position: center 55%;
+      z-index: 0;
+    }
+    .k-hero .scrim {
+      position: absolute; inset: 0; z-index: 1;
+    }
+    .k-hero .content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 10px; }
+    .k-top {
+      position: absolute; top: 12px; left: 12px; right: 12px; z-index: 3;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .k-toggle {
+      display: inline-flex; background: rgba(0,0,0,0.35); backdrop-filter: blur(8px);
+      border-radius: 999px; padding: 3px; border: 1px solid rgba(255,255,255,0.2);
+    }
+    .k-toggle span {
+      padding: 5px 10px; border-radius: 999px; font-size: 0.7rem; font-weight: 700;
+      color: rgba(255,255,255,0.7);
+    }
+    .k-toggle span.on { background: rgba(255,255,255,0.2); color: #fff; }
+    .k-headline {
+      font-size: 1.45rem; font-weight: 700; letter-spacing: -0.02em;
+      line-height: 1.15; max-width: 14ch; text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+    }
+    .k-btn-primary {
+      border: 0; border-radius: 10px; padding: 12px 16px; font-weight: 700; font-size: 0.9rem;
+      width: 100%;
+    }
+    .k-btn-secondary {
+      background: transparent; border-radius: 10px; padding: 11px 16px;
+      font-weight: 600; font-size: 0.88rem; width: 100%;
+      border: 1.5px solid rgba(255,255,255,0.85); color: #fff;
+    }
+    .k-link {
+      background: none; border: 0; color: #fff; font-weight: 600; font-size: 0.85rem;
+      text-decoration: underline; text-underline-offset: 3px; align-self: flex-start;
+      padding: 2px 0; opacity: 0.95;
+    }
+    .k-hex {
+      font-size: 0.7rem; color: var(--muted); margin: 6px 0 0;
+      font-family: "IBM Plex Mono", monospace;
+    }
+    .mini-logo-dark .l1 .vin, .mini-logo-dark .l1 .diesel { color: #9fd4ff; font-size: 0.95rem; }
+    .mini-logo-dark .l1 { font-size: 0.95rem; }
+    .mini-logo-dark .l1 .not-script { font-size: 1.2rem; }
+    .mini-logo-dark .l1 .i-plug { border-width: 2px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="banner">
+      Preview only — not wired to the app. Keeps A1 green Caveat <em>not</em>. VIN/DIESEL redesigned so it won’t read as the actor.
+    </div>
+    <h1 class="page">R3 · Logo + color in use</h1>
+    <p class="page-sub">L1–L5 wordmarks · K1–K6 390px hero mocks · B1 teal + B2 navy/blue/ember</p>
+
+    <!-- ========== PART 1: LOGOS ========== -->
+    <div class="sec">Part 1 · Logo concepts</div>
+
+    <!-- L1 -->
+    <div class="card" id="L1">
+      <span class="tag">L1 · Charge-cut letterforms</span>
+      <div class="bg-pair">
+        <div class="logo-stage dark">
+          <div class="l1" aria-label="VIN not DIESEL">
+            <span class="vin"><svg class="bolt-v" viewBox="0 0 40 48" aria-hidden="true"><path fill="#7ec8ff" d="M22 0 L8 26 H18 L14 48 L34 18 H22 Z"/></svg>IN</span>
+            <span class="not-script">not</span>
+            <span class="diesel">D<span class="i-plug" aria-hidden="true"></span>ESEL</span>
+          </div>
+        </div>
+        <div class="logo-stage light">
+          <div class="l1">
+            <span class="vin"><svg class="bolt-v" viewBox="0 0 40 48" aria-hidden="true"><path fill="#1a5faf" d="M22 0 L8 26 H18 L14 48 L34 18 H22 Z"/></svg>IN</span>
+            <span class="not-script">not</span>
+            <span class="diesel">D<span class="i-plug" aria-hidden="true"></span>ESEL</span>
+          </div>
+        </div>
+      </div>
+      <div class="icons-row">
+        <div>
+          <div class="app-icon ai-l1">
+            <div class="l1 ai-inner" style="color:#7ec8ff">
+              <span class="vin"><svg class="bolt-v" viewBox="0 0 40 48"><path fill="#7ec8ff" d="M22 0 L8 26 H18 L14 48 L34 18 H22 Z"/></svg></span>
+              <span class="not-script" style="font-size:1.6rem">not</span>
+            </div>
+          </div>
+          <div class="app-label">app icon</div>
+        </div>
+      </div>
+      <p class="rationale">Lightning bolt replaces the V; plug prongs form the I in DIESEL — EV charge motif, not a celebrity nameplate.</p>
+    </div>
+
+    <!-- L2 -->
+    <div class="card" id="L2">
+      <span class="tag">L2 · VIN plate + struck DIESEL</span>
+      <div class="bg-pair">
+        <div class="logo-stage dark">
+          <div class="l2">
+            <div class="l2-plate">VIN · US · EV</div>
+            <div class="l2-row">
+              <span class="not-script">not</span>
+              <span class="diesel">DIESEL</span>
+            </div>
+          </div>
+        </div>
+        <div class="logo-stage light">
+          <div class="l2">
+            <div class="l2-plate">VIN · US · EV</div>
+            <div class="l2-row">
+              <span class="not-script">not</span>
+              <span class="diesel">DIESEL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="icons-row">
+        <div>
+          <div class="app-icon ai-l2">
+            <div style="text-align:center;line-height:1.1">
+              <div style="font-family:IBM Plex Mono,monospace;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;color:#1a1f24">VIN</div>
+              <div class="not-script" style="font-size:1.35rem">not</div>
+            </div>
+          </div>
+          <div class="app-label">app icon</div>
+        </div>
+      </div>
+      <p class="rationale">VIN reads as a stamped vehicle ID plate; green script <em>not</em> slashes through DIESEL — marketplace for battery trucks, not diesel.</p>
+    </div>
+
+    <!-- L3 -->
+    <div class="card" id="L3">
+      <span class="tag">L3 · Charge gradient fill</span>
+      <div class="bg-pair">
+        <div class="logo-stage dark">
+          <div class="l3">
+            <span class="vin">VIN</span>
+            <span class="not-script">not</span>
+            <span class="diesel">DIESEL</span>
+          </div>
+        </div>
+        <div class="logo-stage light">
+          <div class="l3">
+            <span class="vin">VIN</span>
+            <span class="not-script">not</span>
+            <span class="diesel">DIESEL</span>
+          </div>
+        </div>
+      </div>
+      <div class="icons-row">
+        <div>
+          <div class="app-icon ai-l3">
+            <div class="l3 ai-inner" style="font-size:1rem">
+              <span class="vin">V</span><span class="not-script" style="font-size:1.3rem">n</span><span class="diesel">D</span>
+            </div>
+          </div>
+          <div class="app-label">app icon</div>
+        </div>
+      </div>
+      <p class="rationale">Oswald condensed with blue→volt gradient fill — energy/charge feel without flat white blocks.</p>
+    </div>
+
+    <!-- L4 -->
+    <div class="card" id="L4">
+      <span class="tag">L4 · Stencil / work-truck industrial</span>
+      <div class="bg-pair">
+        <div class="logo-stage dark">
+          <div class="l4">
+            <span class="vin">VIN</span>
+            <span class="not-script">not</span>
+            <span class="diesel">DIESEL</span>
+          </div>
+        </div>
+        <div class="logo-stage light">
+          <div class="l4">
+            <span class="vin">VIN</span>
+            <span class="not-script">not</span>
+            <span class="diesel">DIESEL</span>
+          </div>
+        </div>
+      </div>
+      <div class="icons-row">
+        <div>
+          <div class="app-icon ai-l4">
+            <div class="l4 ai-inner" style="font-size:0.95rem;gap:0.1em">
+              <span class="vin">VIN</span>
+            </div>
+            <span class="not-script" style="position:absolute;font-size:1.1rem;margin-top:28px">not</span>
+          </div>
+          <div class="app-label">app icon</div>
+        </div>
+      </div>
+      <p class="rationale">Ember solid VIN + stencil-outline DIESEL — industrial yard / fleet stencil vibe with volt <em>not</em> as the punchline.</p>
+    </div>
+
+    <!-- L5 -->
+    <div class="card" id="L5">
+      <span class="tag">L5 · Geometric + truck/bolt mark</span>
+      <div class="bg-pair">
+        <div class="logo-stage dark">
+          <div class="l5">
+            <div class="l5-mark" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <path d="M3 15 H7 L9 10 H15 L17 7 H22 L24 10 V15 H22.5 Q21.2 18 19 18 Q16.8 18 15.5 15 H10.5 Q9.2 18 7 18 Q4.8 18 3.5 15 H3 Z" stroke="#3aa0ff" stroke-width="1.4" fill="rgba(58,160,255,0.15)"/>
+                <circle cx="7" cy="16.5" r="1.6" fill="#1fd6a0"/>
+                <circle cx="19" cy="16.5" r="1.6" fill="#1fd6a0"/>
+                <path d="M14 4 L11 10 H14 L12.5 15 L18 8 H15 Z" fill="#1fd6a0"/>
+              </svg>
+            </div>
+            <div class="l5-words">
+              <span class="vin">VIN</span>
+              <span class="not-script">not</span>
+              <span class="diesel">DIESEL</span>
+            </div>
+          </div>
+        </div>
+        <div class="logo-stage light">
+          <div class="l5">
+            <div class="l5-mark" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <path d="M3 15 H7 L9 10 H15 L17 7 H22 L24 10 V15 H22.5 Q21.2 18 19 18 Q16.8 18 15.5 15 H10.5 Q9.2 18 7 18 Q4.8 18 3.5 15 H3 Z" stroke="#3aa0ff" stroke-width="1.4" fill="rgba(58,160,255,0.15)"/>
+                <circle cx="7" cy="16.5" r="1.6" fill="#1fd6a0"/>
+                <circle cx="19" cy="16.5" r="1.6" fill="#1fd6a0"/>
+                <path d="M14 4 L11 10 H14 L12.5 15 L18 8 H15 Z" fill="#1fd6a0"/>
+              </svg>
+            </div>
+            <div class="l5-words">
+              <span class="vin">VIN</span>
+              <span class="not-script">not</span>
+              <span class="diesel">DIESEL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="icons-row">
+        <div>
+          <div class="app-icon ai-l5">
+            <svg width="40" height="40" viewBox="0 0 26 26" fill="none">
+              <path d="M3 15 H7 L9 10 H15 L17 7 H22 L24 10 V15 H22.5 Q21.2 18 19 18 Q16.8 18 15.5 15 H10.5 Q9.2 18 7 18 Q4.8 18 3.5 15 H3 Z" stroke="#3aa0ff" stroke-width="1.4" fill="rgba(58,160,255,0.2)"/>
+              <circle cx="7" cy="16.5" r="1.6" fill="#1fd6a0"/>
+              <circle cx="19" cy="16.5" r="1.6" fill="#1fd6a0"/>
+              <path d="M14 4 L11 10 H14 L12.5 15 L18 8 H15 Z" fill="#1fd6a0"/>
+            </svg>
+          </div>
+          <div class="app-label">app / favicon</div>
+        </div>
+      </div>
+      <p class="rationale">Rounded Space Grotesk + truck silhouette with charge bolt mark — clear EV pickup marketplace icon system.</p>
+    </div>
+
+    <!-- ========== PART 2: COLOR IN USE ========== -->
+    <div class="sec">Part 2 · Color in use (390 heroes)</div>
+    <p class="page-sub" style="margin-top:-4px">Logo lockup uses <strong>L1</strong> (strongest EV motif). Photos from PR #1 Wikimedia assets.</p>
+
+    <!-- K1 B1 -->
+    <div class="card" id="K1">
+      <span class="tag">K1 · B1 teal — volt CTA</span>
+      <div class="k-hero">
+        <div class="bg" style="background-image:url(assets/lightning-lifestyle.webp);background-position:center 45%"></div>
+        <div class="scrim" style="background:linear-gradient(to top, rgba(12,46,40,0.92) 0%, rgba(12,46,40,0.45) 45%, rgba(12,46,40,0.25) 100%)"></div>
+        <div class="k-top">
+          <div class="l1 mini-logo-dark">
+            <span class="vin"><svg class="bolt-v" viewBox="0 0 40 48"><path fill="#9fd4ff" d="M22 0 L8 26 H18 L14 48 L34 18 H22 Z"/></svg>IN</span>
+            <span class="not-script">not</span>
+            <span class="diesel">D<span class="i-plug"></span>ESEL</span>
+          </div>
+          <div class="k-toggle"><span class="on">Work</span><span>Play</span></div>
+        </div>
+        <div class="content">
+          <div class="k-headline">Battery-first trucks for the job.</div>
+          <button type="button" class="k-btn-primary" style="background:#1fd6a0;color:#06241c">See trucks for sale</button>
+          <button type="button" class="k-btn-secondary">Message seller</button>
+          <button type="button" class="k-link">Ask a question</button>
+        </div>
+      </div>
+      <p class="k-hex">B1 · ink #0C2E28 · volt #1FD6A0 · sand #F0C27A · cream #EFE6D4</p>
+    </div>
+
+    <!-- K2 B1 sand accent -->
+    <div class="card" id="K2">
+      <span class="tag">K2 · B1 teal — sand CTA</span>
+      <div class="k-hero">
+        <div class="bg" style="background-image:url(assets/rivian-stack.webp);background-position:center 40%"></div>
+        <div class="scrim" style="background:linear-gradient(to top, rgba(12,46,40,0.94) 0%, rgba(20,70,60,0.5) 50%, rgba(12,46,40,0.2) 100%)"></div>
+        <div class="k-top">
+          <div class="l1 mini-logo-dark">
+            <span class="vin"><svg class="bolt-v" viewBox="0 0 40 48"><path fill="#9fd4ff" d="M22 0 L8 26 H18 L14 48 L34 18 H22 Z"/></svg>IN</span>
+            <span class="not-script">not</span>
+            <span class="diesel">D<span class="i-plug"></span>ESEL</span>
+          </div>
+          <div class="k-toggle"><span>Work</span><span class="on">Play</span></div>
+        </div>
+        <div class="content">
+          <div class="k-headline">Weekends without the fuel stop.</div>
+          <button type="button" class="k-btn-primary" style="background:#f0c27a;color:#3a2a08">Explore the R1T</button>
+          <button type="button" class="k-btn-secondary" style="border-color:#efe6d4;color:#efe6d4">Book a PPI</button>
+          <button type="button" class="k-link" style="color:#efe6d4">Range &amp; battery details</button>
+        </div>
+      </div>
+      <p class="k-hex">B1 · same swatches · sand primary CTA · cream secondary text</p>
+    </div>
+
+    <!-- K3 B2 ember CTA -->
+    <div class="card" id="K3">
+      <span class="tag">K3 · B2 navy — ember primary CTA</span>
+      <div class="k-hero">
+        <div class="bg" style="background-image:url(assets/silverado-stack.webp);background-position:center 45%"></div>
+        <div class="scrim" style="background:linear-gradient(to top, rgba(11,26,46,0.95) 0%, rgba(11,26,46,0.5) 48%, rgba(11,26,46,0.28) 100%)"></div>
+        <div class="k-top">
+          <div class="l1 mini-logo-dark">
+            <span class="vin"><svg class="bolt-v" viewBox="0 0 40 48"><path fill="#9fd4ff" d="M22 0 L8 26 H18 L14 48 L34 18 H22 Z"/></svg>IN</span>
+            <span class="not-script">not</span>
+            <span class="diesel">D<span class="i-plug"></span>ESEL</span>
+          </div>
+          <div class="k-toggle"><span class="on">Work</span><span>Play</span></div>
+        </div>
+        <div class="content">
+          <div class="k-headline">Fleet-ready EVs. SOH first.</div>
+          <button type="button" class="k-btn-primary" style="background:#ff6b2c;color:#fff">Buy Now</button>
+          <button type="button" class="k-btn-secondary">Make an offer</button>
+          <button type="button" class="k-link">Shop all trucks</button>
+        </div>
+      </div>
+      <p class="k-hex">B2 · navy #0B1A2E · charge #3AA0FF · ember #FF6B2C · mist #E8F1FF</p>
+    </div>
+
+    <!-- K4 B2 charge CTA -->
+    <div class="card" id="K4">
+      <span class="tag">K4 · B2 navy — charge-blue primary CTA</span>
+      <div class="k-hero">
+        <div class="bg" style="background-image:url(assets/cybertruck-lifestyle.webp);background-position:center 50%"></div>
+        <div class="scrim" style="background:linear-gradient(to top, rgba(11,26,46,0.94) 0%, rgba(18,50,90,0.45) 50%, rgba(11,26,46,0.3) 100%)"></div>
+        <div class="k-top">
+          <div class="l1 mini-logo-dark">
+            <span class="vin"><svg class="bolt-v" viewBox="0 0 40 48"><path fill="#9fd4ff" d="M22 0 L8 26 H18 L14 48 L34 18 H22 Z"/></svg>IN</span>
+            <span class="not-script">not</span>
+            <span class="diesel">D<span class="i-plug"></span>ESEL</span>
+          </div>
+          <div class="k-toggle"><span>Work</span><span class="on">Play</span></div>
+        </div>
+        <div class="content">
+          <div class="k-headline">Overland capable. Supercharger ready.</div>
+          <button type="button" class="k-btn-primary" style="background:#3aa0ff;color:#061018">Explore the Cybertruck</button>
+          <button type="button" class="k-btn-secondary" style="border-color:#3aa0ff;color:#cfe6ff">Message</button>
+          <button type="button" class="k-link" style="color:#9fd4ff">Ask a question</button>
+        </div>
+      </div>
+      <p class="k-hex">B2 · charge #3AA0FF primary · navy overlay · ember unused (alt)</p>
+    </div>
+
+    <!-- K5 B2 mist lighter -->
+    <div class="card" id="K5">
+      <span class="tag">K5 · B2 mist-light variant</span>
+      <div class="k-hero" style="color:#0b1a2e">
+        <div class="bg" style="background-image:url(assets/hummer-stack.webp);background-position:center 40%"></div>
+        <div class="scrim" style="background:linear-gradient(to top, rgba(232,241,255,0.96) 0%, rgba(232,241,255,0.72) 42%, rgba(11,26,46,0.25) 100%)"></div>
+        <div class="k-top">
+          <div class="l1" style="font-size:0.95rem">
+            <span class="vin" style="color:#1570c5"><svg class="bolt-v" viewBox="0 0 40 48"><path fill="#1570c5" d="M22 0 L8 26 H18 L14 48 L34 18 H22 Z"/></svg>IN</span>
+            <span class="not-script">not</span>
+            <span class="diesel" style="color:#3a6f9e">D<span class="i-plug"></span>ESEL</span>
+          </div>
+          <div class="k-toggle" style="background:rgba(255,255,255,0.7);border-color:#c5d6ea">
+            <span class="on" style="background:#0b1a2e;color:#fff">Work</span>
+            <span style="color:#0b1a2e">Play</span>
+          </div>
+        </div>
+        <div class="content">
+          <div class="k-headline" style="text-shadow:none;color:#0b1a2e">Capability theater — check GVWR first.</div>
+          <button type="button" class="k-btn-primary" style="background:#ff6b2c;color:#fff">See trucks for sale</button>
+          <button type="button" class="k-btn-secondary" style="border-color:#0b1a2e;color:#0b1a2e">Book a PPI</button>
+          <button type="button" class="k-link" style="color:#1570c5">Technical specs</button>
+        </div>
+      </div>
+      <p class="k-hex">B2 mist #E8F1FF ground · navy text · ember CTA · charge link</p>
+    </div>
+
+    <!-- K6 B2 split ember+charge -->
+    <div class="card" id="K6">
+      <span class="tag">K6 · B2 dual accent (ember + charge)</span>
+      <div class="k-hero">
+        <div class="bg" style="background-image:url(assets/sierra-stack.webp);background-position:center 50%"></div>
+        <div class="scrim" style="background:linear-gradient(135deg, rgba(11,26,46,0.92) 0%, rgba(26,58,110,0.55) 50%, rgba(255,107,44,0.35) 100%)"></div>
+        <div class="k-top">
+          <div class="l1 mini-logo-dark">
+            <span class="vin"><svg class="bolt-v" viewBox="0 0 40 48"><path fill="#9fd4ff" d="M22 0 L8 26 H18 L14 48 L34 18 H22 Z"/></svg>IN</span>
+            <span class="not-script">not</span>
+            <span class="diesel">D<span class="i-plug"></span>ESEL</span>
+          </div>
+          <div class="k-toggle"><span class="on">Work</span><span>Play</span></div>
+        </div>
+        <div class="content">
+          <div class="k-headline">Work week charged. Play day ready.</div>
+          <button type="button" class="k-btn-primary" style="background:linear-gradient(90deg,#ff6b2c,#3aa0ff);color:#fff">Make an offer</button>
+          <button type="button" class="k-btn-secondary" style="border-color:#3aa0ff;color:#cfe6ff">Message</button>
+          <button type="button" class="k-link">Discover more</button>
+        </div>
+      </div>
+      <p class="k-hex">B2 · ember→charge gradient primary · navy base · both accents in play</p>
+    </div>
+  </div>
+</body>
+</html>
