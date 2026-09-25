@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { LISTINGS, distanceFromHome } from '../data/listings'
+import { batteryConfidenceFromListing } from '../lib/battery'
 import MakeOfferModal from '../components/MakeOfferModal'
 import BuyNowModal from '../components/BuyNowModal'
 
@@ -86,11 +87,11 @@ export default function Listing() {
               <div className="stat-hint">Displayed / sticker class</div>
             </div>
             <div className="stat-tile">
-              <div className="stat-label">Battery SOH</div>
+              <div className="stat-label">Battery</div>
               <div className={`stat-value ${sohMissing ? 'amber' : ''}`}>
-                {sohMissing ? 'Incomplete' : `${listing.soh}%`}
+                {batteryConfidenceFromListing(listing).label}
               </div>
-              <div className="stat-hint">{sohMissing ? 'No measurement on file' : listing.sohMethod}</div>
+              <div className="stat-hint">{sohMissing ? 'No health reading on file' : listing.sohMethod}</div>
             </div>
             <div className="stat-tile">
               <div className="stat-label">Payload</div>
@@ -147,7 +148,7 @@ export default function Listing() {
           <dl className="facts-strip">
             <div className="fact"><dt>Battery / drive unit</dt><dd>{listing.warrantyBatteryMonths} mo left</dd></div>
             <div className="fact"><dt>Bumper-to-bumper</dt><dd>{listing.warrantyBumperMonths > 0 ? `${listing.warrantyBumperMonths} mo left` : 'Expired'}</dd></div>
-            <div className="fact"><dt>SOH method</dt><dd style={{ fontSize: '0.8rem', fontWeight: 500 }}>{listing.sohMethod || 'Not provided'}</dd></div>
+            <div className="fact"><dt>How it was measured</dt><dd style={{ fontSize: '0.8rem', fontWeight: 500 }}>{listing.sohMethod || 'Not provided'}</dd></div>
           </dl>
           <p style={{ marginTop: 10, color: 'var(--text-muted)', fontSize: '0.88rem' }}>{listing.warrantyNotes}</p>
         </section>

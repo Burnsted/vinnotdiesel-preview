@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { distanceFromHome } from '../data/listings'
+import { batteryConfidenceFromListing } from '../lib/battery'
 
 function formatPrice(listing) {
   if (listing.allInPrice == null) {
@@ -36,7 +37,7 @@ function TruckSilhouette({ make }) {
 export default function ListingCard({ listing }) {
   const price = formatPrice(listing)
   const miles = distanceFromHome(listing)
-  const sohMissing = listing.soh == null
+  const battery = batteryConfidenceFromListing(listing)
   const sellerLabel = listing.sellerType.charAt(0).toUpperCase() + listing.sellerType.slice(1)
 
   return (
@@ -70,7 +71,7 @@ export default function ListingCard({ listing }) {
 
         <div className="card-chip-row">
           <span className="meta-chip ev-chip">
-            SOH<strong>{sohMissing ? '—' : `${listing.soh}%`}</strong>
+            {battery.label}
           </span>
           <span className="meta-chip ev-chip">
             Range<strong>{listing.ratedRange} mi</strong>

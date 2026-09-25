@@ -78,7 +78,7 @@ export default function Home() {
       <section className="locked-section" aria-labelledby="ev-layer-title">
         <h2 id="ev-layer-title">Free EV layer on every unit</h2>
         <p className="locked-section-lead">
-          Battery status (often unknown), VIN recall placeholder, charging notes, and annual savings when a dollar figure is on file.
+          Battery health when a reading is on file, VIN recall placeholder, charging notes, and annual savings when a dollar figure is on file.
         </p>
       </section>
 

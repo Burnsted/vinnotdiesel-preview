@@ -3,6 +3,7 @@ import SavingsLine from '../components/SavingsLine'
 import WorkCompare from '../components/WorkCompare'
 import WorkSpecRows from '../components/WorkSpecRows'
 import { getPackage, getUnit } from '../data/package'
+import { batteryConfidenceFromUnit } from '../lib/battery'
 import { formatMoney } from '../lib/fit'
 import { currentWorkVehicle, displayWorkSpec } from '../lib/workSpec'
 
@@ -105,10 +106,7 @@ export default function PackageUnit() {
           <div className="ev-layer-item">
             <dt>Battery</dt>
             <dd>
-              <strong>{unit.battery.status}</strong>
-              {unit.battery.soh != null && (
-                <span> · SOH {unit.battery.soh}%</span>
-              )}
+              <strong>{batteryConfidenceFromUnit(unit).label}</strong>
               <p>{unit.battery.note}</p>
             </dd>
           </div>

@@ -10,7 +10,7 @@ const SORTS = [
   { id: 'price-desc', label: 'Price: high → low' },
   { id: 'mileage', label: 'Mileage: low → high' },
   { id: 'range', label: 'Range: high → low' },
-  { id: 'soh', label: 'SOH: high → low' },
+  { id: 'soh', label: 'Battery health: high → low' },
   { id: 'closest', label: 'Closest (WPB, FL)' },
 ]
 
@@ -212,7 +212,7 @@ export default function Browse() {
         {results.length === 0 ? (
           <div className="empty-state">
             <p>No trucks match these filters.</p>
-            <p style={{ fontSize: '0.85rem' }}>Try lowering SOH min, payload, or clearing transparent pricing.</p>
+            <p style={{ fontSize: '0.85rem' }}>Try lowering battery health min, payload, or clearing transparent pricing.</p>
           </div>
         ) : (
           <div className="listing-grid">

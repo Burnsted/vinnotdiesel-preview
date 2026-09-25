@@ -43,10 +43,10 @@ const ELECTRICAL_UNITS = [
     },
     fitScore: {
       band: 'worth it if…',
-      reason: 'Worth it if dealer supplies battery SOH and open recalls clear before deposit.',
+      reason: 'Worth it if dealer supplies battery health and open recalls clear before deposit.',
     },
     openItems: [
-      'Battery SOH not on file',
+      'Battery health not on file',
       'Confirm remaining factory warranty transfer',
       'Verify ladder-rack mounting points on this body',
     ],
@@ -120,7 +120,7 @@ const ELECTRICAL_UNITS = [
       status: 'Not reported by dealer',
       soh: null,
       usableKwh: 98,
-      note: 'Usable pack size known from trim; SOH not reported.',
+      note: 'Usable pack size known from trim; battery health not reported.',
     },
     recall: {
       status: 'Unchecked — placeholder',
@@ -136,10 +136,10 @@ const ELECTRICAL_UNITS = [
     },
     fitScore: {
       band: 'worth it if…',
-      reason: 'Worth it if SOH clears 90%+ and mileage comps hold after PPI.',
+      reason: 'Worth it if battery health clears 90%+ and mileage comps hold after PPI.',
     },
     openItems: [
-      'Battery SOH not reported by dealer',
+      'Battery health not reported by dealer',
       'Tire wear unknown',
       'Upfit not included',
     ],
@@ -186,7 +186,7 @@ const ELECTRICAL_UNITS = [
       reason: 'Hold until battery report and depot charging capacity are confirmed.',
     },
     openItems: [
-      'Battery SOH missing',
+      'Battery health missing',
       'Depot L2 circuit capacity unknown',
       'Shelving fit not verified',
     ],
@@ -233,11 +233,11 @@ const LANDSCAPE_UNITS = [
     },
     fitScore: {
       band: 'worth it if…',
-      reason: 'Worth it if tow rating for the enclosed trailer is confirmed and SOH lands on file.',
+      reason: 'Worth it if tow rating for the enclosed trailer is confirmed and battery health lands on file.',
     },
     openItems: [
       'Tow rating for dual-axle enclosed cargo must be verified',
-      'Battery SOH not reported',
+      'Battery health not reported',
       'Replaces a current non-EV hauler — year of the outgoing truck is unconfirmed',
     ],
     replaceNote: 'Replaces hauler — current truck year unconfirmed (not title-checked).',
@@ -284,7 +284,7 @@ const LANDSCAPE_UNITS = [
       reason: 'Worth it as the second truck if the WT hauler’s tow rating clears.',
     },
     openItems: [
-      'Battery SOH not reported',
+      'Battery health not reported',
       'Pro Power output not verified on this unit',
       'PPI recommended before close',
     ],

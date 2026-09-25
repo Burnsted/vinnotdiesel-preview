@@ -7,6 +7,7 @@ import {
   getPackage,
   packageStickerSum,
 } from '../data/package'
+import { batteryConfidenceFromUnit } from '../lib/battery'
 import { formatMoney } from '../lib/fit'
 import { currentWorkVehicle, displayWorkSpec } from '../lib/workSpec'
 
@@ -64,7 +65,7 @@ export default function PackageResults() {
         <p className="locked-page-lead">{pkg.summary}</p>
         <div className="package-honesty" aria-label="Package notes">
           <span className="ev-chip">
-            Battery unknown on {unknownBatt} of {pkg.unitCount}
+            Battery health not on file for {unknownBatt} of {pkg.unitCount}
           </span>
           <span className="ev-chip">Recalls unchecked per stock ID</span>
           <span className="ev-chip">{pkg.statedCountNote}</span>
@@ -138,7 +139,6 @@ export default function PackageResults() {
               </div>
               <p className="package-unit-meta">
                 {unit.mileage.toLocaleString()} mi
-                {' · '}Battery: {unit.battery.status}
               </p>
               <p className="package-unit-meta">
                 {unit.stockId}
@@ -148,8 +148,7 @@ export default function PackageResults() {
               <SavingsLine source={unit} />
               <div className="package-unit-chips">
                 <span className="ev-chip">
-                  Battery: {unit.battery.status}
-                  {unit.battery.soh != null ? ` · SOH ${unit.battery.soh}%` : ''}
+                  {batteryConfidenceFromUnit(unit).label}
                 </span>
               </div>
               <p className="package-fee-note">Fee at checkout — amount TBD</p>
