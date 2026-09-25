@@ -54,6 +54,8 @@ export function displayWorkSpec(unit) {
   if (!listing) {
     return {
       payload: { text: DASH, known: false },
+      bed: { text: DASH, known: false },
+      cab: { text: DASH, known: false },
       cabBed: { text: DASH, known: false },
       tow: { text: DASH, known: false },
       source: null,
@@ -61,6 +63,8 @@ export function displayWorkSpec(unit) {
   }
   return {
     payload: factField(listing.payload, formatLb),
+    bed: factField(listing.bed),
+    cab: factField(listing.cab),
     cabBed: factField(formatCabBed(listing.cab, listing.bed)),
     tow: factField(listing.tow, formatLb),
     source: listing.id,
@@ -84,11 +88,13 @@ export function currentWorkVehicle(intake, pkg) {
 
   const empty = { text: DASH, known: false }
   return {
-    heading: 'Your current work truck',
+    heading: 'Your current work vehicle',
     role,
     kind: 'Non-EV work vehicle',
     spec: {
       payload: empty,
+      bed: empty,
+      cab: empty,
       cabBed: empty,
       tow: empty,
       source: null,
@@ -96,8 +102,17 @@ export function currentWorkVehicle(intake, pkg) {
   }
 }
 
+/** Package + unit cards: payload · bed/cab · tow */
 export const WORK_SPEC_ROWS = [
   { key: 'payload', label: 'Payload' },
   { key: 'cabBed', label: 'Bed / cab' },
   { key: 'tow', label: 'Tow' },
+]
+
+/** Compare moment: Steve product-bar row order */
+export const COMPARE_SPEC_ROWS = [
+  { key: 'payload', label: 'Payload' },
+  { key: 'bed', label: 'Bed / capacity' },
+  { key: 'cab', label: 'Cab' },
+  { key: 'tow', label: 'Tow / pull' },
 ]

@@ -93,8 +93,8 @@ export default function PackageUnit() {
       <WorkCompare
         current={current}
         candidates={[candidate]}
-        title="Next to your current work truck"
-        lead="See how this unit lines up with the non-EV work vehicle in that role today. We do not invent payload or tow for the current truck."
+        title="Next to your current work vehicle"
+        lead="See how this EV matches the job your current truck does. We do not invent payload or tow for the current vehicle."
       />
 
       <section className="module" aria-labelledby="ev-layer">

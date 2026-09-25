@@ -1,7 +1,8 @@
-import { WORK_SPEC_ROWS } from '../lib/workSpec'
+import { COMPARE_SPEC_ROWS } from '../lib/workSpec'
 
 /**
  * On-page side-by-side vs the shop's current non-EV work vehicle.
+ * Product-bar rows: Role · Payload · Bed / capacity · Cab · Tow / pull.
  * Not a compare tray / edge drawer.
  */
 export default function WorkCompare({ current, candidates, title, lead }) {
@@ -45,9 +46,14 @@ function CompareCard({ kicker, heading, role, spec, current = false }) {
     >
       <p className="work-compare-col-kicker">{kicker}</p>
       <h3 className="work-compare-col-name">{heading}</h3>
-      <p className="work-compare-col-role">{role}</p>
       <dl className="work-spec-rows">
-        {WORK_SPEC_ROWS.map((row) => {
+        <div className="work-spec-row">
+          <dt>Role</dt>
+          <dd>
+            <span className="work-spec-value is-known">{role}</span>
+          </dd>
+        </div>
+        {COMPARE_SPEC_ROWS.map((row) => {
           const field = spec[row.key]
           return (
             <div key={row.key} className="work-spec-row">

@@ -106,8 +106,8 @@ export default function PackageResults() {
       <WorkCompare
         current={current}
         candidates={compareCandidates}
-        title="How they fit next to your current work truck"
-        lead="Payload, bed / cab, and tow — side by side with the non-EV work vehicle in that role today. A dash means we do not have that figure yet."
+        title="How they fit next to your current work vehicle"
+        lead="See how this EV matches the job your current truck does — payload, bed / cab, and tow side by side. A dash means we do not have that figure yet."
       />
 
       <section aria-labelledby="units-title">
