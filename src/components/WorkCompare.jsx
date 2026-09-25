@@ -11,7 +11,7 @@ export default function WorkCompare({ current, candidates, title, lead }) {
       <h2 id="work-compare-title" className="work-compare-title">
         {title}
       </h2>
-      <p className="work-compare-lead">{lead}</p>
+      {lead ? <p className="work-compare-lead">{lead}</p> : null}
       <div className="work-compare-grid" role="list">
         <CompareCard
           kicker={current.kind}
@@ -33,11 +33,7 @@ export default function WorkCompare({ current, candidates, title, lead }) {
           />
         ))}
       </div>
-      <p className="work-compare-note">
-        Energy is one row: range (pack size) on the EV, tank range (MPG) on
-        your current work vehicle. A dash means that figure is not on file —
-        we do not invent range, tank gallons, MPG, or KBB.
-      </p>
+      <p className="work-compare-note">Dash = not on file.</p>
     </section>
   )
 }

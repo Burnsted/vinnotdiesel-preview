@@ -1219,10 +1219,10 @@ img { max-width: 100%; display: block; }
 .locked-home { background: #0c1214; color: #f2f4f5; }
 .locked-hero {
   position: relative;
-  min-height: min(92vh, 760px);
+  min-height: min(68vh, 560px);
   display: flex;
   align-items: flex-end;
-  padding: 48px 24px 56px;
+  padding: 48px 24px 40px;
   overflow: hidden;
 }
 .locked-hero-bg {
@@ -1294,9 +1294,52 @@ img { max-width: 100%; display: block; }
 }
 
 .locked-section {
-  padding: 56px 24px;
+  padding: 28px 24px 40px;
   max-width: var(--page-max);
   margin: 0 auto;
+}
+.home-dense { padding-top: 20px; }
+.home-path {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.home-path li {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+}
+.home-money-line {
+  margin: 0 0 14px;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.62);
+}
+.home-layer-chips {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.home-layer-chips li {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.78);
+}
+.home-quiet {
+  margin: 0;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
 }
 .locked-section h2 {
   font-size: 1.45rem; margin: 0 0 10px; letter-spacing: -0.01em; color: #fff;
@@ -1356,6 +1399,37 @@ img { max-width: 100%; display: block; }
 }
 .locked-crumbs a { color: var(--text-muted); }
 .locked-page-header { margin-bottom: 28px; }
+.match-header { margin-bottom: 18px; }
+.match-kicker {
+  margin: 0 0 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-dim);
+}
+.match-title {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+.spec-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 10px;
+}
+.spec-chip {
+  display: inline-flex;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: var(--bg-muted);
+  color: var(--text);
+}
+.spec-chip.is-dash { color: var(--text-dim); font-weight: 500; }
+.package-unit-card.is-dense { padding: 12px; gap: 4px; }
+.package-unit-card.is-dense .package-unit-actions { justify-content: flex-start; }
 .locked-eyebrow {
   font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
   text-transform: uppercase; color: var(--cyan); margin: 0 0 8px;

@@ -25,7 +25,7 @@ export default function Home() {
             Used EV fleet packages that fit the work day.
           </h1>
           <p className="locked-hero-lead">
-            Work vans and trucks that do the same job as non-EV work vehicles — and can save money, maintenance, and time. We help small trade shops see the fit, then package used EVs matched to your routes (typically 3–5 vehicles, up to ~10). Add units to the fleet as you build the package.
+            Same job as your current non-EV work vehicles.
           </p>
           <div className="locked-hero-actions">
             <Link to="/intake" className="btn btn-primary">
@@ -41,69 +41,21 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="locked-section" aria-labelledby="how-title">
-        <h2 id="how-title">How it works</h2>
-        <p className="locked-section-lead">
-          One clear path for shops that want a small used-EV package. Single-truck browse stays secondary.
-        </p>
-        <ol className="locked-steps">
-          <li>
-            <strong>Fleet intake</strong>
-            <span>Trade, fleet size (blank / “not surveyed yet” allowed), region, and what a real work day looks like.</span>
-          </li>
-          <li>
-            <strong>Package match</strong>
-            <span>A small set of used EVs sized to that day — not a giant catalog dump.</span>
-          </li>
-          <li>
-            <strong>Per-unit decisions</strong>
-            <span>Add to fleet on each unit that belongs in the package. Keep shopping for the rest. FleetFit facilitates the sale when the mix is ready.</span>
-          </li>
-        </ol>
-      </section>
-
-      <section className="locked-section locked-section-alt" aria-labelledby="money-title">
-        <h2 id="money-title">How money works</h2>
-        <p className="locked-section-lead">
-          Buyer’s fee on closed units only (BaT / Cars &amp; Bids–style). Package browse shows listing asks only —
-          checkout shows <strong>Fee at checkout — amount TBD</strong>. No fee $ or % is invented on package cards.
-        </p>
-        <ul className="locked-bullets">
-          <li>Buyer pays the seller / dealer. FleetFit never holds vehicle funds.</li>
-          <li>We never claim FleetFit inspected the truck.</li>
-          <li>Battery and recall data are often incomplete — we surface those gaps.</li>
+      <section className="locked-section home-dense" aria-label="How it works">
+        <ul className="home-path">
+          <li>Intake</li>
+          <li>Package</li>
+          <li>Add units</li>
         </ul>
-      </section>
-
-      <section className="locked-section" aria-labelledby="ev-layer-title">
-        <h2 id="ev-layer-title">Free EV layer on every unit</h2>
-        <p className="locked-section-lead">
-          Battery health when a reading is on file, VIN recall placeholder, charging notes, and annual savings when a dollar figure is on file.
+        <p className="home-money-line">
+          Buyer’s fee on closed units · amount at checkout (TBD).
         </p>
-      </section>
-
-      <section className="locked-section locked-section-alt" aria-labelledby="secondary-title">
-        <h2 id="secondary-title">Secondary: Couples Match / single truck</h2>
-        <p className="locked-section-lead">
-          One-offs still matter by word of mouth. Not the home lead — no inventory carousel here. Same EV layer, and Add to fleet if a single truck belongs in the package.
-        </p>
-        <Link to="/shop" className="btn locked-btn-on-dark">Browse single trucks</Link>
-      </section>
-
-      <section className="locked-section" aria-labelledby="preview-title">
-        <h2 id="preview-title">Public preview note</h2>
-        <p className="locked-section-lead">
-          Examples are composite and anonymized (e.g. “Treasure Coast electrical — ~4 service vans”).
-          Real shop concepts stay private. This build is UI preview only.
-        </p>
-        <div className="locked-hero-actions">
-          <Link to="/intake" className="btn btn-primary">
-            Start fleet intake
-          </Link>
-          <Link to="/package/pkg-tc-landscape-2" className="btn locked-btn-on-dark">
-            2-unit landscape example
-          </Link>
-        </div>
+        <ul className="home-layer-chips">
+          <li>Battery health</li>
+          <li>Recalls</li>
+          <li>Charging</li>
+        </ul>
+        <p className="home-quiet">Composite preview · not a real shop.</p>
       </section>
     </div>
   )
