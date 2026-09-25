@@ -1,6 +1,7 @@
 import { Link, useLocation, useParams } from 'react-router-dom'
 import AddToFleetButton from '../components/AddToFleetButton'
 import SavingsLine from '../components/SavingsLine'
+import UnitPhoto from '../components/UnitPhoto'
 import WorkCompare from '../components/WorkCompare'
 import WorkSpecRows from '../components/WorkSpecRows'
 import { getPackage, getUnit } from '../data/package'
@@ -48,6 +49,8 @@ export default function PackageUnit() {
         <span aria-hidden="true"> / </span>
         <span>{unit.stockId}</span>
       </nav>
+
+      <UnitPhoto unit={unit} packageId={pkg.id} size="hero" showAsk />
 
       <header className="locked-page-header">
         <p className="locked-eyebrow">

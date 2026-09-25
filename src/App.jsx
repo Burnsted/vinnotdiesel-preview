@@ -6,8 +6,10 @@ import Browse from './pages/Browse'
 import Listing from './pages/Listing'
 import Model from './pages/Model'
 import FleetIntake from './pages/FleetIntake'
+import PackageLayout from './pages/PackageLayout'
 import PackageResults from './pages/PackageResults'
 import PackageUnit from './pages/PackageUnit'
+import FullCompare from './pages/FullCompare'
 import Checkout from './pages/Checkout'
 
 export default function App() {
@@ -22,8 +24,11 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/intake" element={<FleetIntake />} />
-          <Route path="/package/:packageId" element={<PackageResults />} />
-          <Route path="/package/:packageId/unit/:unitId" element={<PackageUnit />} />
+          <Route path="/package/:packageId" element={<PackageLayout />}>
+            <Route index element={<PackageResults />} />
+            <Route path="unit/:unitId" element={<PackageUnit />} />
+            <Route path="compare" element={<FullCompare />} />
+          </Route>
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/shop" element={<Browse />} />
           <Route path="/model/:slug" element={<Model />} />

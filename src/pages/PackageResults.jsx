@@ -1,6 +1,7 @@
 import { Link, useLocation, useParams } from 'react-router-dom'
 import AddToFleetButton from '../components/AddToFleetButton'
 import SavingsLine from '../components/SavingsLine'
+import UnitPhoto from '../components/UnitPhoto'
 import WorkCompare from '../components/WorkCompare'
 import WorkSpecRows from '../components/WorkSpecRows'
 import {
@@ -121,6 +122,7 @@ export default function PackageResults() {
         <ul className="package-unit-grid">
           {pkg.units.map((unit, index) => (
             <li key={unit.id} className="package-unit-card">
+              <UnitPhoto unit={unit} packageId={pkg.id} size="card" showAsk />
               <div className="package-unit-card-top">
                 <BodyGlyph type={unit.bodyType} />
                 <div className="package-unit-card-copy">
