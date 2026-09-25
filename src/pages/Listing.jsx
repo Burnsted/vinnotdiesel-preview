@@ -68,6 +68,7 @@ export default function Listing() {
           </h1>
           <p className="hero-sub">
             <span className="vin-mono">{listing.vin}</span>
+            {' '}(demo stock ID)
             {' · '}{listing.mileage.toLocaleString()} mi
             {' · '}{listing.location.city}, {listing.location.state}
             {' · '}{miles} mi from West Palm Beach, FL

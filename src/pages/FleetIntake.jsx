@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { matchPackageIdFromIntake } from '../data/package'
 
 const TRADES = [
   'Electrical',
@@ -21,12 +22,15 @@ const REGIONS = [
 const FLEET_SIZE_OPTIONS = [
   { value: '', label: 'Not surveyed yet' },
   { value: '1-2', label: '1–2 vehicles' },
-  { value: '3-7', label: '3–7 vehicles (typical package)' },
-  { value: '8+', label: '8+ vehicles' },
+  { value: '3-5', label: '3–5 vehicles (typical package)' },
+  { value: '6-10', label: '6–10 vehicles' },
+  { value: '10+', label: 'More than 10' },
 ]
 
 export default function FleetIntake() {
   const navigate = useNavigate()
+  const [params] = useSearchParams()
+  const adjusting = params.get('adjust') === '1'
   const [trade, setTrade] = useState('Electrical')
   const [fleetSize, setFleetSize] = useState('')
   const [region, setRegion] = useState('Treasure Coast, FL')
@@ -36,19 +40,15 @@ export default function FleetIntake() {
 
   function onSubmit(e) {
     e.preventDefault()
-    // Preview: always lands on the locked anonymized 4-unit package
-    navigate('/package/pkg-tc-electrical-4', {
-      state: {
-        intake: {
-          trade,
-          fleetSize: fleetSize || 'not-surveyed',
-          region,
-          dailyMiles,
-          overnightCharge,
-          notes,
-        },
-      },
-    })
+    const intake = {
+      trade,
+      fleetSize: fleetSize || 'not-surveyed',
+      region,
+      dailyMiles,
+      overnightCharge,
+      notes,
+    }
+    navigate(`/package/${matchPackageIdFromIntake(intake)}`, { state: { intake } })
   }
 
   return (
@@ -61,9 +61,9 @@ export default function FleetIntake() {
 
       <header className="locked-page-header">
         <p className="locked-eyebrow">VinNotDiesel · Fleet swap</p>
-        <h1>Tell us about the work day</h1>
+        <h1>{adjusting ? 'Adjust the mix' : 'Tell us about the work day'}</h1>
         <p className="locked-page-lead">
-          Primary path: small-fleet used-EV packages for trade shops.
+          Primary path: small-fleet used-EV packages for trade shops (typically 3–5, up to ~10).
           Fleet size can stay blank if you have not surveyed yet.
         </p>
       </header>
@@ -135,7 +135,8 @@ export default function FleetIntake() {
             Match a package
           </button>
           <p className="intake-hint">
-            Preview always opens the anonymized Treasure Coast electrical 4-unit example.
+            Preview opens an anonymized composite for the selected trade
+            (electrical → 4-unit service package; landscaping → 2-unit hauler + lead).
           </p>
         </div>
       </form>

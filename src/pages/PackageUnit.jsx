@@ -1,19 +1,13 @@
 import { Link, useParams } from 'react-router-dom'
-import { DEMO_PACKAGE, getUnit } from '../data/package'
-
-function fitClass(band) {
-  if (band === 'worth it') return 'fit-worth'
-  if (band?.startsWith('worth it if')) return 'fit-if'
-  if (band === 'pass') return 'fit-pass'
-  return 'fit-nodata'
-}
+import { getPackage, getUnit } from '../data/package'
+import { fitClass, formatMoney } from '../lib/fit'
 
 export default function PackageUnit() {
   const { packageId, unitId } = useParams()
-  const unit = getUnit(unitId)
-  const pkgOk = packageId === DEMO_PACKAGE.id
+  const pkg = getPackage(packageId)
+  const unit = getUnit(packageId, unitId)
 
-  if (!pkgOk || !unit) {
+  if (!pkg || !unit) {
     return (
       <div className="locked-page">
         <p>Unit not found.</p>
@@ -29,13 +23,15 @@ export default function PackageUnit() {
         <span aria-hidden="true"> / </span>
         <Link to="/intake">Fleet intake</Link>
         <span aria-hidden="true"> / </span>
-        <Link to={`/package/${DEMO_PACKAGE.id}`}>Package</Link>
+        <Link to={`/package/${pkg.id}`}>Package</Link>
         <span aria-hidden="true"> / </span>
         <span>{unit.stockId}</span>
       </nav>
 
       <header className="locked-page-header">
-        <p className="locked-eyebrow">{unit.stockId} · placeholder stock</p>
+        <p className="locked-eyebrow">
+          {unit.stockId} · {unit.role} · placeholder stock · DEMO
+        </p>
         <h1>
           {unit.year} {unit.make} {unit.model} {unit.trim}
         </h1>
@@ -51,14 +47,20 @@ export default function PackageUnit() {
       <div className="unit-ask-bar">
         <div>
           <div className="stat-label">Listing ask</div>
-          <div className="unit-ask-price">${unit.askPrice.toLocaleString()}</div>
+          <div className="unit-ask-price">{formatMoney(unit.askPrice)}</div>
           <p className="package-fee-note">Buyer’s fee appears only at checkout — amount TBD</p>
         </div>
         <div className="unit-ask-actions">
-          <Link to={`/checkout?unit=${unit.id}&action=buy`} className="btn btn-primary">
+          <Link
+            to={`/checkout?package=${pkg.id}&unit=${unit.id}&action=buy`}
+            className="btn btn-primary"
+          >
             Buy Now
           </Link>
-          <Link to={`/checkout?unit=${unit.id}&action=offer`} className="btn">
+          <Link
+            to={`/checkout?package=${pkg.id}&unit=${unit.id}&action=offer`}
+            className="btn"
+          >
             Make Offer
           </Link>
         </div>
@@ -122,6 +124,7 @@ export default function PackageUnit() {
       <section className="module" aria-labelledby="unit-about">
         <h2 id="unit-about" className="module-title">About this unit</h2>
         <p>{unit.description}</p>
+        {unit.replaceNote ? <p className="locked-muted">{unit.replaceNote}</p> : null}
         <p className="locked-muted">Upfit: {unit.upfitNote}</p>
         <p className="locked-muted">Title: {unit.titleStatus} · Seller type: {unit.sellerType}</p>
         <p className="locked-muted">
@@ -130,7 +133,8 @@ export default function PackageUnit() {
       </section>
 
       <p className="locked-foot-note">
-        VinNotDiesel does not hold vehicle funds. Package screens never show fee amounts.
+        VinNotDiesel does not hold vehicle funds. Buyer pays the seller / dealer.
+        Package screens never show fee amounts.
       </p>
     </div>
   )
