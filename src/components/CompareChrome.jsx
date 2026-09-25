@@ -11,7 +11,7 @@ export default function CompareChrome() {
   const ids = compare.idsFor(packageId)
   const onFullCompare = location.pathname.endsWith('/compare')
   const trayVisible = Boolean(pkg) && compare.trayOpen && compare.packageId === packageId && !onFullCompare && ids.length > 0 && !compare.maxPrompt
-  const nubVisible = Boolean(pkg) && ids.length > 0 && !compare.trayOpen && compare.packageId === packageId
+  const nubVisible = Boolean(pkg) && ids.length > 0 && !compare.trayOpen && compare.packageId === packageId && !onFullCompare
 
   if (!pkg) return null
 
