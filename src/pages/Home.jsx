@@ -29,10 +29,10 @@ export default function Home() {
           </p>
           <div className="locked-hero-actions">
             <Link to="/intake" className="btn btn-primary">
-              See if they fit
+              Match my fleet
             </Link>
             <Link to={`/package/${DEFAULT_PACKAGE_ID}`} className="btn locked-btn-on-dark">
-              See example package
+              View example package
             </Link>
           </div>
         </div>
