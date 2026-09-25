@@ -1,9 +1,9 @@
 /**
- * Official Franz wordmark v1 (2026-09-25).
- * VIN white · NOT amber #DBB24A · DIESEL white. Transparent outlines
- * (Barlow Condensed ExtraBold). Light chrome swaps VIN/DIESEL to charcoal
- * #0E1B1F so the same lockup reads on white. No FMT chrome. Never mashed
- * VINNOTDIESEL.
+ * Official Franz wordmark v2 (2026-09-25) — L5 system, no truck/bolt.
+ * VIN ALL CAPS Space Grotesk Bold · sky #68B0F0
+ * not lowercase Satisfy script · neon mint #3DDC84
+ * DIESEL ALL CAPS Space Grotesk Bold · white on dark / charcoal #0D1520 on light
+ * Never mashed VINNOTDIESEL. No amber. No FMT chrome.
  */
 const FILES = {
   dark: {
@@ -12,9 +12,9 @@ const FILES = {
     eyebrow: 'vnd-wordmark-nav-dark.svg',
   },
   light: {
-    nav: 'vnd-wordmark-nav-light.svg',
+    nav: 'vnd-wordmark-horizontal-light.svg',
     hero: 'vnd-wordmark-horizontal-light.svg',
-    eyebrow: 'vnd-wordmark-nav-light.svg',
+    eyebrow: 'vnd-wordmark-horizontal-light.svg',
   },
 }
 
