@@ -1,10 +1,13 @@
 import { Link, useLocation, useParams } from 'react-router-dom'
+import WorkCompare from '../components/WorkCompare'
+import WorkSpecRows from '../components/WorkSpecRows'
 import {
   batteryUnknownCount,
   getPackage,
   packageStickerSum,
 } from '../data/package'
 import { fitClass, formatMoney } from '../lib/fit'
+import { currentWorkVehicle, displayWorkSpec } from '../lib/workSpec'
 
 function BodyGlyph({ type }) {
   return (
@@ -32,6 +35,15 @@ export default function PackageResults() {
   const sticker = packageStickerSum(pkg)
   const unknownBatt = batteryUnknownCount(pkg)
   const askParts = pkg.units.map((u) => formatMoney(u.askPrice)).join(' + ')
+  const current = currentWorkVehicle(intake, pkg)
+  const unitNavState = location.state
+  const compareCandidates = pkg.units.map((unit) => ({
+    id: unit.id,
+    kicker: 'Candidate EV',
+    heading: `${unit.year} ${unit.make} ${unit.model} ${unit.trim}`,
+    role: unit.role,
+    spec: displayWorkSpec(unit),
+  }))
 
   return (
     <div className="locked-page package-page">
@@ -91,6 +103,13 @@ export default function PackageResults() {
         <p className="locked-muted">{pkg.matchNote}</p>
       </section>
 
+      <WorkCompare
+        current={current}
+        candidates={compareCandidates}
+        title="How they fit next to your current work truck"
+        lead="Payload, bed / cab, and tow — side by side with the non-EV work vehicle in that role today. A dash means we do not have that figure yet."
+      />
+
       <section aria-labelledby="units-title">
         <h2 id="units-title" className="package-units-title">Units in this package</h2>
         <ul className="package-unit-grid">
@@ -102,7 +121,11 @@ export default function PackageResults() {
                   <p className="package-unit-role">
                     Unit {index + 1} · {unit.role}
                   </p>
-                  <Link to={`/package/${pkg.id}/unit/${unit.id}`} className="package-unit-name">
+                  <Link
+                    to={`/package/${pkg.id}/unit/${unit.id}`}
+                    state={unitNavState}
+                    className="package-unit-name"
+                  >
                     {unit.year} {unit.make} {unit.model} {unit.trim}
                   </Link>
                   <p className="package-unit-meta">
@@ -122,6 +145,7 @@ export default function PackageResults() {
                 {unit.stockId}
                 {unit.replaceNote ? ` · ${unit.replaceNote}` : ''}
               </p>
+              <WorkSpecRows spec={displayWorkSpec(unit)} />
               <div className="package-unit-chips">
                 <span className={`fit-chip ${fitClass(unit.fitScore.band)}`}>
                   FIT: {unit.fitScore.band}
@@ -133,7 +157,11 @@ export default function PackageResults() {
               </div>
               <p className="package-fee-note">Fee at checkout — amount TBD</p>
               <div className="package-unit-actions">
-                <Link to={`/package/${pkg.id}/unit/${unit.id}`} className="btn btn-sm">
+                <Link
+                  to={`/package/${pkg.id}/unit/${unit.id}`}
+                  state={unitNavState}
+                  className="btn btn-sm"
+                >
                   Open unit
                 </Link>
                 <Link

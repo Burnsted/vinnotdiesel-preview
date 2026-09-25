@@ -1,11 +1,16 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
+import WorkCompare from '../components/WorkCompare'
+import WorkSpecRows from '../components/WorkSpecRows'
 import { getPackage, getUnit } from '../data/package'
 import { fitClass, formatMoney } from '../lib/fit'
+import { currentWorkVehicle, displayWorkSpec } from '../lib/workSpec'
 
 export default function PackageUnit() {
   const { packageId, unitId } = useParams()
+  const location = useLocation()
   const pkg = getPackage(packageId)
   const unit = getUnit(packageId, unitId)
+  const intake = location.state?.intake
 
   if (!pkg || !unit) {
     return (
@@ -16,6 +21,16 @@ export default function PackageUnit() {
     )
   }
 
+  const spec = displayWorkSpec(unit)
+  const current = currentWorkVehicle(intake, pkg)
+  const candidate = {
+    id: unit.id,
+    kicker: 'Candidate EV',
+    heading: `${unit.year} ${unit.make} ${unit.model} ${unit.trim}`,
+    role: unit.role,
+    spec,
+  }
+
   return (
     <div className="locked-page locked-unit-page">
       <nav className="locked-crumbs" aria-label="Breadcrumb">
@@ -23,7 +38,7 @@ export default function PackageUnit() {
         <span aria-hidden="true"> / </span>
         <Link to="/intake">Fleet intake</Link>
         <span aria-hidden="true"> / </span>
-        <Link to={`/package/${pkg.id}`}>Package</Link>
+        <Link to={`/package/${pkg.id}`} state={location.state}>Package</Link>
         <span aria-hidden="true"> / </span>
         <span>{unit.stockId}</span>
       </nav>
@@ -65,6 +80,22 @@ export default function PackageUnit() {
           </Link>
         </div>
       </div>
+
+      <section className="module work-spec-module" aria-labelledby="work-specs">
+        <h2 id="work-specs" className="module-title">Work specs</h2>
+        <p className="work-spec-lead">
+          Payload, bed / cab, and tow from listing data already in this preview.
+          A dash means that figure is not on file.
+        </p>
+        <WorkSpecRows spec={spec} className="work-spec-rows-unit" />
+      </section>
+
+      <WorkCompare
+        current={current}
+        candidates={[candidate]}
+        title="Next to your current work truck"
+        lead="See how this unit lines up with the non-EV work vehicle in that role today. We do not invent payload or tow for the current truck."
+      />
 
       <section className="module" aria-labelledby="ev-layer">
         <h2 id="ev-layer" className="module-title">Free EV layer</h2>
