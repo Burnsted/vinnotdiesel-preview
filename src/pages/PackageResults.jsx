@@ -1,4 +1,5 @@
 import { Link, useLocation, useParams } from 'react-router-dom'
+import SavingsLine from '../components/SavingsLine'
 import WorkCompare from '../components/WorkCompare'
 import WorkSpecRows from '../components/WorkSpecRows'
 import {
@@ -6,7 +7,7 @@ import {
   getPackage,
   packageStickerSum,
 } from '../data/package'
-import { fitClass, formatMoney } from '../lib/fit'
+import { formatMoney } from '../lib/fit'
 import { currentWorkVehicle, displayWorkSpec } from '../lib/workSpec'
 
 function BodyGlyph({ type }) {
@@ -61,16 +62,14 @@ export default function PackageResults() {
         </p>
         <h1>{pkg.headline}</h1>
         <p className="locked-page-lead">{pkg.summary}</p>
-        <div className="package-honesty" aria-label="Honesty badges">
-          <span className={`fit-chip ${fitClass(pkg.packageFit.band)}`}>
-            {pkg.packageFit.band}
-          </span>
+        <div className="package-honesty" aria-label="Package notes">
           <span className="ev-chip">
             Battery unknown on {unknownBatt} of {pkg.unitCount}
           </span>
           <span className="ev-chip">Recalls unchecked per stock ID</span>
           <span className="ev-chip">{pkg.statedCountNote}</span>
         </div>
+        <SavingsLine source={pkg} className="savings-line-package" />
         <p className="locked-disclaimer">
           Composite anonymized example for public preview. Not a real shop.
           Listing asks only — buyer’s fee is not shown on package screens.
@@ -146,10 +145,8 @@ export default function PackageResults() {
                 {unit.replaceNote ? ` · ${unit.replaceNote}` : ''}
               </p>
               <WorkSpecRows spec={displayWorkSpec(unit)} />
+              <SavingsLine source={unit} />
               <div className="package-unit-chips">
-                <span className={`fit-chip ${fitClass(unit.fitScore.band)}`}>
-                  FIT: {unit.fitScore.band}
-                </span>
                 <span className="ev-chip">
                   Battery: {unit.battery.status}
                   {unit.battery.soh != null ? ` · SOH ${unit.battery.soh}%` : ''}
@@ -185,7 +182,7 @@ export default function PackageResults() {
       <div className="package-panels">
         <section className="package-panel" aria-labelledby="sticker-title">
           <h2 id="sticker-title" className="package-panel-kicker">
-            Package sticker sum <span className="fact-badge">FACT</span>
+            Package sticker sum
           </h2>
           <p className="package-sticker">{formatMoney(sticker)}</p>
           <p className="locked-muted">
@@ -201,7 +198,7 @@ export default function PackageResults() {
               <div>
                 <dt>{pkg.newVsUsed.usedLabel}</dt>
                 <dd>
-                  {formatMoney(sticker)} <span className="fact-badge">FACT SUM</span>
+                  {formatMoney(sticker)}
                 </dd>
               </div>
               <div>
@@ -213,7 +210,7 @@ export default function PackageResults() {
           </section>
         ) : (
           <section className="package-panel" aria-labelledby="fitshort-title">
-            <h2 id="fitshort-title" className="package-panel-kicker">Fit · short</h2>
+            <h2 id="fitshort-title" className="package-panel-kicker">At a glance</h2>
             <dl className="package-compare">
               {(pkg.fitShort || []).map((row) => (
                 <div key={row.label}>

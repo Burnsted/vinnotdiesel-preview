@@ -1,8 +1,9 @@
 import { Link, useLocation, useParams } from 'react-router-dom'
+import SavingsLine from '../components/SavingsLine'
 import WorkCompare from '../components/WorkCompare'
 import WorkSpecRows from '../components/WorkSpecRows'
 import { getPackage, getUnit } from '../data/package'
-import { fitClass, formatMoney } from '../lib/fit'
+import { formatMoney } from '../lib/fit'
 import { currentWorkVehicle, displayWorkSpec } from '../lib/workSpec'
 
 export default function PackageUnit() {
@@ -88,6 +89,7 @@ export default function PackageUnit() {
           A dash means that figure is not on file.
         </p>
         <WorkSpecRows spec={spec} className="work-spec-rows-unit" />
+        <SavingsLine source={unit} className="savings-line-unit" />
       </section>
 
       <WorkCompare
@@ -129,15 +131,6 @@ export default function PackageUnit() {
             <dd>
               <strong>{unit.tradeFit.label}</strong>
               <p>{unit.tradeFit.detail}</p>
-            </dd>
-          </div>
-          <div className="ev-layer-item ev-layer-fit">
-            <dt>FIT SCORE</dt>
-            <dd>
-              <span className={`fit-chip ${fitClass(unit.fitScore.band)}`}>
-                {unit.fitScore.band}
-              </span>
-              <p>{unit.fitScore.reason}</p>
             </dd>
           </div>
         </dl>

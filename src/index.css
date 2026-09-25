@@ -1768,6 +1768,37 @@ img { max-width: 100%; display: block; }
   gap: 2px;
 }
 .work-compare-card .work-spec-row dd { text-align: left; }
+
+.savings-line {
+  margin: 6px 0 2px;
+}
+.savings-line-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 0.85rem;
+}
+.savings-line-label {
+  color: var(--text-dim);
+  font-weight: 500;
+}
+.savings-line-value { font-weight: 600; }
+.savings-line-value.is-dash { color: var(--text-dim); font-weight: 500; }
+.savings-line-note {
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.35;
+  max-width: 28rem;
+}
+.savings-line-package {
+  margin-top: 14px;
+}
+.savings-line-unit {
+  margin-top: 14px;
+  max-width: 28rem;
+}
 .work-compare-note {
   margin: 12px 0 0;
   font-size: 0.8rem;

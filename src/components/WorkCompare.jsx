@@ -62,7 +62,6 @@ function CompareCard({ kicker, heading, role, spec, current = false }) {
                 <span className={field.known ? 'work-spec-value is-known' : 'work-spec-value is-dash'}>
                   {field.text}
                 </span>
-                {field.known ? <span className="fact-badge">FACT</span> : null}
               </dd>
             </div>
           )

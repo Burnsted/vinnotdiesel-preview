@@ -90,7 +90,7 @@ export default function Checkout() {
               ))}
               <div>
                 <dt>Package sticker sum</dt>
-                <dd>{formatMoney(sticker)} <span className="fact-badge">FACT</span></dd>
+                <dd>{formatMoney(sticker)}</dd>
               </div>
             </>
           )}

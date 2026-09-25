@@ -71,21 +71,15 @@ export default function Home() {
         <ul className="locked-bullets">
           <li>Buyer pays the seller / dealer. FleetFit never holds vehicle funds.</li>
           <li>We never claim FleetFit inspected the truck.</li>
-          <li>Battery and recall data are often incomplete — we surface that as FACT gaps.</li>
+          <li>Battery and recall data are often incomplete — we surface those gaps.</li>
         </ul>
       </section>
 
       <section className="locked-section" aria-labelledby="ev-layer-title">
         <h2 id="ev-layer-title">Free EV layer on every unit</h2>
         <p className="locked-section-lead">
-          Battery status (often unknown), VIN recall placeholder, charging / trade fit, and a FIT SCORE.
+          Battery status (often unknown), VIN recall placeholder, charging notes, and annual savings when a dollar figure is on file.
         </p>
-        <div className="locked-fit-bands" role="list">
-          <span className="fit-chip fit-worth" role="listitem">worth it</span>
-          <span className="fit-chip fit-if" role="listitem">worth it if…</span>
-          <span className="fit-chip fit-pass" role="listitem">pass</span>
-          <span className="fit-chip fit-nodata" role="listitem">not enough data</span>
-        </div>
       </section>
 
       <section className="locked-section locked-section-alt" aria-labelledby="secondary-title">
