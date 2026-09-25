@@ -22,40 +22,42 @@ export default function Home() {
             <Wordmark size="hero" tone="dark" />
           </p>
           <h1 className="locked-hero-title">
-            Replace the mismatched fleet with used EVs that fit the work day.
+            Used EV fleet packages that fit the work day.
           </h1>
           <p className="locked-hero-lead">
-            Small-fleet swap packages for trade shops — typically 3–5 vehicles, up to ~10.
-            Intake your routes, get a package match, then Buy Now or Make Offer per unit.
+            Work vans and trucks that do the same job as gas or diesel — and can save money, maintenance, and time. We help small trade shops see the fit, then package used EVs matched to your routes (typically 3–5 vehicles, up to ~10). Buy Now or Make Offer per unit.
           </p>
           <div className="locked-hero-actions">
             <Link to="/intake" className="btn btn-primary">
-              Start fleet intake
+              See if they fit
             </Link>
             <Link to={`/package/${DEFAULT_PACKAGE_ID}`} className="btn btn-ghost locked-btn-on-dark">
               See example package
             </Link>
           </div>
+          <p className="locked-hero-cred">
+            In EVs since 2015 · 16 owned · 4 in the driveway now
+          </p>
         </div>
       </header>
 
       <section className="locked-section" aria-labelledby="how-title">
         <h2 id="how-title">How it works</h2>
         <p className="locked-section-lead">
-          One primary path for shops. Couples Match / single-unit shop is secondary — word of mouth, not the home.
+          One clear path for shops that want a small used-EV package. Single-truck browse stays secondary.
         </p>
         <ol className="locked-steps">
           <li>
             <strong>Fleet intake</strong>
-            <span>Trade, fleet size (blank / “not surveyed yet” allowed), region, and work-day constraints.</span>
+            <span>Trade, fleet size (blank / “not surveyed yet” allowed), region, and what a real work day looks like.</span>
           </li>
           <li>
             <strong>Package match</strong>
-            <span>A small set of used EVs sized to the work day — not a giant catalog dump.</span>
+            <span>A small set of used EVs sized to that day — not a giant catalog dump.</span>
           </li>
           <li>
             <strong>Per-unit decisions</strong>
-            <span>Buy Now or Make Offer on each unit. Free EV diligence layer on every truck. Reserve or offer on the whole package.</span>
+            <span>Buy Now or Make Offer on each unit. Free EV diligence on every truck. Reserve or offer on the whole package.</span>
           </li>
         </ol>
       </section>
@@ -89,8 +91,7 @@ export default function Home() {
       <section className="locked-section locked-section-alt" aria-labelledby="secondary-title">
         <h2 id="secondary-title">Secondary: Couples Match / single truck</h2>
         <p className="locked-section-lead">
-          Word-of-mouth one-offs still matter. This is not the primary home — no inventory carousel here.
-          Browse placeholder stock when you only need one truck; the same EV layer and per-unit Buy Now / Make Offer apply.
+          One-offs still matter by word of mouth. Not the home lead — no inventory carousel here. Same EV layer and per-unit Buy Now / Make Offer when you only need one truck.
         </p>
         <Link to="/shop" className="btn locked-btn-on-dark">Browse single trucks</Link>
       </section>
