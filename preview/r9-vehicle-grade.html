@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>R9 — Vehicle grade dial on listing detail (preview only)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0b1a2e;
+      --charge: #3aa0ff;
+      --ember: #ff6b2c;
+      --volt: #1fd6a0;
+      --mist: #e8f1ff;
+      --ink: #0b1a2e;
+      --muted: #5a6a7a;
+      --paper: #eef2f7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.4;
+    }
+    .wrap { max-width: 390px; margin: 0 auto; padding: 14px 12px 56px; }
+    .banner {
+      background: #fff3cd; border: 1px solid #e6d089; border-radius: 10px;
+      padding: 10px 12px; font-size: 0.76rem; color: #5c4b12; margin-bottom: 14px;
+    }
+    h1.page { font-size: 1.15rem; margin: 0 0 4px; letter-spacing: -0.02em; }
+    .page-sub { margin: 0 0 14px; color: var(--muted); font-size: 0.8rem; }
+    .ex { color: #9a6b12; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.03em; }
+    .src { font-size: 0.7rem; color: var(--muted); margin: 0 0 12px; line-height: 1.35; }
+
+    /* L5 exact */
+    .not-script {
+      font-family: Caveat, cursive; font-weight: 700; color: var(--volt);
+      line-height: 1; display: inline-block;
+    }
+    .l5 { display: flex; align-items: center; gap: 0.45em; }
+    .l5-mark {
+      width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+      background: linear-gradient(145deg, #123050, #0b1a2e);
+      display: grid; place-items: center;
+      border: 1px solid rgba(58,160,255,0.45);
+    }
+    .l5-mark svg { width: 20px; height: 20px; }
+    .l5-words {
+      display: flex; align-items: baseline; gap: 0.18em;
+      font-family: Space Grotesk, sans-serif; font-weight: 700;
+      font-size: 0.92rem; letter-spacing: -0.02em;
+    }
+    .l5-words .vin { color: #5eb6ff; }
+    .l5-words .diesel { color: #9ecfff; font-weight: 600; opacity: 0.92; }
+    .l5-words .not-script { font-size: 1.1rem; }
+
+    .phone {
+      width: 100%; border-radius: 18px; overflow: hidden;
+      background: #fff; color: var(--ink);
+      border: 1px solid #d5dde8;
+      box-shadow: 0 10px 28px rgba(11,26,46,0.18);
+    }
+
+    .hero { position: relative; height: 188px; color: #fff; }
+    .hero .bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center 40%;
+    }
+    .hero .scrim {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(11,26,46,0.82), transparent 58%);
+    }
+    .topbar {
+      position: absolute; top: 10px; left: 12px; right: 12px; z-index: 3;
+      display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    }
+    .toggle {
+      display: inline-flex; background: rgba(0,0,0,0.35); backdrop-filter: blur(8px);
+      border-radius: 999px; padding: 3px; border: 1px solid rgba(255,255,255,0.22);
+    }
+    .toggle span {
+      padding: 5px 10px; border-radius: 999px; font-size: 0.68rem; font-weight: 700;
+      color: rgba(255,255,255,0.65);
+    }
+    .toggle span.on { background: var(--charge); color: #061018; }
+    .hero-title {
+      position: absolute; left: 0; right: 0; bottom: 14px; z-index: 2;
+      text-align: center; font-size: 1.4rem; font-weight: 700; font-style: italic;
+      letter-spacing: -0.02em; margin: 0; text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+    }
+
+    .body { padding: 14px 12px 18px; }
+    .crumbs { display: flex; gap: 6px; justify-content: center; margin-bottom: 8px; }
+    .crumb {
+      font-size: 0.72rem; font-weight: 600; padding: 6px 10px; border-radius: 999px;
+      background: #e8eef5; color: #334;
+    }
+    .model-name { text-align: center; margin: 0 0 4px; font-size: 1.15rem; font-weight: 700; }
+    .avail {
+      text-align: center; margin: 0 0 12px; font-size: 0.78rem; color: var(--muted);
+    }
+    .avail strong { color: var(--ink); }
+
+    .year-summary {
+      display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 12px;
+      scrollbar-width: none;
+    }
+    .year-summary::-webkit-scrollbar { display: none; }
+    .ys {
+      flex: 0 0 86px; border-radius: 14px; padding: 0; overflow: hidden;
+      background: #eef2f7; border: 1.5px solid transparent;
+      cursor: pointer; font-family: inherit; color: inherit; text-align: left;
+    }
+    .ys.is-on {
+      background: rgba(58,160,255,0.1);
+      border-color: var(--charge);
+      box-shadow: 0 0 0 1px rgba(58,160,255,0.22);
+    }
+    .ys-ph { height: 54px; background-size: cover; background-position: center; }
+    .ys-meta { padding: 7px 8px 9px; }
+    .ys-y { font-size: 1rem; font-weight: 700; display: block; line-height: 1.1; }
+    .ys.is-on .ys-y { color: var(--charge); }
+    .ys-from { font-size: 0.68rem; font-weight: 700; color: var(--ink); display: block; margin-top: 2px; }
+    .ys-n { font-size: 0.58rem; color: var(--muted); }
+
+    .section-h {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--muted); margin: 4px 0 8px;
+      display: flex; justify-content: space-between; align-items: baseline;
+    }
+
+    .inv-filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+    .ifilt {
+      border: 1.5px solid #d5dde8; background: #fff; border-radius: 999px;
+      padding: 6px 10px; font-size: 0.72rem; font-weight: 600; font-family: inherit;
+      color: var(--ink); cursor: pointer;
+    }
+    .ifilt.is-on {
+      background: rgba(58,160,255,0.14);
+      border-color: var(--charge);
+      color: #0b4a8a;
+    }
+    .ifilt-note { width: 100%; font-size: 0.65rem; color: var(--muted); margin: 0; }
+
+    .yg {
+      border: 1px solid #d5dde8; border-radius: 14px; overflow: hidden;
+      margin-bottom: 10px; background: #fff;
+    }
+    .yg-h {
+      width: 100%; display: flex; justify-content: space-between; align-items: center;
+      gap: 10px; padding: 10px 12px; border: 0; background: #f7fafc;
+      font-family: inherit; cursor: pointer; text-align: left;
+    }
+    .yg.is-open .yg-h { background: #e8f1ff; }
+    .yg-h .y { font-size: 1.05rem; font-weight: 700; }
+    .yg.is-open .yg-h .y { color: var(--charge); }
+    .yg-h .sub { font-size: 0.72rem; color: var(--muted); }
+    .yg-h .right { text-align: right; flex-shrink: 0; }
+    .yg-h .from { font-size: 0.86rem; font-weight: 700; }
+    .yg-h .chev {
+      display: inline-grid; place-items: center; width: 22px; height: 22px;
+      border-radius: 6px; background: #fff; border: 1px solid #d5dde8;
+      font-size: 0.7rem; color: var(--muted); margin-left: 6px;
+    }
+    .yg.is-open .yg-h .chev { color: var(--charge); border-color: var(--charge); transform: rotate(180deg); }
+    .yg-b { display: none; padding: 0 10px 12px; border-top: 1px solid #e3e9f0; }
+    .yg.is-open .yg-b { display: block; }
+
+    .thumb-row {
+      display: flex; gap: 8px; overflow-x: auto; padding: 10px 2px 4px;
+      scrollbar-width: none;
+    }
+    .thumb-row::-webkit-scrollbar { display: none; }
+    .thumb {
+      flex: 0 0 148px; border-radius: 12px; overflow: hidden;
+      border: 1.5px solid #d5dde8; background: #fff;
+      cursor: pointer; font-family: inherit; color: inherit; text-align: left; padding: 0;
+    }
+    .thumb:hover, .thumb.is-on { border-color: var(--charge); }
+    .thumb-ph {
+      height: 88px; background-size: cover; background-position: center;
+      position: relative;
+    }
+    .thumb-badge {
+      position: absolute; top: 6px; left: 6px;
+      font-size: 0.55rem; font-weight: 700; padding: 2px 6px; border-radius: 999px;
+      background: rgba(11,26,46,0.75); color: #fff;
+    }
+    .thumb-meta { padding: 7px 8px 9px; }
+    .thumb-price { font-size: 0.92rem; font-weight: 700; margin: 0; }
+    .thumb-mi { font-size: 0.68rem; color: var(--muted); margin: 1px 0 0; }
+    .thumb-cfg { font-size: 0.62rem; color: #334; margin: 3px 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* Detail */
+    .detail { display: none; }
+    .detail.is-on { display: block; }
+    .detail-ph {
+      height: 150px; background-size: cover; background-position: center;
+      position: relative;
+    }
+    .detail-back {
+      position: absolute; top: 10px; left: 10px;
+      border: 0; border-radius: 999px; padding: 6px 10px;
+      background: rgba(255,255,255,0.92); font-weight: 700; font-size: 0.72rem;
+      font-family: inherit; cursor: pointer; color: var(--ink);
+    }
+    .detail-body { padding: 12px 14px 18px; background: #fff; }
+    .detail-title { margin: 0 0 2px; font-size: 1.05rem; font-weight: 700; }
+    .detail-dealer { margin: 0 0 10px; font-size: 0.78rem; color: var(--muted); }
+
+    /* Price + ONE modest grade dial on white */
+    .price-grade {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px; margin: 0 0 4px;
+    }
+    .price-block { min-width: 0; flex: 1; }
+    .detail-price { margin: 0; font-size: 1.4rem; font-weight: 700; line-height: 1.1; }
+    .detail-price-sub { margin: 2px 0 0; font-size: 0.7rem; color: var(--muted); }
+    .grade-wrap {
+      flex: 0 0 auto; display: flex; flex-direction: column; align-items: center;
+      padding: 2px 0 0;
+    }
+    .grade-caption {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--muted); text-align: center;
+      margin-top: 0; line-height: 1.15; max-width: 72px;
+    }
+
+    .grade-blurb {
+      margin: 6px 0 12px; font-size: 0.72rem; color: var(--muted); line-height: 1.35;
+    }
+
+    .factors {
+      border: 1px solid #e3e9f0; border-radius: 12px; overflow: hidden;
+      margin: 0 0 12px; background: #fafcfe;
+    }
+    .factors-h {
+      width: 100%; display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 12px; border: 0; background: #f0f5fa;
+      font-family: inherit; font-weight: 700; font-size: 0.82rem; cursor: pointer;
+      color: var(--ink); text-align: left;
+    }
+    .factors.is-open .factors-h { background: #e8f1ff; }
+    .factors-b { display: none; padding: 4px 12px 10px; border-top: 1px solid #e3e9f0; }
+    .factors.is-open .factors-b { display: block; }
+    .factor-row {
+      display: flex; justify-content: space-between; gap: 10px;
+      padding: 8px 0; border-bottom: 1px solid #e8eef5; font-size: 0.8rem;
+    }
+    .factor-row:last-child { border-bottom: 0; }
+    .factor-row dt { color: var(--muted); font-weight: 500; }
+    .factor-row dd { margin: 0; font-weight: 700; text-align: right; }
+    .factor-row .hint { display: block; font-size: 0.62rem; font-weight: 500; color: var(--muted); margin-top: 1px; }
+
+    .fleet-box {
+      border: 1px dashed #c5d0dc; border-radius: 12px; margin: 0 0 12px; overflow: hidden;
+      background: #f7f9fc;
+    }
+    .fleet-h {
+      width: 100%; display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 12px; border: 0; background: transparent;
+      font-family: inherit; font-weight: 700; font-size: 0.8rem; cursor: pointer;
+      color: var(--ink); text-align: left;
+    }
+    .fleet-b { display: none; padding: 0 12px 12px; font-size: 0.74rem; color: var(--muted); line-height: 1.4; }
+    .fleet-box.is-open .fleet-b { display: block; }
+    .fleet-b strong { color: #334; }
+
+    .spec-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 0 0 12px;
+    }
+    .sg {
+      background: #eef2f7; border-radius: 10px; padding: 8px 10px;
+    }
+    .sg .lab { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+    .sg .val { font-size: 0.86rem; font-weight: 700; margin-top: 1px; }
+
+    .btn-ember {
+      width: 100%; border: 0; border-radius: 10px; padding: 12px;
+      background: var(--ember); color: #fff; font-weight: 700; font-size: 0.9rem;
+      font-family: inherit; cursor: pointer;
+    }
+    .btn-outline {
+      width: 100%; margin-top: 8px; border-radius: 10px; padding: 11px;
+      border: 1.5px solid var(--navy); background: transparent; color: var(--navy);
+      font-weight: 600; font-size: 0.86rem; font-family: inherit; cursor: pointer;
+    }
+    .view-model { display: block; }
+    .view-model.is-hide { display: none; }
+    .foot { margin-top: 14px; font-size: 0.7rem; color: var(--muted); line-height: 1.4; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="banner">
+      Preview only — <strong>hard separation</strong> from Fit My Truck. No FMT labels or scoring.
+      Inventory thumbs stay clean. After a truck is picked: <strong>one modest Vehicle Grade</strong>
+      dial to the right of price on white. L5 + K6. No app deploy.
+    </div>
+    <h1 class="page">R9 · Vehicle grade on listing detail</h1>
+    <p class="page-sub">Year inventory (no dials) → one peer-grade dial beside price</p>
+    <p class="src">
+      Grade = peer score vs similar same make/model used trucks (SOH, miles, warranty, and other used-fleet buying factors).
+      All scores <span class="ex">EXAMPLE</span>. Not a work-day fit score. Brands stay unlinked.
+    </p>
+
+    <div class="phone" id="S3">
+      <div class="view-model" id="viewModel">
+        <div class="hero">
+          <div class="bg" style="background-image:url(assets/rivian-stack.webp)"></div>
+          <div class="scrim"></div>
+          <div class="topbar">
+            <div class="l5" aria-label="VIN not DIESEL">
+              <div class="l5-mark" aria-hidden="true">
+                <svg viewBox="0 0 26 26" fill="none">
+                  <path d="M3 15 H7 L9 10 H15 L17 7 H22 L24 10 V15 H22.5 Q21.2 18 19 18 Q16.8 18 15.5 15 H10.5 Q9.2 18 7 18 Q4.8 18 3.5 15 H3 Z" stroke="#3aa0ff" stroke-width="1.4" fill="rgba(58,160,255,0.15)"/>
+                  <circle cx="7" cy="16.5" r="1.6" fill="#1fd6a0"/>
+                  <circle cx="19" cy="16.5" r="1.6" fill="#1fd6a0"/>
+                  <path d="M14 4 L11 10 H14 L12.5 15 L18 8 H15 Z" fill="#1fd6a0"/>
+                </svg>
+              </div>
+              <div class="l5-words">
+                <span class="vin">VIN</span>
+                <span class="not-script">not</span>
+                <span class="diesel">DIESEL</span>
+              </div>
+            </div>
+            <div class="toggle"><span class="on">Work</span><span>Play</span></div>
+          </div>
+          <h2 class="hero-title">Rivian R1T</h2>
+        </div>
+
+        <div class="body">
+          <div class="crumbs">
+            <span class="crumb">Pickup</span>
+            <span class="crumb">Rivian R1T</span>
+          </div>
+          <h3 class="model-name">Rivian R1T.</h3>
+          <p class="avail" id="availLine">—</p>
+
+          <p class="section-h">
+            <span>For sale by year</span>
+            <span class="ex">EXAMPLE</span>
+          </p>
+          <div class="year-summary" id="yearSummary"></div>
+
+          <p class="section-h">
+            <span>Inventory filters</span>
+            <span class="ex">only options on trucks for sale</span>
+          </p>
+          <div class="inv-filters" id="invFilters"></div>
+
+          <div id="yearGroups"></div>
+        </div>
+      </div>
+
+      <div class="detail" id="detail">
+        <div class="detail-ph" id="detailPh">
+          <button type="button" class="detail-back" id="detailBack">← Inventory</button>
+        </div>
+        <div class="detail-body">
+          <p class="ex" style="margin:0 0 6px">EXAMPLE listing</p>
+          <h3 class="detail-title" id="detailTitle">—</h3>
+          <p class="detail-dealer" id="detailDealer">—</p>
+
+          <div class="price-grade">
+            <div class="price-block">
+              <p class="detail-price" id="detailPrice">—</p>
+              <p class="detail-price-sub">All-in · fees included · <span class="ex">EXAMPLE</span></p>
+            </div>
+            <div class="grade-wrap" id="gradeWrap" aria-label="Vehicle grade"></div>
+          </div>
+          <p class="grade-blurb">
+            Vehicle Grade · peer score vs similar R1Ts for sale (SOH, miles, warranty remaining, and related used-fleet factors).
+            <span class="ex">EXAMPLE</span>
+          </p>
+
+          <div class="factors is-open" id="factors">
+            <button type="button" class="factors-h" id="factorsToggle">
+              <span>What’s in this grade</span>
+              <span aria-hidden="true">▾</span>
+            </button>
+            <div class="factors-b" id="factorsBody"></div>
+          </div>
+
+          <div class="fleet-box" id="fleetBox">
+            <button type="button" class="fleet-h" id="fleetToggle">
+              <span>Fleet match / savings <span class="ex">later</span></span>
+              <span aria-hidden="true">▸</span>
+            </button>
+            <div class="fleet-b">
+              <strong>Placeholder only.</strong>
+              Later, VinNotDiesel can show how this truck matches your shop’s routes and saves
+              oil-change / fuel-stop time with overnight recharge — a separate score from Vehicle Grade.
+              No second dial row in this preview.
+            </div>
+          </div>
+
+          <div class="spec-grid" id="detailSpecs"></div>
+          <button type="button" class="btn-ember">Buy Now</button>
+          <button type="button" class="btn-outline">Message seller</button>
+        </div>
+      </div>
+    </div>
+
+    <p class="foot">
+      Hard brand separation: VinNotDiesel scoring ≠ Fit My Truck. Inventory has no dials; one grade dial appears only after a listing is opened.
+      Stopped at preview — no full build.
+    </p>
+  </div>
+
+  <script>
+    /** Modest speedometer dial — one overall Vehicle Grade on listing detail only. */
+    function dialTone(score) {
+      if (score >= 80) return { arc: "#1fd6a0", num: "#0f7a58" };
+      if (score >= 60) return { arc: "#3aa0ff", num: "#1570c5" };
+      return { arc: "#ff6b2c", num: "#c44a14" };
+    }
+    function polar(cx, cy, r, deg) {
+      const rad = (deg * Math.PI) / 180;
+      return [cx + r * Math.cos(rad), cy + r * Math.sin(rad)];
+    }
+    function arcPath(cx, cy, r, startDeg, endDeg) {
+      const [x1, y1] = polar(cx, cy, r, startDeg);
+      const [x2, y2] = polar(cx, cy, r, endDeg);
+      const large = endDeg - startDeg > 180 ? 1 : 0;
+      return `M ${x1.toFixed(2)} ${y1.toFixed(2)} A ${r} ${r} 0 ${large} 1 ${x2.toFixed(2)} ${y2.toFixed(2)}`;
+    }
+    function vehicleGradeDial(score, size = 72) {
+      const s = Math.max(0, Math.min(100, Math.round(Number(score) || 0)));
+      const tone = dialTone(s);
+      const start = -210, sweep = 240;
+      const needle = start + (s / 100) * sweep;
+      const cx = 50, cy = 54, r = 34;
+      const track = arcPath(cx, cy, r, start, start + sweep);
+      const fill = arcPath(cx, cy, r, start, needle);
+      const [nx, ny] = polar(cx, cy, r - 5, needle);
+      let ticks = "";
+      for (let i = 0; i <= 4; i++) {
+        const d = start + (i / 4) * sweep;
+        const [a1, a2] = polar(cx, cy, r + 1, d);
+        const [b1, b2] = polar(cx, cy, r + 4.5, d);
+        ticks += `<line x1="${a1.toFixed(1)}" y1="${a2.toFixed(1)}" x2="${b1.toFixed(1)}" y2="${b2.toFixed(1)}" stroke="${i === 4 ? "#1fd6a0" : "#b8c4d0"}" stroke-width="1.2" stroke-linecap="round"/>`;
+      }
+      return `
+        <div data-score="${s}">
+          <svg viewBox="0 0 100 72" width="${size}" height="${(size * 0.72).toFixed(1)}" aria-hidden="true">
+            <path d="${track}" fill="none" stroke="#dfe6ee" stroke-width="6.5" stroke-linecap="round"/>
+            <path d="${fill}" fill="none" stroke="${tone.arc}" stroke-width="6.5" stroke-linecap="round"/>
+            ${ticks}
+            <line x1="${cx}" y1="${cy}" x2="${nx.toFixed(2)}" y2="${ny.toFixed(2)}"
+              stroke="#ff6b2c" stroke-width="2.1" stroke-linecap="round"/>
+            <circle cx="${cx}" cy="${cy}" r="3.6" fill="#0b1a2e" stroke="#ff6b2c" stroke-width="1.2"/>
+            <text x="${cx}" y="${cy + 16}" text-anchor="middle"
+              font-family="Space Grotesk, sans-serif" font-weight="700" font-size="15"
+              fill="${tone.num}">${s}</text>
+          </svg>
+          <div class="grade-caption">Vehicle Grade <span class="ex">EX</span></div>
+        </div>
+      `;
+    }
+
+    // EXAMPLE inventory — no dials on thumbs; grade only on detail
+    const INVENTORY = [
+      { id: "ex-22a", year: 2022, trim: "Adventure", pack: "Large Pack", motor: "Dual Motor", price: 48900, miles: 41200, dealer: "Everglades EV Motors · Miami, FL", soh: 90, range: 310, payload: 1760, tow: 11000, warrantyBattMo: 48, img: "assets/rivian-hero.webp",
+        grade: 71, factors: { soh: "90% · near peer avg", miles: "41.2k · above peer avg", warranty: "48 mo battery left", other: "Clean title · 1 owner" } },
+      { id: "ex-22b", year: 2022, trim: "Explore", pack: "Standard Pack", motor: "Dual Motor", price: 45500, miles: 52800, dealer: "Private seller · Fort Lauderdale, FL", soh: 87, range: 260, payload: 1760, tow: 11000, warrantyBattMo: 36, img: "assets/rivian-stack.webp",
+        grade: 58, factors: { soh: "87% · below peer avg", miles: "52.8k · high for year", warranty: "36 mo battery left", other: "Clean title · private" } },
+      { id: "ex-23a", year: 2023, trim: "Adventure", pack: "Large Pack", motor: "Dual Motor", price: 52000, miles: 22100, dealer: "Coastal Solar Ops LLC · Miami, FL", soh: 91, range: 328, payload: 1760, tow: 11000, warrantyBattMo: 70, img: "assets/rivian-stack.webp",
+        grade: 84, factors: { soh: "91% · solid for miles", miles: "22.1k · below peer avg", warranty: "70 mo battery left", other: "Clean title · documented service" } },
+      { id: "ex-23b", year: 2023, trim: "Adventure", pack: "Max Pack", motor: "Quad Motor", price: 58900, miles: 18450, dealer: "Atlantic Coast EV · Boca Raton, FL", soh: 93, range: 370, payload: 1760, tow: 11000, warrantyBattMo: 74, img: "assets/rivian-hero.webp",
+        grade: 89, factors: { soh: "93% · strong", miles: "18.5k · below peer avg", warranty: "74 mo battery left", other: "Max Pack · dealer inspected" } },
+      { id: "ex-23c", year: 2023, trim: "Explore", pack: "Large Pack", motor: "Dual Motor", price: 49900, miles: 30600, dealer: "Sunbelt Fleet Resale · Tampa, FL", soh: 90, range: 320, payload: 1760, tow: 11000, warrantyBattMo: 62, img: "assets/rivian-stack.webp",
+        grade: 77, factors: { soh: "90% · peer avg", miles: "30.6k · near peer avg", warranty: "62 mo battery left", other: "Fleet surplus · clean title" } },
+      { id: "ex-24a", year: 2024, trim: "Adventure", pack: "Large Pack", motor: "Dual Motor", price: 62900, miles: 9800, dealer: "Rivian Approved · Orlando, FL", soh: 97, range: 328, payload: 1764, tow: 11000, warrantyBattMo: 88, img: "assets/rivian-hero.webp",
+        grade: 92, factors: { soh: "97% · excellent", miles: "9.8k · low", warranty: "88 mo battery left", other: "Approved pre-owned" } },
+      { id: "ex-24b", year: 2024, trim: "Adventure", pack: "Max Pack", motor: "Tri Motor", price: 71900, miles: 6100, dealer: "Palm Beach EV Collective · WPB, FL", soh: 98, range: 370, payload: 1764, tow: 11000, warrantyBattMo: 92, img: "assets/rivian-stack.webp",
+        grade: 94, factors: { soh: "98% · excellent", miles: "6.1k · very low", warranty: "92 mo battery left", other: "Max Pack · low miles" } },
+      { id: "ex-24c", year: 2024, trim: "Ascend", pack: "Max Pack", motor: "Dual Motor", price: 68500, miles: 4200, dealer: "Gulfstream Motors · Sarasota, FL", soh: 99, range: 370, payload: 1764, tow: 11000, warrantyBattMo: 94, img: "assets/rivian-hero.webp",
+        grade: 95, factors: { soh: "99% · top tier", miles: "4.2k · very low", warranty: "94 mo battery left", other: "Ascend trim · dealer" } },
+      { id: "ex-24d", year: 2024, trim: "Explore", pack: "Large Pack", motor: "Performance Dual", price: 60100, miles: 14200, dealer: "Private seller · Jupiter, FL", soh: 96, range: 310, payload: 1764, tow: 11000, warrantyBattMo: 82, img: "assets/rivian-stack.webp",
+        grade: 86, factors: { soh: "96% · strong", miles: "14.2k · average", warranty: "82 mo battery left", other: "Private · clean title" } },
+      { id: "ex-25a", year: 2025, trim: "Adventure", pack: "Large Pack", motor: "Dual Motor", price: 74200, miles: 2100, dealer: "Rivian Delivery Center · Miami, FL", soh: 99, range: 328, payload: 1764, tow: 11000, warrantyBattMo: 100, img: "assets/rivian-hero.webp",
+        grade: 93, factors: { soh: "99% · near new", miles: "2.1k · very low", warranty: "100 mo battery left", other: "CPO path · delivery center" } },
+      { id: "ex-25b", year: 2025, trim: "Ascend", pack: "Max Pack", motor: "Tri Motor", price: 82000, miles: 900, dealer: "Prestige EV · Naples, FL", soh: 100, range: 370, payload: 1764, tow: 11000, warrantyBattMo: 104, img: "assets/rivian-stack.webp",
+        grade: 91, factors: { soh: "100% · as-new", miles: "0.9k · minimal", warranty: "104 mo battery left", other: "Ask is high vs peers" } }
+    ];
+
+    const state = { openYear: 2024, packFilter: null, detailId: null };
+
+    function money(n) { return "$" + Math.round(n).toLocaleString(); }
+    function filtered() {
+      return INVENTORY.filter((L) => !state.packFilter || L.pack === state.packFilter);
+    }
+    function yearsPresent() {
+      const map = new Map();
+      for (const L of filtered()) {
+        if (!map.has(L.year)) map.set(L.year, []);
+        map.get(L.year).push(L);
+      }
+      return [...map.entries()].sort((a, b) => a[0] - b[0]);
+    }
+    function packsInInventory() {
+      return [...new Set(INVENTORY.map((L) => L.pack))];
+    }
+
+    function renderAvail() {
+      const years = [...new Set(INVENTORY.map((L) => L.year))].sort();
+      const short = years.map((y) => String(y).slice(2)).join(", ");
+      document.getElementById("availLine").innerHTML =
+        `I've got a <strong>${short}</strong> available — compare prices. <span class="ex">EXAMPLE</span>`;
+    }
+
+    function renderYearSummary() {
+      const root = document.getElementById("yearSummary");
+      root.innerHTML = yearsPresent().map(([year, list]) => {
+        const from = Math.min(...list.map((L) => L.price));
+        const on = state.openYear === year ? "is-on" : "";
+        return `
+          <button type="button" class="ys ${on}" data-year="${year}">
+            <div class="ys-ph" style="background-image:url(${list[0].img})"></div>
+            <div class="ys-meta">
+              <span class="ys-y">${year}</span>
+              <span class="ys-from">from ${money(from)}</span>
+              <span class="ys-n">${list.length} for sale</span>
+            </div>
+          </button>
+        `;
+      }).join("");
+      root.querySelectorAll(".ys").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const y = Number(btn.dataset.year);
+          state.openYear = state.openYear === y ? null : y;
+          state.detailId = null;
+          render();
+        });
+      });
+    }
+
+    function renderFilters() {
+      const root = document.getElementById("invFilters");
+      const packs = packsInInventory();
+      root.innerHTML = `
+        <button type="button" class="ifilt ${!state.packFilter ? "is-on" : ""}" data-pack="">All packs</button>
+        ${packs.map((p) => `
+          <button type="button" class="ifilt ${state.packFilter === p ? "is-on" : ""}" data-pack="${p}">${p}</button>
+        `).join("")}
+        <p class="ifilt-note">Filters only list packs on trucks for sale — not theoretical configs.</p>
+      `;
+      root.querySelectorAll(".ifilt").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          state.packFilter = btn.dataset.pack || null;
+          state.detailId = null;
+          const still = filtered().some((L) => L.year === state.openYear);
+          if (!still) state.openYear = yearsPresent()[0]?.[0] ?? null;
+          render();
+        });
+      });
+    }
+
+    function renderYearGroups() {
+      const root = document.getElementById("yearGroups");
+      root.innerHTML = yearsPresent().map(([year, list]) => {
+        const from = Math.min(...list.map((L) => L.price));
+        const to = Math.max(...list.map((L) => L.price));
+        const open = state.openYear === year;
+        return `
+          <div class="yg ${open ? "is-open" : ""}" id="yg-${year}">
+            <button type="button" class="yg-h" data-year="${year}" aria-expanded="${open}">
+              <span class="left">
+                <span class="y">${year}</span>
+                <span class="sub">${list.length} for sale · <span class="ex">EXAMPLE</span></span>
+              </span>
+              <span class="right">
+                <span class="from">${money(from)}${from !== to ? "–" + money(to) : ""}</span>
+                <span class="chev" aria-hidden="true">▾</span>
+              </span>
+            </button>
+            <div class="yg-b">
+              <div class="thumb-row">
+                ${list.map((L) => `
+                  <button type="button" class="thumb ${state.detailId === L.id ? "is-on" : ""}" data-id="${L.id}">
+                    <div class="thumb-ph" style="background-image:url(${L.img})">
+                      <span class="thumb-badge">${L.trim}</span>
+                    </div>
+                    <div class="thumb-meta">
+                      <p class="thumb-price">${money(L.price)}</p>
+                      <p class="thumb-mi">${L.miles.toLocaleString()} mi</p>
+                      <p class="thumb-cfg">${L.pack} · ${L.motor}</p>
+                    </div>
+                  </button>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      root.querySelectorAll(".yg-h").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const y = Number(btn.dataset.year);
+          state.openYear = state.openYear === y ? null : y;
+          state.detailId = null;
+          render();
+        });
+      });
+      root.querySelectorAll(".thumb").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          state.detailId = btn.dataset.id;
+          render();
+        });
+      });
+    }
+
+    function renderDetail() {
+      const detail = document.getElementById("detail");
+      const model = document.getElementById("viewModel");
+      const L = INVENTORY.find((x) => x.id === state.detailId);
+      if (!L) {
+        detail.classList.remove("is-on");
+        model.classList.remove("is-hide");
+        return;
+      }
+      model.classList.add("is-hide");
+      detail.classList.add("is-on");
+      document.getElementById("detailPh").style.backgroundImage = `url(${L.img})`;
+      document.getElementById("detailTitle").textContent = `${L.year} Rivian R1T ${L.trim}`;
+      document.getElementById("detailDealer").textContent = L.dealer;
+      document.getElementById("detailPrice").textContent = money(L.price);
+      document.getElementById("gradeWrap").innerHTML = vehicleGradeDial(L.grade, 76);
+
+      document.getElementById("factorsBody").innerHTML = `
+        <dl>
+          <div class="factor-row">
+            <dt>Battery SOH<span class="hint">vs similar R1Ts</span></dt>
+            <dd>${L.factors.soh} <span class="ex">EX</span></dd>
+          </div>
+          <div class="factor-row">
+            <dt>Mileage<span class="hint">peer year/model</span></dt>
+            <dd>${L.factors.miles} <span class="ex">EX</span></dd>
+          </div>
+          <div class="factor-row">
+            <dt>Warranty remaining<span class="hint">battery / drive</span></dt>
+            <dd>${L.factors.warranty} <span class="ex">EX</span></dd>
+          </div>
+          <div class="factor-row">
+            <dt>Other buying factors</dt>
+            <dd>${L.factors.other} <span class="ex">EX</span></dd>
+          </div>
+        </dl>
+      `;
+
+      document.getElementById("detailSpecs").innerHTML = `
+        <div class="sg"><div class="lab">Miles</div><div class="val">${L.miles.toLocaleString()}</div></div>
+        <div class="sg"><div class="lab">SOH</div><div class="val">${L.soh}%</div></div>
+        <div class="sg"><div class="lab">Pack (on truck)</div><div class="val">${L.pack}</div></div>
+        <div class="sg"><div class="lab">Motor (on truck)</div><div class="val">${L.motor}</div></div>
+        <div class="sg"><div class="lab">Rated range</div><div class="val">~${L.range} mi</div></div>
+        <div class="sg"><div class="lab">Payload</div><div class="val">${L.payload.toLocaleString()} lb</div></div>
+      `;
+    }
+
+    function render() {
+      renderAvail();
+      renderYearSummary();
+      renderFilters();
+      renderYearGroups();
+      renderDetail();
+    }
+
+    document.getElementById("detailBack").addEventListener("click", () => {
+      state.detailId = null;
+      render();
+    });
+    document.getElementById("factorsToggle").addEventListener("click", () => {
+      document.getElementById("factors").classList.toggle("is-open");
+    });
+    document.getElementById("fleetToggle").addEventListener("click", () => {
+      document.getElementById("fleetBox").classList.toggle("is-open");
+      const open = document.getElementById("fleetBox").classList.contains("is-open");
+      document.getElementById("fleetToggle").querySelector("[aria-hidden]").textContent = open ? "▾" : "▸";
+    });
+
+    render();
+  </script>
+</body>
+</html>
