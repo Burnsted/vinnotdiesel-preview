@@ -88,7 +88,7 @@ export function currentWorkVehicle(intake, pkg) {
 
   const empty = { text: DASH, known: false }
   return {
-    heading: 'Your current work vehicle',
+    heading: 'Your truck',
     role,
     kind: 'Non-EV work vehicle',
     spec: {

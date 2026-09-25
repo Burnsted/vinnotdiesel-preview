@@ -11,7 +11,14 @@ export default function AddToFleetButton({ pickId, size = '' }) {
       aria-pressed={inFleet}
       onClick={() => fleet.toggle(pickId)}
     >
-      {inFleet ? 'In fleet' : 'Add to fleet'}
+      {inFleet ? (
+        <>
+          <span className="in-fleet-check" aria-hidden="true">✓</span>
+          In fleet
+        </>
+      ) : (
+        'Add to fleet'
+      )}
     </button>
   )
 }
