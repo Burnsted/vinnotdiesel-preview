@@ -41,7 +41,7 @@ export default function MakeOfferModal({ listing, onClose }) {
                 <option value="168">7 days</option>
               </select>
             </div>
-            <p className="fake-note">Demo only — no real offer is sent. No payments in this preview.</p>
+            <p className="fake-note">Demo only — no real offer is sent. Buyer’s fee: fee at checkout — amount TBD. VinNotDiesel does not hold vehicle funds.</p>
             <div className="modal-actions">
               <button type="button" className="btn btn-ghost" onClick={onClose}>Cancel</button>
               <button type="submit" className="btn btn-amber">Submit offer</button>
