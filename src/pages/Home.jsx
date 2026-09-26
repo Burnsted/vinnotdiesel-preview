@@ -2,7 +2,11 @@ import { Link } from 'react-router-dom'
 import { DEFAULT_PACKAGE_ID } from '../data/package'
 import Wordmark from '../components/Wordmark'
 
+const EXAMPLE = `/package/${DEFAULT_PACKAGE_ID}`
+
 export default function Home() {
+  const plateSrc = `${import.meta.env.BASE_URL}home/hero-plate.svg`
+
   return (
     <div className="locked-home is-sparse">
       <header className="locked-hero" aria-label="FleetFit">
@@ -18,20 +22,21 @@ export default function Home() {
           </div>
         </nav>
         <div className="locked-hero-inner">
-          <p className="locked-brand">
-            <Wordmark size="hero" tone="dark" />
-          </p>
           <h1 className="locked-hero-title">
             Used EV fleet packages that fit the work day.
           </h1>
           <p className="locked-hero-lead">
             Same job as your work truck — money, maintenance, and time.
           </p>
+          <Link to={EXAMPLE} className="home-hero-plate" aria-label="Demo package">
+            <img src={plateSrc} alt="" className="home-hero-plate-art" />
+            <span className="home-hero-plate-chip">Demo package</span>
+          </Link>
           <div className="locked-hero-actions">
             <Link to="/intake" className="btn btn-primary">
               Match my fleet
             </Link>
-            <Link to={`/package/${DEFAULT_PACKAGE_ID}`} className="btn locked-btn-on-dark">
+            <Link to={EXAMPLE} className="btn locked-btn-on-dark">
               View example package
             </Link>
           </div>
