@@ -795,6 +795,7 @@ img { max-width: 100%; display: block; }
 }
 
 .app-shell.chrome-dark { background: #05080a; color: #fff; }
+.app-shell.chrome-home { background: #f2f2f2; color: #111; }
 .app-shell.chrome-dark .site-footer {
   background: var(--dark); border-top-color: #222; color: #888;
 }
@@ -1382,6 +1383,156 @@ img { max-width: 100%; display: block; }
   text-decoration: none;
 }
 .home-path a:hover { color: #fff; }
+
+/* 03 Icon path mood — light ground, oversized PATH, example strip */
+.locked-home.is-mood {
+  background: #f2f2f2;
+  color: #111;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+.locked-home.is-mood .locked-hero {
+  min-height: auto;
+  align-items: flex-start;
+  padding: 88px 24px 20px;
+}
+.locked-home.is-mood .locked-hero-bg { display: none; }
+.locked-home.is-mood .locked-hero-inner { width: min(560px, 100%); }
+.locked-home.is-mood .locked-hero-title {
+  color: #111;
+  font-size: clamp(2rem, 8vw, 2.75rem);
+  margin: 0 0 12px;
+  animation: none;
+}
+.locked-home.is-mood .locked-hero-lead {
+  color: #555;
+  font-size: 1.02rem;
+  margin: 0 0 18px;
+  max-width: 22rem;
+  animation: none;
+}
+.locked-home.is-mood .locked-topnav-brand { color: #111; }
+.locked-home.is-mood .locked-topnav-links a {
+  color: #333;
+}
+.locked-home.is-mood .locked-topnav-links a:hover { color: #111; }
+.locked-home.is-mood .locked-hero-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  max-width: 420px;
+  animation: none;
+}
+.locked-home.is-mood .locked-hero-actions .btn {
+  width: 100%;
+  border-radius: 999px;
+  padding: 16px 22px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.locked-home.is-mood .btn-primary {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+.locked-home.is-mood .btn-primary:hover {
+  background: #222;
+  color: #fff;
+}
+.locked-home.is-mood .home-btn-quiet {
+  background: #fff;
+  color: #111;
+  border: 1px solid #e4e4e4;
+}
+.locked-home.is-mood .home-btn-quiet:hover {
+  background: #f7f7f7;
+  text-decoration: none;
+}
+.locked-home.is-mood .home-dense {
+  padding: 8px 24px 8px;
+}
+.locked-home.is-mood .home-path-label {
+  color: #888;
+}
+.home-path-icons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.home-path-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 112px;
+  padding: 16px 8px 14px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  color: #111;
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-align: center;
+}
+.home-path-card:hover { text-decoration: none; color: #111; }
+.home-path-icon {
+  width: 36px;
+  height: 36px;
+  display: block;
+}
+.home-ex {
+  padding-top: 18px;
+  padding-bottom: 8px;
+}
+.home-ex-strip {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+.home-ex-card {
+  display: block;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  text-align: center;
+  text-decoration: none;
+  color: #111;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.home-ex-card:hover { text-decoration: none; color: #111; }
+.home-ex-art {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.home-ex-card span {
+  display: block;
+  padding: 8px 4px 10px;
+}
+.home-ex-fact {
+  margin: 0 0 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #F5A623;
+}
+.locked-home.is-mood .home-quiet {
+  padding: 8px 24px 0;
+  color: #888;
+}
+@media (min-width: 560px) {
+  .home-path-icons { grid-template-columns: repeat(4, 1fr); }
+}
 
 @keyframes locked-fade-up {
   from { opacity: 0; transform: translateY(14px); }

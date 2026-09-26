@@ -16,11 +16,11 @@ import Budget from './pages/Budget'
 export default function App() {
   const location = useLocation()
   const path = location.pathname
-  const darkChrome = path === '/' || path === ''
+  const isHome = path === '/' || path === ''
 
   return (
-    <div className={`app-shell ${darkChrome ? 'chrome-dark' : ''}`}>
-      {!darkChrome && <Header />}
+    <div className={`app-shell ${isHome ? 'chrome-home' : ''}`}>
+      {!isHome && <Header />}
       <main className="main">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -37,7 +37,7 @@ export default function App() {
           <Route path="/listing/:id" element={<Listing />} />
         </Routes>
       </main>
-      {!darkChrome && <Footer />}
+      {!isHome && <Footer />}
     </div>
   )
 }

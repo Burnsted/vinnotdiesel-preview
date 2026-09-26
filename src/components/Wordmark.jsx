@@ -1,7 +1,7 @@
 /**
  * Official Franz FleetFit wordmark J6 open plus (Ted ~8:11 PM ET 2026-09-25).
  * Dark surfaces: Fleet white #FFFFFF · Fit amber #F5A623 · open-plus mark.
- * Light surfaces stay on interim teal files — no J6 light ship this drop.
+ * Light surfaces: Fleet #111111 · Fit amber #F5A623 · same J6 open-plus.
  * UI chrome teal #1BB6A8 is not the mark Fit color.
  */
 const FILES = {
@@ -11,9 +11,9 @@ const FILES = {
     eyebrow: 'fleetfit-wordmark-j6-nav-dark.svg',
   },
   light: {
-    nav: 'fleetfit-wordmark-horizontal-light.svg',
-    hero: 'fleetfit-wordmark-horizontal-light.svg',
-    eyebrow: 'fleetfit-wordmark-horizontal-light.svg',
+    nav: 'fleetfit-wordmark-j6-nav-light.svg',
+    hero: 'fleetfit-wordmark-j6-nav-light.svg',
+    eyebrow: 'fleetfit-wordmark-j6-nav-light.svg',
   },
 }
 
