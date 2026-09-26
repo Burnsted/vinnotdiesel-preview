@@ -3,7 +3,7 @@ import AddToFleetButton from './AddToFleetButton'
 import { distanceFromHome } from '../data/listings'
 import { batteryConfidenceFromListing } from '../lib/battery'
 import { fleetListingKey } from '../lib/fleetPick'
-import { vehiclePhotoFor } from '../lib/vehiclePhoto'
+import ListingPhoto from './ListingPhoto'
 
 function formatPrice(listing) {
   if (listing.allInPrice == null) {
@@ -37,11 +37,7 @@ export default function ListingCard({ listing }) {
             </span>
           )}
         </div>
-        <img
-          src={vehiclePhotoFor(listing)}
-          alt=""
-          className="card-media-photo"
-        />
+        <ListingPhoto listing={listing} vehicle={listing} className="card-media-photo" />
       </Link>
 
       <div className="card-body">
@@ -51,7 +47,7 @@ export default function ListingCard({ listing }) {
         </h3>
         <p className="card-condition">
           Used · {sellerLabel} seller
-          {' · '}{listing.mileage.toLocaleString()} mi
+          {listing.mileage != null ? ` · ${listing.mileage.toLocaleString()} mi` : ''}
         </p>
 
         <div className="card-chip-row">
@@ -59,10 +55,10 @@ export default function ListingCard({ listing }) {
             {battery.label}
           </span>
           <span className="meta-chip ev-chip">
-            Range<strong>{listing.ratedRange} mi</strong>
+            Range<strong>{listing.ratedRange != null ? `${listing.ratedRange} mi` : '—'}</strong>
           </span>
           <span className="meta-chip">
-            Payload<strong>{listing.payload.toLocaleString()} lb</strong>
+            Payload<strong>{listing.payload != null ? `${listing.payload.toLocaleString()} lb` : '—'}</strong>
           </span>
           <span className="meta-chip">
             Seller<strong>{sellerLabel}</strong>
@@ -105,7 +101,7 @@ export default function ListingCard({ listing }) {
           <span className="sep">·</span>
           <span className="muted">
             {listing.location.city}, {listing.location.state}
-            {' · '}{miles} mi away
+            {miles != null ? ` · ${miles} mi away` : ''}
           </span>
         </p>
       </div>

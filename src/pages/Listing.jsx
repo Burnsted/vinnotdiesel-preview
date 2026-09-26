@@ -4,7 +4,7 @@ import AddToFleetButton from '../components/AddToFleetButton'
 import { LISTINGS, distanceFromHome } from '../data/listings'
 import { batteryConfidenceFromListing } from '../lib/battery'
 import { fleetListingKey } from '../lib/fleetPick'
-import { vehiclePhotoFor } from '../lib/vehiclePhoto'
+import ListingPhoto from '../components/ListingPhoto'
 
 const GALLERY_LABELS = [
   { key: 'exterior', label: 'Exterior' },
@@ -46,8 +46,6 @@ export default function Listing() {
 
   const panels = GALLERY_LABELS.filter((g) => listing.photos.includes(g.key))
   const gallery = panels.length ? panels : GALLERY_LABELS.slice(0, 4)
-  const exteriorPhoto = vehiclePhotoFor(listing)
-
   return (
     <>
       <div className="detail-page">
@@ -72,7 +70,7 @@ export default function Listing() {
             {' '}(demo stock ID)
             {' · '}{listing.mileage.toLocaleString()} mi
             {' · '}{listing.location.city}, {listing.location.state}
-            {' · '}{miles} mi from West Palm Beach, FL
+            {miles != null ? ` · ${miles} mi from West Palm Beach, FL` : ''}
             {' · '}Listed {listing.listedDaysAgo === 0 ? 'today' : `${listing.listedDaysAgo}d ago`}
           </p>
           <div className="hero-stats">
@@ -83,7 +81,7 @@ export default function Listing() {
             </div>
             <div className="stat-tile">
               <div className="stat-label">Rated range</div>
-              <div className="stat-value">{listing.ratedRange} mi</div>
+              <div className="stat-value">{listing.ratedRange != null ? `${listing.ratedRange} mi` : '—'}</div>
               <div className="stat-hint">Displayed / sticker class</div>
             </div>
             <div className="stat-tile">
@@ -95,8 +93,12 @@ export default function Listing() {
             </div>
             <div className="stat-tile">
               <div className="stat-label">Payload</div>
-              <div className="stat-value">{listing.payload.toLocaleString()} lb</div>
-              <div className="stat-hint">GVWR {listing.gvwr.toLocaleString()} · curb {listing.curb.toLocaleString()}</div>
+              <div className="stat-value">{listing.payload != null ? `${listing.payload.toLocaleString()} lb` : '—'}</div>
+              <div className="stat-hint">
+                {listing.gvwr != null || listing.curb != null
+                  ? `GVWR ${listing.gvwr != null ? listing.gvwr.toLocaleString() : '—'} · curb ${listing.curb != null ? listing.curb.toLocaleString() : '—'}`
+                  : 'Not on this listing card'}
+              </div>
             </div>
           </div>
         </section>
@@ -108,7 +110,7 @@ export default function Listing() {
             {gallery.map((g, i) => (
               <div key={g.key} className={`g-panel ${i === 0 ? 'g-main has-photo' : ''}`}>
                 {i === 0 ? (
-                  <img src={exteriorPhoto} alt="" className="g-panel-photo" />
+                  <ListingPhoto vehicle={listing} className="g-panel-photo" />
                 ) : (
                   <span className="g-icon" aria-hidden="true">▣</span>
                 )}
@@ -123,13 +125,13 @@ export default function Listing() {
           <h2 className="module-title"><span className="num">3</span> Work &amp; EV facts</h2>
           <dl className="facts-strip">
             <div className="fact"><dt>Usable pack</dt><dd>{listing.usableKwh ? `${listing.usableKwh} kWh` : '—'}</dd></div>
-            <div className="fact"><dt>Onboard charger</dt><dd>{listing.onboardChargerKw} kW</dd></div>
-            <div className="fact"><dt>DC fast max</dt><dd>{listing.dcFastMaxKw} kW</dd></div>
-            <div className="fact"><dt>Cab / bed</dt><dd>{listing.cab} / {listing.bed}</dd></div>
-            <div className="fact"><dt>Drivetrain</dt><dd>{listing.drivetrain}</dd></div>
-            <div className="fact"><dt>Payload</dt><dd>{listing.payload.toLocaleString()} lb</dd></div>
-            <div className="fact"><dt>GVWR</dt><dd>{listing.gvwr.toLocaleString()} lb</dd></div>
-            <div className="fact"><dt>Curb</dt><dd>{listing.curb.toLocaleString()} lb</dd></div>
+            <div className="fact"><dt>Onboard charger</dt><dd>{listing.onboardChargerKw != null ? `${listing.onboardChargerKw} kW` : '—'}</dd></div>
+            <div className="fact"><dt>DC fast max</dt><dd>{listing.dcFastMaxKw != null ? `${listing.dcFastMaxKw} kW` : '—'}</dd></div>
+            <div className="fact"><dt>Cab / bed</dt><dd>{listing.cab || listing.bed ? `${listing.cab || '—'} / ${listing.bed || '—'}` : '—'}</dd></div>
+            <div className="fact"><dt>Drivetrain</dt><dd>{listing.drivetrain || '—'}</dd></div>
+            <div className="fact"><dt>Payload</dt><dd>{listing.payload != null ? `${listing.payload.toLocaleString()} lb` : '—'}</dd></div>
+            <div className="fact"><dt>GVWR</dt><dd>{listing.gvwr != null ? `${listing.gvwr.toLocaleString()} lb` : '—'}</dd></div>
+            <div className="fact"><dt>Curb</dt><dd>{listing.curb != null ? `${listing.curb.toLocaleString()} lb` : '—'}</dd></div>
           </dl>
           <p style={{ marginTop: 12, color: 'var(--text-muted)', fontSize: '0.9rem' }}>{listing.description}</p>
         </section>

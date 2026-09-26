@@ -1,8 +1,9 @@
 /**
  * Anonymized composite packages for the PUBLIC friend-preview.
- * Real shop concepts stay private — no shop names, no production VINs,
- * no phones/emails. Stock IDs only.
+ * Considered-unit photos + year/make/model/price/miles/dealer come from
+ * FACT Hot Deals listing rows. No invented VIN / price / miles / dealer.
  */
+import { applyListingFactsToUnit } from '../lib/vehiclePhoto'
 
 export const DEFAULT_PACKAGE_ID = 'pkg-tc-electrical-4'
 
@@ -375,8 +376,13 @@ export const PACKAGES = [
   },
 ]
 
+function withListingFacts(pkg) {
+  if (!pkg) return null
+  return { ...pkg, units: pkg.units.map(applyListingFactsToUnit) }
+}
+
 export function getPackage(id) {
-  return PACKAGES.find((p) => p.id === id) || null
+  return withListingFacts(PACKAGES.find((p) => p.id === id) || null)
 }
 
 export function getUnit(packageId, unitId) {
@@ -385,7 +391,8 @@ export function getUnit(packageId, unitId) {
 }
 
 export function findUnitAnywhere(unitId) {
-  for (const pkg of PACKAGES) {
+  for (const raw of PACKAGES) {
+    const pkg = withListingFacts(raw)
     const unit = pkg.units.find((u) => u.id === unitId)
     if (unit) return { pkg, unit }
   }

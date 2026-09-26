@@ -21,7 +21,9 @@ function oneLiner(listing) {
   const seats = listing.cab?.toLowerCase().includes('crew') || listing.cab?.toLowerCase().includes('super')
     ? 'up to 5 seats'
     : 'up to 3 seats'
-  return `Electric work truck: ${doors}, ${seats}, ${listing.bed} bed.`
+  return listing.bed
+    ? `Electric work truck: ${doors}, ${seats}, ${listing.bed} bed.`
+    : `Electric work truck: ${doors}, ${seats}.`
 }
 
 function workBlurb(make, model) {
@@ -90,9 +92,9 @@ export function getModels() {
       description: oneLiner(sample),
       fromPrice,
       count: m.listings.length,
-      image: vehiclePhotoFor(sample),
-      heroImage: vehiclePhotoFor(sample),
-      lifestyleImage: vehiclePhotoFor(sample),
+      image: vehiclePhotoFor(sample) || '',
+      heroImage: vehiclePhotoFor(sample) || '',
+      lifestyleImage: vehiclePhotoFor(sample) || '',
       blurb: workBlurb(m.make, m.model),
       cab: sample.cab,
       bed: sample.bed,

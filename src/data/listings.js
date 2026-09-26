@@ -1,7 +1,9 @@
-/** Demo inventory for FleetFit preview — not real listings. Stock IDs only (no VIN strings). */
+/** Demo inventory for FleetFit preview. Considered-unit FACT overlay from Hot Deals. */
+import { applyListingFactsToListing } from '../lib/vehiclePhoto'
+
 export const HOME_BASE = { city: 'West Palm Beach', state: 'FL', lat: 26.7153, lng: -80.0534 };
 
-export const LISTINGS = [
+const SEED_LISTINGS = [
   {
     id: 'vnd-001',
     year: 2023,
@@ -344,6 +346,8 @@ export const LISTINGS = [
   },
 ];
 
+export const LISTINGS = SEED_LISTINGS.map(applyListingFactsToListing)
+
 export function haversineMiles(a, b) {
   const R = 3958.8;
   const toRad = (d) => (d * Math.PI) / 180;
@@ -358,6 +362,7 @@ export function haversineMiles(a, b) {
 }
 
 export function distanceFromHome(listing) {
+  if (listing?.location?.lat == null || listing?.location?.lng == null) return null
   return Math.round(haversineMiles(HOME_BASE, listing.location));
 }
 
@@ -365,4 +370,4 @@ export const MAKES = [...new Set(LISTINGS.map((l) => l.make))].sort();
 export const MODELS = [...new Set(LISTINGS.map((l) => `${l.make}|${l.model}`))].sort();
 export const UPFT_TAGS = [...new Set(LISTINGS.flatMap((l) => l.upfitTags))].sort();
 export const SELLER_TYPES = ['private', 'dealer', 'fleet', 'upfitter'];
-export const CAB_BED_OPTIONS = [...new Set(LISTINGS.map((l) => `${l.cab} / ${l.bed}`))].sort();
+export const CAB_BED_OPTIONS = [...new Set(LISTINGS.map((l) => `${l.cab || '—'} / ${l.bed || '—'}`))].sort();

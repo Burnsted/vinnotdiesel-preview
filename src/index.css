@@ -2458,6 +2458,31 @@ img { max-width: 100%; display: block; }
   object-position: center 55%;
   display: block;
 }
+.listing-photo-pending {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12px;
+  background: #1a2228;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+.listing-photo-pending.is-current {
+  background: #14181c;
+  color: rgba(255, 255, 255, 0.7);
+}
+.card-media .listing-photo-pending,
+.home-hero-plate .listing-photo-pending,
+.home-ex-card .listing-photo-pending,
+.g-panel .listing-photo-pending {
+  position: absolute;
+}
 .unit-photo.has-photo::after {
   content: '';
   position: absolute;
@@ -2664,6 +2689,13 @@ img { max-width: 100%; display: block; }
   object-position: center 50%;
   border-radius: 10px;
   background: #1a2233;
+}
+.compare-tray-thumb .listing-photo-pending,
+.compare-max-thumbs .listing-photo-pending {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  font-size: 0.52rem;
 }
 .compare-tray-whisper {
   display: block;

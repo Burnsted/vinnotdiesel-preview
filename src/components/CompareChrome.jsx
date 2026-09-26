@@ -1,7 +1,7 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { getPackage, getUnit } from '../data/package'
 import { COMPARE_MAX, unitWhisper, useCompareSet } from '../lib/compareSet'
-import { vehiclePhotoFor } from '../lib/vehiclePhoto'
+import ListingPhoto from './ListingPhoto'
 
 export default function CompareChrome() {
   const { packageId } = useParams()
@@ -56,11 +56,7 @@ export default function CompareChrome() {
                     if (ids.length >= 2) openFull()
                   }}
                 >
-                  <img
-                    src={vehiclePhotoFor(unit)}
-                    alt=""
-                    className="compare-tray-photo"
-                  />
+                  <ListingPhoto vehicle={unit} className="compare-tray-photo" />
                   <span className="compare-tray-whisper">{unitWhisper(unit)}</span>
                 </button>
                 <button
@@ -94,11 +90,7 @@ export default function CompareChrome() {
             <ul className="compare-max-thumbs">
               {units.map((unit) => (
                 <li key={unit.id}>
-                  <img
-                    src={vehiclePhotoFor(unit)}
-                    alt=""
-                    className="compare-tray-photo"
-                  />
+                  <ListingPhoto vehicle={unit} className="compare-tray-photo" />
                   <button
                     type="button"
                     className="compare-tray-remove"

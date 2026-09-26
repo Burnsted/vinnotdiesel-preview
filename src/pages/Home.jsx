@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { DEFAULT_PACKAGE_ID } from '../data/package'
+import ListingPhoto from '../components/ListingPhoto'
 import Wordmark from '../components/Wordmark'
-import { HERO_PLATE_PHOTO, exampleStripPhoto } from '../lib/vehiclePhoto'
 
 const EXAMPLE = `/package/${DEFAULT_PACKAGE_ID}`
 const AMBER = '#F5A623'
@@ -79,11 +79,7 @@ export default function Home() {
             Same job as your work truck — money, maintenance, and time.
           </p>
           <Link to={EXAMPLE} className="home-hero-plate" aria-label="Demo package">
-            <img
-              src={HERO_PLATE_PHOTO}
-              alt=""
-              className="home-hero-plate-art"
-            />
+            <ListingPhoto alias="hero" className="home-hero-plate-art" />
             <span className="home-hero-plate-chip">Demo package</span>
           </Link>
           <div className="locked-hero-actions">
@@ -117,11 +113,7 @@ export default function Home() {
           {EXAMPLES.map((ex) => (
             <li key={ex.kind}>
               <Link to={ex.to} className="home-ex-card">
-                <img
-                  src={exampleStripPhoto(ex.kind)}
-                  alt=""
-                  className="home-ex-art"
-                />
+                <ListingPhoto alias={`strip-${ex.kind}`} className="home-ex-art" />
                 <span>{ex.label}</span>
               </Link>
             </li>
