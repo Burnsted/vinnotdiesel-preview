@@ -2,6 +2,7 @@ import { useMemo, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getModelBySlug } from '../data/models'
 import ListingCard from '../components/ListingCard'
+import Wordmark from '../components/Wordmark'
 
 function formatFrom(price) {
   if (price == null) return null
@@ -58,8 +59,8 @@ export default function Model() {
         <Link to="/" className="overlay-icon-btn" aria-label="Back home">
           <span className="burger light" aria-hidden="true"><span /><span /><span /></span>
         </Link>
-        <Link to="/" className="overlay-wordmark" aria-label="VinNotDiesel home">
-          VinNotDiesel
+        <Link to="/" className="overlay-wordmark" aria-label="FleetFit">
+          <Wordmark size="nav" tone="dark" decorative />
         </Link>
         <button type="button" className="overlay-icon-btn" aria-label="Account (stub)">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
@@ -95,9 +96,6 @@ export default function Model() {
         <div className="model-cta-stack">
           <button type="button" className="btn-model-primary" onClick={scrollToInventory}>
             See trucks for sale ({model.count})
-          </button>
-          <button type="button" className="btn-model-secondary" onClick={() => alert('Demo: Make an offer is stubbed on the model page. Open a listing to offer.')}>
-            Make an offer
           </button>
           <button type="button" className="btn-model-secondary" onClick={() => alert('Demo: PPI booking stubbed.')}>
             Book a pre-purchase inspection
@@ -150,8 +148,8 @@ export default function Model() {
             <StatBlock value={s.onboardKw.value} unit=" kW" caption={s.onboardKw.caption} />
           )}
           <p className="model-stats-footnote">
-            Figures use only values already on demo listings (ratedRange, payload, soh, gvwr, dcFastMaxKw, onboardChargerKw).
-            Tow ratings are omitted — not present in seed data. Measuring notes: rated range is seller sticker/displayed class; SOH methods vary by listing.
+            Figures use only values already on demo listings (range, payload, battery health, GVWR, charge rates).
+            Tow ratings are omitted — not present in seed data. Measuring notes: rated range is seller sticker/displayed class; battery health methods vary by listing.
           </p>
         </section>
 

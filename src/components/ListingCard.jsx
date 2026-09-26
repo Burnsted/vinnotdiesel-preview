@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom'
+import AddToFleetButton from './AddToFleetButton'
 import { distanceFromHome } from '../data/listings'
+import { batteryConfidenceFromListing } from '../lib/battery'
+import { fleetListingKey } from '../lib/fleetPick'
+import ListingPhoto from './ListingPhoto'
 
 function formatPrice(listing) {
-  if (listing.allInPrice == null || !listing.feesKnown) {
-    return { text: 'Price + fees unknown', unknown: true }
+  if (listing.allInPrice == null) {
+    return { text: 'Ask unknown', unknown: true }
   }
   return {
     text: `$${listing.allInPrice.toLocaleString()}`,
@@ -16,27 +20,10 @@ function valuePillClass(band) {
   return `pill pill-value-${band}`
 }
 
-function TruckSilhouette({ make }) {
-  const label = make?.slice(0, 3).toUpperCase() || 'EV'
-  return (
-    <svg width="220" height="90" viewBox="0 0 220 90" fill="none" aria-hidden="true">
-      <path
-        d="M12 62 H36 L48 36 H98 L114 24 H178 L206 36 V62 H194 Q186 74 172 74 Q158 74 150 62 H70 Q62 74 48 74 Q34 74 26 62 H12 Z"
-        fill="rgba(17,17,17,0.06)"
-        stroke="#333"
-        strokeWidth="1.4"
-      />
-      <circle cx="48" cy="66" r="10" stroke="#555" strokeWidth="1.5" fill="#f2f2f2" />
-      <circle cx="172" cy="66" r="10" stroke="#555" strokeWidth="1.5" fill="#f2f2f2" />
-      <text x="110" y="50" textAnchor="middle" fill="#666" fontSize="13" fontFamily="Inter,sans-serif" fontWeight="600">{label}</text>
-    </svg>
-  )
-}
-
 export default function ListingCard({ listing }) {
   const price = formatPrice(listing)
   const miles = distanceFromHome(listing)
-  const sohMissing = listing.soh == null
+  const battery = batteryConfidenceFromListing(listing)
   const sellerLabel = listing.sellerType.charAt(0).toUpperCase() + listing.sellerType.slice(1)
 
   return (
@@ -50,12 +37,7 @@ export default function ListingCard({ listing }) {
             </span>
           )}
         </div>
-        <div className="card-media-truck">
-          <TruckSilhouette make={listing.make} />
-        </div>
-        <span className="card-media-label" style={{ position: 'absolute', bottom: 8, right: 10 }}>
-          placeholder
-        </span>
+        <ListingPhoto listing={listing} vehicle={listing} className="card-media-photo" />
       </Link>
 
       <div className="card-body">
@@ -65,26 +47,18 @@ export default function ListingCard({ listing }) {
         </h3>
         <p className="card-condition">
           Used · {sellerLabel} seller
-        </p>
-        <p className="card-specs">
-          SOH {sohMissing ? '—' : `${listing.soh}%`}
-          <span className="dot">·</span>
-          {listing.ratedRange} mi range
-          <span className="dot">·</span>
-          {listing.payload.toLocaleString()} lb payload
-          <span className="dot">·</span>
-          {listing.mileage.toLocaleString()} mi
+          {listing.mileage != null ? ` · ${listing.mileage.toLocaleString()} mi` : ''}
         </p>
 
         <div className="card-chip-row">
           <span className="meta-chip ev-chip">
-            SOH<strong>{sohMissing ? '—' : `${listing.soh}%`}</strong>
+            {battery.label}
           </span>
           <span className="meta-chip ev-chip">
-            Range<strong>{listing.ratedRange} mi</strong>
+            Range<strong>{listing.ratedRange != null ? `${listing.ratedRange} mi` : '—'}</strong>
           </span>
           <span className="meta-chip">
-            Payload<strong>{listing.payload.toLocaleString()} lb</strong>
+            Payload<strong>{listing.payload != null ? `${listing.payload.toLocaleString()} lb` : '—'}</strong>
           </span>
           <span className="meta-chip">
             Seller<strong>{sellerLabel}</strong>
@@ -93,17 +67,7 @@ export default function ListingCard({ listing }) {
 
         <div className="card-price-block">
           <div className={`card-price ${price.unknown ? 'unknown' : ''}`}>{price.text}</div>
-          {!price.unknown && (
-            <>
-              <span className="card-price-note">All-in · fees included</span>
-              <button type="button" className="card-price-link" onClick={(e) => { e.preventDefault(); e.stopPropagation() }}>
-                Price details
-              </button>
-            </>
-          )}
-          {price.unknown && (
-            <span className="card-price-note">Ask seller for fee sheet</span>
-          )}
+          <span className="card-price-note">asking · fee at checkout TBD</span>
         </div>
 
         {listing.upfitTags.length > 0 && (
@@ -115,7 +79,8 @@ export default function ListingCard({ listing }) {
         )}
 
         <div className="card-actions">
-          <Link to={`/listing/${listing.id}`} className="btn btn-primary">
+          <AddToFleetButton pickId={fleetListingKey(listing.id)} />
+          <Link to={`/listing/${listing.id}`} className="btn">
             Show details
           </Link>
           <button
@@ -136,7 +101,7 @@ export default function ListingCard({ listing }) {
           <span className="sep">·</span>
           <span className="muted">
             {listing.location.city}, {listing.location.state}
-            {' · '}{miles} mi away
+            {miles != null ? ` · ${miles} mi away` : ''}
           </span>
         </p>
       </div>

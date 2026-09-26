@@ -10,7 +10,7 @@ const SORTS = [
   { id: 'price-desc', label: 'Price: high → low' },
   { id: 'mileage', label: 'Mileage: low → high' },
   { id: 'range', label: 'Range: high → low' },
-  { id: 'soh', label: 'SOH: high → low' },
+  { id: 'soh', label: 'Battery health: high → low' },
   { id: 'closest', label: 'Closest (WPB, FL)' },
 ]
 
@@ -141,8 +141,8 @@ export default function Browse() {
   return (
     <div className="browse-layout">
       <div className="browse-hero">
-        <h1>Used EV work trucks for sale.</h1>
-        <p className="browse-sub">Battery first · All-in price · Work Value. <a href="#/" style={{color:'var(--cyan)'}}>Home</a></p>
+        <h1>Used EV fleet packages.</h1>
+        <p className="browse-sub">Used EV fleet packages that fit the work day · asking · fee at checkout TBD. <a href="#/" style={{color:'var(--cyan)'}}>Home</a></p>
       </div>
 
       <div className="browse-chrome">
@@ -212,7 +212,7 @@ export default function Browse() {
         {results.length === 0 ? (
           <div className="empty-state">
             <p>No trucks match these filters.</p>
-            <p style={{ fontSize: '0.85rem' }}>Try lowering SOH min, payload, or clearing transparent pricing.</p>
+            <p style={{ fontSize: '0.85rem' }}>Try lowering battery health min, payload, or clearing transparent pricing.</p>
           </div>
         ) : (
           <div className="listing-grid">

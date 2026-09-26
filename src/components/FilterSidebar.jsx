@@ -101,7 +101,7 @@ export default function FilterSidebar({ filters, setFilters, open, onClose }) {
       <div className="filter-section">
         <h3 className="filter-section-title">EV</h3>
         <div className="filter-group">
-          <label htmlFor="sohMin">SOH min (%)</label>
+          <label htmlFor="sohMin">Battery health min (%)</label>
           <input id="sohMin" type="number" min="0" max="100" step="1" placeholder="e.g. 90"
             value={filters.sohMin} onChange={(e) => set('sohMin', e.target.value)} />
         </div>
@@ -126,7 +126,7 @@ export default function FilterSidebar({ filters, setFilters, open, onClose }) {
       <div className="filter-section">
         <h3 className="filter-section-title">Trust</h3>
         <div className="filter-group">
-          <label htmlFor="priceMax">All-in price max ($)</label>
+          <label htmlFor="priceMax">Ask max ($)</label>
           <input id="priceMax" type="number" min="0" step="1000" placeholder="e.g. 60000"
             value={filters.priceMax} onChange={(e) => set('priceMax', e.target.value)} />
         </div>

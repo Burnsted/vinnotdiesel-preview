@@ -1,5 +1,6 @@
 import { Link, useNavigate, useSearchParams, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import Wordmark from './Wordmark'
 
 export default function Header() {
   const [params] = useSearchParams()
@@ -28,7 +29,7 @@ export default function Header() {
           type="button"
           className="header-menu-btn"
           aria-label="Menu"
-          onClick={() => navigate('/shop')}
+          onClick={() => navigate('/intake')}
         >
           <span className="burger" aria-hidden="true">
             <span /><span /><span />
@@ -51,25 +52,17 @@ export default function Header() {
           </form>
         )}
 
-        <Link to="/" className="logo" aria-label="VinNotDiesel home">
-          <span className="logo-mark">
-            <span className="vin">Vin</span>
-            <span className="not">Not</span>
-            <span className="diesel">Diesel</span>
-          </span>
+        <Link to="/" className="logo" aria-label="FleetFit">
+          <Wordmark size="nav" tone="light" decorative />
         </Link>
 
         <nav className="header-nav" aria-label="Primary">
-          <Link className="header-icon-btn" to="/" title="Browse" aria-label="Browse">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-              <path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.8 5.6 21.2 8 14 2 9.2h7.6z" />
-            </svg>
+          <Link className="header-text-link" to="/intake">
+            Fleet intake
           </Link>
-          <button type="button" className="header-icon-btn" title="Saved" aria-label="Saved (stub)">
-            <svg width="16" height="18" viewBox="0 0 16 20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-              <path d="M3 1.5h10a1 1 0 011 1v15.2l-6-3.4-6 3.4V2.5a1 1 0 011-1z" />
-            </svg>
-          </button>
+          <Link className="header-text-link" to="/shop" title="Single trucks">
+            Shop
+          </Link>
           <span className="badge-demo">Demo</span>
         </nav>
       </div>

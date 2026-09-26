@@ -1,12 +1,5 @@
 import { LISTINGS } from './listings'
-import heroCoastal from '../assets/trucks/hero-coastal.webp'
-import depotCharge from '../assets/trucks/depot-charge.webp'
-import jobsitePalms from '../assets/trucks/jobsite-palms.webp'
-import nightCoast from '../assets/trucks/night-coast.webp'
-import angularLot from '../assets/trucks/angular-lot.webp'
-import scrubTrail from '../assets/trucks/scrub-trail.webp'
-
-const IMAGE_POOL = [heroCoastal, depotCharge, jobsitePalms, nightCoast, angularLot, scrubTrail]
+import { vehiclePhotoFor } from '../lib/vehiclePhoto'
 
 function slugify(make, model) {
   return `${make}-${model}`
@@ -28,7 +21,9 @@ function oneLiner(listing) {
   const seats = listing.cab?.toLowerCase().includes('crew') || listing.cab?.toLowerCase().includes('super')
     ? 'up to 5 seats'
     : 'up to 3 seats'
-  return `Electric work truck: ${doors}, ${seats}, ${listing.bed} bed.`
+  return listing.bed
+    ? `Electric work truck: ${doors}, ${seats}, ${listing.bed} bed.`
+    : `Electric work truck: ${doors}, ${seats}.`
 }
 
 function workBlurb(make, model) {
@@ -39,17 +34,17 @@ function workBlurb(make, model) {
     'Chevrolet Silverado EV':
       'Work-trim electric pickup with large usable packs and fleet-friendly upfit paths. Built for routes that need range, payload, and a true service body — not lifestyle trim.',
     'GMC Sierra EV':
-      'Ultium-platform sibling to Silverado EV with Elevation-class comfort. Same capability class for crews that want GMC dealer support and documented SOH before the buy.',
+      'Ultium-platform sibling to Silverado EV with Elevation-class comfort. Same capability class for crews that want GMC dealer support and documented battery health before the buy.',
     'Rivian R1T':
       'Adventure-oriented electric pickup with gear-tunnel storage. Useful for solar and field crews; confirm service coverage on your routes before fleet adoption.',
     'Tesla Cybertruck':
       'High-capability exoskeleton pickup with Supercharger access. Bed and body are atypical for traditional trades — verify vault upfits and hitch logistics for your work.',
     'GMC Hummer EV':
-      'Extreme off-road electric pickup. Listed for completeness: width, curb weight, and energy use limit classic fleet routes even when payload and SOH look fine on paper.',
+      'Extreme off-road electric pickup. Listed for completeness: width, curb weight, and energy use limit classic fleet routes even when payload and battery health look fine on paper.',
   }
   return (
     blurbs[key] ||
-    'Electric work truck listed on VinNotDiesel. Review battery SOH, payload, warranty, and all-in price on each unit before you travel.'
+    'Electric work truck in a FleetFit package. Review battery health, payload, warranty, and listing ask on each unit before you travel.'
   )
 }
 
@@ -69,7 +64,7 @@ export function getModels() {
     map.get(key).listings.push(l)
   }
 
-  const models = [...map.values()].map((m, idx) => {
+  const models = [...map.values()].map((m) => {
     const priced = m.listings.filter((l) => l.allInPrice != null && l.feesKnown)
     const fromPrice = priced.length ? Math.min(...priced.map((l) => l.allInPrice)) : null
     const sohs = m.listings.map((l) => l.soh).filter((v) => v != null)
@@ -97,9 +92,9 @@ export function getModels() {
       description: oneLiner(sample),
       fromPrice,
       count: m.listings.length,
-      image: IMAGE_POOL[idx % IMAGE_POOL.length],
-      heroImage: IMAGE_POOL[(idx + 1) % IMAGE_POOL.length],
-      lifestyleImage: IMAGE_POOL[(idx + 2) % IMAGE_POOL.length],
+      image: vehiclePhotoFor(sample) || '',
+      heroImage: vehiclePhotoFor(sample) || '',
+      lifestyleImage: vehiclePhotoFor(sample) || '',
       blurb: workBlurb(m.make, m.model),
       cab: sample.cab,
       bed: sample.bed,
@@ -120,8 +115,8 @@ export function getModels() {
           value: sohs.length ? Math.round(sohs.reduce((a, b) => a + b, 0) / sohs.length) : null,
           best: sohs.length ? Math.max(...sohs) : null,
           missing: sohs.length < m.listings.length,
-          caption: 'Battery state of health — typical / best across listings',
-          footnote: 'From listing soh + sohMethod. Units without SOH show Incomplete Data on the listing.',
+          caption: 'Battery health — typical / best across listings',
+          footnote: 'From listing battery health readings. Units without a reading show Incomplete Data on the listing.',
         },
         gvwrLb: {
           value: typical(gvwrs),
@@ -153,11 +148,9 @@ export function getModelBySlug(slug) {
 
 export const HERO_SLIDES = getModels()
   .slice(0, 5)
-  .map((m, i) => ({
+  .map((m) => ({
     id: m.slug,
     title: `${m.model}.`,
-    image: IMAGE_POOL[i % IMAGE_POOL.length],
+    image: m.heroImage,
     href: `/model/${m.slug}`,
   }))
-
-export { IMAGE_POOL }

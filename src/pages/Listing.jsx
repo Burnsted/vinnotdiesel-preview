@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import AddToFleetButton from '../components/AddToFleetButton'
 import { LISTINGS, distanceFromHome } from '../data/listings'
-import MakeOfferModal from '../components/MakeOfferModal'
-import BuyNowModal from '../components/BuyNowModal'
+import { batteryConfidenceFromListing } from '../lib/battery'
+import { fleetListingKey } from '../lib/fleetPick'
+import ListingPhoto from '../components/ListingPhoto'
 
 const GALLERY_LABELS = [
   { key: 'exterior', label: 'Exterior' },
@@ -20,10 +22,8 @@ function bandClass(band) {
 export default function Listing() {
   const { id } = useParams()
   const listing = useMemo(() => LISTINGS.find((l) => l.id === id), [id])
-  const [offerOpen, setOfferOpen] = useState(false)
-  const [buyOpen, setBuyOpen] = useState(false)
-  const [msgNote, setMsgNote] = useState('')
   const [ppiNote, setPpiNote] = useState('')
+  const [msgNote, setMsgNote] = useState('')
 
   if (!listing) {
     return (
@@ -38,15 +38,14 @@ export default function Listing() {
   }
 
   const miles = distanceFromHome(listing)
-  const priceKnown = listing.allInPrice != null && listing.feesKnown
+  const priceKnown = listing.allInPrice != null
   const priceText = priceKnown
     ? `$${listing.allInPrice.toLocaleString()}`
-    : 'Price + fees unknown'
+    : 'Ask unknown'
   const sohMissing = listing.soh == null
 
   const panels = GALLERY_LABELS.filter((g) => listing.photos.includes(g.key))
   const gallery = panels.length ? panels : GALLERY_LABELS.slice(0, 4)
-
   return (
     <>
       <div className="detail-page">
@@ -68,33 +67,38 @@ export default function Listing() {
           </h1>
           <p className="hero-sub">
             <span className="vin-mono">{listing.vin}</span>
+            {' '}(demo stock ID)
             {' · '}{listing.mileage.toLocaleString()} mi
             {' · '}{listing.location.city}, {listing.location.state}
-            {' · '}{miles} mi from West Palm Beach, FL
+            {miles != null ? ` · ${miles} mi from West Palm Beach, FL` : ''}
             {' · '}Listed {listing.listedDaysAgo === 0 ? 'today' : `${listing.listedDaysAgo}d ago`}
           </p>
           <div className="hero-stats">
             <div className="stat-tile">
-              <div className="stat-label">All-in price</div>
+              <div className="stat-label">Listing ask</div>
               <div className={`stat-value ${priceKnown ? 'price' : 'amber'}`}>{priceText}</div>
-              <div className="stat-hint">{priceKnown ? 'Fees included' : 'Ask seller for fee sheet'}</div>
+              <div className="stat-hint">asking · fee at checkout TBD</div>
             </div>
             <div className="stat-tile">
               <div className="stat-label">Rated range</div>
-              <div className="stat-value">{listing.ratedRange} mi</div>
+              <div className="stat-value">{listing.ratedRange != null ? `${listing.ratedRange} mi` : '—'}</div>
               <div className="stat-hint">Displayed / sticker class</div>
             </div>
             <div className="stat-tile">
-              <div className="stat-label">Battery SOH</div>
+              <div className="stat-label">Battery</div>
               <div className={`stat-value ${sohMissing ? 'amber' : ''}`}>
-                {sohMissing ? 'Incomplete' : `${listing.soh}%`}
+                {batteryConfidenceFromListing(listing).label}
               </div>
-              <div className="stat-hint">{sohMissing ? 'No measurement on file' : listing.sohMethod}</div>
+              <div className="stat-hint">{sohMissing ? 'No health reading on file' : listing.sohMethod}</div>
             </div>
             <div className="stat-tile">
               <div className="stat-label">Payload</div>
-              <div className="stat-value">{listing.payload.toLocaleString()} lb</div>
-              <div className="stat-hint">GVWR {listing.gvwr.toLocaleString()} · curb {listing.curb.toLocaleString()}</div>
+              <div className="stat-value">{listing.payload != null ? `${listing.payload.toLocaleString()} lb` : '—'}</div>
+              <div className="stat-hint">
+                {listing.gvwr != null || listing.curb != null
+                  ? `GVWR ${listing.gvwr != null ? listing.gvwr.toLocaleString() : '—'} · curb ${listing.curb != null ? listing.curb.toLocaleString() : '—'}`
+                  : 'Not on this listing card'}
+              </div>
             </div>
           </div>
         </section>
@@ -104,10 +108,13 @@ export default function Listing() {
           <h2 className="module-title"><span className="num">2</span> Media gallery</h2>
           <div className="gallery">
             {gallery.map((g, i) => (
-              <div key={g.key} className={`g-panel ${i === 0 ? 'g-main' : ''}`}>
-                <span className="g-icon" aria-hidden="true">▣</span>
+              <div key={g.key} className={`g-panel ${i === 0 ? 'g-main has-photo' : ''}`}>
+                {i === 0 ? (
+                  <ListingPhoto vehicle={listing} className="g-panel-photo" />
+                ) : (
+                  <span className="g-icon" aria-hidden="true">▣</span>
+                )}
                 <span>{g.label}</span>
-                <span style={{ fontSize: '0.65rem', opacity: 0.7 }}>SVG placeholder</span>
               </div>
             ))}
           </div>
@@ -118,13 +125,13 @@ export default function Listing() {
           <h2 className="module-title"><span className="num">3</span> Work &amp; EV facts</h2>
           <dl className="facts-strip">
             <div className="fact"><dt>Usable pack</dt><dd>{listing.usableKwh ? `${listing.usableKwh} kWh` : '—'}</dd></div>
-            <div className="fact"><dt>Onboard charger</dt><dd>{listing.onboardChargerKw} kW</dd></div>
-            <div className="fact"><dt>DC fast max</dt><dd>{listing.dcFastMaxKw} kW</dd></div>
-            <div className="fact"><dt>Cab / bed</dt><dd>{listing.cab} / {listing.bed}</dd></div>
-            <div className="fact"><dt>Drivetrain</dt><dd>{listing.drivetrain}</dd></div>
-            <div className="fact"><dt>Payload</dt><dd>{listing.payload.toLocaleString()} lb</dd></div>
-            <div className="fact"><dt>GVWR</dt><dd>{listing.gvwr.toLocaleString()} lb</dd></div>
-            <div className="fact"><dt>Curb</dt><dd>{listing.curb.toLocaleString()} lb</dd></div>
+            <div className="fact"><dt>Onboard charger</dt><dd>{listing.onboardChargerKw != null ? `${listing.onboardChargerKw} kW` : '—'}</dd></div>
+            <div className="fact"><dt>DC fast max</dt><dd>{listing.dcFastMaxKw != null ? `${listing.dcFastMaxKw} kW` : '—'}</dd></div>
+            <div className="fact"><dt>Cab / bed</dt><dd>{listing.cab || listing.bed ? `${listing.cab || '—'} / ${listing.bed || '—'}` : '—'}</dd></div>
+            <div className="fact"><dt>Drivetrain</dt><dd>{listing.drivetrain || '—'}</dd></div>
+            <div className="fact"><dt>Payload</dt><dd>{listing.payload != null ? `${listing.payload.toLocaleString()} lb` : '—'}</dd></div>
+            <div className="fact"><dt>GVWR</dt><dd>{listing.gvwr != null ? `${listing.gvwr.toLocaleString()} lb` : '—'}</dd></div>
+            <div className="fact"><dt>Curb</dt><dd>{listing.curb != null ? `${listing.curb.toLocaleString()} lb` : '—'}</dd></div>
           </dl>
           <p style={{ marginTop: 12, color: 'var(--text-muted)', fontSize: '0.9rem' }}>{listing.description}</p>
         </section>
@@ -146,7 +153,7 @@ export default function Listing() {
           <dl className="facts-strip">
             <div className="fact"><dt>Battery / drive unit</dt><dd>{listing.warrantyBatteryMonths} mo left</dd></div>
             <div className="fact"><dt>Bumper-to-bumper</dt><dd>{listing.warrantyBumperMonths > 0 ? `${listing.warrantyBumperMonths} mo left` : 'Expired'}</dd></div>
-            <div className="fact"><dt>SOH method</dt><dd style={{ fontSize: '0.8rem', fontWeight: 500 }}>{listing.sohMethod || 'Not provided'}</dd></div>
+            <div className="fact"><dt>How it was measured</dt><dd style={{ fontSize: '0.8rem', fontWeight: 500 }}>{listing.sohMethod || 'Not provided'}</dd></div>
           </dl>
           <p style={{ marginTop: 10, color: 'var(--text-muted)', fontSize: '0.88rem' }}>{listing.warrantyNotes}</p>
         </section>
@@ -241,7 +248,7 @@ export default function Listing() {
         <section className="module">
           <h2 className="module-title"><span className="num">11</span> Next steps</h2>
           <p style={{ margin: '0 0 8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-            Message · Make Offer · Buy Now · Book PPI — use the sticky bar below. PPI scheduling is stubbed.
+            Add this truck to the fleet if it belongs in the package, then keep looking. PPI scheduling is stubbed.
           </p>
           {ppiNote && <p className="ppi-note">{ppiNote}</p>}
         </section>
@@ -253,19 +260,7 @@ export default function Listing() {
             {priceText}
           </div>
           <div className="cta-actions">
-            <button
-              type="button"
-              className="btn btn-ghost"
-              onClick={() => alert('Demo: messaging not connected. Use Q&A stub above.')}
-            >
-              Message
-            </button>
-            <button type="button" className="btn" onClick={() => setOfferOpen(true)}>
-              Make Offer
-            </button>
-            <button type="button" className="btn btn-primary" onClick={() => setBuyOpen(true)}>
-              Buy Now
-            </button>
+            <AddToFleetButton pickId={fleetListingKey(listing.id)} />
             <button
               type="button"
               className="btn"
@@ -277,8 +272,6 @@ export default function Listing() {
         </div>
       </div>
 
-      {offerOpen && <MakeOfferModal listing={listing} onClose={() => setOfferOpen(false)} />}
-      {buyOpen && <BuyNowModal listing={listing} onClose={() => setBuyOpen(false)} />}
     </>
   )
 }

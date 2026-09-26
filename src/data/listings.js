@@ -1,14 +1,16 @@
-/** Demo inventory for VinNotDiesel preview — not real listings. */
+/** Demo inventory for FleetFit preview. Considered-unit FACT overlay from Hot Deals. */
+import { applyListingFactsToListing } from '../lib/vehiclePhoto'
+
 export const HOME_BASE = { city: 'West Palm Beach', state: 'FL', lat: 26.7153, lng: -80.0534 };
 
-export const LISTINGS = [
+const SEED_LISTINGS = [
   {
     id: 'vnd-001',
     year: 2023,
     make: 'Ford',
     model: 'F-150 Lightning',
     trim: 'Pro',
-    vin: '1FT6W1EV5PWG12345',
+    vin: 'DEMO-STOCK-001',
     mileage: 18420,
     location: { city: 'Fort Lauderdale', state: 'FL', lat: 26.1224, lng: -80.1373 },
     titleStatus: 'Clean',
@@ -41,9 +43,9 @@ export const LISTINGS = [
       'Frunk liner has jobsite scratches',
     ],
     workValue: 'Strong',
-    compsNote: 'Priced ~4% under SE FL Pro comps with similar SOH and upfit.',
+    compsNote: 'Priced ~4% under SE FL Pro comps with similar battery health and upfit.',
     photos: ['exterior', 'bed-upfit', 'dash-range', 'charge-port', 'underbody'],
-    description: 'Fleet-maintained Lightning Pro with documented SOH and ready-to-work upfit. Pro Power Onboard 2.4 kW. One-owner commercial title history.',
+    description: 'Fleet-maintained Lightning Pro with documented battery health and ready-to-work upfit. Pro Power Onboard 2.4 kW. One-owner commercial title history.',
   },
   {
     id: 'vnd-002',
@@ -51,7 +53,7 @@ export const LISTINGS = [
     make: 'Chevrolet',
     model: 'Silverado EV',
     trim: 'WT',
-    vin: '3GCUDEED5RG456789',
+    vin: 'DEMO-STOCK-002',
     mileage: 11250,
     location: { city: 'Tampa', state: 'FL', lat: 27.9506, lng: -82.4572 },
     titleStatus: 'Clean',
@@ -85,7 +87,7 @@ export const LISTINGS = [
     workValue: 'Strong',
     compsNote: 'Long-range WT with service body; comps scarce — ask reflects pack + upfit.',
     photos: ['exterior', 'bed-upfit', 'dash-range', 'charge-port', 'underbody'],
-    description: 'Utility fleet surplus. Massive usable pack, documented SOH, and a true service body — not a lifestyle truck.',
+    description: 'Utility fleet surplus. Massive usable pack, documented battery health, and a true service body — not a lifestyle truck.',
   },
   {
     id: 'vnd-003',
@@ -93,7 +95,7 @@ export const LISTINGS = [
     make: 'Ford',
     model: 'F-150 Lightning',
     trim: 'XLT',
-    vin: '1FT6W1EV0NWG98765',
+    vin: 'DEMO-STOCK-003',
     mileage: 41200,
     location: { city: 'Orlando', state: 'FL', lat: 28.5383, lng: -81.3792 },
     titleStatus: 'Clean',
@@ -127,9 +129,9 @@ export const LISTINGS = [
       'Tire wear ~60%',
     ],
     workValue: 'Fair',
-    compsNote: 'Mileage and SOH pull it into Fair band vs newer Pros.',
+    compsNote: 'Mileage and battery health pull it into Fair band vs newer Pros.',
     photos: ['exterior', 'bed-upfit', 'dash-range', 'charge-port'],
-    description: 'Owner-operator XLT used for residential electrical. Honest SOH, known issues listed, no surprises.',
+    description: 'Owner-operator XLT used for residential electrical. Honest battery health, known issues listed, no surprises.',
   },
   {
     id: 'vnd-004',
@@ -137,7 +139,7 @@ export const LISTINGS = [
     make: 'GMC',
     model: 'Sierra EV',
     trim: 'Elevation',
-    vin: '1GTUUEEL5RU234567',
+    vin: 'DEMO-STOCK-004',
     mileage: 8900,
     location: { city: 'Jacksonville', state: 'FL', lat: 30.3322, lng: -81.6557 },
     titleStatus: 'Clean',
@@ -164,14 +166,14 @@ export const LISTINGS = [
     upfitDescription: 'Factory spray-in liner only — no commercial body yet.',
     warrantyBatteryMonths: 90,
     warrantyBumperMonths: 30,
-    warrantyNotes: 'Dealer has not provided SOH printout; ask before travel.',
+    warrantyNotes: 'Dealer has not provided a battery health printout; ask before travel.',
     knownIssues: [
-      'Seller has not supplied battery SOH report',
+      'Seller has not supplied a battery health report',
     ],
     workValue: 'Incomplete Data',
-    compsNote: 'Cannot score Work Value without SOH + all-in fees.',
+    compsNote: 'Cannot score Work Value without battery health + all-in fees.',
     photos: ['exterior', 'bed-upfit', 'dash-range', 'charge-port'],
-    description: 'Low-mile Elevation. Attractive truck, but SOH and dealer fees not documented — Incomplete Data until seller uploads pack report.',
+    description: 'Low-mile Elevation. Attractive truck, but battery health and dealer fees not documented — Incomplete Data until seller uploads pack report.',
   },
   {
     id: 'vnd-005',
@@ -179,7 +181,7 @@ export const LISTINGS = [
     make: 'Rivian',
     model: 'R1T',
     trim: 'Adventure Dual-Motor',
-    vin: '7FCTGAAA5PN345678',
+    vin: 'DEMO-STOCK-005',
     mileage: 22100,
     location: { city: 'Miami', state: 'FL', lat: 25.7617, lng: -80.1918 },
     titleStatus: 'Clean',
@@ -222,7 +224,7 @@ export const LISTINGS = [
     make: 'Tesla',
     model: 'Cybertruck',
     trim: 'AWD',
-    vin: '7G2CEHED5RA567890',
+    vin: 'DEMO-STOCK-006',
     mileage: 15600,
     location: { city: 'West Palm Beach', state: 'FL', lat: 26.7153, lng: -80.0534 },
     titleStatus: 'Clean',
@@ -265,7 +267,7 @@ export const LISTINGS = [
     make: 'GMC',
     model: 'Hummer EV',
     trim: 'Pickup 3X',
-    vin: '1GKB0PDC5PU678901',
+    vin: 'DEMO-STOCK-007',
     mileage: 19800,
     location: { city: 'Naples', state: 'FL', lat: 26.1420, lng: -81.7948 },
     titleStatus: 'Clean',
@@ -300,7 +302,7 @@ export const LISTINGS = [
     workValue: 'Stretched',
     compsNote: 'Heavy, thirsty, expensive — Stretched unless you specifically need Extreme Off-Road capability.',
     photos: ['exterior', 'bed-upfit', 'dash-range', 'charge-port'],
-    description: 'Capability theater with genuine off-road chops. Listed for completeness — not a typical VinNotDiesel work buy.',
+    description: 'Capability theater with genuine off-road chops. Listed for completeness — not a typical FleetFit fleet package.',
   },
   {
     id: 'vnd-008',
@@ -308,7 +310,7 @@ export const LISTINGS = [
     make: 'Chevrolet',
     model: 'Silverado EV',
     trim: 'WT',
-    vin: '3GCUDEED0SG789012',
+    vin: 'DEMO-STOCK-008',
     mileage: 4200,
     location: { city: 'Gainesville', state: 'FL', lat: 29.6516, lng: -82.3248 },
     titleStatus: 'Clean',
@@ -335,7 +337,7 @@ export const LISTINGS = [
     upfitDescription: 'Knapheide ladder rack, under-rail toolboxes, spray liner, amber beacon pre-wire.',
     warrantyBatteryMonths: 94,
     warrantyBumperMonths: 34,
-    warrantyNotes: 'Nearly full factory coverage; surplus sale includes SOH certificate.',
+    warrantyNotes: 'Nearly full factory coverage; surplus sale includes a battery health certificate.',
     knownIssues: [],
     workValue: 'Strong',
     compsNote: 'Almost-new WT with commercial upfit — Strong Work Value.',
@@ -343,6 +345,8 @@ export const LISTINGS = [
     description: 'Newest seed unit. Facilities fleet surplus after EV pilot expansion. Battery-first paperwork already in the dossier.',
   },
 ];
+
+export const LISTINGS = SEED_LISTINGS.map(applyListingFactsToListing)
 
 export function haversineMiles(a, b) {
   const R = 3958.8;
@@ -358,6 +362,7 @@ export function haversineMiles(a, b) {
 }
 
 export function distanceFromHome(listing) {
+  if (listing?.location?.lat == null || listing?.location?.lng == null) return null
   return Math.round(haversineMiles(HOME_BASE, listing.location));
 }
 
@@ -365,4 +370,4 @@ export const MAKES = [...new Set(LISTINGS.map((l) => l.make))].sort();
 export const MODELS = [...new Set(LISTINGS.map((l) => `${l.make}|${l.model}`))].sort();
 export const UPFT_TAGS = [...new Set(LISTINGS.flatMap((l) => l.upfitTags))].sort();
 export const SELLER_TYPES = ['private', 'dealer', 'fleet', 'upfitter'];
-export const CAB_BED_OPTIONS = [...new Set(LISTINGS.map((l) => `${l.cab} / ${l.bed}`))].sort();
+export const CAB_BED_OPTIONS = [...new Set(LISTINGS.map((l) => `${l.cab || '—'} / ${l.bed || '—'}`))].sort();
