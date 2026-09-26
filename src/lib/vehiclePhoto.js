@@ -1,13 +1,19 @@
 /**
  * Considered-unit photos: dealer listing thumbs only.
- * Current (non-EV) column is never a listing — stub, never stock art.
+ * Current (shop’s non-EV) column may use labeled stock — we do not have their truck.
  */
 
+import currentTruck from '../assets/stock/current-truck.webp'
+import currentVan from '../assets/stock/current-van.webp'
 import {
   LISTING_ALIASES,
   LISTING_PHOTO_FILES,
   LISTING_ROWS,
 } from '../data/listingPhotos'
+
+export function currentWorkPhoto({ bodyType } = {}) {
+  return bodyType === 'van' ? currentVan : currentTruck
+}
 
 export function resolveListingKey(vehicleOrKey) {
   if (vehicleOrKey == null) return null

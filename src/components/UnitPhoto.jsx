@@ -1,5 +1,6 @@
 import CompareControl from './CompareControl'
-import ListingPhoto, { PhotoPending } from './ListingPhoto'
+import ListingPhoto from './ListingPhoto'
+import { currentWorkPhoto } from '../lib/vehiclePhoto'
 import { formatAsk } from '../lib/workSpec'
 import { unitWhisper } from '../lib/compareSet'
 
@@ -31,10 +32,15 @@ export default function UnitPhoto({
   return (
     <div className={`unit-photo is-${size} is-${body} has-photo ${current ? 'is-current' : ''}`}>
       {current ? (
-        <PhotoPending current />
+        <img
+          src={currentWorkPhoto({ bodyType: body })}
+          alt=""
+          className="unit-photo-img"
+        />
       ) : (
         <ListingPhoto vehicle={unit} className="unit-photo-img" />
       )}
+      {current ? <span className="unit-photo-stock">Stock · not a listing</span> : null}
       <span className="unit-photo-glyph sr-only">{thumbLabel}</span>
       {whisper && unit ? (
         <span className="unit-photo-whisper">{unitWhisper(unit)}</span>

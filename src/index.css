@@ -2533,6 +2533,18 @@ img { max-width: 100%; display: block; }
   font-weight: 600;
   color: rgba(255, 255, 255, 0.82);
 }
+.unit-photo-stock {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  background: rgba(15, 20, 25, 0.72);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 600;
+}
 .unit-photo-headline {
   position: absolute;
   top: 10px;
@@ -2569,6 +2581,7 @@ img { max-width: 100%; display: block; }
 }
 .unit-photo-whisper,
 .unit-photo-headline,
+.unit-photo-stock,
 .unit-photo-ask,
 .unit-photo-kbb,
 .compare-control {
