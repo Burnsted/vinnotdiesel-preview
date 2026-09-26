@@ -1,34 +1,9 @@
 import { Link } from 'react-router-dom'
 import { DEFAULT_PACKAGE_ID } from '../data/package'
 import Wordmark from '../components/Wordmark'
+import heroCoastal from '../assets/trucks/hero-coastal.webp'
 
 const EXAMPLE = `/package/${DEFAULT_PACKAGE_ID}`
-
-function HeroPlateArt() {
-  return (
-    <svg className="home-hero-plate-art" viewBox="0 0 640 280" aria-hidden="true">
-      <defs>
-        <linearGradient id="home-plate-shop" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#24343e" />
-          <stop offset="0.55" stopColor="#182228" />
-          <stop offset="1" stopColor="#12181c" />
-        </linearGradient>
-        <radialGradient id="home-plate-vignette" cx="78%" cy="18%" r="72%">
-          <stop offset="0" stopColor="#2a4c4c" stopOpacity="0.42" />
-          <stop offset="1" stopColor="#12181c" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <rect width="640" height="280" rx="28" fill="url(#home-plate-shop)" />
-      <rect width="640" height="280" rx="28" fill="url(#home-plate-vignette)" />
-      <g fill="#07090b">
-        <rect x="58" y="98" width="420" height="86" rx="12" />
-        <path d="M478 118 h96 a14 14 0 0 1 14 14 v52 h-110 z" />
-        <circle cx="156" cy="196" r="16" />
-        <circle cx="486" cy="196" r="16" />
-      </g>
-    </svg>
-  )
-}
 
 export default function Home() {
   return (
@@ -53,7 +28,11 @@ export default function Home() {
             Same job as your work truck — money, maintenance, and time.
           </p>
           <Link to={EXAMPLE} className="home-hero-plate" aria-label="Demo package">
-            <HeroPlateArt />
+            <img
+              src={heroCoastal}
+              alt=""
+              className="home-hero-plate-art"
+            />
             <span className="home-hero-plate-chip">Demo package</span>
           </Link>
           <div className="locked-hero-actions">

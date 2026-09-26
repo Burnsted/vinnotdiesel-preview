@@ -1281,9 +1281,9 @@ img { max-width: 100%; display: block; }
 }
 .locked-btn-on-dark:hover { background: rgba(255, 255, 255, 0.08); text-decoration: none; }
 
-/* Franz 01 sparse home — stacked pills, PATH, no cred row */
+/* Franz 01 sparse home — photo plate, PATH, no cred row */
 .locked-home.is-sparse {
-  background: #05080a;
+  background: #10161a;
   min-height: 100vh;
 }
 .locked-home.is-sparse .locked-hero {
@@ -1293,8 +1293,8 @@ img { max-width: 100%; display: block; }
 }
 .locked-home.is-sparse .locked-hero-bg {
   background:
-    radial-gradient(ellipse 70% 48% at 82% 0%, rgba(27, 182, 168, 0.14), transparent 58%),
-    #05080a;
+    radial-gradient(ellipse 70% 48% at 82% 0%, rgba(27, 182, 168, 0.16), transparent 58%),
+    #10161a;
   animation: none;
 }
 .locked-home.is-sparse .locked-hero-inner {
@@ -1313,25 +1313,35 @@ img { max-width: 100%; display: block; }
   position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 7;
-  min-height: 168px;
+  aspect-ratio: 8 / 5;
+  min-height: 200px;
   margin: 0 0 22px;
   border-radius: 22px;
   overflow: hidden;
   text-decoration: none;
-  background: #182228;
+  background: #2a3840;
 }
 .home-hero-plate:hover { text-decoration: none; }
 .home-hero-plate-art {
   display: block;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: center 62%;
+}
+.home-hero-plate::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 58%, rgba(12, 18, 20, 0.28) 100%);
+  pointer-events: none;
 }
 .home-hero-plate-chip {
   position: absolute;
   left: 14px;
   bottom: 14px;
-  background: rgba(15, 20, 25, 0.78);
+  z-index: 1;
+  background: rgba(15, 20, 25, 0.72);
   color: #fff;
   border-radius: 999px;
   padding: 6px 12px;
