@@ -1223,7 +1223,7 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: flex-end;
   padding: 48px 24px 40px;
-  overflow: hidden;
+  overflow: visible;
 }
 .locked-hero-bg {
   position: absolute; inset: 0;

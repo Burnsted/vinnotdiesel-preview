@@ -4,9 +4,33 @@ import Wordmark from '../components/Wordmark'
 
 const EXAMPLE = `/package/${DEFAULT_PACKAGE_ID}`
 
-export default function Home() {
-  const plateSrc = `${import.meta.env.BASE_URL}home/hero-plate.svg`
+function HeroPlateArt() {
+  return (
+    <svg className="home-hero-plate-art" viewBox="0 0 640 280" aria-hidden="true">
+      <defs>
+        <linearGradient id="home-plate-shop" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#152028" />
+          <stop offset="0.55" stopColor="#0c1216" />
+          <stop offset="1" stopColor="#080b0e" />
+        </linearGradient>
+        <radialGradient id="home-plate-vignette" cx="78%" cy="18%" r="72%">
+          <stop offset="0" stopColor="#1a3a3a" stopOpacity="0.28" />
+          <stop offset="1" stopColor="#080b0e" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <rect width="640" height="280" rx="28" fill="url(#home-plate-shop)" />
+      <rect width="640" height="280" rx="28" fill="url(#home-plate-vignette)" />
+      <g fill="#111417">
+        <rect x="78" y="112" width="392" height="72" rx="10" />
+        <path d="M470 128 h78 a12 12 0 0 1 12 12 v44 h-90 z" />
+        <circle cx="168" cy="196" r="13" />
+        <circle cx="468" cy="196" r="13" />
+      </g>
+    </svg>
+  )
+}
 
+export default function Home() {
   return (
     <div className="locked-home is-sparse">
       <header className="locked-hero" aria-label="FleetFit">
@@ -29,7 +53,7 @@ export default function Home() {
             Same job as your work truck — money, maintenance, and time.
           </p>
           <Link to={EXAMPLE} className="home-hero-plate" aria-label="Demo package">
-            <img src={plateSrc} alt="" className="home-hero-plate-art" />
+            <HeroPlateArt />
             <span className="home-hero-plate-chip">Demo package</span>
           </Link>
           <div className="locked-hero-actions">
