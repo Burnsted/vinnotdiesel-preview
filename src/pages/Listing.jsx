@@ -4,6 +4,7 @@ import AddToFleetButton from '../components/AddToFleetButton'
 import { LISTINGS, distanceFromHome } from '../data/listings'
 import { batteryConfidenceFromListing } from '../lib/battery'
 import { fleetListingKey } from '../lib/fleetPick'
+import { vehiclePhotoFor } from '../lib/vehiclePhoto'
 
 const GALLERY_LABELS = [
   { key: 'exterior', label: 'Exterior' },
@@ -22,6 +23,7 @@ export default function Listing() {
   const { id } = useParams()
   const listing = useMemo(() => LISTINGS.find((l) => l.id === id), [id])
   const [ppiNote, setPpiNote] = useState('')
+  const [msgNote, setMsgNote] = useState('')
 
   if (!listing) {
     return (
@@ -44,6 +46,7 @@ export default function Listing() {
 
   const panels = GALLERY_LABELS.filter((g) => listing.photos.includes(g.key))
   const gallery = panels.length ? panels : GALLERY_LABELS.slice(0, 4)
+  const exteriorPhoto = vehiclePhotoFor(listing)
 
   return (
     <>
@@ -103,10 +106,13 @@ export default function Listing() {
           <h2 className="module-title"><span className="num">2</span> Media gallery</h2>
           <div className="gallery">
             {gallery.map((g, i) => (
-              <div key={g.key} className={`g-panel ${i === 0 ? 'g-main' : ''}`}>
-                <span className="g-icon" aria-hidden="true">▣</span>
+              <div key={g.key} className={`g-panel ${i === 0 ? 'g-main has-photo' : ''}`}>
+                {i === 0 ? (
+                  <img src={exteriorPhoto} alt="" className="g-panel-photo" />
+                ) : (
+                  <span className="g-icon" aria-hidden="true">▣</span>
+                )}
                 <span>{g.label}</span>
-                <span style={{ fontSize: '0.65rem', opacity: 0.7 }}>SVG placeholder</span>
               </div>
             ))}
           </div>

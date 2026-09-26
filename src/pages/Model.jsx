@@ -97,9 +97,6 @@ export default function Model() {
           <button type="button" className="btn-model-primary" onClick={scrollToInventory}>
             See trucks for sale ({model.count})
           </button>
-          <button type="button" className="btn-model-secondary" onClick={() => alert('Demo: Make an offer is stubbed on the model page. Open a listing to offer.')}>
-            Make an offer
-          </button>
           <button type="button" className="btn-model-secondary" onClick={() => alert('Demo: PPI booking stubbed.')}>
             Book a pre-purchase inspection
           </button>

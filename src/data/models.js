@@ -1,12 +1,5 @@
 import { LISTINGS } from './listings'
-import heroCoastal from '../assets/trucks/hero-coastal.webp'
-import depotCharge from '../assets/trucks/depot-charge.webp'
-import jobsitePalms from '../assets/trucks/jobsite-palms.webp'
-import nightCoast from '../assets/trucks/night-coast.webp'
-import angularLot from '../assets/trucks/angular-lot.webp'
-import scrubTrail from '../assets/trucks/scrub-trail.webp'
-
-const IMAGE_POOL = [heroCoastal, depotCharge, jobsitePalms, nightCoast, angularLot, scrubTrail]
+import { vehiclePhotoFor } from '../lib/vehiclePhoto'
 
 function slugify(make, model) {
   return `${make}-${model}`
@@ -69,7 +62,7 @@ export function getModels() {
     map.get(key).listings.push(l)
   }
 
-  const models = [...map.values()].map((m, idx) => {
+  const models = [...map.values()].map((m) => {
     const priced = m.listings.filter((l) => l.allInPrice != null && l.feesKnown)
     const fromPrice = priced.length ? Math.min(...priced.map((l) => l.allInPrice)) : null
     const sohs = m.listings.map((l) => l.soh).filter((v) => v != null)
@@ -97,9 +90,9 @@ export function getModels() {
       description: oneLiner(sample),
       fromPrice,
       count: m.listings.length,
-      image: IMAGE_POOL[idx % IMAGE_POOL.length],
-      heroImage: IMAGE_POOL[(idx + 1) % IMAGE_POOL.length],
-      lifestyleImage: IMAGE_POOL[(idx + 2) % IMAGE_POOL.length],
+      image: vehiclePhotoFor(sample),
+      heroImage: vehiclePhotoFor(sample),
+      lifestyleImage: vehiclePhotoFor(sample),
       blurb: workBlurb(m.make, m.model),
       cab: sample.cab,
       bed: sample.bed,
@@ -153,11 +146,9 @@ export function getModelBySlug(slug) {
 
 export const HERO_SLIDES = getModels()
   .slice(0, 5)
-  .map((m, i) => ({
+  .map((m) => ({
     id: m.slug,
     title: `${m.model}.`,
-    image: IMAGE_POOL[i % IMAGE_POOL.length],
+    image: m.heroImage,
     href: `/model/${m.slug}`,
   }))
-
-export { IMAGE_POOL }

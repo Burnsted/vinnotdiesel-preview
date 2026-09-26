@@ -3,6 +3,7 @@ import AddToFleetButton from './AddToFleetButton'
 import { distanceFromHome } from '../data/listings'
 import { batteryConfidenceFromListing } from '../lib/battery'
 import { fleetListingKey } from '../lib/fleetPick'
+import { vehiclePhotoFor } from '../lib/vehiclePhoto'
 
 function formatPrice(listing) {
   if (listing.allInPrice == null) {
@@ -17,23 +18,6 @@ function formatPrice(listing) {
 function valuePillClass(band) {
   if (band === 'Incomplete Data') return 'pill pill-incomplete'
   return `pill pill-value-${band}`
-}
-
-function TruckSilhouette({ make }) {
-  const label = make?.slice(0, 3).toUpperCase() || 'EV'
-  return (
-    <svg width="220" height="90" viewBox="0 0 220 90" fill="none" aria-hidden="true">
-      <path
-        d="M12 62 H36 L48 36 H98 L114 24 H178 L206 36 V62 H194 Q186 74 172 74 Q158 74 150 62 H70 Q62 74 48 74 Q34 74 26 62 H12 Z"
-        fill="rgba(17,17,17,0.06)"
-        stroke="#333"
-        strokeWidth="1.4"
-      />
-      <circle cx="48" cy="66" r="10" stroke="#555" strokeWidth="1.5" fill="#f2f2f2" />
-      <circle cx="172" cy="66" r="10" stroke="#555" strokeWidth="1.5" fill="#f2f2f2" />
-      <text x="110" y="50" textAnchor="middle" fill="#666" fontSize="13" fontFamily="Inter,sans-serif" fontWeight="600">{label}</text>
-    </svg>
-  )
 }
 
 export default function ListingCard({ listing }) {
@@ -53,12 +37,11 @@ export default function ListingCard({ listing }) {
             </span>
           )}
         </div>
-        <div className="card-media-truck">
-          <TruckSilhouette make={listing.make} />
-        </div>
-        <span className="card-media-label" style={{ position: 'absolute', bottom: 8, right: 10 }}>
-          placeholder
-        </span>
+        <img
+          src={vehiclePhotoFor(listing)}
+          alt=""
+          className="card-media-photo"
+        />
       </Link>
 
       <div className="card-body">

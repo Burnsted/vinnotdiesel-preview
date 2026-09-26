@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { DEFAULT_PACKAGE_ID } from '../data/package'
 import Wordmark from '../components/Wordmark'
-import heroCoastal from '../assets/trucks/hero-coastal.webp'
+import { HERO_PLATE_PHOTO, exampleStripPhoto } from '../lib/vehiclePhoto'
 
 const EXAMPLE = `/package/${DEFAULT_PACKAGE_ID}`
 const AMBER = '#F5A623'
@@ -44,45 +44,6 @@ function PathIcon({ name }) {
   )
 }
 
-function TruckArt({ kind }) {
-  if (kind === 'lightning') {
-    return (
-      <svg className="home-ex-art" viewBox="0 0 160 120" aria-hidden="true">
-        <rect width="160" height="120" rx="18" fill="#2a3038" />
-        <g fill="#1a2744">
-          <rect x="18" y="48" width="72" height="32" rx="6" />
-          <path d="M90 54 h36 a6 6 0 0 1 6 6 v20 H90 z" />
-          <circle cx="40" cy="86" r="8" />
-          <circle cx="112" cy="86" r="8" />
-        </g>
-      </svg>
-    )
-  }
-  if (kind === 'cyber') {
-    return (
-      <svg className="home-ex-art" viewBox="0 0 160 120" aria-hidden="true">
-        <rect width="160" height="120" rx="18" fill="#2a3038" />
-        <g fill="#c8ccd0">
-          <path d="M22 78 L48 46 H118 L140 78 Z" />
-          <circle cx="48" cy="86" r="8" fill="#111417" />
-          <circle cx="118" cy="86" r="8" fill="#111417" />
-        </g>
-      </svg>
-    )
-  }
-  return (
-    <svg className="home-ex-art" viewBox="0 0 160 120" aria-hidden="true">
-      <rect width="160" height="120" rx="18" fill="#2a3038" />
-      <g fill="#2d4a35">
-        <rect x="20" y="50" width="68" height="30" rx="8" />
-        <path d="M88 56 h38 a8 8 0 0 1 8 8 v16 H88 z" />
-        <circle cx="42" cy="86" r="8" />
-        <circle cx="114" cy="86" r="8" />
-      </g>
-    </svg>
-  )
-}
-
 const PATH = [
   { name: 'intake', label: 'Intake', to: '/intake' },
   { name: 'package', label: 'Package', to: EXAMPLE },
@@ -119,7 +80,7 @@ export default function Home() {
           </p>
           <Link to={EXAMPLE} className="home-hero-plate" aria-label="Demo package">
             <img
-              src={heroCoastal}
+              src={HERO_PLATE_PHOTO}
               alt=""
               className="home-hero-plate-art"
             />
@@ -156,13 +117,17 @@ export default function Home() {
           {EXAMPLES.map((ex) => (
             <li key={ex.kind}>
               <Link to={ex.to} className="home-ex-card">
-                <TruckArt kind={ex.kind} />
+                <img
+                  src={exampleStripPhoto(ex.kind)}
+                  alt=""
+                  className="home-ex-art"
+                />
                 <span>{ex.label}</span>
               </Link>
             </li>
           ))}
         </ul>
-        <p className="home-ex-fact">Demo · composite · not shop inventory FACT</p>
+        <p className="home-ex-fact">Demo · composite · not shop inventory</p>
       </section>
 
       <p className="home-quiet">Demo · composite examples · not a real shop</p>

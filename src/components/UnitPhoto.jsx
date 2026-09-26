@@ -1,6 +1,7 @@
 import CompareControl from './CompareControl'
 import { formatAsk } from '../lib/workSpec'
 import { unitWhisper } from '../lib/compareSet'
+import { currentWorkPhoto, vehiclePhotoFor } from '../lib/vehiclePhoto'
 
 export default function UnitPhoto({
   unit,
@@ -10,23 +11,28 @@ export default function UnitPhoto({
   showCompare = true,
   whisper = false,
   current = false,
+  bodyType,
   kbb,
   headline,
 }) {
+  const body = current
+    ? (bodyType || 'truck')
+    : unit?.bodyType === 'van'
+      ? 'van'
+      : 'truck'
   const thumbLabel = current
     ? 'YOUR TRUCK'
-    : unit?.bodyType === 'van'
+    : body === 'van'
       ? 'EV VAN'
       : 'EV TRUCK'
   const ask = showAsk && !current ? formatAsk(unit?.askPrice) : null
   const showKbb = current && kbb?.known
-
-  const body = current ? 'truck' : unit?.bodyType === 'van' ? 'van' : 'truck'
+  const src = current ? currentWorkPhoto({ bodyType: body }) : vehiclePhotoFor(unit)
 
   return (
-    <div className={`unit-photo is-${size} is-${body} ${current ? 'is-current' : ''}`}>
+    <div className={`unit-photo is-${size} is-${body} has-photo ${current ? 'is-current' : ''}`}>
+      <img src={src} alt="" className="unit-photo-img" />
       <span className="unit-photo-glyph sr-only">{thumbLabel}</span>
-      <span className="unit-photo-shape" aria-hidden="true" />
       {whisper && unit ? (
         <span className="unit-photo-whisper">{unitWhisper(unit)}</span>
       ) : null}

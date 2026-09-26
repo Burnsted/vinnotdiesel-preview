@@ -18,6 +18,7 @@ export default function WorkCompare({ current, candidates, title, packageId }) {
             role={current.role}
             spec={current.spec}
             current
+            bodyType={current.bodyType}
             showCompare={false}
           />
         </div>

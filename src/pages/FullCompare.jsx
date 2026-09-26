@@ -139,7 +139,13 @@ export default function FullCompare() {
           <div className="full-compare-row is-photo" role="row">
             <div className="full-compare-label" role="rowheader">Photo</div>
             <div className="full-compare-cell is-current" role="cell">
-              <UnitPhoto current kbb={current.spec.kbbTradeIn} size="compare" showCompare={false} />
+              <UnitPhoto
+                current
+                bodyType={current.bodyType}
+                kbb={current.spec.kbbTradeIn}
+                size="compare"
+                showCompare={false}
+              />
               <p className="full-compare-kicker">Now</p>
             </div>
             {candidates.map((col) => (

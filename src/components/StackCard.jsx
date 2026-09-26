@@ -22,6 +22,7 @@ export default function StackCard({
   role,
   mileage,
   current = false,
+  bodyType,
   showCompare = true,
 }) {
   const [open, setOpen] = useState(false)
@@ -47,6 +48,7 @@ export default function StackCard({
         showAsk={!current}
         showCompare={showCompare && !current}
         current={current}
+        bodyType={bodyType || unit?.bodyType}
         kbb={spec?.kbbTradeIn}
         headline={payloadChip}
       />

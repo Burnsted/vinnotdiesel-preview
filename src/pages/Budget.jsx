@@ -20,9 +20,15 @@ export default function Budget() {
 
   function onSubmit(e) {
     e.preventDefault()
+    const trimmed = String(raw).trim()
+    if (!trimmed) {
+      writeBudget({ maxSpend: null })
+      navigate(`/package/${DEFAULT_PACKAGE_ID}`)
+      return
+    }
     const maxSpend = parseSpend(raw)
     if (maxSpend == null) {
-      setError('Enter a max spend — 200k is fine.')
+      setError('Enter a max spend — 200k is fine. Blank is OK.')
       return
     }
     writeBudget({ maxSpend })
@@ -39,7 +45,7 @@ export default function Budget() {
 
       <header className="locked-page-header">
         <h1>Budget</h1>
-        <p className="locked-page-lead">Type a max spend for the package.</p>
+        <p className="locked-page-lead">Type a max spend for the package. Blank is OK.</p>
       </header>
 
       <form className="intake-form" onSubmit={onSubmit}>
@@ -60,7 +66,9 @@ export default function Budget() {
             <span className="intake-hint">
               KBB trade-in {formatMoney(kbbFact)} · counted in the envelope
             </span>
-          ) : null}
+          ) : (
+            <span className="intake-hint">Blank is OK — no KBB on file, none invented.</span>
+          )}
         </label>
 
         {error ? <p className="intake-hint">{error}</p> : null}
