@@ -11,6 +11,7 @@ import PackageResults from './pages/PackageResults'
 import PackageUnit from './pages/PackageUnit'
 import FullCompare from './pages/FullCompare'
 import Checkout from './pages/Checkout'
+import Budget from './pages/Budget'
 
 export default function App() {
   const location = useLocation()
@@ -30,6 +31,7 @@ export default function App() {
             <Route path="compare" element={<FullCompare />} />
           </Route>
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/budget" element={<Budget />} />
           <Route path="/shop" element={<Browse />} />
           <Route path="/model/:slug" element={<Model />} />
           <Route path="/listing/:id" element={<Listing />} />

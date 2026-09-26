@@ -4,50 +4,31 @@ import Wordmark from '../components/Wordmark'
 
 const EXAMPLE = `/package/${DEFAULT_PACKAGE_ID}`
 
-function PlateArt({ kind }) {
-  if (kind === 'cargo') {
-    return (
-      <svg className="home-three-art" viewBox="0 0 160 120" aria-hidden="true">
-        <g fill="#111417">
-          <rect x="18" y="48" width="78" height="32" rx="5" />
-          <path d="M96 52 h28 a6 6 0 0 1 6 6 v22 H96 z" />
-          <circle cx="40" cy="86" r="7" />
-          <circle cx="108" cy="86" r="7" />
-        </g>
-      </svg>
-    )
-  }
-  if (kind === 'package') {
-    return (
-      <svg className="home-three-art" viewBox="0 0 160 120" aria-hidden="true">
-        <g fill="#111417">
-          <rect x="22" y="44" width="50" height="28" rx="5" />
-          <rect x="80" y="52" width="54" height="24" rx="5" />
-          <circle cx="36" cy="80" r="6" />
-          <circle cx="64" cy="80" r="6" />
-          <circle cx="96" cy="84" r="6" />
-          <circle cx="122" cy="84" r="6" />
-        </g>
-      </svg>
-    )
-  }
+function HeroPlateArt() {
   return (
-    <svg className="home-three-art" viewBox="0 0 160 120" aria-hidden="true">
+    <svg className="home-hero-plate-art" viewBox="0 0 640 280" aria-hidden="true">
+      <defs>
+        <linearGradient id="home-plate-shop" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#152028" />
+          <stop offset="0.55" stopColor="#0c1216" />
+          <stop offset="1" stopColor="#080b0e" />
+        </linearGradient>
+        <radialGradient id="home-plate-vignette" cx="78%" cy="18%" r="72%">
+          <stop offset="0" stopColor="#1a3a3a" stopOpacity="0.28" />
+          <stop offset="1" stopColor="#080b0e" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <rect width="640" height="280" rx="28" fill="url(#home-plate-shop)" />
+      <rect width="640" height="280" rx="28" fill="url(#home-plate-vignette)" />
       <g fill="#111417">
-        <rect x="16" y="44" width="92" height="36" rx="6" />
-        <path d="M108 50 h26 a7 7 0 0 1 7 7 v23 H108 z" />
-        <circle cx="40" cy="86" r="7" />
-        <circle cx="112" cy="86" r="7" />
+        <rect x="78" y="112" width="392" height="72" rx="10" />
+        <path d="M470 128 h78 a12 12 0 0 1 12 12 v44 h-90 z" />
+        <circle cx="168" cy="196" r="13" />
+        <circle cx="468" cy="196" r="13" />
       </g>
     </svg>
   )
 }
-
-const PLATES = [
-  { kind: 'van', label: 'Ask $28k', demo: true, aria: 'Ask $28k, demo' },
-  { kind: 'cargo', label: 'Range 126', demo: true, aria: 'Range 126, demo' },
-  { kind: 'package', label: 'Demo pkg', demo: false, aria: 'Demo package' },
-]
 
 export default function Home() {
   return (
@@ -71,24 +52,10 @@ export default function Home() {
           <p className="locked-hero-lead">
             Same job as your work truck — money, maintenance, and time.
           </p>
-          <ul className="home-three-up">
-            {PLATES.map((plate) => (
-              <li key={plate.kind}>
-                <Link
-                  to={EXAMPLE}
-                  className={`home-three-plate is-${plate.kind}`}
-                  aria-label={plate.aria}
-                >
-                  <PlateArt kind={plate.kind} />
-                  <span className="home-three-chips">
-                    <span>{plate.label}</span>
-                    {plate.demo ? <span className="home-three-demo">demo</span> : null}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <p className="home-three-hint">Tap a plate → example package</p>
+          <Link to={EXAMPLE} className="home-hero-plate" aria-label="Demo package">
+            <HeroPlateArt />
+            <span className="home-hero-plate-chip">Demo package</span>
+          </Link>
           <div className="locked-hero-actions">
             <Link to="/intake" className="btn btn-primary">
               Match my fleet
@@ -106,6 +73,9 @@ export default function Home() {
           <li>Intake</li>
           <li>Package</li>
           <li>Add to fleet</li>
+          <li>
+            <Link to="/budget">Budget</Link>
+          </li>
         </ul>
         <p className="home-quiet">Demo · composite examples · not a real shop</p>
       </section>
