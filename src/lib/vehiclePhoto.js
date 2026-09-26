@@ -62,7 +62,7 @@ export function applyListingFactsToUnit(unit) {
     battery: {
       ...unit.battery,
       soh: null,
-      usableKwh: unit.battery?.usableKwh ?? null,
+      usableKwh: null,
       status: 'Not reported by dealer',
     },
   }
