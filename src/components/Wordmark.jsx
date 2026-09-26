@@ -1,14 +1,14 @@
 /**
- * Official Franz FleetFit wordmark v1 (2026-09-25).
- * Compound FleetFit — Fleet white (#FFFFFF on dark / charcoal #0B1220 on light)
- * · Fit teal #1BB6A8. Space Grotesk Bold. No script, no gap, no truck/bolt.
- * Vin Not Diesel L5 joke mark is parked. No FMT chrome in this lockup.
+ * Official Franz FleetFit wordmark J6 open plus (Ted ~8:11 PM ET 2026-09-25).
+ * Dark surfaces: Fleet white #FFFFFF · Fit amber #F5A623 · open-plus mark.
+ * Light surfaces stay on interim teal files — no J6 light ship this drop.
+ * UI chrome teal #1BB6A8 is not the mark Fit color.
  */
 const FILES = {
   dark: {
-    nav: 'fleetfit-wordmark-nav-dark.svg',
-    hero: 'fleetfit-wordmark-horizontal-dark.svg',
-    eyebrow: 'fleetfit-wordmark-nav-dark.svg',
+    nav: 'fleetfit-wordmark-j6-nav-dark.svg',
+    hero: 'fleetfit-wordmark-j6-hero-dark.svg',
+    eyebrow: 'fleetfit-wordmark-j6-nav-dark.svg',
   },
   light: {
     nav: 'fleetfit-wordmark-horizontal-light.svg',
