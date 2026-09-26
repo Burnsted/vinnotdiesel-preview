@@ -2,6 +2,8 @@ import { Link, useLocation, useParams } from 'react-router-dom'
 import StackCard from '../components/StackCard'
 import WorkCompare from '../components/WorkCompare'
 import { batteryUnknownCount, getPackage } from '../data/package'
+import { factKbbTradeIn, readBudget, spendEnvelope, unitsWithinEnvelope } from '../lib/budget'
+import { formatMoney } from '../lib/fit'
 import { fleetUnitKey, useFleetPick } from '../lib/fleetPick'
 import { currentWorkVehicle, displayWorkSpec } from '../lib/workSpec'
 
@@ -47,10 +49,12 @@ export default function PackageResults() {
   }
 
   const current = currentWorkVehicle(intake, pkg)
-  const selectedInPackage = pkg.units.filter((unit) => fleet.has(fleetUnitKey(pkg.id, unit.id))).length
-  const unknownBatt = batteryUnknownCount(pkg)
+  const envelope = spendEnvelope(readBudget().maxSpend, factKbbTradeIn(intake, pkg))
+  const visibleUnits = unitsWithinEnvelope(pkg.units, envelope)
+  const selectedInPackage = visibleUnits.filter((unit) => fleet.has(fleetUnitKey(pkg.id, unit.id))).length
+  const unknownBatt = batteryUnknownCount({ ...pkg, units: visibleUnits })
   const dayNeed = dayNeedLabel(pkg, intake)
-  const compareCandidates = pkg.units.map((unit) => ({
+  const compareCandidates = visibleUnits.map((unit) => ({
     id: unit.id,
     unit,
     pickId: fleetUnitKey(pkg.id, unit.id),
@@ -87,6 +91,9 @@ export default function PackageResults() {
           </span>
           <span className="spec-chip is-dash">Recalls —</span>
           <span className="spec-chip is-known">{fleetSizeChip(intake, pkg)}</span>
+          {envelope != null ? (
+            <span className="spec-chip is-known">Envelope {formatMoney(envelope)}</span>
+          ) : null}
         </div>
       </header>
 
@@ -99,8 +106,14 @@ export default function PackageResults() {
 
       <section aria-labelledby="units-title">
         <h2 id="units-title" className="package-units-title">Units</h2>
+        {visibleUnits.length === 0 ? (
+          <p className="locked-muted">
+            No units in this demo fit that spend.{' '}
+            <Link to="/budget">Adjust spend</Link>
+          </p>
+        ) : null}
         <ul className="package-unit-stack">
-          {pkg.units.map((unit) => {
+          {visibleUnits.map((unit) => {
             const spec = displayWorkSpec(unit)
             return (
               <li key={unit.id}>
@@ -124,7 +137,7 @@ export default function PackageResults() {
 
       <div className="package-cta-bar">
         <p className="package-fleet-count">
-          {selectedInPackage} of {pkg.unitCount} in fleet
+          {selectedInPackage} of {visibleUnits.length || pkg.unitCount} in fleet
         </p>
         <Link to="/intake?adjust=1" className="btn btn-sm">
           Adjust mix

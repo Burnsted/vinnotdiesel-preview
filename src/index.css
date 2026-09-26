@@ -1377,6 +1377,11 @@ img { max-width: 100%; display: block; }
   background: rgba(255, 255, 255, 0.04);
   border-color: rgba(255, 255, 255, 0.18);
 }
+.home-path a {
+  color: inherit;
+  text-decoration: none;
+}
+.home-path a:hover { color: #fff; }
 
 @keyframes locked-fade-up {
   from { opacity: 0; transform: translateY(14px); }
