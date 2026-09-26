@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400.64 68.00" width="188.54" height="32.00" role="img" aria-label="FleetFit">
   <title>FleetFit</title>
-  <!-- J6 open plus on light · Fleet #111111 · Fit amber #F5A623 · same geometry as nav-dark -->
+  <!-- J6 open plus on light. Fleet #111111. Fit amber #F5A623. Same geometry as nav-dark. -->
   <g id="open-plus">
     <rect x="29.579" y="6.000" width="8.842" height="23.579" fill="#F5A623"/>
     <rect x="38.421" y="29.579" width="23.579" height="8.842" fill="#F5A623"/>

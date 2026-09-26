@@ -109,7 +109,8 @@ img { max-width: 100%; display: block; }
 .wordmark-hero { height: 44px; max-width: min(100%, 360px); }
 .wordmark-eyebrow { height: 18px; max-width: min(100%, 180px); }
 .logo .wordmark { height: 26px; }
-.locked-topnav-brand .wordmark { height: 28px; }
+.locked-topnav-brand .wordmark { height: 28px; min-width: 140px; flex-shrink: 0; }
+.locked-topnav-brand { flex-shrink: 0; }
 .locked-brand .wordmark { height: 44px; }
 .footer-brand .wordmark { height: 22px; }
 .overlay-wordmark .wordmark { height: 26px; }
