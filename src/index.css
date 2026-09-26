@@ -1395,7 +1395,11 @@ img { max-width: 100%; display: block; }
 .locked-home.is-mood .locked-hero {
   min-height: auto;
   align-items: flex-start;
-  padding: 88px 24px 20px;
+  padding: 8px 24px 20px;
+}
+.locked-home.is-mood .locked-topnav {
+  position: relative;
+  padding: 16px 0 20px;
 }
 .locked-home.is-mood .locked-hero-bg { display: none; }
 .locked-home.is-mood .locked-hero-inner { width: min(560px, 100%); }
