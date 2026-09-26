@@ -1394,7 +1394,8 @@ img { max-width: 100%; display: block; }
 }
 .locked-home.is-mood .locked-hero {
   min-height: auto;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: stretch;
   padding: 8px 24px 20px;
 }
 .locked-home.is-mood .locked-topnav {
