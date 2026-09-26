@@ -52,9 +52,6 @@ export default function Home() {
           <li>Intake</li>
           <li>Package</li>
           <li>Add to fleet</li>
-          <li>
-            <Link to="/budget">Budget</Link>
-          </li>
         </ul>
         <p className="home-quiet">Demo · composite examples · not a real shop</p>
       </section>
