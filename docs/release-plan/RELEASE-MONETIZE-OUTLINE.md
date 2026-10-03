@@ -51,10 +51,10 @@ Plain outline for Ted. Each step says who prepares it and the one answer Ted mus
    Ted’s one answer: “Yes, use ‘Send me my fit summary’ (or paste your exact words).”
 
 4. **Work-compare honesty pass**  
-   What: Confirm every package screen compares current gas/diesel truck vs candidates on payload, bed, cab, tow; never invent numbers (use —).  
+   What: Confirm every package screen compares current gas/diesel truck vs candidates on payload, bed, cab, tow; never invent numbers (use —). Gas-twin savings inputs Ted locked: **20,000 miles / vehicle / year**; vehicles **charge at the shop overnight**; **insurance is an unconfirmed placeholder** until Ted gets quotes **Monday 10/6**.  
    Who prepares: Cursor — checklist against PR #5.  
-   Needs Ted: **Only if something looks wrong.**  
-   Ted’s one answer: “Compare screens look honest.”
+   Needs Ted: **Only if something looks wrong** (insurance after Monday quotes).  
+   Ted’s one answer: “Compare screens look honest” / after 10/6: “Use this insurance figure: ___” or “Keep insurance as placeholder.”
 
 5. **Voice check**  
    What: Concierge tone — helpful, never anti-diesel, never blaming shops; no Ted personal EV history in public copy.  
@@ -112,7 +112,9 @@ Plain outline for Ted. Each step says who prepares it and the one answer Ted mus
 
 ## C. Monetize (options only — nothing decided)
 
-Present as choices. Do not treat any as final.
+Present as choices. Do not treat any as final. No invented prices or partner names (Sherlock is still sourcing charger partners and incentives).
+
+**Charger context (Ted’s idea, not decided):** Most trade vehicles go home or to the shop overnight, so nearly every package needs a home or shop charger — and employee electricity compensation if they charge at home. Locked savings baseline for gas-twin math: **20,000 miles / vehicle / year**, **shop overnight charging**; insurance stays a placeholder until Monday 10/6 quotes.
 
 13. **Choose how money starts**  
     What: Pick a first money path (options below).  
@@ -125,14 +127,27 @@ Present as choices. Do not treat any as final.
     - Concierge time explaining EV vs current truck for first-time buyers  
     - Per-vehicle commission example **~$250 / vehicle** on closed units  
     - Small recurring piece to cover site costs  
+    - **Charger bundle (idea):** sell a charger with each vehicle through a volume-discount partnership with a non-Chinese charger maker  
 
-14. **Wire the chosen path into the product (after Ted picks)**  
-    What: Stub or real paywall / invoice / commission tracking — only for the chosen option.  
+14. **Package add-on: Charger (idea)**  
+    What: Optional **Charger** line on the package so almost every fit includes home/shop charging (and notes home-charge employee electricity pay if needed).  
+    Who prepares: Cursor — stub add-on after Ted says explore it; Sherlock sources partner.  
+    Needs Ted: **Yes.**  
+    Ted’s one answer: “Add Charger as a package add-on” or “Skip for now.”
+
+15. **Charger partner as first-page sponsor (idea)**  
+    What: Option to make the charger partner the first-page sponsor (no partner name until Sherlock finishes sourcing).  
+    Who prepares: Cursor — placement mock only after Ted wants it.  
+    Needs Ted: **Yes.**  
+    Ted’s one answer: “Yes, offer the sponsor slot” or “No sponsor.”
+
+16. **Wire the chosen path into the product (after Ted picks)**  
+    What: Stub or real paywall / invoice / commission / charger-bundle tracking — only for the chosen option(s).  
     Who prepares: Cursor.  
     Needs Ted: **Yes** (confirm scope).  
     Ted’s one answer: “Build the stub for ___ only.”
 
-15. **Recurring cover for site costs (optional later)**  
+17. **Recurring cover for site costs (optional later)**  
     What: Lightweight subscription or retainers so hosting/tools aren’t Ted’s hobby bill.  
     Who prepares: Cursor — tiny menu after first paid use.  
     Needs Ted: **Later.**  
@@ -143,9 +158,10 @@ Present as choices. Do not treat any as final.
 ## Open questions only Ted can answer
 
 1. **Easiest first trade** — electrical, landscaping/lawn, HVAC, or other?  
-2. **Final fee** — report, concierge, per-vehicle, recurring, or mix? (ideas above are not final)  
+2. **Final fee** — report, concierge, per-vehicle, charger bundle, recurring, or mix? (ideas above are not final)  
 3. **Legal** — start attorney now, or after first shop conversation?  
-4. **What “releasable” means** — his one-sentence bar for “good enough to show a shop.”
+4. **What “releasable” means** — his one-sentence bar for “good enough to show a shop.”  
+5. **Charger partner + sponsor** — which partner (once Sherlock has options), and is the first-page sponsor slot wanted?
 
 ---
 
@@ -154,4 +170,5 @@ Present as choices. Do not treat any as final.
 - PR #5 is the intended product spine; other open PRs are R&D or older locks.  
 - Agent/Cursor does prep; Ted only answers and gives go/no-go.  
 - Sunshine Mountain LLC / rentals / family stay higher priority — no step assumes Ted runs day-to-day ops.  
-- Pricing numbers in section C are examples from Ted’s idea list, not approved rates.
+- Pricing numbers in section C are examples from Ted’s idea list, not approved rates.  
+- Charger bundle, Charger add-on, and sponsor slot are ideas only until Ted decides.
